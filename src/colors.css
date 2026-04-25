@@ -1,0 +1,560 @@
+@theme {
+  --color-theme: var(--theme);
+  --color-background: var(--background);
+  --color-backdrop: var(--backdrop);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-surface: var(--surface);
+  --color-surface-original: var(--surface-original);
+  --color-surface-cut: var(--surface-cut);
+  --color-surface-minus: var(--surface-minus);
+  --color-surface-plus: var(--surface-plus);
+  --color-surface-next: var(--surface-next);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-dark: var(--on-surface-dark);
+  --color-on-surface-darker: var(--on-surface-darker);
+  --color-on-surface-darkest: var(--on-surface-darkest);
+  --color-surface-white: var(--surface-white);
+  --color-surface-black: var(--surface-black);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-hover-fill: var(--surface-hover-fill);
+  --color-surface-pressed: var(--surface-pressed);
+  --color-background-outline: var(--background-outline);
+  --color-surface-outline: var(--surface-outline);
+  --color-surface-outline-original: var(--surface-outline-original);
+  --color-surface-highlight: var(--surface-highlight);
+
+  --shadow-surface-outline: var(--shadow-surface-outline);
+  --shadow-surface-outline-fill: var(--shadow-surface-outline-fill);
+  --shadow-surface-cut-outline: var(--shadow-surface-cut-outline);
+  --shadow-popover: 0 24px 64px -12px rgb(0 0 0 / 0.5);
+
+  --dark-primary-lightness: 0.95;
+  --dark-primary-chroma: 0.18;
+
+  --light-primary-lightness: 0.5;
+  --light-primary-chroma: 0.18;
+}
+
+:root,
+.color-neutral {
+  --theme: #fff;
+}
+.color-brand {
+  --theme: #d7ff38;
+}
+.color-red {
+  --theme: #ff0b0b;
+}
+.color-pink {
+  --theme: #ff0bac;
+}
+.color-purple {
+  --theme: #a20bff;
+}
+.color-blue {
+  --theme: #0047ff;
+}
+.color-cyan {
+  --theme: #00f9ff;
+}
+.color-lime {
+  --theme: #7dff0b;
+}
+.color-green {
+  --theme: #0bff23;
+}
+.color-yellow {
+  --theme: #fff800;
+}
+.color-orange {
+  --theme: #ff7a00;
+}
+/* DEFAULT */
+:root,
+.color-neutral {
+  --background: #0f0f0f;
+  --backdrop: #000;
+  --primary: oklch(from var(--theme) var(--dark-primary-lightness) 0 h);
+  --on-primary: oklch(from var(--theme) 0.2 0 h);
+  --surface: oklch(from var(--theme) 0.21 0 h);
+  --surface-original: oklch(from var(--theme) 0.21 0 h);
+  --surface-cut: oklch(from var(--theme) 0.17 0 h);
+  --surface-cut-original: oklch(from var(--theme) 0.17 0 h);
+  --on-surface: oklch(from var(--theme) 0.9 0 h);
+  --on-surface-dark: oklch(from var(--theme) 0.65 0 h);
+  --on-surface-darker: oklch(from var(--theme) 0.5 0 h);
+  --on-surface-darkest: oklch(from var(--theme) 0.4 0 h);
+  --surface-white: oklch(from var(--theme) 1 0 h);
+  --surface-black: oklch(from var(--theme) 0 0 h);
+  --background-outline: oklch(from var(--theme) 0.23 0 h);
+  --surface-outline: oklch(from var(--theme) 0.3 0 h);
+  --surface-outline-original: oklch(from var(--theme) 0.3 0 h);
+
+  --surface-hover: color-mix(in oklab, var(--surface-white) 5%, transparent);
+  --surface-pressed: color-mix(in oklab, var(--surface-white) 3%, transparent);
+  --surface-hover-fill: color-mix(
+    in oklab,
+    var(--surface-white) 20%,
+    transparent
+  );
+
+  --surface-mix-color: var(--surface-white);
+  --surface-mix-amount: 6%;
+
+  --shadow-surface-cut-outline:
+    -1px -1px 0px 0px color-mix(in oklab, var(--surface-white) 2%, transparent)
+      inset,
+    0px 0px 0px 1px color-mix(in oklab, var(--surface-white) 7%, transparent)
+      inset;
+
+  --shadow-surface-outline:
+    1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 9%, transparent)
+      inset,
+    -1px -1px 0px 0px color-mix(in oklab, var(--surface-white) 8%, transparent)
+      inset;
+
+  --shadow-surface-outline-fill:
+    1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 20%, transparent)
+      inset,
+    -1px -1px 0px 0px color-mix(in oklab, var(--surface-white) 20%, transparent)
+      inset;
+}
+
+/* COLORS */
+[class*='color-']:not(.color-neutral) {
+  --background: oklch(from var(--theme) 0.15 0.02 h);
+  --backdrop: #000;
+  --primary: oklch(
+    from var(--theme) var(--dark-primary-lightness) var(--dark-primary-chroma) h
+  );
+  --on-primary: oklch(from var(--theme) 0.2 0.05 h);
+  --surface: oklch(from var(--theme) 0.23 0.027 h);
+  --surface-original: oklch(from var(--theme) 0.23 0.027 h);
+  --surface-cut: oklch(from var(--theme) 0.19 0.027 h);
+  --surface-cut-original: oklch(from var(--theme) 0.19 0.027 h);
+  --on-surface: oklch(from var(--theme) 0.9 0.03 h);
+  --on-surface-dark: oklch(from var(--theme) 0.65 0.03 h);
+  --on-surface-darker: oklch(from var(--theme) 0.5 0.03 h);
+  --on-surface-darkest: oklch(from var(--theme) 0.4 0.03 h);
+  --surface-white: oklch(from var(--theme) 0.92 0.05 h);
+  --surface-black: oklch(from var(--theme) 0.08 0.02 h);
+  --background-outline: oklch(from var(--theme) 0.25 0.02 h);
+  --surface-outline: oklch(from var(--theme) 0.28 0.025 h);
+  --surface-outline-original: oklch(from var(--theme) 0.28 0.025 h);
+
+  --surface-hover: color-mix(in oklab, var(--surface-white) 5%, transparent);
+  --surface-pressed: color-mix(in oklab, var(--surface-white) 3%, transparent);
+  --surface-hover-fill: color-mix(
+    in oklab,
+    var(--surface-white) 40%,
+    transparent
+  );
+  --surface-mix-color: var(--surface-white);
+  --surface-mix-amount: 6%;
+
+  --shadow-surface-cut-outline:
+    -1px -1px 0px 0px color-mix(in oklab, var(--surface-white) 2%, transparent)
+      inset,
+    0px 0px 0px 1px color-mix(in oklab, var(--surface-white) 7%, transparent)
+      inset;
+
+  --shadow-surface-outline:
+    1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 9%, transparent)
+      inset,
+    -1px -1px 0px 0px color-mix(in oklab, var(--surface-white) 8%, transparent)
+      inset;
+  --shadow-surface-outline-fill:
+    1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 30%, transparent)
+      inset,
+    -1px -1px 0px 0px color-mix(in oklab, var(--surface-white) 30%, transparent)
+      inset;
+}
+
+.light,
+.dark .light {
+  --highlight-white-mix: 50%;
+}
+
+/* DEFAULT LIGHT */
+:root.light,
+.dark .light,
+:root .light,
+.light.color-neutral,
+.light .color-neutral,
+.color-neutral .light {
+  --background: #fff;
+  --backdrop: oklch(0.91 0 0);
+  --primary: oklch(from var(--theme) 0.1 0 h);
+  --on-primary: oklch(from var(--theme) 0.96 0 h);
+  --surface: oklch(0.97 0 0);
+  --surface-original: oklch(0.97 0 0);
+  --surface-cut: oklch(from var(--theme) 0.93 0 h);
+  --surface-cut-original: oklch(from var(--theme) 0.93 0 h);
+  --on-surface: oklch(0.32 0 0);
+  --on-surface-dark: oklch(0.5 0 0);
+  --on-surface-darker: oklch(0.65 0 0);
+  --on-surface-darkest: oklch(0.75 0 0);
+  --surface-white: oklch(1 0 0);
+  --surface-black: oklch(0 0 0);
+  --background-outline: oklch(0.89 0 0);
+  --surface-outline: oklch(0.89 0 0);
+  --surface-outline-original: oklch(0.89 0 0);
+
+  --surface-hover: color-mix(in oklab, var(--surface-black) 3%, transparent);
+  --surface-pressed: color-mix(in oklab, var(--surface-white) 6%, transparent);
+
+  --surface-mix-amount: 4%;
+  --surface-mix-color: var(--surface-black);
+
+  --shadow-surface-cut-outline:
+    0.5px 0.5px 0px 0px
+      color-mix(in oklab, var(--surface-black) 10%, transparent) inset,
+    0px 0px 0px 0.5px color-mix(in oklab, var(--surface-black) 5%, transparent)
+      inset;
+  --shadow-surface-outline-fill:
+    0px 0px 0px 0.5px color-mix(in oklab, var(--surface-black) 20%, transparent)
+      inset,
+    1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 30%, transparent)
+      inset;
+  &,
+  [class*='surface-level-'] {
+    --shadow-surface-outline:
+      0px 0px 0px 1px var(--color-surface-outline) inset,
+      1.5px 1.5px 0px 0px
+        color-mix(in oklab, var(--surface-white) 60%, transparent) inset;
+  }
+}
+/* COLORS LIGHT */
+.light [class*='color-']:not(.color-neutral),
+.dark .light [class*='color-']:not(.color-neutral),
+.light[class*='color-']:not(.color-neutral) {
+  --background: oklch(0.91 0.015 100);
+  --backdrop: oklch(0.74 0.018 100);
+  --primary: oklch(
+    from var(--theme) var(--light-primary-lightness) var(--light-primary-chroma)
+      h
+  );
+  --on-primary: oklch(from var(--theme) 0.97 0.04 h);
+  --surface: oklch(from var(--theme) 0.97 0.015 h);
+  --surface-original: oklch(from var(--theme) 0.97 0.015 h);
+  --surface-cut: oklch(from var(--theme) 0.93 0.02 h);
+  --surface-cut-original: oklch(from var(--theme) 0.93 0.02 h);
+  --on-surface: oklch(from var(--theme) 0.25 0.015 h);
+  --on-surface-dark: oklch(from var(--theme) 0.5 0.025 h);
+  --on-surface-darker: oklch(from var(--theme) 0.65 0.025 h);
+  --on-surface-darkest: oklch(from var(--theme) 0.75 0.025 h);
+  --surface-white: oklch(from var(--theme) 0.98 0.04 h);
+  --surface-black: oklch(from var(--theme) 0.4 0.07 h);
+  --background-outline: oklch(from var(--theme) 0.74 0.03 h);
+  --surface-outline: oklch(from var(--theme) 0.88 0.025 h);
+  --surface-outline-original: oklch(from var(--theme) 0.88 0.025 h);
+
+  --surface-hover: color-mix(in oklab, var(--surface-black) 6%, transparent);
+  --surface-hover-fill: color-mix(
+    in oklab,
+    var(--surface-white) 10%,
+    transparent
+  );
+  --surface-pressed: color-mix(in oklab, var(--surface-white) 6%, transparent);
+
+  --surface-mix-amount: 5%;
+  --surface-mix-color: var(--surface-black);
+
+  --shadow-surface-cut-outline:
+    0.5px 0.5px 0px 0px
+      color-mix(in oklab, var(--surface-black) 10%, transparent) inset,
+    0px 0px 0px 0.5px color-mix(in oklab, var(--surface-black) 5%, transparent)
+      inset;
+
+  --shadow-surface-outline-fill:
+    0px 0px 0px 1px color-mix(in oklab, var(--surface-black) 40%, transparent)
+      inset,
+    1px 1px 0px 0.25px
+      color-mix(in oklab, var(--surface-white) 30%, transparent) inset;
+
+  &,
+  [class*='surface-level-'] {
+    --shadow-surface-outline:
+      0px 0px 0px 1px var(--color-surface-outline) inset,
+      1.5px 1.5px 0px 0px
+        color-mix(in oklab, var(--surface-white) 80%, transparent) inset;
+  }
+}
+
+/* COMMON */
+.light,
+.dark,
+[class*='color-'] {
+  --color-background: var(--background);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-surface: var(--surface);
+  --color-surface-cut: var(--surface-cut);
+  --color-surface-minus: var(--surface-minus);
+  --color-surface-plus: var(--surface-plus);
+  --color-surface-next: var(--surface);
+  --color-surface-outline: var(--surface-outline);
+  --color-surface-white: var(--surface-white);
+  --color-surface-black: var(--surface-black);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-hover-fill: var(--surface-hover-fill);
+  --color-surface-pressed: var(--surface-pressed);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-dark: var(--on-surface-dark);
+  --color-on-surface-darker: var(--on-surface-darker);
+  --color-on-surface-darkest: var(--on-surface-darkest);
+  --color-background-outline: var(--background-outline);
+
+  --surface-highlight: color-mix(
+    in oklab,
+    var(--surface-white) var(--highlight-white-mix, 3%),
+    var(--surface) var(--highlight-original-mix, 100%)
+  );
+  --color-surface-highlight: var(--surface-highlight);
+
+  /* SURFACE 1 */
+  --surface-1: var(--surface-original);
+  --surface-1-cut: var(--surface-cut-original);
+  --surface-1-minus: color-mix(
+    in oklab,
+    var(--surface-black) calc(var(--surface-mix-amount)),
+    var(--surface-original) 100%
+  );
+  --surface-1-plus: color-mix(
+    in oklab,
+    var(--surface-white) calc(var(--surface-mix-amount) / 2),
+    var(--surface-original) 100%
+  );
+  --on-surface-1: var(--on-surface);
+  --on-surface-1-dark: var(--on-surface-dark);
+  --on-surface-1-darker: var(--on-surface-darker);
+  --on-surface-1-darkest: var(--on-surface-darkest);
+  --surface-1-outline: var(--surface-outline-original);
+
+  /* SURFACE 2 */
+  --surface-2: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
+    var(--surface-original) 100%
+  );
+  --surface-2-cut: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
+    var(--surface-cut-original) var(--surface-original-mix, 100%)
+  );
+  --surface-2-plus: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1.5),
+    var(--surface-original) 100%
+  );
+  --on-surface-2: var(--on-surface);
+  --on-surface-2-dark: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
+    var(--on-surface-dark) var(--surface-original-mix, 100%)
+  );
+  --on-surface-2-darker: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
+    var(--on-surface-darker) var(--surface-original-mix, 100%)
+  );
+  --on-surface-2-darkest: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
+    var(--on-surface-darkest) var(--surface-original-mix, 100%)
+  );
+  --surface-2-outline: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
+    var(--surface-outline-original)
+  );
+
+  /* SURFACE 3 */
+  --surface-3: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
+    var(--surface-original) 100%
+  );
+  --surface-3-cut: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
+    var(--surface-cut-original) var(--surface-original-mix, 100%)
+  );
+  --surface-3-plus: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2.5),
+    var(--surface-original) 100%
+  );
+  --on-surface-3: var(--on-surface);
+  --on-surface-3-dark: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
+    var(--on-surface-dark) var(--surface-original-mix, 100%)
+  );
+  --on-surface-3-darker: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
+    var(--on-surface-darker) var(--surface-original-mix, 100%)
+  );
+  --on-surface-3-darkest: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
+    var(--on-surface-darkest) var(--surface-original-mix, 100%)
+  );
+  --surface-3-outline: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
+    var(--surface-outline-original)
+  );
+
+  /* SURFACE 4 */
+  --surface-4: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
+    var(--surface-original) 100%
+  );
+  --surface-4-cut: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
+    var(--surface-cut-original) var(--surface-original-mix, 100%)
+  );
+  --surface-4-plus: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3.5),
+    var(--surface-original) 100%
+  );
+  --on-surface-4: var(--on-surface);
+  --on-surface-4-dark: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
+    var(--on-surface-dark) var(--surface-original-mix, 100%)
+  );
+  --on-surface-4-darker: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
+    var(--on-surface-darker) var(--surface-original-mix, 100%)
+  );
+  --on-surface-4-darkest: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
+    var(--on-surface-darkest) var(--surface-original-mix, 100%)
+  );
+  --surface-4-outline: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
+    var(--surface-outline-original)
+  );
+
+  /* SURFACE 5 */
+  --surface-5: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
+    var(--surface-original) 100%
+  );
+  --surface-5-cut: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
+    var(--surface-cut-original) var(--surface-original-mix, 100%)
+  );
+  --surface-5-plus: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4.5),
+    var(--surface-original) 100%
+  );
+  --on-surface-5: var(--on-surface);
+  --on-surface-5-dark: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
+    var(--on-surface-dark) var(--surface-original-mix, 100%)
+  );
+  --on-surface-5-darker: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
+    var(--on-surface-darker) var(--surface-original-mix, 100%)
+  );
+  --on-surface-5-darkest: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
+    var(--on-surface-darkest) var(--surface-original-mix, 100%)
+  );
+  --surface-5-outline: color-mix(
+    in oklab,
+    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
+    var(--surface-outline-original)
+  );
+}
+
+/* LEVELS */
+[class*='surface-level-'] {
+  --color-surface-highlight: color-mix(
+    in oklab,
+    var(--color-surface-white) var(--highlight-white-mix, 3%),
+    var(--color-surface) var(--highlight-original-mix, 100%)
+  );
+}
+.surface-level-1,
+.surface-level-1[class*='color-'] {
+  --color-surface: var(--surface-1);
+  --color-surface-cut: var(--surface-1-cut);
+  --color-surface-minus: var(--surface-1-minus);
+  --color-surface-plus: var(--surface-1-plus);
+  --color-surface-next: var(--surface-2);
+  --color-surface-outline: var(--surface-1-outline);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-dark: var(--on-surface-1-dark);
+  --color-on-surface-darker: var(--on-surface-1-darker);
+  --color-on-surface-darkest: var(--on-surface-1-darkest);
+}
+.surface-level-2,
+.surface-level-2[class*='color-'] {
+  --color-surface: var(--surface-2);
+  --color-surface-cut: var(--surface-2-cut);
+  --color-surface-minus: var(--surface-1-plus);
+  --color-surface-plus: var(--surface-2-plus);
+  --color-surface-next: var(--surface-3);
+  --color-surface-outline: var(--surface-2-outline);
+  --color-on-surface: var(--on-surface-2);
+  --color-on-surface-dark: var(--on-surface-2-dark);
+  --color-on-surface-darker: var(--on-surface-2-darker);
+  --color-on-surface-darkest: var(--on-surface-2-darkest);
+}
+.surface-level-3,
+.surface-level-3[class*='color-'] {
+  --color-surface: var(--surface-3);
+  --color-surface-cut: var(--surface-3-cut);
+  --color-surface-minus: var(--surface-2-plus);
+  --color-surface-plus: var(--surface-3-plus);
+  --color-surface-next: var(--surface-4);
+  --color-surface-outline: var(--surface-3-outline);
+  --color-on-surface: var(--on-surface-3);
+  --color-on-surface-dark: var(--on-surface-3-dark);
+  --color-on-surface-darker: var(--on-surface-3-darker);
+  --color-on-surface-darkest: var(--on-surface-3-darkest);
+}
+.surface-level-4,
+.surface-level-4[class*='color-'] {
+  --color-surface: var(--surface-4);
+  --color-surface-cut: var(--surface-4-cut);
+  --color-surface-minus: var(--surface-3-plus);
+  --color-surface-plus: var(--surface-4-plus);
+  --color-surface-next: var(--surface-5);
+  --color-surface-outline: var(--surface-4-outline);
+  --color-on-surface: var(--on-surface-4);
+  --color-on-surface-dark: var(--on-surface-4-dark);
+  --color-on-surface-darker: var(--on-surface-4-darker);
+  --color-on-surface-darkest: var(--on-surface-4-darkest);
+}
+.surface-level-5,
+.surface-level-5[class*='color-'] {
+  --color-surface: var(--surface-5);
+  --color-surface-cut: var(--surface-5-cut);
+  --color-surface-minus: var(--surface-4-plus);
+  --color-surface-plus: var(--surface-5-plus);
+  --color-surface-next: var(--surface-6);
+  --color-surface-outline: var(--surface-5-outline);
+  --color-on-surface: var(--on-surface-5);
+  --color-on-surface-dark: var(--on-surface-5-dark);
+  --color-on-surface-darker: var(--on-surface-5-darker);
+  --color-on-surface-darkest: var(--on-surface-5-darkest);
+}

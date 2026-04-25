@@ -1,0 +1,206 @@
+import {
+  useRef,
+  ElementType,
+  ChangeEvent,
+  MouseEvent,
+  PointerEvent,
+  ComponentPropsWithoutRef,
+} from 'react';
+
+import { cn } from '../shared/cn';
+import { useAccentColor } from '../shared/use-accent-color';
+import { useTheme } from '../shared/use-theme';
+import { Color } from '../types';
+import { FocusableLayer } from './FocusableLayer';
+import { Surface } from './Surface';
+
+interface RadioOwnProps<C extends ElementType = 'label'> {
+  /** Controlled checked state. Default `false`. */
+  checked?: boolean;
+  /** Visually dim the radio and disable interaction. */
+  disabled?: boolean;
+  /** Block toggling without the disabled visual treatment. */
+  readOnly?: boolean;
+  /** Native `value` - submitted with the form when `checked`. */
+  value?: string;
+  /** Native `name` - used to group radios in the same set. */
+  name?: string;
+  size?: 'sm' | 'md';
+  required?: boolean;
+  /** Fires when the user toggles the radio. First arg is the new checked state, second is the raw event. */
+  onChange?: (checked: boolean, event?: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (e: MouseEvent) => void;
+  onPointerDown?: (e: PointerEvent) => void;
+  /**
+   * When `true` (default), renders a hidden native input for form submission and accessibility.
+   * When `false`, the component falls back to ARIA roles (`role="radio"`, `aria-checked`,
+   * keyboard `Space`/`Enter` toggling) and `onChange` fires from the click handler.
+   */
+  input?: boolean;
+  /** `id` for the hidden `<input>`. Used to wire an external `<label htmlFor>` to this radio. */
+  inputId?: string;
+  /** Extra classes for the outer label/element. */
+  className?: string;
+  /** Accent color for the checked state. Default: theme accent. */
+  color?: Color;
+  /**
+   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden
+   * input on click. Use a non-label container when the radio lives inside an existing label —
+   * see `hoverable`/`focusable` for how this changes interactivity.
+   */
+  component?: C;
+  /**
+   * Auto-computed when omitted: `true` if `component === 'label'`, otherwise `false`.
+   * Override explicitly for custom containers that should still show hover affordances.
+   */
+  hoverable?: boolean;
+  /**
+   * Auto-computed when omitted: `true` if `component === 'label'` OR `input` is `true`.
+   * Drives whether the focus ring (`FocusableLayer`) is rendered.
+   */
+  focusable?: boolean;
+}
+
+export type RadioProps<C extends ElementType = 'label'> = RadioOwnProps<C> &
+  Omit<ComponentPropsWithoutRef<C>, keyof RadioOwnProps<C>>;
+
+export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
+  const accentColor = useAccentColor();
+  const theme = useTheme();
+
+  const {
+    checked = false,
+    disabled = false,
+    readOnly,
+    value,
+    name,
+    size = 'sm',
+    required = false,
+    onChange = () => {},
+    onClick = () => {},
+    onPointerDown = () => {},
+    input = true,
+    inputId,
+    className,
+    color = accentColor,
+    component = 'label',
+    hoverable,
+    focusable,
+    ...rest
+  } = props;
+  const elRef = useRef<HTMLElement | null>(null);
+
+  let hoverableComputed = hoverable;
+  let focusableComputed = focusable;
+
+  if (typeof hoverableComputed === 'undefined')
+    hoverableComputed = component === 'label';
+  if (typeof focusableComputed === 'undefined')
+    focusableComputed = component === 'label' || input;
+
+  const Component = component as ElementType;
+  const ariaFallback = !input
+    ? {
+        role: 'radio',
+        'aria-checked': checked,
+        'aria-disabled': disabled || undefined,
+        'aria-readonly': readOnly || undefined,
+        'aria-required': required || undefined,
+        tabIndex: disabled ? -1 : 0,
+        onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => {
+          if (disabled || readOnly) return;
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            onChange(!checked);
+          }
+        },
+      }
+    : {};
+
+  const handleClick = (e: MouseEvent) => {
+    onClick(e);
+    if (!input && !disabled && !readOnly) {
+      onChange(!checked);
+    }
+  };
+
+  return (
+    <Component
+      className={cn(
+        'checkbox group/radio relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
+        size === 'sm' && 'size-5',
+        size === 'md' && 'size-6',
+
+        disabled && 'opacity-50',
+        className,
+      )}
+      onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
+      onClick={handleClick}
+      onPointerDown={onPointerDown}
+      ref={elRef}
+      {...ariaFallback}
+      {...rest}
+    >
+      {input && (
+        <input
+          id={inputId}
+          disabled={disabled || readOnly}
+          readOnly={readOnly}
+          checked={checked}
+          required={required}
+          type="checkbox"
+          value={value}
+          name={name}
+          className="pointer-events-none absolute inset-1 z-10 opacity-0"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(!checked, e)}
+        />
+      )}
+
+      {/* Knob */}
+      <Surface
+        className={cn(
+          'absolute inset-0 size-full shrink-0 rounded-full duration-200',
+        )}
+        outline
+        variant={'gradient'}
+        hoverable={hoverableComputed && !disabled && !readOnly}
+        clickable={hoverableComputed && !disabled && !readOnly}
+      />
+
+      {/* Checked Knob */}
+      <Surface
+        className={cn(
+          'absolute inset-0 size-full shrink-0 rounded-full duration-200',
+          !checked && 'scale-0',
+          checked ? 'opacity-100' : 'opacity-0',
+        )}
+        color={color}
+        outline={theme === 'light'}
+        variant={'gradient-fill'}
+        hoverable={hoverableComputed && !disabled && !readOnly}
+        clickable={hoverableComputed && !disabled && !readOnly}
+      />
+
+      {/* Check */}
+      <span
+        className={cn(
+          'pointer-events-none relative size-2 rounded-full duration-200',
+          !checked &&
+            cn(
+              'scale-75 bg-on-surface-dark',
+              !readOnly && !disabled && 'group-active/radio:scale-65',
+            ),
+          checked &&
+            cn(
+              'bg-on-primary',
+              `color-${color}`,
+              !disabled && !readOnly && 'group-active/radio:scale-90',
+            ),
+        )}
+      />
+      {focusableComputed && !disabled && !readOnly && (
+        <FocusableLayer className="rounded-full" group="radio" />
+      )}
+    </Component>
+  );
+}

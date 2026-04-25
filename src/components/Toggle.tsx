@@ -1,0 +1,253 @@
+import {
+  useRef,
+  ElementType,
+  ReactNode,
+  MouseEvent,
+  ComponentPropsWithoutRef,
+} from 'react';
+
+import { cn } from '../shared/cn';
+import { useAccentColor } from '../shared/use-accent-color';
+import { useTheme } from '../shared/use-theme';
+import { Color } from '../types';
+import { FocusableLayer } from './FocusableLayer';
+import { Surface, SurfaceVariant } from './Surface';
+
+type ToggleSize = 'sm' | 'md';
+
+interface ToggleOwnProps<C extends ElementType = 'label'> {
+  /** Controlled checked state. Default `false`. */
+  checked?: boolean;
+  /** Visually dim the toggle and disable interaction. */
+  disabled?: boolean;
+  /** Block toggling without the disabled visual treatment. */
+  readOnly?: boolean;
+  /** Fires when the user toggles. First arg is the new checked state, second is the raw event. */
+  onChange?: (
+    checked: boolean,
+    event?: React.ChangeEvent<HTMLInputElement>,
+  ) => void;
+  /** Accent color for the checked state knob fill. Default: theme accent. */
+  color?: Color;
+  /**
+   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden
+   * input on click. Use a non-label container when nesting inside an existing label —
+   * see `hoverable`/`focusable` for how this changes interactivity.
+   */
+  component?: C;
+  /**
+   * Icon rendered inside the knob. Pass either a static `ReactNode`, or a function
+   * `(checked) => ReactNode` to render different content based on the toggle state.
+   * If omitted, the built-in animated cross/check glyph is used.
+   */
+  icon?: ReactNode | ((checked: boolean) => ReactNode);
+  size?: ToggleSize;
+  /** Extra classes for the outer label/element. */
+  className?: string;
+  /**
+   * When `true` (default), renders a hidden native `<input type="checkbox" role="switch">`
+   * for form submission and accessibility. When `false`, falls back to ARIA roles
+   * (`role="switch"`, `aria-checked`, keyboard `Space`/`Enter` toggling).
+   */
+  input?: boolean;
+  /**
+   * Auto-computed when omitted: `true` if `component === 'label'`, otherwise `false`.
+   * Override explicitly for custom containers that should still show hover affordances.
+   */
+  hoverable?: boolean;
+  /**
+   * Auto-computed when omitted: `true` if `component === 'label'` OR `input` is `true`.
+   * Drives whether the focus ring (`FocusableLayer`) is rendered on the knob.
+   */
+  focusable?: boolean;
+  /** Outline ring on the **track** (background surface). Default `true`. */
+  outline?: boolean;
+  /**
+   * Surface level for the **track**. Default `'+1'` - one level deeper than the parent surface.
+   * Accepts the same absolute / relative (`"+1"`/`"-1"`) syntax as `Surface.level`.
+   */
+  surfaceLevel?: string | number;
+  /** Surface variant for the **track**. Default `'solid'`. */
+  variant?: SurfaceVariant;
+  /** Outline ring on the **knob**. Default `true`. */
+  knobOutline?: boolean;
+  /** Surface variant for the **knob**. Default `'gradient'`. */
+  knobVariant?: SurfaceVariant;
+  /**
+   * Surface level for the **knob**. Default `'+2'` - two levels deeper than the parent surface,
+   * so the knob reads as a raised piece on top of the track.
+   */
+  knobSurfaceLevel?: string | number;
+}
+
+export type ToggleProps<C extends ElementType = 'label'> = ToggleOwnProps<C> &
+  Omit<ComponentPropsWithoutRef<C>, keyof ToggleOwnProps<C>>;
+
+export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
+  const accentColor = useAccentColor();
+  const theme = useTheme();
+
+  const {
+    checked = false,
+    disabled = false,
+    readOnly,
+    onChange = () => {},
+    color = accentColor,
+    component = 'label',
+    icon,
+    size = 'md',
+    className,
+    input = true,
+    hoverable,
+    focusable,
+    outline = true,
+    variant = 'solid',
+    surfaceLevel = '+1',
+    knobOutline = true,
+    knobVariant = 'gradient',
+    knobSurfaceLevel = '+2',
+  } = props;
+  const elRef = useRef<HTMLElement | null>(null);
+  let hoverableComputed = hoverable;
+  let focusableComputed = focusable;
+
+  if (typeof hoverableComputed === 'undefined') {
+    hoverableComputed = component === 'label';
+  }
+  if (typeof focusableComputed === 'undefined') {
+    focusableComputed = component === 'label' || input;
+  }
+
+  const Component = component as ElementType;
+  const ariaFallback = !input
+    ? {
+        role: 'switch',
+        'aria-checked': checked,
+        'aria-disabled': disabled || undefined,
+        'aria-readonly': readOnly || undefined,
+        tabIndex: disabled ? -1 : 0,
+        onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => {
+          if (disabled || readOnly) return;
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            onChange(!checked);
+          }
+        },
+        onClick: () => {
+          if (disabled || readOnly) return;
+          onChange(!checked);
+        },
+      }
+    : {};
+  return (
+    <Component
+      className={cn(
+        'toggle group/toggle relative flex shrink-0 rounded-full select-none',
+        size === 'sm' && 'w-10 p-1',
+        size === 'md' && 'w-12 p-1',
+        className,
+      )}
+      onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
+      ref={elRef}
+      {...ariaFallback}
+    >
+      {input && (
+        <input
+          checked={checked}
+          type="checkbox"
+          role="switch"
+          aria-checked={checked}
+          disabled={disabled || readOnly}
+          readOnly={readOnly}
+          className="pointer-events-none absolute inset-0 z-10 opacity-0"
+          onChange={(e) => onChange(!checked, e)}
+        />
+      )}
+
+      {/* BG */}
+      <Surface
+        level={surfaceLevel}
+        className="absolute inset-0 rounded-full"
+        outline={outline}
+        variant={variant}
+        wrapContent={false}
+      />
+
+      {/* Knob */}
+      <Surface
+        className={cn(
+          'z-10 rounded-full duration-300',
+          size === 'sm' && 'size-4',
+          size === 'md' && 'size-5',
+          checked && size === 'sm' && `translate-x-4`,
+          checked && size === 'md' && `translate-x-5`,
+          disabled && 'opacity-50',
+        )}
+        contentClassName="flex items-center justify-center"
+        variant={knobVariant}
+        outline={knobOutline}
+        level={knobSurfaceLevel}
+        clickable={!disabled && !readOnly}
+        hoverable={!disabled && !readOnly}
+        beforeContent={
+          <Surface
+            className={cn(
+              'absolute inset-0 size-full shrink-0 rounded-full duration-200',
+              theme === 'light' && !checked && 'scale-0',
+              checked ? 'opacity-100' : 'opacity-0',
+            )}
+            color={color}
+            outline={true}
+            level={'+0'}
+            variant={'gradient-fill'}
+            clickable={!disabled && !readOnly}
+            hoverable={!disabled && !readOnly}
+          />
+        }
+      >
+        {icon && typeof icon === 'function' && icon(checked)}
+        {icon && typeof icon !== 'function' && icon}
+        {!icon && (
+          <span
+            className={cn(
+              'absolute inset-0',
+              checked && `color-${color}`,
+              size === 'sm' && 'scale-80',
+            )}
+          >
+            <span
+              className={cn(
+                'absolute inset-0 duration-300 group-active/toggle:scale-90',
+                checked && 'rotate-180',
+                !checked && size === 'sm' && 'rotate-90',
+              )}
+            >
+              <span
+                className={cn(
+                  'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 rotate-45 rounded-full duration-300',
+                  checked ? 'bg-on-primary' : 'bg-on-surface-dark',
+                  checked
+                    ? 'translate-x-0.5 -translate-y-[1.75px] scale-x-40'
+                    : 'scale-x-75',
+                )}
+              />
+              <span
+                className={cn(
+                  'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 -rotate-45 rounded-full duration-300',
+                  checked ? 'bg-on-primary' : 'bg-on-surface-dark',
+                  checked
+                    ? '-translate-x-[1.5px] scale-x-60 -rotate-60'
+                    : 'scale-x-75',
+                )}
+              />
+            </span>
+          </span>
+        )}
+
+        {focusableComputed && !disabled && !readOnly && (
+          <FocusableLayer className="rounded-full" group="toggle" />
+        )}
+      </Surface>
+    </Component>
+  );
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@cladd-ui/react",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://cladd.io",
+  "bugs": {
+    "url": "https://github.com/cladd-ui/cladd/issues"
+  },
+  "license": "MIT",
+  "author": "Vladimir Kharlampidi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cladd-ui/cladd.git"
+  },
+  "type": "module",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
+  }
+}

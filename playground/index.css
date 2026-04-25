@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@import '@cladd-ui/react/ui.css';
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  /* background-color: #0f0f0f; */
+  /* background-color: #fff; */
+  font-family: Inter;
+  @apply bg-background;
+}

@@ -1,0 +1,71 @@
+@layer base {
+  .preloader-wrap {
+    transform-origin: center;
+    animation: preloader-rotate 4s infinite;
+  }
+  .preloader-knob {
+    transform-origin: left;
+    animation:
+      preloader-knob-move 1s infinite,
+      preloader-knob-scale 1s infinite;
+  }
+
+  @keyframes preloader-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    12.5%,
+    25% {
+      transform: rotate(90deg);
+    }
+
+    37.5%,
+    50% {
+      transform: rotate(180deg);
+    }
+    62.5%,
+    75% {
+      transform: rotate(270deg);
+    }
+    87.5%,
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes preloader-knob-move {
+    0%,
+    10% {
+      translate: 0px;
+    }
+    40%,
+    60% {
+      translate: calc(100%);
+    }
+    90%,
+    100% {
+      translate: 0px;
+    }
+  }
+
+  @keyframes preloader-knob-scale {
+    0% {
+      scale: 0.9 1;
+      transform-origin: left;
+    }
+    25% {
+      scale: 1.2 0.95;
+    }
+    50% {
+      scale: 0.9 1;
+      transform-origin: right;
+    }
+    75% {
+      scale: 1.2 0.95;
+    }
+    100% {
+      scale: 0.9 1;
+      transform-origin: left;
+    }
+  }
+}

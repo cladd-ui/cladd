@@ -1,0 +1,17 @@
+@layer base {
+  input[type='range'] {
+    appearance: none;
+    background: transparent;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    background: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    box-shadow: none;
+    border-radius: 50%;
+    opacity: 0;
+  }
+}

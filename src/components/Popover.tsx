@@ -1,0 +1,620 @@
+import {
+  cloneElement,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
+
+import { cn } from '../shared/cn';
+import { useModalUtils } from '../shared/use-modal-utils';
+import { useTheme } from '../shared/use-theme';
+import { Color } from '../types';
+import { Backdrop } from './Backdrop';
+import { ModalController, ModalPhase } from './ModalController';
+import { Surface, SurfaceProps, SurfaceVariant } from './Surface';
+
+type PopoverContextValue = {
+  register: (closeFn: () => void) => () => void;
+};
+
+const PopoverContext = createContext<PopoverContextValue | null>(null);
+
+type PopoverRootContextValue = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  anchorRef: React.RefObject<HTMLElement | null>;
+};
+
+const PopoverRootContext = createContext<PopoverRootContextValue | null>(null);
+
+/**
+ * State container for the `Popover` + `PopoverTrigger` + `Popover` compound. Holds the open
+ * state and the anchor ref so a `PopoverTrigger` can register the anchor element and a sibling
+ * `Popover` can read both via context.
+ *
+ * Use this when you want the trigger and the popover to be siblings in JSX (Radix-style):
+ *
+ * ```tsx
+ * <PopoverRoot>
+ *   <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+ *   <Popover>...</Popover>
+ * </PopoverRoot>
+ * ```
+ *
+ * Skip this and pass `open`/`onOpenChange`/`anchorRef` directly to `<Popover>` if you'd rather
+ * control state yourself.
+ */
+export const PopoverRoot = ({
+  children,
+  defaultOpen = false,
+  open: openProp,
+  onOpenChange,
+}: {
+  children: React.ReactNode;
+  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
+  defaultOpen?: boolean;
+  /** Controlled open state. When provided, internal state is bypassed. */
+  open?: boolean;
+  /** Fires whenever the open state should change (clicks on trigger, outside-clicks, escape). */
+  onOpenChange?: (open: boolean) => void;
+}) => {
+  const [internalOpen, setInternalOpen] = useState(defaultOpen);
+  const anchorRef = useRef<HTMLElement | null>(null);
+
+  const isControlled = openProp !== undefined;
+  const open = isControlled ? openProp : internalOpen;
+  const setOpen = (newOpen: boolean) => {
+    if (!isControlled) setInternalOpen(newOpen);
+    onOpenChange?.(newOpen);
+  };
+
+  return (
+    <PopoverRootContext.Provider value={{ open, setOpen, anchorRef }}>
+      {children}
+    </PopoverRootContext.Provider>
+  );
+};
+
+/**
+ * Wraps a single child element to act as the popover trigger. **Clones** the child to attach:
+ * - a `ref` callback that registers the element as the popover's anchor (composed with any
+ *   existing ref on the child),
+ * - an `onClick` handler that toggles the surrounding `PopoverRoot`'s open state (composed
+ *   with any existing `onClick`).
+ *
+ * No-ops (renders the child as-is) when used outside a `PopoverRoot`. Expects exactly one
+ * React element child that accepts `ref` and `onClick`.
+ */
+export const PopoverTrigger = ({
+  children,
+}: {
+  /** Single React element to use as the trigger. Must accept `ref` and `onClick`. */
+  children: React.ReactNode;
+}) => {
+  const ctx = useContext(PopoverRootContext);
+  if (!ctx) return <>{children}</>;
+
+  const child = children as React.ReactElement<any>;
+  const originalRef = child?.props?.ref;
+  const originalOnClick = child?.props?.onClick;
+
+  const setRef = (el: HTMLElement | null) => {
+    ctx.anchorRef.current = el;
+    if (typeof originalRef === 'function') originalRef(el);
+    else if (
+      originalRef &&
+      typeof originalRef === 'object' &&
+      'current' in originalRef
+    ) {
+      (originalRef as React.MutableRefObject<any>).current = el;
+    }
+  };
+
+  const onClick = (e: React.MouseEvent) => {
+    if (originalOnClick) originalOnClick(e);
+    ctx.setOpen(!ctx.open);
+  };
+
+  return cloneElement(child, { ref: setRef, onClick });
+};
+
+/**
+ * Wraps a single child element to close the surrounding popover when clicked. **Clones** the
+ * child to attach an `onClick` handler that flips the surrounding `PopoverRoot`'s open state
+ * to `false` (composed with any existing `onClick` on the child).
+ *
+ * ```tsx
+ * <PopoverRoot>
+ *   <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+ *   <Popover>
+ *     ...
+ *     <PopoverClose><Button>Done</Button></PopoverClose>
+ *   </Popover>
+ * </PopoverRoot>
+ * ```
+ *
+ * No-ops (renders the child as-is) when used outside a `PopoverRoot`.
+ */
+export const PopoverClose = ({
+  children,
+}: {
+  /** Single React element to use as the close affordance. Must accept `onClick`. */
+  children: React.ReactNode;
+}) => {
+  const ctx = useContext(PopoverRootContext);
+  if (!ctx) return <>{children}</>;
+
+  const child = children as React.ReactElement<any>;
+  const originalOnClick = child?.props?.onClick;
+
+  const onClick = (e: React.MouseEvent) => {
+    if (originalOnClick) originalOnClick(e);
+    ctx.setOpen(false);
+  };
+
+  return cloneElement(child, { onClick });
+};
+
+export type PopoverPosition =
+  | 'top-start'
+  | 'top'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left'
+  | 'left-end'
+  | 'right-start'
+  | 'right'
+  | 'right-end';
+export type PopoverOffset = OffsetValue | [OffsetValue, OffsetValue];
+interface PositionConfig {
+  area: string;
+  justifySelf?: string;
+  alignSelf?: string;
+  origin: string;
+  // [mainAxis, crossAxis] - main pushes away from anchor, cross shifts along anchor edge
+  offsetProperties: [string, string];
+}
+
+const POSITIONS: Record<PopoverPosition, PositionConfig> = {
+  'top-start': {
+    area: 'top center',
+    justifySelf: 'start',
+    origin: 'origin-bottom-left',
+    offsetProperties: ['marginBottom', 'marginLeft'],
+  },
+  top: {
+    area: 'top center',
+    origin: 'origin-bottom',
+    offsetProperties: ['marginBottom', 'marginLeft'],
+  },
+  'top-end': {
+    area: 'top center',
+    justifySelf: 'end',
+    origin: 'origin-bottom-right',
+    offsetProperties: ['marginBottom', 'marginRight'],
+  },
+  'bottom-start': {
+    area: 'bottom center',
+    justifySelf: 'start',
+    origin: 'origin-top-left',
+    offsetProperties: ['marginTop', 'marginLeft'],
+  },
+  bottom: {
+    area: 'bottom center',
+    origin: 'origin-top',
+    offsetProperties: ['marginTop', 'marginLeft'],
+  },
+  'bottom-end': {
+    area: 'bottom center',
+    justifySelf: 'end',
+    origin: 'origin-top-right',
+    offsetProperties: ['marginTop', 'marginRight'],
+  },
+  'left-start': {
+    area: 'center left',
+    alignSelf: 'start',
+    origin: 'origin-top-right',
+    offsetProperties: ['marginRight', 'marginTop'],
+  },
+  left: {
+    area: 'center left',
+    origin: 'origin-right',
+    offsetProperties: ['marginRight', 'marginTop'],
+  },
+  'left-end': {
+    area: 'center left',
+    alignSelf: 'end',
+    origin: 'origin-bottom-right',
+    offsetProperties: ['marginRight', 'marginBottom'],
+  },
+  'right-start': {
+    area: 'center right',
+    alignSelf: 'start',
+    origin: 'origin-top-left',
+    offsetProperties: ['marginLeft', 'marginTop'],
+  },
+  right: {
+    area: 'center right',
+    origin: 'origin-left',
+    offsetProperties: ['marginLeft', 'marginTop'],
+  },
+  'right-end': {
+    area: 'center right',
+    alignSelf: 'end',
+    origin: 'origin-bottom-left',
+    offsetProperties: ['marginLeft', 'marginBottom'],
+  },
+};
+
+type OffsetValue = number | string;
+
+const resolveOffset = (value: OffsetValue, marginProp: string): string => {
+  if (typeof value === 'number') return `${value}px`;
+  if (value.endsWith('%')) {
+    const fraction = parseFloat(value) / 100;
+    const dim =
+      marginProp === 'marginTop' || marginProp === 'marginBottom'
+        ? 'height'
+        : 'width';
+    return `calc(anchor-size(${dim}) * ${fraction})`;
+  }
+  return value;
+};
+
+type PopoverOwnProps = {
+  /** Controlled open state. When omitted, falls back to the surrounding `PopoverRoot` state, then `false`. */
+  open?: boolean;
+  /** Fires whenever the open state should change. When omitted, falls back to the `PopoverRoot` setter. */
+  onOpenChange?: (open: boolean) => void;
+
+  /** Extra classes applied to the popover root `Surface`. */
+  className?: string;
+  /** Extra classes applied to the inner scrollable content area. Default includes `max-h-[70vh] overflow-auto`. */
+  contentClassName?: string;
+  /**
+   * Ref to the element the popover should anchor against. Defaults to the anchor registered
+   * by `PopoverRoot` + `PopoverTrigger`. CSS anchor positioning is used - an `anchor-name`
+   * is auto-applied to the element if it doesn't already have one.
+   */
+  anchorRef?: React.RefObject<HTMLElement | null>;
+  /**
+   * Static rect (or ref to one) to anchor against when there's no DOM anchor element
+   * (e.g. for a context menu opened at a pointer position). Ignored if `anchorRef.current` exists.
+   */
+  anchorRect?: DOMRect | React.RefObject<DOMRect>;
+  /**
+   * Portal target. CSS selector string (default `'#app, #__next, #root'` - first match wins),
+   * or `false` to render inline without portalling.
+   */
+  root?: string | boolean;
+  /** Anchor side + alignment. See `PopoverPosition`. Default `'bottom'`. */
+  position?: PopoverPosition;
+  /**
+   * Spacing from anchor. Either a single value (main axis only) or `[main, cross]`.
+   * Numbers are pixels; strings pass through (e.g. `'8px'`, `'50%'` - `%` resolves against
+   * `anchor-size(width|height)` depending on the position).
+   */
+  offset?: OffsetValue | [OffsetValue, OffsetValue];
+  /** Render a backdrop behind the popover. Default `false`. */
+  backdrop?: boolean;
+  /** Make the backdrop transparent (still captures clicks for outside-close). */
+  backdropTransparent?: boolean;
+  /** Accent color token (`Color` enum). Sets the popover's `color-{name}` class - used by border/ring/text helpers. */
+  color?: Color;
+  /** Popover content. */
+  children?: React.ReactNode;
+  /**
+   * Forwarded to the underlying `Surface` as `level`. Default depends on theme:
+   * `1` for light theme, `undefined` (parent + 1) for dark theme.
+   */
+  surfaceLevel?: number | string;
+  /** Surface variant. Default depends on theme: `'gradient'` for dark, `'solid'` for light. */
+  variant?: SurfaceVariant;
+  /** Outline ring on the popover surface. Default `true` for non-light themes. */
+  outline?: boolean;
+  /** Defer rendering until first opened, and unmount after close. */
+  lazy?: boolean;
+  /** Default `true`. */
+  closeOnBackdropClick?: boolean;
+  /** Default `true`. Suppressed automatically when this popover has a child popover/dialog open. */
+  closeOnEscape?: boolean;
+  /** Fires when the open transition begins (after `open` flips to `true`, before the animation). */
+  onOpen?: () => void;
+  /** Fires after the open transition completes (`transitionend` on the surface). */
+  onOpened?: () => void;
+  /** Fires when the close transition begins (after `open` flips to `false`, before the animation). */
+  onClose?: () => void;
+  /** Fires after the close transition completes - use for unmount/cleanup work tied to dismissal. */
+  onClosed?: () => void;
+  /** Forwarded to the popover surface root element. */
+  ref?: React.Ref<HTMLElement>;
+};
+
+export type PopoverProps = PopoverOwnProps &
+  Omit<SurfaceProps, keyof PopoverOwnProps>;
+
+type PopoverInnerProps = Omit<PopoverProps, 'open' | 'onOpenChange'> & {
+  phase?: ModalPhase;
+  onPhaseChange?: (phase: ModalPhase) => void;
+};
+
+const PopoverInner = (props: PopoverInnerProps) => {
+  const theme = useTheme();
+  const {
+    phase = 'closed',
+    onPhaseChange = () => {},
+
+    className = '',
+    contentClassName = '',
+    anchorRef,
+    anchorRect,
+    root = '#app, #__next, #root',
+    position = 'bottom',
+    offset,
+    backdrop = false,
+    backdropTransparent = false,
+    color,
+    children,
+    surfaceLevel = theme === 'light' ? 1 : undefined,
+    variant = theme === 'dark' ? 'gradient' : 'solid',
+    outline = theme !== 'light',
+    lazy = false,
+    closeOnBackdropClick = true,
+    closeOnEscape = true,
+    onOpen = () => {},
+    onOpened = () => {},
+    onClose = () => {},
+    onClosed = () => {},
+    ref,
+    ...rest
+  } = props;
+
+  const anchorNameRef = useRef('');
+
+  // Reuse existing anchor-name if target already has one (e.g. from Tooltip),
+  // otherwise generate a shared one
+  if (anchorRef?.current) {
+    const existing = anchorRef.current.style.getPropertyValue('anchor-name');
+    if (existing) {
+      anchorNameRef.current = existing;
+    }
+  }
+  if (!anchorNameRef.current) {
+    anchorNameRef.current = `--anchor-${Math.random().toString(36).slice(2, 8)}`;
+  }
+  const anchorName = anchorNameRef.current;
+
+  const getAnchorRect = (): DOMRect | null => {
+    if (!anchorRect) return null;
+    if (typeof anchorRect === 'object' && 'current' in anchorRect)
+      return (anchorRect as React.RefObject<DOMRect>).current;
+    return anchorRect as DOMRect;
+  };
+
+  const elRef = useRef<HTMLElement>(null);
+  const containerElRef = useRef<HTMLDivElement>(null);
+  const wasPointerDown = useRef(false);
+
+  const positionConfig = POSITIONS[position] || POSITIONS['right-start'];
+
+  const { opened, open, close } = useModalUtils({
+    lazy,
+    phase,
+    onPhaseChange,
+    onOpen,
+    onOpened,
+    onClose,
+    onClosed,
+    transitionEndElRef: elRef as React.RefObject<HTMLElement>,
+    closeOnEscape() {
+      if (!closeOnEscape) return false;
+      if (containerElRef.current && containerElRef.current.nextElementSibling) {
+        const nextEl = containerElRef.current.nextElementSibling;
+        if (nextEl.matches('.popover, .dialog')) {
+          return false;
+        }
+      }
+      return true;
+    },
+  });
+
+  // Set anchor-name on target element if not already set
+  useEffect(() => {
+    const anchorEl = anchorRef?.current;
+    if (!anchorEl || !anchorName) return;
+    if (!anchorEl.style.getPropertyValue('anchor-name')) {
+      anchorEl.style.setProperty('anchor-name', anchorName);
+    }
+  }, [anchorRef, anchorName]);
+
+  // Click-outside handling
+  const onDocumentClick = (e: MouseEvent) => {
+    if (!opened) return;
+    const target = e.target as HTMLElement;
+    if (containerElRef.current && containerElRef.current.contains(target))
+      return;
+    const targetPopoverEl = target.closest('.popover');
+    if (targetPopoverEl) {
+      const isParentPopoverClicked =
+        targetPopoverEl &&
+        containerElRef.current &&
+        targetPopoverEl.nextElementSibling === containerElRef.current;
+      if (!isParentPopoverClicked) {
+        return;
+      }
+    }
+
+    if (!wasPointerDown.current) return;
+    if (!target.closest('body')) return;
+    if (!closeOnBackdropClick) return;
+    if (
+      containerElRef.current &&
+      containerElRef.current.nextElementSibling &&
+      containerElRef.current.nextElementSibling.classList.contains('popover')
+    ) {
+      return;
+    }
+    close();
+  };
+
+  const onPointerDown = () => {
+    wasPointerDown.current = true;
+  };
+
+  useEffect(() => {
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('click', onDocumentClick);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('click', onDocumentClick);
+    };
+  });
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      open();
+    });
+  }, []);
+
+  // Track popovers that are React-tree children of this one
+  const parentPopover = useContext(PopoverContext);
+  const childCloseFns = useRef<Set<() => void>>(new Set());
+  const popoverContextValue = useRef<PopoverContextValue>({
+    register: (closeFn: () => void) => {
+      childCloseFns.current.add(closeFn);
+      return () => {
+        childCloseFns.current.delete(closeFn);
+      };
+    },
+  }).current;
+
+  // Keep latest close in a ref so the registered callback always calls the current one
+  const closeRef = useRef(close);
+  closeRef.current = close;
+
+  // Register this popover's close with its parent popover (if any)
+  useEffect(() => {
+    if (!parentPopover) return;
+    return parentPopover.register(() => closeRef.current());
+  }, [parentPopover]);
+
+  // Cascade close to registered child popovers when this one starts closing
+  useEffect(() => {
+    if (phase !== 'closing') return;
+    childCloseFns.current.forEach((closeChild) => closeChild());
+  }, [phase]);
+
+  const [mainOffset, crossOffset] = Array.isArray(offset)
+    ? offset
+    : [offset || 0, 0];
+  const [mainProp, crossProp] = positionConfig.offsetProperties;
+
+  const popoverStyle = {
+    position: 'absolute',
+    positionAnchor: anchorName,
+    positionArea: positionConfig.area,
+    positionTryFallbacks: 'flip-block, flip-inline, flip-block flip-inline',
+    justifySelf: positionConfig.justifySelf,
+    alignSelf: positionConfig.alignSelf,
+    ...(mainOffset ? { [mainProp]: resolveOffset(mainOffset, mainProp) } : {}),
+    ...(crossOffset
+      ? { [crossProp]: resolveOffset(crossOffset, crossProp) }
+      : {}),
+  } as React.CSSProperties;
+
+  const content = (
+    <PopoverContext.Provider value={popoverContextValue}>
+      <div
+        className="popover"
+        ref={containerElRef as React.RefObject<HTMLDivElement>}
+      >
+        {backdrop && (
+          <Backdrop
+            onClick={() => {
+              if (closeOnBackdropClick) close();
+            }}
+            className={cn(
+              'duration-200',
+              backdropTransparent ? 'bg-transparent' : 'bg-backdrop/50',
+              opened ? 'opacity-100' : 'opacity-0',
+            )}
+          />
+        )}
+        {anchorRect &&
+          !anchorRef?.current &&
+          (() => {
+            const rect = getAnchorRect();
+            return rect ? (
+              <div
+                style={
+                  {
+                    position: 'fixed',
+                    pointerEvents: 'none',
+                    left: rect.left,
+                    top: rect.top,
+                    width: rect.width,
+                    height: rect.height,
+                    anchorName: anchorName,
+                  } as React.CSSProperties
+                }
+              />
+            ) : null;
+          })()}
+        <Surface
+          ref={(el: HTMLElement) => {
+            elRef.current = el;
+            if (typeof ref === 'function') ref(el);
+            else if (ref && 'current' in ref)
+              (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+          }}
+          style={popoverStyle}
+          className={cn(
+            'pointer-events-auto z-50 w-40 max-w-[calc(100vw-16px)] rounded-3xl shadow-popover transition-[opacity,transform,scale] duration-0',
+            opened && 'scale-100 opacity-100 ease-[cubic-bezier(0,1,0,1.025)]',
+            (phase === 'opened' || (phase === 'opening' && opened)) &&
+              'duration-400',
+            phase === 'closing' && 'duration-300 ease-out!',
+            (phase === 'closing' || !opened) && 'scale-0 opacity-0',
+            positionConfig.origin,
+            className,
+          )}
+          color={color}
+          level={surfaceLevel}
+          variant={variant}
+          outline={outline}
+          contentClassName={cn('max-h-[70vh] overflow-auto', contentClassName)}
+          {...rest}
+        >
+          {children}
+        </Surface>
+      </div>
+    </PopoverContext.Provider>
+  );
+
+  return root
+    ? createPortal(content, document.querySelector(root as string) as Element)
+    : content;
+};
+
+export const Popover = ({
+  open,
+  onOpenChange,
+  anchorRef,
+  ...rest
+}: PopoverProps) => {
+  const ctx = useContext(PopoverRootContext);
+  const effectiveOpen = open ?? ctx?.open ?? false;
+  const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});
+  const effectiveAnchorRef = anchorRef ?? ctx?.anchorRef;
+  return (
+    <ModalController open={effectiveOpen} onOpenChange={effectiveOnOpenChange}>
+      <PopoverInner anchorRef={effectiveAnchorRef} {...rest} />
+    </ModalController>
+  );
+};
