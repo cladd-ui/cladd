@@ -35,6 +35,9 @@ import {
   SurfaceCut,
   TextArea,
   Toggle,
+  Toolbar,
+  ToolbarButton,
+  ToolbarSeparator,
   UIProvider,
   WithTooltip,
   cn,
@@ -105,6 +108,13 @@ function App() {
       <div
         className={cn('flex flex-col items-start gap-8 p-8 text-on-surface')}
       >
+        <BlockTitle>Toolbar</BlockTitle>
+        <Toolbar size="sm">
+          <ToolbarButton>Button 1</ToolbarButton>
+          <ToolbarButton>Button 2</ToolbarButton>
+          <ToolbarSeparator />
+          <ToolbarButton>Button 3</ToolbarButton>
+        </Toolbar>
         <BlockTitle>Nested Popovers Test</BlockTitle>
         <PopoverRoot>
           <PopoverTrigger>
@@ -744,30 +754,15 @@ function App() {
           outline
           className="rounded-3xl"
         >
-          <Surface
-            variant="gradient"
-            contentClassName="p-1"
-            outline
-            className="max-w-full rounded-full"
-          >
-            <NumberField size="sm" input={true} value={10} rounded={true} />
-          </Surface>
-          <Surface
-            variant="gradient"
-            contentClassName="p-1"
-            outline
-            className="max-w-full rounded-full"
-          >
-            <NumberField input={true} value={10} rounded={true} />
-          </Surface>
-          <Surface
-            variant="gradient"
-            contentClassName="p-1"
-            outline
-            className="max-w-full rounded-full"
-          >
-            <NumberField size="lg" input={true} value={10} rounded={true} />
-          </Surface>
+          <NumberField size="sm" input={true} value={10} rounded={false} />
+
+          <NumberField input={true} value={10} rounded={false} />
+
+          <NumberField size="lg" input={true} value={10} rounded={false} />
+
+          <NumberField size="xl" input={true} value={10} rounded={false} />
+
+          <NumberField size="2xl" input={true} value={10} rounded={false} />
         </Surface>
         <BlockTitle>Segmented</BlockTitle>
         <Surface
@@ -1045,6 +1040,45 @@ function App() {
             </Button>
             <Button rounded size="2xl">
               Button 2XL
+            </Button>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button rounded multiline size="sm">
+              Button SM
+            </Button>
+            <Button rounded multiline size="md">
+              Button MD
+            </Button>
+            <Button rounded multiline size="lg">
+              Button LG
+            </Button>
+            <Button rounded multiline size="xl">
+              Button XL
+            </Button>
+            <Button rounded multiline size="2xl">
+              Button 2XL
+            </Button>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button rounded multiline size="sm">
+              Button SM
+              <br /> Multiline <br /> Multiline
+            </Button>
+            <Button rounded multiline size="md">
+              Button MD
+              <br /> Multiline <br /> Multiline
+            </Button>
+            <Button rounded multiline size="lg">
+              Button LG
+              <br /> Multiline <br /> Multiline
+            </Button>
+            <Button rounded multiline size="xl">
+              Button XL
+              <br /> Multiline <br /> Multiline
+            </Button>
+            <Button rounded multiline size="2xl">
+              Button 2XL
+              <br /> Multiline <br /> Multiline
             </Button>
           </div>
           <div className="flex items-center gap-2">

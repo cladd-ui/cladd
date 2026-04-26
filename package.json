@@ -8,7 +8,8 @@
     "check-types": "tsc --noEmit",
     "dev": "cd playground && vite",
     "format": "oxfmt",
-    "format:check": "oxfmt --check"
+    "format:check": "oxfmt --check",
+    "release": "node scripts/release.mjs"
   },
   "dependencies": {
     "@cladd-ui/react": "file:src",
