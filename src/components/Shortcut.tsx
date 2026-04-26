@@ -97,8 +97,8 @@ export const Shortcut = (props: ShortcutProps) => {
   }[size];
   const fontSizeClass = {
     sm: 'text-[10px]',
-    md: 'text-[10px]',
-    lg: 'text-[11px]',
+    md: 'text-[11px]',
+    lg: 'text-[12px]',
     xl: 'text-[12px]',
     '2xl': 'text-[14px]',
   }[size];
