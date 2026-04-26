@@ -1,7 +1,6 @@
 import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 
 import { useSurface } from '../hooks/use-surface';
-import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { SurfaceContent } from './SurfaceContent';
@@ -121,7 +120,6 @@ export const Surface = <C extends ElementType = 'div'>(
   );
 
   const Component = component as ElementType;
-  const theme = useTheme();
   const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
 
   return (
@@ -146,12 +144,7 @@ export const Surface = <C extends ElementType = 'div'>(
           variant === 'gradient' &&
             'bg-linear-to-br from-surface-highlight to-surface',
           variant === 'gradient-fill' &&
-            cn(
-              'bg-linear-to-br',
-              theme === 'dark'
-                ? 'from-primary to-primary/85'
-                : 'from-primary/80 to-primary',
-            ),
+            'bg-linear-to-br from-primary to-primary/85 light:from-primary/80 light:to-primary',
 
           outline &&
             cn(

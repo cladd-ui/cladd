@@ -8,7 +8,6 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
-import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -68,7 +67,6 @@ export type RadioProps<C extends ElementType = 'label'> = RadioOwnProps<C> &
 
 export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
   const accentColor = useAccentColor();
-  const theme = useTheme();
 
   const {
     checked = false,
@@ -177,7 +175,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
           checked ? 'opacity-100' : 'opacity-0',
         )}
         color={color}
-        outline={theme === 'light'}
+        outline
         variant={'gradient-fill'}
         hoverable={hoverableComputed && !disabled && !readOnly}
         clickable={hoverableComputed && !disabled && !readOnly}

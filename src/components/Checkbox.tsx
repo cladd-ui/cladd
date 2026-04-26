@@ -8,7 +8,6 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
-import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -76,7 +75,6 @@ export function Checkbox<C extends ElementType = 'label'>(
   props: CheckboxProps<C>,
 ) {
   const accentColor = useAccentColor();
-  const theme = useTheme();
 
   const {
     checked = false,
@@ -185,7 +183,7 @@ export function Checkbox<C extends ElementType = 'label'>(
           checked ? 'opacity-100' : 'opacity-0',
         )}
         color={color}
-        outline={theme === 'light'}
+        outline
         variant={'gradient-fill'}
         hoverable={hoverableComputed && !disabled && !readOnly}
         clickable={hoverableComputed && !disabled && !readOnly}
@@ -202,11 +200,7 @@ export function Checkbox<C extends ElementType = 'label'>(
             !disabled &&
             !readOnly &&
             'group-group-active/checkbox:scale-65',
-          checked &&
-            cn(
-              theme === 'light' ? 'text-on-primary' : 'text-on-primary',
-              `color-${color}`,
-            ),
+          checked && cn('text-on-primary', `color-${color}`),
           checkClassName,
         )}
       />

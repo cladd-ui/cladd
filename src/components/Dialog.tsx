@@ -219,7 +219,7 @@ const DialogInner = (props: DialogInnerProps) => {
     cancelButtonColor = 'neutral',
     confirmButtonColor = accentColor,
     surfaceLevel = 1,
-    variant = theme === 'light' ? 'solid' : 'gradient',
+    variant = 'gradient',
     outline = theme === 'dark',
     onCancel,
     onConfirm,
@@ -373,12 +373,6 @@ const DialogInner = (props: DialogInnerProps) => {
                   !(requireConfirmText && inputText !== requireConfirmText)
                     ? confirmButtonColor
                     : undefined
-                }
-                variant={
-                  theme === 'light' &&
-                  !(requireConfirmText && inputText !== requireConfirmText)
-                    ? 'gradient-fill'
-                    : 'gradient'
                 }
                 rounded
                 size="lg"

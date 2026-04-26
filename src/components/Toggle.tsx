@@ -7,7 +7,6 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
-import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -85,7 +84,6 @@ export type ToggleProps<C extends ElementType = 'label'> = ToggleOwnProps<C> &
 
 export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
   const accentColor = useAccentColor();
-  const theme = useTheme();
 
   const {
     checked = false,
@@ -193,7 +191,7 @@ export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
           <Surface
             className={cn(
               'absolute inset-0 size-full shrink-0 rounded-full duration-200',
-              theme === 'light' && !checked && 'scale-0',
+              !checked && 'scale-0',
               checked ? 'opacity-100' : 'opacity-0',
             )}
             color={color}
