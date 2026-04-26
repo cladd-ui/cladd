@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState, ChangeEvent, MouseEvent } from 'react';
 
+import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
-interface RangeProps {
+export type RangeSize = 'sm' | 'md';
+export interface RangeProps {
   /** Controlled value. When omitted, the component falls back to uncontrolled mode using `defaultValue`. */
   value?: number;
   /** Initial value (uncontrolled). Default `0`. Ignored when `value` is provided. */
@@ -18,7 +19,7 @@ interface RangeProps {
   max?: number;
   /** Default `1`. */
   step?: number;
-  size?: 'sm' | 'md';
+  size?: RangeSize;
   /** Visually dim the range and disable interaction. */
   disabled?: boolean;
   /** Block dragging without the disabled visual treatment. */

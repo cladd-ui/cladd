@@ -12,13 +12,13 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useAccentColor } from '../hooks/use-accent-color';
+import { useDevice } from '../hooks/use-device';
+import { useFocusTrap } from '../hooks/use-focus-trap';
+import { useModalUtils } from '../hooks/use-modal-utils';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { getDevice } from '../shared/get-device';
 import { nextTick } from '../shared/next-tick';
-import { useAccentColor } from '../shared/use-accent-color';
-import { useFocusTrap } from '../shared/use-focus-trap';
-import { useModalUtils } from '../shared/use-modal-utils';
-import { useTheme } from '../shared/use-theme';
 import { Color } from '../types';
 import { Backdrop } from './Backdrop';
 import { Button } from './Button';
@@ -131,7 +131,7 @@ export const DialogClose = ({ children }: { children: ReactNode }) => {
   return cloneElement(child, { onClick });
 };
 
-interface DialogProps {
+export interface DialogProps {
   /** Controlled open state. When omitted, falls back to the surrounding `DialogRoot` state, then `false`. */
   open?: boolean;
   /** Fires whenever the open state should change. When omitted, falls back to the `DialogRoot` setter. */
@@ -247,7 +247,7 @@ const DialogInner = (props: DialogInnerProps) => {
     lazy,
     transitionEndElRef: elRef,
     onOpen() {
-      const device = getDevice();
+      const device = useDevice();
       if (!requireConfirmText && confirmButtonRef.current && !device.mobile) {
         if (!confirmButtonRef.current) return;
 

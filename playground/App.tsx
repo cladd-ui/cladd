@@ -1,48 +1,46 @@
-import { BlockTitle } from '@cladd-ui/react/components/BlockTitle';
-import { Button, ButtonSize } from '@cladd-ui/react/components/Button';
-import { Checkbox } from '@cladd-ui/react/components/Checkbox';
 import {
+  BlockTitle,
+  Button,
+  ButtonSize,
+  Checkbox,
   Dialog,
   DialogClose,
   DialogRoot,
   DialogTrigger,
-} from '@cladd-ui/react/components/Dialog';
-import { Input } from '@cladd-ui/react/components/Input';
-import { Link } from '@cladd-ui/react/components/Link';
-import { List } from '@cladd-ui/react/components/List';
-import { ListButton } from '@cladd-ui/react/components/ListButton';
-import { ListDivider } from '@cladd-ui/react/components/ListDivider';
-import { ListItem } from '@cladd-ui/react/components/ListItem';
-import {
+  Input,
+  Link,
+  List,
+  ListButton,
+  ListDivider,
+  ListItem,
   Popover,
   PopoverClose,
   PopoverRoot,
   PopoverTrigger,
-} from '@cladd-ui/react/components/Popover';
-import {
   Popup,
   PopupClose,
   PopupRoot,
   PopupTrigger,
-} from '@cladd-ui/react/components/Popup';
-import { PopupContent } from '@cladd-ui/react/components/PopupContent';
-import { Preloader, PreloaderSize } from '@cladd-ui/react/components/Preloader';
-import { Radio } from '@cladd-ui/react/components/Radio';
-import { Range } from '@cladd-ui/react/components/Range';
-import { Segmented } from '@cladd-ui/react/components/Segmented';
-import { SegmentedButton } from '@cladd-ui/react/components/SegmentedButton';
-import { Select } from '@cladd-ui/react/components/Select';
-import { Stepper } from '@cladd-ui/react/components/Stepper';
-import { Surface } from '@cladd-ui/react/components/Surface';
-import { SurfaceCut } from '@cladd-ui/react/components/SurfaceCut';
-import { Tag } from '@cladd-ui/react/components/Tag';
-import { TextArea } from '@cladd-ui/react/components/TextArea';
-import { Toggle } from '@cladd-ui/react/components/Toggle';
-import { UIProvider } from '@cladd-ui/react/components/UIProvider';
-import { WithTooltip } from '@cladd-ui/react/components/WithTooltip';
-import { cn } from '@cladd-ui/react/shared/cn';
-import { useDialog } from '@cladd-ui/react/shared/use-dialog';
-import { useToast } from '@cladd-ui/react/shared/use-toast';
+  PopupContent,
+  Preloader,
+  PreloaderSize,
+  Radio,
+  Range,
+  Segmented,
+  SegmentedButton,
+  Select,
+  Stepper,
+  Surface,
+  SurfaceCut,
+  Tag,
+  TextArea,
+  Toggle,
+  UIProvider,
+  WithTooltip,
+  useDialog,
+  useToast,
+  cn,
+} from '@cladd-ui/react';
 import { useState } from 'react';
 
 const Icon = (props: any) => {

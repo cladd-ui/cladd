@@ -1,6 +1,6 @@
 import { cloneElement, useEffect, useRef, useState } from 'react';
 
-import { getDevice } from '../shared/get-device';
+import { useDevice } from '../hooks/use-device';
 import { Color } from '../types';
 import { Tooltip, TooltipPosition, TooltipProps } from './Tooltip';
 
@@ -8,7 +8,7 @@ let tooltipGlobalTimeout: number = 0;
 let tooltipGlobalTimeoutId: number = 0;
 
 const resetGlobalTimeout = () => {
-  const device = getDevice();
+  const device = useDevice();
   tooltipGlobalTimeout = device.mobile ? 500 : 1000;
 };
 
@@ -19,21 +19,7 @@ const getGlobalTimeout = () => {
   return tooltipGlobalTimeout;
 };
 
-export const WithTooltip = ({
-  children: originalChild,
-  tooltip = '',
-  className,
-  position,
-  offset,
-  color,
-  timeout = true,
-  onOpen,
-  onOpened,
-  onClose,
-  onClosed,
-  ref: forwardedRef,
-  onClick: forwardedOnClick,
-}: {
+export interface WithTooltipProps {
   /** Single React element to attach the tooltip to. The tooltip anchors to this child's DOM element. */
   children: React.ReactNode;
   /** Tooltip content. When falsy, no tooltip is rendered or wired up - `WithTooltip` becomes a transparent wrapper. */
@@ -64,7 +50,23 @@ export const WithTooltip = ({
   ref?: React.Ref<HTMLElement>;
   /** Composed onto the child element's `onClick` (called before the child's own handler, if any). */
   onClick?: (e: React.MouseEvent) => void;
-}) => {
+}
+
+export const WithTooltip = ({
+  children: originalChild,
+  tooltip = '',
+  className,
+  position,
+  offset,
+  color,
+  timeout = true,
+  onOpen,
+  onOpened,
+  onClose,
+  onClosed,
+  ref: forwardedRef,
+  onClick: forwardedOnClick,
+}: WithTooltipProps) => {
   const [modalState, setModalState] = useState<boolean>(false);
   const elRef = useRef<HTMLElement | null>(null);
   const tooltipVisibleRef = useRef(false);

@@ -1,7 +1,7 @@
 import { cn } from '../shared/cn';
 import { Surface, SurfaceVariant } from './Surface';
 
-export const PopupContent = (props: {
+export interface PopupContentProps {
   /** Forwarded to the underlying `Surface` as `level`. Default `1`. Accepts the relative (`"+1"`/`"-1"`) syntax via `Surface.level`. */
   surfaceLevel?: number;
   /** Card content. */
@@ -16,7 +16,9 @@ export const PopupContent = (props: {
   outline?: boolean;
   /** Forwarded to the card `Surface`'s root element. */
   ref?: React.Ref<HTMLDivElement>;
-}) => {
+}
+
+export const PopupContent = (props: PopupContentProps) => {
   const {
     surfaceLevel = 1,
     children,

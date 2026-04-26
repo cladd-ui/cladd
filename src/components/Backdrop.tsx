@@ -2,7 +2,7 @@ import { ReactNode, Ref, HTMLAttributes } from 'react';
 
 import { cn } from '../shared/cn';
 
-interface BackdropProps extends HTMLAttributes<HTMLDivElement> {
+export interface BackdropProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   children?: ReactNode;
   ref?: Ref<HTMLDivElement>;

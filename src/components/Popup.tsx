@@ -8,9 +8,9 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useFocusTrap } from '../hooks/use-focus-trap';
+import { useModalUtils } from '../hooks/use-modal-utils';
 import { cn } from '../shared/cn';
-import { useFocusTrap } from '../shared/use-focus-trap';
-import { useModalUtils } from '../shared/use-modal-utils';
 import { Color } from '../types';
 import { Backdrop } from './Backdrop';
 import { Button } from './Button';

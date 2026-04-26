@@ -13,14 +13,14 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { SurfaceCut } from './SurfaceCut';
 import { SurfaceCutContent } from './SurfaceCutContent';
 
-type TextAreaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type TextAreaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface TextAreaOwnProps<C extends ElementType = 'div'> {
   /** Polymorphic wrapper element. Defaults to `'div'`. The editable area itself is always a `contenteditable` `<div>`. */

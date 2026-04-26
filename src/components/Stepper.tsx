@@ -7,7 +7,7 @@ import { Input, InputSize } from './Input';
 import { SurfaceVariant } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
-type StepperSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type StepperSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface StepperOwnProps {
   /** Custom content rendered inside the stepper container (rare - most usage is value-only). */

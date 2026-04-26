@@ -5,7 +5,7 @@ import { ThemeProvider } from './ThemeContext';
 import { ToastsPortal } from './ToastsPortal';
 import { ToastsPortalProvider } from './ToastsPortalContext';
 
-interface UIProps {
+export interface UIProviderProps {
   /**
    * Color scheme. Default `'dark'`. Read by `useTheme` and used to switch surface defaults
    * (e.g. Popover/Dialog/Tooltip pick different `variant`, `outline`, and `surfaceLevel` per theme).
@@ -19,7 +19,7 @@ interface UIProps {
   children?: React.ReactNode;
 }
 
-export const UIProvider = (props: UIProps) => {
+export const UIProvider = (props: UIProviderProps) => {
   const { theme = 'dark', accentColor = 'brand', children } = props;
 
   return (

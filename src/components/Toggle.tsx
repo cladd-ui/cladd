@@ -6,14 +6,14 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useAccentColor } from '../hooks/use-accent-color';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
-import { useTheme } from '../shared/use-theme';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface, SurfaceVariant } from './Surface';
 
-type ToggleSize = 'sm' | 'md';
+export type ToggleSize = 'sm' | 'md';
 
 interface ToggleOwnProps<C extends ElementType = 'label'> {
   /** Controlled checked state. Default `false`. */

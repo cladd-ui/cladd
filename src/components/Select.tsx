@@ -9,9 +9,9 @@ import {
   MouseEvent,
 } from 'react';
 
+import { useDevice } from '../hooks/use-device';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { getDevice } from '../shared/get-device';
-import { useTheme } from '../shared/use-theme';
 import { BlockTitle } from './BlockTitle';
 import { Button, buttonIconSizes, ButtonSize } from './Button';
 import { Checkbox } from './Checkbox';
@@ -265,7 +265,7 @@ export function Select<T = string>(props: SelectProps<T>) {
   const elRef = useRef<HTMLElement | null>(null);
   const listElRef = useRef<HTMLDivElement | null>(null);
   const searchbarRef = useRef<HTMLElement | null>(null);
-  const device = getDevice();
+  const device = useDevice();
   const reactId = useId();
   const listboxId = `select-listbox-${reactId}`;
   const optionIdPrefix = `select-option-${reactId}`;

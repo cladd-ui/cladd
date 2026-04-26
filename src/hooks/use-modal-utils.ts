@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import { ModalPhase } from '../components/ModalController';
-import { nextTick } from './next-tick';
+import { ModalPhase } from "../components/ModalController";
+import { nextTick } from "../shared/next-tick";
 
 export const useModalUtils = ({
   phase,
@@ -38,14 +38,14 @@ export const useModalUtils = ({
   const fireClosed = () => {
     if (closedFiredRef.current) return;
     closedFiredRef.current = true;
-    callbacksRef.current.onPhaseChange('closed');
+    callbacksRef.current.onPhaseChange("closed");
     callbacksRef.current.onClosed();
   };
 
   const close = () => {
     setOpened(false);
     onClose();
-    onPhaseChange('closing');
+    onPhaseChange("closing");
   };
 
   const open = () => {
@@ -59,9 +59,9 @@ export const useModalUtils = ({
   };
 
   const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
+    if (e.key === "Escape") {
       if (closeOnEscape === false) return;
-      if (typeof closeOnEscape === 'function' && !closeOnEscape()) return;
+      if (typeof closeOnEscape === "function" && !closeOnEscape()) return;
       e.preventDefault();
       e.stopPropagation();
       close();
@@ -72,31 +72,31 @@ export const useModalUtils = ({
     if (!transitionEndElRef) return;
     if (!transitionEndElRef.current || e.target !== transitionEndElRef.current)
       return;
-    if (phase === 'closing') {
+    if (phase === "closing") {
       fireClosed();
     }
-    if (phase === 'opening' || phase === 'opened') {
+    if (phase === "opening" || phase === "opened") {
       onOpened(transitionEndElRef.current);
-      if (phase === 'opening') {
-        onPhaseChange('opened');
+      if (phase === "opening") {
+        onPhaseChange("opened");
       }
     }
   };
 
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener("keydown", onKeyDown);
     const el = transitionEndElRef?.current;
     if (el) {
       if (!el.checkVisibility()) {
         onTransitionEnd({ target: el } as unknown as TransitionEvent);
       } else {
-        el.addEventListener('transitionend', onTransitionEnd);
+        el.addEventListener("transitionend", onTransitionEnd);
       }
     }
     return () => {
-      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener("keydown", onKeyDown);
       if (el) {
-        el.removeEventListener('transitionend', onTransitionEnd);
+        el.removeEventListener("transitionend", onTransitionEnd);
       }
     };
   });
@@ -110,12 +110,12 @@ export const useModalUtils = ({
     }
   }, [opened]);
   useEffect(() => {
-    if (phase === 'closing') {
+    if (phase === "closing") {
       if (opened) {
         setOpened(false);
         onClose();
       }
-    } else if (phase === 'opening' || phase === 'opened') {
+    } else if (phase === "opening" || phase === "opened") {
       if (!opened && initiallyOpenedRef.current) {
         open();
       }
@@ -127,7 +127,7 @@ export const useModalUtils = ({
   // transitionend could fire), synthetically flip external state to closed.
   useEffect(() => {
     return () => {
-      if (phaseRef.current === 'closing') {
+      if (phaseRef.current === "closing") {
         fireClosed();
       }
     };

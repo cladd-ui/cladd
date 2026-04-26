@@ -8,9 +8,9 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useModalUtils } from '../hooks/use-modal-utils';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { useModalUtils } from '../shared/use-modal-utils';
-import { useTheme } from '../shared/use-theme';
 import { Color } from '../types';
 import { Backdrop } from './Backdrop';
 import { ModalController, ModalPhase } from './ModalController';

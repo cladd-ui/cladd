@@ -1,10 +1,10 @@
+import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
 import { Color } from '../types';
 
 export type PreloaderSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-interface PreloaderProps {
+export interface PreloaderProps {
   /** Preloader dimension. Default `'sm'`. Drives the size, knob position, and border thickness. */
   size?: PreloaderSize;
   /** Accent color for the spinning knob and ring. Default: theme accent. */

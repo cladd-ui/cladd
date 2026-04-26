@@ -1,10 +1,10 @@
 @source './';
-@source '../components';
+@source './components';
 
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant light (&:where(.light, .light *));
-@import './colors.css';
-@import './safe-areas.css';
-@import './preloader.css';
-@import './popup.css';
-@import './range.css';
+@import "./colors.css";
+@import "./safe-areas.css";
+@import "./preloader.css";
+@import "./popup.css";
+@import "./range.css";

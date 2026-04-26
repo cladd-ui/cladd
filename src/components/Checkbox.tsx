@@ -7,13 +7,15 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useAccentColor } from '../hooks/use-accent-color';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
-import { useTheme } from '../shared/use-theme';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { CheckIcon } from './icons/CheckIcon';
 import { Surface } from './Surface';
+
+export type CheckboxSize = 'sm' | 'md';
 
 interface CheckboxOwnProps<C extends ElementType = 'label'> {
   /** Controlled checked state. Default `false`. */
@@ -26,7 +28,7 @@ interface CheckboxOwnProps<C extends ElementType = 'label'> {
   value?: string;
   /** Native `name` - used for form submission and to group radio-like checkboxes. */
   name?: string;
-  size?: 'sm' | 'md';
+  size?: CheckboxSize;
   required?: boolean;
   /** Fires when the user toggles the checkbox. First arg is the new checked state, second is the raw event (when fired by the hidden `<input>`). */
   onChange?: (checked: boolean, event?: ChangeEvent<HTMLInputElement>) => void;

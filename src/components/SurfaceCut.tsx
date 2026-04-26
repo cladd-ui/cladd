@@ -1,7 +1,7 @@
 import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 
+import { useSurface } from '../hooks/use-surface';
 import { cn } from '../shared/cn';
-import { useSurface } from '../shared/use-surface';
 import { Color } from '../types';
 import { SurfaceContextProvider } from './SurfaceContext';
 import { SurfaceCutContent } from './SurfaceCutContent';

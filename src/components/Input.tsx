@@ -11,8 +11,8 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
 import { Color } from '../types';
 import { Button, ButtonSize } from './Button';
 import { FocusableLayer } from './FocusableLayer';

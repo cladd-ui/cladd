@@ -2,7 +2,7 @@ import { ReactNode, Ref, HTMLAttributes } from 'react';
 
 import { cn } from '../shared/cn';
 
-interface SurfaceContentProps extends HTMLAttributes<HTMLDivElement> {
+export interface SurfaceContentProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
   ref?: Ref<HTMLDivElement>;

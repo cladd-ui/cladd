@@ -12,9 +12,9 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useModalUtils } from '../hooks/use-modal-utils';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { useModalUtils } from '../shared/use-modal-utils';
-import { useTheme } from '../shared/use-theme';
 import { Color } from '../types';
 import { Button } from './Button';
 import { CloseIcon } from './icons/CloseIcon';
@@ -116,7 +116,7 @@ export const ToastClose = ({ children }: { children: ReactNode }) => {
   return cloneElement(child, { onClick });
 };
 
-interface ToastProps {
+export interface ToastProps {
   /** Controlled open state. When omitted, falls back to the surrounding `ToastRoot` state, then `false`. */
   open?: boolean;
   /** Fires whenever the open state should change (close button, auto-timeout, etc.). */

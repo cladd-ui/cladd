@@ -3,5 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "description": "",
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    },
+    "./ui.css": "./ui.css"
+  }
 }

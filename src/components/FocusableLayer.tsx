@@ -1,5 +1,5 @@
+import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
 import { Color } from '../types';
 
 export const FocusableLayer = (props: {

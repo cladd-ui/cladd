@@ -2,7 +2,7 @@ import { ReactNode, Ref, HTMLAttributes } from 'react';
 
 import { cn } from '../shared/cn';
 
-interface ListProps extends HTMLAttributes<HTMLDivElement> {
+export interface ListProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
   ref?: Ref<HTMLDivElement>;

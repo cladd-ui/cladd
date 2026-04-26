@@ -7,12 +7,14 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useAccentColor } from '../hooks/use-accent-color';
+import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { useAccentColor } from '../shared/use-accent-color';
-import { useTheme } from '../shared/use-theme';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface } from './Surface';
+
+export type RadioSize = 'sm' | 'md';
 
 interface RadioOwnProps<C extends ElementType = 'label'> {
   /** Controlled checked state. Default `false`. */
@@ -25,7 +27,7 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   value?: string;
   /** Native `name` - used to group radios in the same set. */
   name?: string;
-  size?: 'sm' | 'md';
+  size?: RadioSize;
   required?: boolean;
   /** Fires when the user toggles the radio. First arg is the new checked state, second is the raw event. */
   onChange?: (checked: boolean, event?: ChangeEvent<HTMLInputElement>) => void;
