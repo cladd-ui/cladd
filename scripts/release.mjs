@@ -52,21 +52,50 @@ const run = (cmd, args, opts = {}) =>
     });
   });
 
-const checkNpmAuth = () =>
+const captureStdout = (cmd, args) =>
   new Promise((resolvePromise) => {
-    const child = spawn("npm", ["whoami"], {
-      stdio: ["ignore", "pipe", "ignore"],
-    });
+    const child = spawn(cmd, args, { stdio: ["ignore", "pipe", "ignore"] });
     let stdout = "";
     child.stdout.on("data", (chunk) => {
       stdout += chunk.toString();
     });
-    child.on("error", () => resolvePromise(null));
-    child.on("exit", (code) => {
-      if (code === 0) resolvePromise(stdout.trim() || null);
-      else resolvePromise(null);
-    });
+    child.on("error", () => resolvePromise({ ok: false, stdout: "" }));
+    child.on("exit", (code) =>
+      resolvePromise({ ok: code === 0, stdout: stdout.trim() }),
+    );
   });
+
+const checkNpmAuth = async () => {
+  const { ok, stdout } = await captureStdout("npm", ["whoami"]);
+  return ok ? stdout || null : null;
+};
+
+const checkGhAvailable = async () => {
+  const { ok } = await captureStdout("gh", ["--version"]);
+  return ok;
+};
+
+const checkGhAuth = async () => {
+  // gh auth status writes to stderr; non-zero exit means not authed.
+  const { ok } = await captureStdout("gh", ["auth", "status"]);
+  return ok;
+};
+
+const checkGitClean = async () => {
+  const { ok, stdout } = await captureStdout("git", ["status", "--porcelain"]);
+  if (!ok) throw new Error("git status failed");
+  return stdout === "";
+};
+
+const getCurrentBranch = async () => {
+  const { ok, stdout } = await captureStdout("git", [
+    "rev-parse",
+    "--abbrev-ref",
+    "HEAD",
+  ]);
+  if (!ok) throw new Error("git rev-parse failed");
+  return stdout;
+};
 
 const promptVersion = async (current) => {
   const choices = {
@@ -152,7 +181,14 @@ const writeChangelog = async (version) => {
   const next = `${header}${result.content}${body ? `\n${body}` : ""}`;
   await writeFile(changelogPath, next);
   console.log(`[release] wrote ${changelogPath}`);
+
+  return result;
 };
+
+// Strip the leading "## version (date)" header from the changelog block —
+// gh release shows the tag/title above the body, so the header is redundant.
+const releaseNotes = (changelogContent) =>
+  changelogContent.replace(/^## .+?\n+/, "").trimEnd();
 
 const main = async () => {
   const pkg = await readJson(pkgJsonPath);
@@ -172,6 +208,27 @@ const main = async () => {
   }
   console.log(`[release] npm user: ${npmUser}`);
 
+  if (!(await checkGhAvailable())) {
+    throw new Error(
+      "GitHub CLI (`gh`) not found on PATH. Install from https://cli.github.com/ and re-run.",
+    );
+  }
+  if (!(await checkGhAuth())) {
+    throw new Error(
+      "Not logged in to GitHub. Run `gh auth login`, then re-run this script.",
+    );
+  }
+
+  if (!(await checkGitClean())) {
+    throw new Error(
+      "Working tree has uncommitted changes. Commit or stash them first — release " +
+        "needs a clean tree so it can stage only the version bump and changelog.",
+    );
+  }
+
+  const branch = await getCurrentBranch();
+  console.log(`[release] git branch: ${branch}`);
+
   const newVersion = await promptVersion(currentVersion);
 
   if (newVersion === currentVersion) {
@@ -180,7 +237,13 @@ const main = async () => {
   }
 
   const ok = await confirm(
-    `\nAbout to bump @cladd-ui/react ${currentVersion} -> ${newVersion}, build, and npm publish. Continue?`,
+    `\nAbout to release @cladd-ui/react ${currentVersion} -> ${newVersion}:\n` +
+      `  • bump package.json files\n` +
+      `  • prepend CHANGELOG.md\n` +
+      `  • build & npm publish\n` +
+      `  • git commit + tag v${newVersion}\n` +
+      `  • git push --follow-tags (branch: ${branch})\n` +
+      `  • gh release create v${newVersion}\n\nContinue?`,
   );
   if (!ok) {
     console.log("Aborted.");
@@ -193,15 +256,17 @@ const main = async () => {
   pkg.version = newVersion;
   await writeJson(pkgJsonPath, pkg);
 
+  let srcPkgUpdated = false;
   try {
     const srcPkg = await readJson(srcPkgJsonPath);
     srcPkg.version = newVersion;
     await writeJson(srcPkgJsonPath, srcPkg);
+    srcPkgUpdated = true;
   } catch {
     // src/package.json is optional — skip silently if missing
   }
 
-  await writeChangelog(newVersion);
+  const changelog = await writeChangelog(newVersion);
   await pause(
     "[release] CHANGELOG.md updated. Press Enter to continue with build & publish, or Ctrl+C to abort and edit it first... ",
   );
@@ -212,7 +277,37 @@ const main = async () => {
   console.log("\n[release] publishing to npm");
   await run("npm", ["publish", "--access", "public"], { cwd: pkgDir });
 
-  console.log(`\n[release] done — @cladd-ui/react@${newVersion} published`);
+  console.log(`\n[release] committing release ${newVersion}`);
+  const filesToCommit = [pkgJsonPath, changelogPath];
+  if (srcPkgUpdated) filesToCommit.push(srcPkgJsonPath);
+  await run("git", ["add", ...filesToCommit]);
+  await run("git", ["commit", "-m", newVersion]);
+
+  console.log(`[release] tagging v${newVersion}`);
+  await run("git", [
+    "tag",
+    "-a",
+    `v${newVersion}`,
+    "-m",
+    `Release v${newVersion}`,
+  ]);
+
+  console.log("[release] pushing commit + tag");
+  await run("git", ["push", "--follow-tags"]);
+
+  console.log("[release] creating GitHub release");
+  const notes = releaseNotes(changelog.content) || "_No changes recorded._";
+  await run("gh", [
+    "release",
+    "create",
+    `v${newVersion}`,
+    "--title",
+    `v${newVersion}`,
+    "--notes",
+    notes,
+  ]);
+
+  console.log(`\n[release] done — @cladd-ui/react@${newVersion} released`);
 };
 
 main().catch((err) => {
