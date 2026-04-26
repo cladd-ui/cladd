@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.6 (2026-04-26)
+
+### Features
+
+- update icons (312cab6)
+- add Shortcut component (43c2afd)
+
 ## 0.0.5 (2026-04-26)
 
 ### Build System
