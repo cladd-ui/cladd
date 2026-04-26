@@ -789,10 +789,10 @@ function App() {
           <div className="flex items-center gap-4">
             <span className="font-mono text-xs">SM:</span>
             <OTPField size="sm" value={otp} onChange={setOtp}>
-              <OTPFieldInput />
-              <OTPFieldInput />
-              <OTPFieldInput />
-              <OTPFieldInput />
+              <OTPFieldInput placeholder="•" />
+              <OTPFieldInput placeholder="•" />
+              <OTPFieldInput placeholder="•" />
+              <OTPFieldInput placeholder="•" />
             </OTPField>
           </div>
           <div className="flex items-center gap-4">
@@ -825,10 +825,10 @@ function App() {
           <div className="flex items-center gap-4">
             <span className="font-mono text-xs">2XL:</span>
             <OTPField size="2xl" value={otp} onChange={setOtp}>
-              <OTPFieldInput />
-              <OTPFieldInput />
-              <OTPFieldInput />
-              <OTPFieldInput />
+              <OTPFieldInput placeholder="•" />
+              <OTPFieldInput placeholder="•" />
+              <OTPFieldInput placeholder="•" />
+              <OTPFieldInput placeholder="•" />
             </OTPField>
           </div>
           <div className="flex items-center gap-4">
