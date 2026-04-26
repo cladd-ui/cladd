@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.5 (2026-04-26)
+
+### Build System
+
+- gh release (a68df92)
+
 ## 0.0.4 (2026-04-26)
 
 ### Features
