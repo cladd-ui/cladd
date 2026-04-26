@@ -1,20 +1,20 @@
 #!/usr/bin/env node
-import { spawn } from 'node:child_process';
-import { readFile, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
-import { createInterface } from 'node:readline/promises';
-import { stdin as input, stdout as output } from 'node:process';
-import { fileURLToPath } from 'node:url';
+import { spawn } from "node:child_process";
+import { readFile, writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
+import { createInterface } from "node:readline/promises";
+import { stdin as input, stdout as output } from "node:process";
+import { fileURLToPath } from "node:url";
 
-import { generateChangelog } from './changelog.mjs';
+import { generateChangelog } from "./changelog.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(__dirname, '..');
-const pkgDir = join(repoRoot, 'packages', 'react');
-const pkgJsonPath = join(pkgDir, 'package.json');
-const srcPkgJsonPath = join(repoRoot, 'src', 'package.json');
-const changelogPath = join(repoRoot, 'CHANGELOG.md');
-const buildScript = join(__dirname, 'build.mjs');
+const repoRoot = resolve(__dirname, "..");
+const pkgDir = join(repoRoot, "packages", "react");
+const pkgJsonPath = join(pkgDir, "package.json");
+const srcPkgJsonPath = join(repoRoot, "src", "package.json");
+const changelogPath = join(repoRoot, "CHANGELOG.md");
+const buildScript = join(__dirname, "build.mjs");
 
 const SEMVER = /^(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/;
 
@@ -25,15 +25,15 @@ const bump = (version, kind) => {
   major = Number(major);
   minor = Number(minor);
   patch = Number(patch);
-  if (kind === 'patch') return `${major}.${minor}.${patch + 1}`;
-  if (kind === 'minor') return `${major}.${minor + 1}.0`;
-  if (kind === 'major') return `${major + 1}.0.0`;
+  if (kind === "patch") return `${major}.${minor}.${patch + 1}`;
+  if (kind === "minor") return `${major}.${minor + 1}.0`;
+  if (kind === "major") return `${major + 1}.0.0`;
   throw new Error(`Unknown bump kind: ${kind}`);
 };
 
 const isValidSemver = (v) => SEMVER.test(v);
 
-const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
 const writeJson = async (path, data) => {
   await writeFile(path, `${JSON.stringify(data, null, 2)}\n`);
@@ -41,23 +41,28 @@ const writeJson = async (path, data) => {
 
 const run = (cmd, args, opts = {}) =>
   new Promise((resolvePromise, rejectPromise) => {
-    const child = spawn(cmd, args, { stdio: 'inherit', ...opts });
-    child.on('error', rejectPromise);
-    child.on('exit', (code) => {
+    const child = spawn(cmd, args, { stdio: "inherit", ...opts });
+    child.on("error", rejectPromise);
+    child.on("exit", (code) => {
       if (code === 0) resolvePromise();
-      else rejectPromise(new Error(`${cmd} ${args.join(' ')} exited with code ${code}`));
+      else
+        rejectPromise(
+          new Error(`${cmd} ${args.join(" ")} exited with code ${code}`),
+        );
     });
   });
 
 const checkNpmAuth = () =>
   new Promise((resolvePromise) => {
-    const child = spawn('npm', ['whoami'], { stdio: ['ignore', 'pipe', 'ignore'] });
-    let stdout = '';
-    child.stdout.on('data', (chunk) => {
+    const child = spawn("npm", ["whoami"], {
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+    let stdout = "";
+    child.stdout.on("data", (chunk) => {
       stdout += chunk.toString();
     });
-    child.on('error', () => resolvePromise(null));
-    child.on('exit', (code) => {
+    child.on("error", () => resolvePromise(null));
+    child.on("exit", (code) => {
       if (code === 0) resolvePromise(stdout.trim() || null);
       else resolvePromise(null);
     });
@@ -65,9 +70,9 @@ const checkNpmAuth = () =>
 
 const promptVersion = async (current) => {
   const choices = {
-    1: { kind: 'patch', value: bump(current, 'patch') },
-    2: { kind: 'minor', value: bump(current, 'minor') },
-    3: { kind: 'major', value: bump(current, 'major') },
+    1: { kind: "patch", value: bump(current, "patch") },
+    2: { kind: "minor", value: bump(current, "minor") },
+    3: { kind: "major", value: bump(current, "major") },
   };
 
   console.log(`\nCurrent version: ${current}\n`);
@@ -79,13 +84,15 @@ const promptVersion = async (current) => {
   const rl = createInterface({ input, output });
   try {
     while (true) {
-      const answer = (await rl.question('\nSelect [1-4] or enter version directly: ')).trim();
+      const answer = (
+        await rl.question("\nSelect [1-4] or enter version directly: ")
+      ).trim();
       if (!answer) continue;
 
       if (choices[answer]) return choices[answer].value;
 
-      if (answer === '4') {
-        const custom = (await rl.question('Enter version (x.y.z): ')).trim();
+      if (answer === "4") {
+        const custom = (await rl.question("Enter version (x.y.z): ")).trim();
         if (isValidSemver(custom)) return custom;
         console.log(`  ! "${custom}" is not a valid semver`);
         continue;
@@ -103,8 +110,10 @@ const promptVersion = async (current) => {
 const confirm = async (message) => {
   const rl = createInterface({ input, output });
   try {
-    const answer = (await rl.question(`${message} [y/N]: `)).trim().toLowerCase();
-    return answer === 'y' || answer === 'yes';
+    const answer = (await rl.question(`${message} [y/N]: `))
+      .trim()
+      .toLowerCase();
+    return answer === "y" || answer === "yes";
   } finally {
     rl.close();
   }
@@ -122,25 +131,25 @@ const pause = async (message) => {
 const writeChangelog = async (version) => {
   const result = generateChangelog({ version });
   console.log(
-    `\n[release] ${result.commitCount} commit(s) since ${result.fromRef ?? 'beginning'}`
+    `\n[release] ${result.commitCount} commit(s) since ${result.fromRef ?? "beginning"}`,
   );
-  console.log('\n--- changelog preview ---');
+  console.log("\n--- changelog preview ---");
   process.stdout.write(result.content);
-  console.log('--- end preview ---\n');
+  console.log("--- end preview ---\n");
 
-  let existing = '';
+  let existing = "";
   try {
-    existing = await readFile(changelogPath, 'utf8');
+    existing = await readFile(changelogPath, "utf8");
   } catch {
     // file doesn't exist yet
   }
 
-  const header = '# Changelog\n\n';
-  const body = existing.startsWith('# Changelog')
-    ? existing.slice(existing.indexOf('\n')).replace(/^\n+/, '')
+  const header = "# Changelog\n\n";
+  const body = existing.startsWith("# Changelog")
+    ? existing.slice(existing.indexOf("\n")).replace(/^\n+/, "")
     : existing;
 
-  const next = `${header}${result.content}${body ? `\n${body}` : ''}`;
+  const next = `${header}${result.content}${body ? `\n${body}` : ""}`;
   await writeFile(changelogPath, next);
   console.log(`[release] wrote ${changelogPath}`);
 };
@@ -149,14 +158,16 @@ const main = async () => {
   const pkg = await readJson(pkgJsonPath);
   const currentVersion = pkg.version;
   if (!isValidSemver(currentVersion)) {
-    throw new Error(`Current version "${currentVersion}" in ${pkgJsonPath} is not valid semver`);
+    throw new Error(
+      `Current version "${currentVersion}" in ${pkgJsonPath} is not valid semver`,
+    );
   }
 
   const npmUser = await checkNpmAuth();
   if (!npmUser) {
     throw new Error(
-      'Not logged in to npm. Run `npm login` first, then re-run this script.\n' +
-        '       (npm whoami returned no user — auth token missing or invalid.)'
+      "Not logged in to npm. Run `npm login` first, then re-run this script.\n" +
+        "       (npm whoami returned no user — auth token missing or invalid.)",
     );
   }
   console.log(`[release] npm user: ${npmUser}`);
@@ -169,14 +180,16 @@ const main = async () => {
   }
 
   const ok = await confirm(
-    `\nAbout to bump @cladd-ui/react ${currentVersion} -> ${newVersion}, build, and npm publish. Continue?`
+    `\nAbout to bump @cladd-ui/react ${currentVersion} -> ${newVersion}, build, and npm publish. Continue?`,
   );
   if (!ok) {
-    console.log('Aborted.');
+    console.log("Aborted.");
     return;
   }
 
-  console.log(`\n[release] writing version ${newVersion} to package.json files`);
+  console.log(
+    `\n[release] writing version ${newVersion} to package.json files`,
+  );
   pkg.version = newVersion;
   await writeJson(pkgJsonPath, pkg);
 
@@ -190,14 +203,14 @@ const main = async () => {
 
   await writeChangelog(newVersion);
   await pause(
-    '[release] CHANGELOG.md updated. Press Enter to continue with build & publish, or Ctrl+C to abort and edit it first... '
+    "[release] CHANGELOG.md updated. Press Enter to continue with build & publish, or Ctrl+C to abort and edit it first... ",
   );
 
-  console.log('\n[release] building');
+  console.log("\n[release] building");
   await run(process.execPath, [buildScript]);
 
-  console.log('\n[release] publishing to npm');
-  await run('npm', ['publish', '--access', 'public'], { cwd: pkgDir });
+  console.log("\n[release] publishing to npm");
+  await run("npm", ["publish", "--access", "public"], { cwd: pkgDir });
 
   console.log(`\n[release] done — @cladd-ui/react@${newVersion} published`);
 };
