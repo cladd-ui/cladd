@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.8 (2026-04-26)
+
+### Features
+
+- add SurfaceContextProvider to bundle (b1c895e)
+
 ## 0.0.7 (2026-04-26)
 
 ### Features
