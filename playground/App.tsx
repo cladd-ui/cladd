@@ -1,5 +1,4 @@
 import {
-  BlockTitle,
   Button,
   ButtonSize,
   Checkbox,
@@ -14,6 +13,7 @@ import {
   ListButton,
   ListItem,
   ListSeparator,
+  ListTitle,
   NumberField,
   OTPField,
   OTPFieldInput,
@@ -31,6 +31,7 @@ import {
   PreloaderSize,
   Radio,
   Range,
+  SectionTitle,
   Segmented,
   SegmentedButton,
   Select,
@@ -115,7 +116,7 @@ function App() {
       <div
         className={cn('flex flex-col items-start gap-8 p-8 text-on-surface')}
       >
-        <BlockTitle>Shortcuts</BlockTitle>
+        <SectionTitle>Shortcuts</SectionTitle>
         <Surface
           outline
           variant="gradient"
@@ -141,14 +142,14 @@ function App() {
             <Shortcut size="2xl">cmd shift alt return up esc</Shortcut>
           </Button>
         </Surface>
-        <BlockTitle>Toolbar</BlockTitle>
+        <SectionTitle>Toolbar</SectionTitle>
         <Toolbar size="sm">
           <ToolbarButton>Button 1</ToolbarButton>
           <ToolbarButton>Button 2</ToolbarButton>
           <ToolbarSeparator />
           <ToolbarButton>Button 3</ToolbarButton>
         </Toolbar>
-        <BlockTitle>Nested Popovers Test</BlockTitle>
+        <SectionTitle>Nested Popovers Test</SectionTitle>
         <PopoverRoot>
           <PopoverTrigger>
             <WithTooltip
@@ -183,7 +184,7 @@ function App() {
             </PopoverRoot>
           </Popover>
         </PopoverRoot>
-        <BlockTitle>Colors Test</BlockTitle>
+        <SectionTitle>Colors Test</SectionTitle>
 
         <div
           className={cn(
@@ -425,9 +426,9 @@ function App() {
                 contentClassName="p-4"
                 color={color}
               >
-                <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
+                <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                   Surface {color}: 1
-                </BlockTitle>
+                </SectionTitle>
                 <SurfaceCut
                   className="mb-2 rounded-full"
                   outline
@@ -440,9 +441,9 @@ function App() {
                   contentClassName="p-4"
                   color={color}
                 >
-                  <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
+                  <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                     Surface {color}: 2
-                  </BlockTitle>
+                  </SectionTitle>
                   <div className="mb-1 bg-surface-prev p-1">Prev</div>
                   <div className="mb-1 bg-surface-minus p-1">Minus</div>
                   <div className="mb-1 bg-surface p-1">Current</div>
@@ -460,9 +461,9 @@ function App() {
                     contentClassName="p-4"
                     color={color}
                   >
-                    <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
+                    <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                       Surface {color}: 3
-                    </BlockTitle>
+                    </SectionTitle>
                     <div className="mb-1 bg-surface-prev p-1">Prev</div>
                     <div className="mb-1 bg-surface-minus p-1">Minus</div>
                     <div className="mb-1 bg-surface p-1">Current</div>
@@ -480,9 +481,9 @@ function App() {
                       contentClassName="p-4"
                       color={color}
                     >
-                      <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
+                      <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                         Surface {color}: 4
-                      </BlockTitle>
+                      </SectionTitle>
                       <div className="mb-1 bg-surface-prev p-1">Prev</div>
                       <div className="mb-1 bg-surface-minus p-1">Minus</div>
                       <div className="mb-1 bg-surface p-1">Current</div>
@@ -500,9 +501,9 @@ function App() {
                         contentClassName="p-4"
                         color={color}
                       >
-                        <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
+                        <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                           Surface {color}: 5
-                        </BlockTitle>
+                        </SectionTitle>
                         <div className="mb-1 bg-surface-prev p-1">Prev</div>
                         <div className="mb-1 bg-surface-minus p-1">Minus</div>
                         <div className="mb-1 bg-surface p-1">Current</div>
@@ -535,7 +536,7 @@ function App() {
           </Button>
         </div>
 
-        <BlockTitle>Preloaders</BlockTitle>
+        <SectionTitle>Preloaders</SectionTitle>
         <Surface
           contentClassName={
             'flex p-4 flex-col gap-4 justify-center items-start '
@@ -553,7 +554,7 @@ function App() {
             </div>
           ))}
         </Surface>
-        <BlockTitle>Select</BlockTitle>
+        <SectionTitle>Select</SectionTitle>
         <Surface
           contentClassName={
             'flex p-4 flex-col gap-4 justify-center items-center '
@@ -578,7 +579,7 @@ function App() {
             {selectValue}
           </Select>
         </Surface>
-        <BlockTitle>Modals</BlockTitle>
+        <SectionTitle>Modals</SectionTitle>
         <Surface
           contentClassName={
             'flex p-4 flex-col gap-4 justify-center items-center '
@@ -598,7 +599,7 @@ function App() {
 
             <Popover offset={['-50%', 16]} position="bottom-end">
               <List>
-                <BlockTitle className="px-2 pt-2 pb-2">Block Title</BlockTitle>
+                <ListTitle>List Title</ListTitle>
                 <ListItem>
                   <Radio checked /> Item 1
                 </ListItem>
@@ -609,7 +610,7 @@ function App() {
                 <ListItem>Item 3</ListItem>
                 <ListItem>Item 4</ListItem>
                 <ListSeparator />
-                <BlockTitle className="p-2">Block Title</BlockTitle>
+                <ListTitle>List Title</ListTitle>
                 <ListButton
                   header="Header text"
                   footer="Footer text"
@@ -763,7 +764,7 @@ function App() {
             </Popup>
           </PopupRoot>
         </Surface>
-        <BlockTitle>Surfaces</BlockTitle>
+        <SectionTitle>Surfaces</SectionTitle>
         <div className="flex flex-col gap-4">
           <Surface className="rounded-full p-4" variant="transparent">
             Surface Transparent
@@ -785,7 +786,7 @@ function App() {
           </Surface>
         </div>
 
-        <BlockTitle>OTPField</BlockTitle>
+        <SectionTitle>OTPField</SectionTitle>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4 items-start'}
           outline
@@ -895,7 +896,7 @@ function App() {
             </OTPField>
           </div>
         </Surface>
-        <BlockTitle>NumberField</BlockTitle>
+        <SectionTitle>NumberField</SectionTitle>
         <Surface
           contentClassName={
             'flex p-4 flex-col gap-4 justify-center items-center '
@@ -913,7 +914,7 @@ function App() {
 
           <NumberField size="2xl" input={true} value={10} rounded={false} />
         </Surface>
-        <BlockTitle>Segmented</BlockTitle>
+        <SectionTitle>Segmented</SectionTitle>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}
           outline
@@ -931,7 +932,7 @@ function App() {
             </SegmentedButton>
           </Segmented>
         </Surface>
-        <BlockTitle>Range Slider</BlockTitle>
+        <SectionTitle>Range Slider</SectionTitle>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}
           outline
@@ -967,7 +968,7 @@ function App() {
             </Surface>
           </div>
         </Surface>
-        <BlockTitle>Checkboxes and radios</BlockTitle>
+        <SectionTitle>Checkboxes and radios</SectionTitle>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}
           outline
@@ -988,7 +989,7 @@ function App() {
             <Radio readOnly checked={checked} onChange={setChecked} />
           </div>
         </Surface>
-        <BlockTitle>Links</BlockTitle>
+        <SectionTitle>Links</SectionTitle>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}
           outline
@@ -1000,7 +1001,7 @@ function App() {
         </Surface>
 
         <div className="flex flex-col gap-4">
-          <BlockTitle>Toolbar Transparent</BlockTitle>
+          <SectionTitle>Toolbar Transparent</SectionTitle>
           <Surface
             contentClassName="p-1 h-9 flex items-center"
             className="rounded-full"
@@ -1054,7 +1055,7 @@ function App() {
               <div className="size-4 rounded-full bg-white/30" />
             </Surface>
           </Surface>
-          <BlockTitle>Toolbar Solid</BlockTitle>
+          <SectionTitle>Toolbar Solid</SectionTitle>
           <Surface
             contentClassName="p-1 h-9 flex items-center"
             className="rounded-full"
@@ -1108,7 +1109,7 @@ function App() {
               <div className="size-4 rounded-full bg-white/30" />
             </Surface>
           </Surface>
-          <BlockTitle>Toolbar Gradient</BlockTitle>
+          <SectionTitle>Toolbar Gradient</SectionTitle>
           <Surface
             contentClassName="p-1 h-9 flex items-center"
             className="rounded-full"
@@ -1138,7 +1139,7 @@ function App() {
             </Surface>
           </Surface>
         </div>
-        <BlockTitle>Buttons</BlockTitle>
+        <SectionTitle>Buttons</SectionTitle>
         <Surface
           outline
           className="rounded-3xl"
@@ -1280,7 +1281,7 @@ function App() {
           </div>
         </Surface>
 
-        <BlockTitle>Chips</BlockTitle>
+        <SectionTitle>Chips</SectionTitle>
         <Surface
           outline
           className="rounded-3xl"
@@ -1351,7 +1352,7 @@ function App() {
             Chip 2XL
           </Chip>
         </Surface>
-        <BlockTitle>Chips In Buttons</BlockTitle>
+        <SectionTitle>Chips In Buttons</SectionTitle>
         <Surface
           outline
           className="rounded-3xl"
@@ -1382,7 +1383,7 @@ function App() {
             <Chip size="2xl">CHIP</Chip>
           </Button>
         </Surface>
-        <BlockTitle>Inputs</BlockTitle>
+        <SectionTitle>Inputs</SectionTitle>
         <Surface
           contentClassName="p-4 grid grid-cols-3 gap-4"
           className="rounded-3xl"
@@ -1596,7 +1597,7 @@ function App() {
             </div>
           </div>
         </Surface>
-        <BlockTitle>TextAreas</BlockTitle>
+        <SectionTitle>TextAreas</SectionTitle>
         <Surface
           className="rounded-3xl"
           outline
@@ -1645,7 +1646,7 @@ function App() {
             rounded
           />
         </Surface>
-        <BlockTitle>Sizes</BlockTitle>
+        <SectionTitle>Sizes</SectionTitle>
         <Surface
           contentClassName="p-4 flex flex-col gap-4"
           className="rounded-3xl"
@@ -1713,7 +1714,7 @@ function App() {
           </div>
         </Surface>
 
-        <BlockTitle>Nested + Colors</BlockTitle>
+        <SectionTitle>Nested + Colors</SectionTitle>
         <div className="h-px w-full shrink-0 bg-background-outline" />
         <div className="flex justify-start gap-8">
           {[

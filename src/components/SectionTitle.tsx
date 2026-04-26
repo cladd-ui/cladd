@@ -2,23 +2,23 @@ import { ReactNode, Ref, ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '../shared/cn';
 
-interface BlockTitleOwnProps {
+interface SectionTitleOwnProps {
   children?: ReactNode;
   className?: string;
   ref?: Ref<HTMLDivElement>;
 }
 
-export type BlockTitleProps = BlockTitleOwnProps &
-  Omit<ComponentPropsWithoutRef<'div'>, keyof BlockTitleOwnProps>;
+export type SectionTitleProps = SectionTitleOwnProps &
+  Omit<ComponentPropsWithoutRef<'div'>, keyof SectionTitleOwnProps>;
 
-export const BlockTitle = (props: BlockTitleProps) => {
+export const SectionTitle = (props: SectionTitleProps) => {
   const { children, className = '', ref, ...rest } = props;
 
   return (
     <div
       ref={ref}
       className={cn(
-        'block-title flex items-end gap-4 text-xs font-medium text-on-surface-dark uppercase select-none',
+        'section-title flex items-end gap-4 text-xs font-medium text-on-surface-dark uppercase select-none',
         className,
       )}
       {...rest}

@@ -12,7 +12,7 @@ import {
 import { useDevice } from '../hooks/use-device';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { BlockTitle } from './BlockTitle';
+import { SectionTitle } from './SectionTitle';
 import { Button, buttonIconSizes, ButtonSize } from './Button';
 import { Checkbox } from './Checkbox';
 import { DropdownIcon } from './icons/DropdownIcon';
@@ -579,7 +579,7 @@ export function Select<T = string>(props: SelectProps<T>) {
           onClosed={onPopoverClosed}
           onClick={(e: MouseEvent) => e.stopPropagation()}
         >
-          {title && <BlockTitle className="px-4 pt-4">{title}</BlockTitle>}
+          {title && <SectionTitle className="px-4 pt-4">{title}</SectionTitle>}
           {search && (
             <Searchbar
               value={searchQuery}

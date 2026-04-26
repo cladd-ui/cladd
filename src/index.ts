@@ -14,7 +14,6 @@ export { DropdownIcon } from "./components/icons/DropdownIcon";
 export { CheckIcon } from "./components/icons/CheckIcon";
 
 export { Backdrop, type BackdropProps } from "./components/Backdrop";
-export { BlockTitle, type BlockTitleProps } from "./components/BlockTitle";
 export { Button, type ButtonProps, type ButtonSize } from "./components/Button";
 export {
   Checkbox,
@@ -38,6 +37,7 @@ export {
   ListSeparator,
   type ListSeparatorProps,
 } from "./components/ListSeparator";
+export { ListTitle, type ListTitleProps } from "./components/ListTitle";
 export {
   NumberField,
   type NumberFieldProps,
@@ -78,6 +78,10 @@ export {
 export { Radio, type RadioProps, type RadioSize } from "./components/Radio";
 export { Range, type RangeProps, type RangeSize } from "./components/Range";
 export { Searchbar, type SearchbarProps } from "./components/Searchbar";
+export {
+  SectionTitle,
+  type SectionTitleProps,
+} from "./components/SectionTitle";
 export { Segmented, type SegmentedProps } from "./components/Segmented";
 export {
   SegmentedButton,
