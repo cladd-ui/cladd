@@ -101,7 +101,7 @@ function App() {
   };
 
   return (
-    <UIProvider theme="light">
+    <UIProvider theme="dark">
       <div
         className={cn('flex flex-col items-start gap-8 p-8 text-on-surface')}
       >
