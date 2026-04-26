@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.10 (2026-04-26)
+
+### Refactoring
+
+- rename togglesColor -> indicatorColor (a79344e)
+
 ## 0.0.9 (2026-04-26)
 
 ### Refactoring
