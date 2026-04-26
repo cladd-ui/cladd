@@ -3,8 +3,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant light (&:where(.light, .light *));
-@import "./colors.css";
-@import "./safe-areas.css";
-@import "./preloader.css";
-@import "./popup.css";
-@import "./range.css";
+@import "./styles/colors.css";
+@import "./styles/safe-areas.css";
+@import "./styles/preloader.css";
+@import "./styles/popup.css";
+@import "./styles/range.css";
