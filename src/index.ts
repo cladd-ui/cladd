@@ -90,6 +90,7 @@ export {
   type ShortcutSize,
 } from "./components/Shortcut";
 
+export { SurfaceContextProvider } from "./components/SurfaceContext";
 export { Surface, type SurfaceProps } from "./components/Surface";
 export {
   SurfaceContent,
