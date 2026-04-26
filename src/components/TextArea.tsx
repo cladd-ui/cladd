@@ -15,6 +15,7 @@ import {
 
 import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
+import { roundedClasses } from '../shared/rounded-classes';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { SurfaceCut } from './SurfaceCut';
@@ -122,7 +123,7 @@ export const TextArea = <C extends ElementType = 'div'>(
   const iconWrapClasses: Record<TextAreaSize, string> = {
     sm: 'left-2.5 [&>svg]:size-4 top-1',
     md: 'left-2.5 [&>svg]:size-4 top-1.5',
-    lg: 'left-2.5 [&>svg]:size-4 top-2.5',
+    lg: 'left-2.5 [&>svg]:size-4 top-2',
     xl: 'left-2.5 [&>svg]:size-4 top-3',
     '2xl': 'left-3.5 [&>svg]:size-4 top-4',
   };
@@ -136,7 +137,7 @@ export const TextArea = <C extends ElementType = 'div'>(
   const inputPaddingVertical: Record<TextAreaSize, string> = {
     sm: 'py-1',
     md: 'py-1.5',
-    lg: 'py-2.5',
+    lg: 'py-2',
     xl: 'py-3',
     '2xl': 'py-4',
   };
@@ -147,25 +148,16 @@ export const TextArea = <C extends ElementType = 'div'>(
     xl: 'pl-8.5 pr-3',
     '2xl': 'pl-9.5 pr-4',
   };
-  const roundedFullSizes: Record<TextAreaSize, string> = {
-    sm: 'rounded-[12px]',
-    md: 'rounded-[14px]',
-    lg: 'rounded-[18px]',
-    xl: 'rounded-[20px]',
-    '2xl': 'rounded-[24px]',
-  };
-  const roundedSizes: Record<TextAreaSize, string> = {
-    sm: 'rounded-md',
-    md: 'rounded-lg',
-    lg: 'rounded-[10px]',
-    xl: 'rounded-xl',
-    '2xl': 'rounded-xl',
-  };
+  const { itemRoundedClasses, focusRoundedClasses } = roundedClasses(
+    size,
+    rounded,
+    true,
+  );
 
   const heights: Record<TextAreaSize, string> = {
     sm: 'min-h-6',
     md: 'min-h-7',
-    lg: 'min-h-9',
+    lg: 'min-h-8',
     xl: 'min-h-10',
     '2xl': 'min-h-12',
   };
@@ -214,10 +206,7 @@ export const TextArea = <C extends ElementType = 'div'>(
       {/* focus layer */}
       {!readOnly && !disabled && (
         <FocusableLayer
-          className={cn(
-            rounded ? roundedFullSizes[size] : roundedSizes[size],
-            valid === false && 'color-red',
-          )}
+          className={cn(focusRoundedClasses, valid === false && 'color-red')}
           force={valid === false}
           color={valid === false ? 'red' : color}
           group="textarea"
@@ -226,10 +215,7 @@ export const TextArea = <C extends ElementType = 'div'>(
 
       {/* input */}
       <SurfaceCut
-        className={cn(
-          rounded ? roundedFullSizes[size] : roundedSizes[size],
-          surfaceClassName,
-        )}
+        className={cn(itemRoundedClasses, surfaceClassName)}
         hoverable={!disabled && !readOnly}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
         ref={(el: HTMLElement | null) => {
@@ -264,7 +250,7 @@ export const TextArea = <C extends ElementType = 'div'>(
               className={cn(
                 inputPadding,
                 heights[size],
-                roundedSizes,
+                itemRoundedClasses,
                 fontSizes[size],
                 'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
                 disabled && 'text-on-surface-darker',

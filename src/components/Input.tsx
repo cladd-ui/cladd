@@ -13,6 +13,7 @@ import {
 
 import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
+import { roundedClasses } from '../shared/rounded-classes';
 import { Color } from '../types';
 import { Button, ButtonSize } from './Button';
 import { FocusableLayer } from './FocusableLayer';
@@ -199,18 +200,16 @@ export const Input = <
     '2xl': 'pl-9.5 pr-4',
   };
 
-  const roundedSizes: Record<InputSize, string> = {
-    sm: 'rounded-md',
-    md: 'rounded-lg',
-    lg: 'rounded-[10px]',
-    xl: 'rounded-xl',
-    '2xl': 'rounded-xl',
-  };
+  const { itemRoundedClasses, focusRoundedClasses } = roundedClasses(
+    size,
+    rounded,
+    false,
+  );
 
   const heights: Record<InputSize, string> = {
     sm: 'h-6',
     md: 'h-7',
-    lg: 'h-9',
+    lg: 'h-8',
     xl: 'h-10',
     '2xl': 'h-12',
   };
@@ -258,10 +257,7 @@ export const Input = <
       {/* focus layer */}
       {!readOnly && !disabled && (
         <FocusableLayer
-          className={cn(
-            rounded ? 'rounded-full' : roundedSizes[size],
-            valid === false && 'color-red',
-          )}
+          className={cn(focusRoundedClasses, valid === false && 'color-red')}
           force={valid === false}
           color={valid === false ? 'red' : color}
           group="input"
@@ -270,10 +266,7 @@ export const Input = <
 
       {/* input */}
       <SurfaceCut
-        className={cn(
-          rounded ? 'rounded-full' : roundedSizes[size],
-          surfaceClassName,
-        )}
+        className={cn(itemRoundedClasses, surfaceClassName)}
         hoverable={!disabled && !readOnly}
         contentClassName={cn('flex items-center', contentClassName)}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
@@ -317,7 +310,7 @@ export const Input = <
             inputPadding,
             heights[size],
             fontSizes[size],
-            rounded ? 'rounded-full' : roundedSizes[size],
+            itemRoundedClasses,
             'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
             disabled && 'text-on-surface-darker',
             'placeholder-on-surface-darker',
@@ -358,7 +351,7 @@ export const Input = <
               'mr-1 -ml-2 w-auto shrink-0 transform-gpu duration-200',
               size === 'sm' && 'h-4 w-5',
               size === 'md' && 'h-5 w-6',
-              size === 'lg' && 'h-7 w-8',
+              size === 'lg' && 'h-6 w-7',
               size === 'xl' && 'h-8 w-9',
               size === '2xl' && 'h-10 w-11',
               !value && 'pointer-events-none scale-0',

@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { cn } from '../shared/cn';
+import { roundedClasses } from '../shared/rounded-classes';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface, SurfaceVariant } from './Surface';
@@ -113,32 +114,16 @@ export const Button = <C extends ElementType = 'button'>(
   const heights: Record<ButtonSize, string> = {
     sm: multiline ? 'min-h-[24px]' : 'h-6',
     md: multiline ? 'min-h-[28px]' : 'h-7',
-    lg: multiline ? 'min-h-[32px]' : 'h-9',
+    lg: multiline ? 'min-h-[32px]' : 'h-8',
     xl: multiline ? 'min-h-[40px]' : 'h-10',
     '2xl': multiline ? 'min-h-[48px]' : 'h-12',
   };
-  const roundedFullMultiline: Record<ButtonSize, string> = {
-    sm: 'rounded-[12px]',
-    md: 'rounded-[14px]',
-    lg: 'rounded-[16px]',
-    xl: 'rounded-[20px]',
-    '2xl': 'rounded-[24px]',
-  };
 
-  const roundedSizes: Record<ButtonSize, string> = {
-    sm: 'rounded-md',
-    md: 'rounded-lg',
-    lg: 'rounded-[10px]',
-    xl: 'rounded-xl',
-    '2xl': 'rounded-2xl',
-  };
-  const focusRoundedSizes: Record<ButtonSize, string> = {
-    sm: 'rounded-[12px]',
-    md: 'rounded-[14px]',
-    lg: 'rounded-[16px]',
-    xl: 'rounded-[18px]',
-    '2xl': 'rounded-[22px]',
-  };
+  const { itemRoundedClasses, focusRoundedClasses } = roundedClasses(
+    size,
+    rounded,
+    multiline,
+  );
 
   const paddings: Record<ButtonSize, string> = {
     sm: 'px-2.5',
@@ -175,12 +160,7 @@ export const Button = <C extends ElementType = 'button'>(
         heights[size],
         disabled && 'pointer-events-none',
         !disabled && component === 'a' ? 'cursor-pointer' : 'cursor-auto',
-
-        rounded
-          ? multiline
-            ? roundedFullMultiline[size]
-            : 'rounded-full'
-          : roundedSizes[size],
+        itemRoundedClasses,
 
         className,
       )}
@@ -216,13 +196,7 @@ export const Button = <C extends ElementType = 'button'>(
         focusable &&
         !readOnly &&
         !disabled && (
-          <FocusableLayer
-            group="button"
-            className={cn(
-              !rounded && focusRoundedSizes[size],
-              rounded && 'rounded-full',
-            )}
-          />
+          <FocusableLayer group="button" className={cn(focusRoundedClasses)} />
         )
       }
       {...rest}
