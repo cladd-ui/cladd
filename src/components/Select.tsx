@@ -30,6 +30,7 @@ interface SelectOptionRenderParams<T> {
 
 import { Color } from '../types';
 import { ButtonProps } from './Button';
+import { Shortcut } from './Shortcut';
 
 interface SelectOwnProps<T = string> {
   /** Selected value (single-select) or array of selected values (when `multiple`). */
@@ -693,9 +694,12 @@ export function Select<T = string>(props: SelectProps<T>) {
                           else if (optionIndex === 9) hint = 0;
                         }
                         return hint !== null ? (
-                          <span className="ml-auto shrink-0 font-mono text-[11px] font-normal text-on-surface-darker tabular-nums">
+                          <Shortcut
+                            className="ml-auto shrink-0 font-semibold tabular-nums"
+                            size="md"
+                          >
                             {hint}
-                          </span>
+                          </Shortcut>
                         ) : null;
                       })()}
                   </div>

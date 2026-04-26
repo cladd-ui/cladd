@@ -38,10 +38,7 @@ export {
   type NumberFieldProps,
   type NumberFieldSize,
 } from "./components/NumberField";
-export {
-  OTPField,
-  type OTPFieldProps,
-} from "./components/OTPField";
+export { OTPField, type OTPFieldProps } from "./components/OTPField";
 export {
   OTPFieldInput,
   type OTPFieldInputProps,
@@ -82,6 +79,12 @@ export {
   type SegmentedButtonProps,
 } from "./components/SegmentedButton";
 export { Select, type SelectProps } from "./components/Select";
+export {
+  Shortcut,
+  type ShortcutProps,
+  type ShortcutSize,
+} from "./components/Shortcut";
+
 export { Surface, type SurfaceProps } from "./components/Surface";
 export {
   SurfaceContent,

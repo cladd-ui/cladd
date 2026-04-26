@@ -34,6 +34,7 @@ import {
   Segmented,
   SegmentedButton,
   Select,
+  Shortcut,
   Surface,
   SurfaceCut,
   TextArea,
@@ -114,6 +115,32 @@ function App() {
       <div
         className={cn('flex flex-col items-start gap-8 p-8 text-on-surface')}
       >
+        <BlockTitle>Shortcuts</BlockTitle>
+        <Surface
+          outline
+          variant="gradient"
+          className="rounded-3xl"
+          contentClassName="flex flex-col gap-4 p-4"
+        >
+          <Shortcut>cmd shift alt return up esc</Shortcut>
+          <Button size="sm" rounded>
+            Button SM{' '}
+            <Shortcut size="sm">alt tab cmd shift alt return up esc</Shortcut>
+          </Button>
+          <Button size="md">
+            Button MD <Shortcut size="md">cmd shift alt return up esc</Shortcut>
+          </Button>
+          <Button size="lg">
+            Button LG <Shortcut size="lg">cmd shift alt return up esc</Shortcut>
+          </Button>
+          <Button size="xl">
+            Button XL <Shortcut size="xl">cmd shift alt return up esc</Shortcut>
+          </Button>
+          <Button size="2xl">
+            Button 2XL{' '}
+            <Shortcut size="2xl">cmd shift alt return up esc</Shortcut>
+          </Button>
+        </Surface>
         <BlockTitle>Toolbar</BlockTitle>
         <Toolbar size="sm">
           <ToolbarButton>Button 1</ToolbarButton>
@@ -124,7 +151,13 @@ function App() {
         <BlockTitle>Nested Popovers Test</BlockTitle>
         <PopoverRoot>
           <PopoverTrigger>
-            <WithTooltip tooltip="Tooltip text">
+            <WithTooltip
+              tooltip={
+                <>
+                  Tooltip text <Shortcut />
+                </>
+              }
+            >
               <Button>Popover</Button>
             </WithTooltip>
           </PopoverTrigger>
