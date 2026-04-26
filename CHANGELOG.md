@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.13 (2026-04-26)
+
+### Features
+
+- OTP - add placeholder (fd7aaf4)
+- Shortcut - render as <kbd> (dec931a)
+
+### Chores
+
+- placeholder in OTP (8195af4)
+
 ## 0.0.12 (2026-04-26)
 
 ### Features
