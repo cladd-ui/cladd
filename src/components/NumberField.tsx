@@ -7,10 +7,10 @@ import { Input, InputSize } from './Input';
 import { SurfaceVariant } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
-export type StepperSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type NumberFieldSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-interface StepperOwnProps {
-  /** Custom content rendered inside the stepper container (rare - most usage is value-only). */
+interface NumberFieldOwnProps {
+  /** Custom content rendered inside the number field container (rare - most usage is value-only). */
   children?: ReactNode;
   /**
    * When `true` (default), the value is rendered in an editable `Input`.
@@ -20,9 +20,9 @@ interface StepperOwnProps {
   input?: boolean;
   /** Extra classes for the value `Input` (or `SurfaceCut`). */
   inputClassName?: string;
-  /** Extra classes for the stepper container. */
+  /** Extra classes for the number field container. */
   className?: string;
-  /** Visually dim the stepper and disable both buttons. */
+  /** Visually dim the number field and disable both buttons. */
   disabled?: boolean;
   /** Block changes without the disabled visual treatment. */
   readOnly?: boolean;
@@ -30,7 +30,7 @@ interface StepperOwnProps {
   rounded?: boolean;
   /** Pill-shape the value display. Default `false`. */
   valueRounded?: boolean;
-  size?: StepperSize;
+  size?: NumberFieldSize;
   /** Accent color for the +/− buttons. */
   color?: Color;
   /** Outline ring on the +/− buttons. Default `false`. */
@@ -47,14 +47,14 @@ interface StepperOwnProps {
   variant?: SurfaceVariant;
   /** Fires after a +/− button press, with the new value (already clamped to `[min, max]`). */
   onChange?: (value: number) => void;
-  /** Forwarded to the stepper container `<div>`. */
+  /** Forwarded to the number field container `<div>`. */
   ref?: Ref<HTMLDivElement>;
 }
 
-export type StepperProps = StepperOwnProps &
-  Omit<ComponentPropsWithoutRef<'div'>, keyof StepperOwnProps>;
+export type NumberFieldProps = NumberFieldOwnProps &
+  Omit<ComponentPropsWithoutRef<'div'>, keyof NumberFieldOwnProps>;
 
-export const Stepper = (props: StepperProps) => {
+export const NumberField = (props: NumberFieldProps) => {
   const {
     children,
     input = true,
@@ -87,7 +87,7 @@ export const Stepper = (props: StepperProps) => {
     onChange(Math.min(max, value + step));
   };
 
-  const inputPaddingNoIcon: Record<StepperSize, string> = {
+  const inputPaddingNoIcon: Record<NumberFieldSize, string> = {
     sm: 'px-2.5',
     md: 'px-2.5',
     lg: 'px-2.5',
@@ -95,7 +95,7 @@ export const Stepper = (props: StepperProps) => {
     '2xl': 'px-3.5',
   };
 
-  const roundedSizes: Record<StepperSize, string> = {
+  const roundedSizes: Record<NumberFieldSize, string> = {
     sm: 'rounded-md',
     md: 'rounded-lg',
     lg: 'rounded-[10px]',
@@ -105,7 +105,7 @@ export const Stepper = (props: StepperProps) => {
 
   return (
     <div
-      className={cn('stepper flex items-center gap-0.5', className)}
+      className={cn('number-field flex items-center gap-0.5', className)}
       ref={ref}
       {...rest}
     >

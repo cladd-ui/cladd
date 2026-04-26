@@ -16,6 +16,7 @@ export {
   type CheckboxProps,
   type CheckboxSize,
 } from "./components/Checkbox";
+export { Chip, type ChipProps, type ChipSize } from "./components/Chip";
 export {
   Dialog,
   DialogClose,
@@ -27,8 +28,16 @@ export { Input, type InputProps, type InputSize } from "./components/Input";
 export { Link, type LinkProps } from "./components/Link";
 export { List, type ListProps } from "./components/List";
 export { ListButton, type ListButtonProps } from "./components/ListButton";
-export { ListDivider, type ListDividerProps } from "./components/ListDivider";
 export { ListItem, type ListItemProps } from "./components/ListItem";
+export {
+  ListSeparator,
+  type ListSeparatorProps,
+} from "./components/ListSeparator";
+export {
+  NumberField,
+  type NumberFieldProps,
+  type NumberFieldSize,
+} from "./components/NumberField";
 export {
   Popover,
   PopoverClose,
@@ -61,11 +70,6 @@ export {
   type SegmentedButtonProps,
 } from "./components/SegmentedButton";
 export { Select, type SelectProps } from "./components/Select";
-export {
-  Stepper,
-  type StepperProps,
-  type StepperSize,
-} from "./components/Stepper";
 export { Surface, type SurfaceProps } from "./components/Surface";
 export {
   SurfaceContent,
@@ -76,7 +80,6 @@ export {
   SurfaceCutContent,
   type SurfaceCutContentProps,
 } from "./components/SurfaceCutContent";
-export { Tag, type TagProps, type TagSize } from "./components/Tag";
 export {
   TextArea,
   type TextAreaProps,

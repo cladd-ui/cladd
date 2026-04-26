@@ -3,6 +3,7 @@ import {
   Button,
   ButtonSize,
   Checkbox,
+  Chip,
   Dialog,
   DialogClose,
   DialogRoot,
@@ -11,17 +12,18 @@ import {
   Link,
   List,
   ListButton,
-  ListDivider,
   ListItem,
+  ListSeparator,
+  NumberField,
   Popover,
   PopoverClose,
   PopoverRoot,
   PopoverTrigger,
   Popup,
   PopupClose,
+  PopupContent,
   PopupRoot,
   PopupTrigger,
-  PopupContent,
   Preloader,
   PreloaderSize,
   Radio,
@@ -29,17 +31,15 @@ import {
   Segmented,
   SegmentedButton,
   Select,
-  Stepper,
   Surface,
   SurfaceCut,
-  Tag,
   TextArea,
   Toggle,
   UIProvider,
   WithTooltip,
+  cn,
   useDialog,
   useToast,
-  cn,
 } from '@cladd-ui/react';
 import { useState } from 'react';
 
@@ -538,10 +538,10 @@ function App() {
                 <ListItem>
                   <Checkbox checked /> Item 2
                 </ListItem>
-                <ListDivider />
+                <ListSeparator />
                 <ListItem>Item 3</ListItem>
                 <ListItem>Item 4</ListItem>
-                <ListDivider />
+                <ListSeparator />
                 <ListButton
                   header="Header text"
                   footer="Footer text"
@@ -561,6 +561,13 @@ function App() {
                 </ListButton>
                 <ListButton icon={<svg className="size-4 shrink-0" />}>
                   Button 5
+                </ListButton>
+                <ListButton
+                  header="Header text"
+                  footer="Footer text"
+                  icon={<Icon />}
+                >
+                  Button 1
                 </ListButton>
               </List>
             </Popover>
@@ -710,7 +717,7 @@ function App() {
           </Surface>
         </div>
 
-        <BlockTitle>Stepper</BlockTitle>
+        <BlockTitle>NumberField</BlockTitle>
         <Surface
           contentClassName={
             'flex p-4 flex-col gap-4 justify-center items-center '
@@ -724,7 +731,7 @@ function App() {
             outline
             className="max-w-full rounded-full"
           >
-            <Stepper size="sm" input={true} value={10} rounded={true} />
+            <NumberField size="sm" input={true} value={10} rounded={true} />
           </Surface>
           <Surface
             variant="gradient"
@@ -732,7 +739,7 @@ function App() {
             outline
             className="max-w-full rounded-full"
           >
-            <Stepper input={true} value={10} rounded={true} />
+            <NumberField input={true} value={10} rounded={true} />
           </Surface>
           <Surface
             variant="gradient"
@@ -740,7 +747,7 @@ function App() {
             outline
             className="max-w-full rounded-full"
           >
-            <Stepper size="lg" input={true} value={10} rounded={true} />
+            <NumberField size="lg" input={true} value={10} rounded={true} />
           </Surface>
         </Surface>
         <BlockTitle>Segmented</BlockTitle>
@@ -1071,25 +1078,25 @@ function App() {
           </div>
         </Surface>
 
-        <BlockTitle>Tags</BlockTitle>
+        <BlockTitle>Chips</BlockTitle>
         <Surface
           outline
           className="rounded-3xl"
           contentClassName="p-4 flex gap-2 flex-wrap"
           level={1}
         >
-          <Tag size="sm" rounded clickable color="green">
-            Tag SM
-          </Tag>
+          <Chip size="sm" rounded clickable color="green">
+            Chip SM
+          </Chip>
 
-          <Tag size="sm" outline rounded clickable color="green">
-            Tag SM
-          </Tag>
-          <Tag size="sm" outline rounded clickable color="green">
+          <Chip size="sm" outline rounded clickable color="green">
+            Chip SM
+          </Chip>
+          <Chip size="sm" outline rounded clickable color="green">
             <Icon />
-            Tag SM
-          </Tag>
-          <Tag
+            Chip SM
+          </Chip>
+          <Chip
             size="md"
             color="red"
             // outline
@@ -1097,52 +1104,52 @@ function App() {
             clickable
           >
             <Icon />
-            Tag MD
-          </Tag>
+            Chip MD
+          </Chip>
 
-          <Tag size="md" color="red" outline rounded clickable>
+          <Chip size="md" color="red" outline rounded clickable>
             <Icon />
-            Tag MD
-          </Tag>
-          <Tag
+            Chip MD
+          </Chip>
+          <Chip
             size="md"
             // outline
             rounded
             clickable
           >
             <Icon />
-            Tag MD
-          </Tag>
+            Chip MD
+          </Chip>
 
-          <Tag size="md" outline rounded clickable>
+          <Chip size="md" outline rounded clickable>
             <Icon />
-            Tag MD
-          </Tag>
+            Chip MD
+          </Chip>
 
-          <Tag size="md" outline rounded clickable color="green">
-            Tag MD
-          </Tag>
-          <Tag size="md" outline rounded clickable color="green">
+          <Chip size="md" outline rounded clickable color="green">
+            Chip MD
+          </Chip>
+          <Chip size="md" outline rounded clickable color="green">
             <Icon />
-            Tag MD
-          </Tag>
-          <Tag size="lg" outline rounded clickable color="green">
-            Tag LG
-          </Tag>
-          <Tag size="lg" outline rounded clickable color="green">
+            Chip MD
+          </Chip>
+          <Chip size="lg" outline rounded clickable color="green">
+            Chip LG
+          </Chip>
+          <Chip size="lg" outline rounded clickable color="green">
             <Icon />
-            Tag LG
-          </Tag>
-          <Tag size="xl" outline rounded clickable color="green">
+            Chip LG
+          </Chip>
+          <Chip size="xl" outline rounded clickable color="green">
             <Icon />
-            Tag XL
-          </Tag>
-          <Tag size="2xl" outline rounded clickable color="green">
+            Chip XL
+          </Chip>
+          <Chip size="2xl" outline rounded clickable color="green">
             <Icon />
-            Tag 2XL
-          </Tag>
+            Chip 2XL
+          </Chip>
         </Surface>
-        <BlockTitle>Tags In Buttons</BlockTitle>
+        <BlockTitle>Chips In Buttons</BlockTitle>
         <Surface
           outline
           className="rounded-3xl"
@@ -1151,26 +1158,26 @@ function App() {
         >
           <Button size="sm" color="red" rounded>
             SM
-            <Tag size="sm" rounded>
-              TAG
-            </Tag>
+            <Chip size="sm" rounded>
+              CHIP
+            </Chip>
           </Button>
           <Button size="md">
             MD
-            <Tag size="md">TAG</Tag>
+            <Chip size="md">CHIP</Chip>
           </Button>
 
           <Button size="lg">
             LG
-            <Tag size="lg">TAG</Tag>
+            <Chip size="lg">CHIP</Chip>
           </Button>
           <Button size="xl">
             XL
-            <Tag size="xl">TAG</Tag>
+            <Chip size="xl">CHIP</Chip>
           </Button>
           <Button size="2xl">
             2XL
-            <Tag size="2xl">TAG</Tag>
+            <Chip size="2xl">CHIP</Chip>
           </Button>
         </Surface>
         <BlockTitle>Inputs</BlockTitle>
@@ -1452,7 +1459,7 @@ function App() {
             <Checkbox size="sm" />
             <Radio size="sm" />
             <Range size="sm" />
-            <Tag size="sm">Tag</Tag>
+            <Chip size="sm">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
             <div>MD:</div>
@@ -1464,7 +1471,7 @@ function App() {
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
-            <Tag size="md">Tag</Tag>
+            <Chip size="md">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
             <div>LG:</div>
@@ -1476,7 +1483,7 @@ function App() {
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
-            <Tag size="lg">Tag</Tag>
+            <Chip size="lg">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
             <div>XL:</div>
@@ -1488,7 +1495,7 @@ function App() {
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
-            <Tag size="xl">Tag</Tag>
+            <Chip size="xl">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
             <div>2XL:</div>
@@ -1500,7 +1507,7 @@ function App() {
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
-            <Tag size="2xl">Tag</Tag>
+            <Chip size="2xl">Chip</Chip>
           </div>
         </Surface>
 

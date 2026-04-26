@@ -11,22 +11,22 @@ import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { Surface } from './Surface';
 
-export type TagSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ChipSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-interface TagOwnProps<C extends ElementType = 'span'> {
-  /** Tag content - typically a short label, optionally with an icon. */
+interface ChipOwnProps<C extends ElementType = 'span'> {
+  /** Chip content - typically a short label, optionally with an icon. */
   children?: ReactNode;
-  /** Currently unused in styling - reserved for future "disabled tag" state. */
+  /** Currently unused in styling - reserved for future "disabled chip" state. */
   disabled?: boolean;
-  /** Extra classes for the tag surface root. */
+  /** Extra classes for the chip surface root. */
   className?: string;
   /** Extra classes for the inner content row. */
   contentClassName?: string;
   /** Apply `rounded-full` (pill) corners. When `false` (default), uses size-specific corner radii. */
   rounded?: boolean;
-  size?: TagSize;
+  size?: ChipSize;
   /**
-   * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the tag
+   * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip
    * becomes interactive automatically (see `clickable`).
    */
   component?: C;
@@ -35,16 +35,16 @@ interface TagOwnProps<C extends ElementType = 'span'> {
    * `'transparent'`; when `false`/omitted, the surface is `'gradient'`.
    */
   outline?: boolean;
-  /** Show hover affordance. Implicitly enabled when the tag is clickable. */
+  /** Show hover affordance. Implicitly enabled when the chip is clickable. */
   hoverable?: boolean;
   /**
-   * Make the tag react to pointer activity (active/pressed state, hover overlay).
+   * Make the chip react to pointer activity (active/pressed state, hover overlay).
    * Auto-computed when omitted: `true` if `component === 'a'` or `'button'`, otherwise `false`.
    * Set explicitly to override (e.g. force a `<span>` to be clickable, or suppress the
    * default for an `<a>` used purely as a navigation anchor).
    */
   clickable?: boolean;
-  /** Accent color token. Sets the tag's `color-{name}` class - drives text and ring colors. */
+  /** Accent color token. Sets the chip's `color-{name}` class - drives text and ring colors. */
   color?: Color;
   /** Icon component rendered before `children`. Receives `iconProps`. */
   icon?: ElementType<any>;
@@ -54,10 +54,10 @@ interface TagOwnProps<C extends ElementType = 'span'> {
   ref?: Ref<HTMLElement>;
 }
 
-export type TagProps<C extends ElementType = 'span'> = TagOwnProps<C> &
-  Omit<ComponentPropsWithoutRef<C>, keyof TagOwnProps<C>>;
+export type ChipProps<C extends ElementType = 'span'> = ChipOwnProps<C> &
+  Omit<ComponentPropsWithoutRef<C>, keyof ChipOwnProps<C>>;
 
-export const Tag = <C extends ElementType = 'span'>(props: TagProps<C>) => {
+export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   const elRef = useRef<HTMLElement | null>(null);
   const {
     children,
@@ -76,28 +76,28 @@ export const Tag = <C extends ElementType = 'span'>(props: TagProps<C>) => {
     ref,
     ...rest
   } = props;
-  const heights: Record<TagSize, string> = {
+  const heights: Record<ChipSize, string> = {
     sm: 'h-4',
     md: 'h-5',
     lg: 'h-7',
     xl: 'h-8',
     '2xl': 'h-10',
   };
-  const paddings: Record<TagSize, string> = {
+  const paddings: Record<ChipSize, string> = {
     sm: 'px-2 [&:has(>svg)]:pl-1',
     md: 'px-2 [&:has(>svg)]:pl-1',
     lg: 'px-2.5 [&:has(>svg)]:pl-1.5',
     xl: 'px-1.5',
     '2xl': 'px-2',
   };
-  const fontSizes: Record<TagSize, string> = {
+  const fontSizes: Record<ChipSize, string> = {
     sm: 'text-[10px]',
     md: 'text-[10px]',
     lg: 'text-xs',
     xl: 'text-sm',
     '2xl': 'text-sm',
   };
-  const iconSizes: Record<TagSize, string> = {
+  const iconSizes: Record<ChipSize, string> = {
     sm: '[&>svg]:size-3',
     md: '[&>svg]:size-4',
     lg: '[&>svg]:size-4',
@@ -134,7 +134,7 @@ export const Tag = <C extends ElementType = 'span'>(props: TagProps<C>) => {
         contentClassName,
       )}
       className={cn(
-        `tag group/tag relative inline-flex font-semibold text-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
+        `chip group/chip relative inline-flex font-semibold text-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
         rounded ? 'rounded-full' : roundedClasses[size],
         clickableComputed && 'duration-200',
         clickableComputed && component === 'a'
