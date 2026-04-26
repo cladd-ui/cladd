@@ -205,6 +205,7 @@ export const Shortcut = (props: ShortcutProps) => {
     >
       {keys.map((key, index) => (
         <Surface
+          component="kbd"
           color={color}
           variant={variant}
           level={surfaceLevel}
