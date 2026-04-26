@@ -7,6 +7,7 @@
   --color-surface: var(--surface);
   --color-surface-original: var(--surface-original);
   --color-surface-cut: var(--surface-cut);
+  --color-surface-prev: var(--surface-prev);
   --color-surface-minus: var(--surface-minus);
   --color-surface-plus: var(--surface-plus);
   --color-surface-next: var(--surface-next);
@@ -122,7 +123,7 @@
 }
 
 /* COLORS */
-[class*='color-']:not(.color-neutral) {
+[class*="color-"]:not(.color-neutral) {
   --background: oklch(from var(--theme) 0.15 0.02 h);
   --backdrop: #000;
   --primary: oklch(
@@ -218,7 +219,7 @@
     1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 30%, transparent)
       inset;
   &,
-  [class*='surface-level-'] {
+  [class*="surface-level-"] {
     --shadow-surface-outline:
       0px 0px 0px 1px var(--color-surface-outline) inset,
       1.5px 1.5px 0px 0px
@@ -226,9 +227,9 @@
   }
 }
 /* COLORS LIGHT */
-.light [class*='color-']:not(.color-neutral),
-.dark .light [class*='color-']:not(.color-neutral),
-.light[class*='color-']:not(.color-neutral) {
+.light [class*="color-"]:not(.color-neutral),
+.dark .light [class*="color-"]:not(.color-neutral),
+.light[class*="color-"]:not(.color-neutral) {
   --background: oklch(0.91 0.015 100);
   --backdrop: oklch(0.74 0.018 100);
   --primary: oklch(
@@ -274,7 +275,7 @@
       color-mix(in oklab, var(--surface-white) 30%, transparent) inset;
 
   &,
-  [class*='surface-level-'] {
+  [class*="surface-level-"] {
     --shadow-surface-outline:
       0px 0px 0px 1px var(--color-surface-outline) inset,
       1.5px 1.5px 0px 0px
@@ -285,208 +286,95 @@
 /* COMMON */
 .light,
 .dark,
-[class*='color-'] {
+[class*="color-"] {
   --color-background: var(--background);
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);
-  --color-surface: var(--surface);
-  --color-surface-cut: var(--surface-cut);
-  --color-surface-minus: var(--surface-minus);
-  --color-surface-plus: var(--surface-plus);
-  --color-surface-next: var(--surface);
-  --color-surface-outline: var(--surface-outline);
   --color-surface-white: var(--surface-white);
   --color-surface-black: var(--surface-black);
   --color-surface-hover: var(--surface-hover);
   --color-surface-hover-fill: var(--surface-hover-fill);
   --color-surface-pressed: var(--surface-pressed);
-  --color-on-surface: var(--on-surface);
-  --color-on-surface-dark: var(--on-surface-dark);
-  --color-on-surface-darker: var(--on-surface-darker);
-  --color-on-surface-darkest: var(--on-surface-darkest);
   --color-background-outline: var(--background-outline);
-
-  --surface-highlight: color-mix(
-    in oklab,
-    var(--surface-white) var(--highlight-white-mix, 3%),
-    var(--surface) var(--highlight-original-mix, 100%)
-  );
-  --color-surface-highlight: var(--surface-highlight);
-
-  /* SURFACE 1 */
-  --surface-1: var(--surface-original);
-  --surface-1-cut: var(--surface-cut-original);
-  --surface-1-minus: color-mix(
-    in oklab,
-    var(--surface-black) calc(var(--surface-mix-amount)),
-    var(--surface-original) 100%
-  );
-  --surface-1-plus: color-mix(
-    in oklab,
-    var(--surface-white) calc(var(--surface-mix-amount) / 2),
-    var(--surface-original) 100%
-  );
-  --on-surface-1: var(--on-surface);
-  --on-surface-1-dark: var(--on-surface-dark);
-  --on-surface-1-darker: var(--on-surface-darker);
-  --on-surface-1-darkest: var(--on-surface-darkest);
-  --surface-1-outline: var(--surface-outline-original);
-
-  /* SURFACE 2 */
-  --surface-2: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
-    var(--surface-original) 100%
-  );
-  --surface-2-cut: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
-    var(--surface-cut-original) var(--surface-original-mix, 100%)
-  );
-  --surface-2-plus: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1.5),
-    var(--surface-original) 100%
-  );
-  --on-surface-2: var(--on-surface);
-  --on-surface-2-dark: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
-    var(--on-surface-dark) var(--surface-original-mix, 100%)
-  );
-  --on-surface-2-darker: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
-    var(--on-surface-darker) var(--surface-original-mix, 100%)
-  );
-  --on-surface-2-darkest: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
-    var(--on-surface-darkest) var(--surface-original-mix, 100%)
-  );
-  --surface-2-outline: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 1),
-    var(--surface-outline-original)
-  );
-
-  /* SURFACE 3 */
-  --surface-3: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
-    var(--surface-original) 100%
-  );
-  --surface-3-cut: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
-    var(--surface-cut-original) var(--surface-original-mix, 100%)
-  );
-  --surface-3-plus: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2.5),
-    var(--surface-original) 100%
-  );
-  --on-surface-3: var(--on-surface);
-  --on-surface-3-dark: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
-    var(--on-surface-dark) var(--surface-original-mix, 100%)
-  );
-  --on-surface-3-darker: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
-    var(--on-surface-darker) var(--surface-original-mix, 100%)
-  );
-  --on-surface-3-darkest: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
-    var(--on-surface-darkest) var(--surface-original-mix, 100%)
-  );
-  --surface-3-outline: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 2),
-    var(--surface-outline-original)
-  );
-
-  /* SURFACE 4 */
-  --surface-4: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
-    var(--surface-original) 100%
-  );
-  --surface-4-cut: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
-    var(--surface-cut-original) var(--surface-original-mix, 100%)
-  );
-  --surface-4-plus: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3.5),
-    var(--surface-original) 100%
-  );
-  --on-surface-4: var(--on-surface);
-  --on-surface-4-dark: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
-    var(--on-surface-dark) var(--surface-original-mix, 100%)
-  );
-  --on-surface-4-darker: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
-    var(--on-surface-darker) var(--surface-original-mix, 100%)
-  );
-  --on-surface-4-darkest: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
-    var(--on-surface-darkest) var(--surface-original-mix, 100%)
-  );
-  --surface-4-outline: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 3),
-    var(--surface-outline-original)
-  );
-
-  /* SURFACE 5 */
-  --surface-5: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
-    var(--surface-original) 100%
-  );
-  --surface-5-cut: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
-    var(--surface-cut-original) var(--surface-original-mix, 100%)
-  );
-  --surface-5-plus: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4.5),
-    var(--surface-original) 100%
-  );
-  --on-surface-5: var(--on-surface);
-  --on-surface-5-dark: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
-    var(--on-surface-dark) var(--surface-original-mix, 100%)
-  );
-  --on-surface-5-darker: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
-    var(--on-surface-darker) var(--surface-original-mix, 100%)
-  );
-  --on-surface-5-darkest: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
-    var(--on-surface-darkest) var(--surface-original-mix, 100%)
-  );
-  --surface-5-outline: color-mix(
-    in oklab,
-    var(--surface-mix-color) calc(var(--surface-mix-amount) * 4),
-    var(--surface-outline-original)
-  );
 }
 
 /* LEVELS */
-[class*='surface-level-'] {
+[class*="surface-level-"],
+[class*="color-"] {
+  --surface-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * var(--surface-multiplier, 0)),
+    var(--surface-original) 100%
+  );
+  --surface-prev-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * calc(var(--surface-multiplier, 0) - 1)),
+    var(--surface-original) 100%
+  );
+  --surface-minus-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * calc(var(--surface-multiplier, 0) - 0.5)),
+    var(--surface-original) 100%
+  );
+  --surface-plus-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * calc(var(--surface-multiplier, 0) + 0.5)),
+    var(--surface-original) 100%
+  );
+  --surface-next-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * calc(var(--surface-multiplier, 0) + 1)),
+    var(--surface-original) 100%
+  );
+  --surface-cut-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * var(--surface-multiplier, 0)),
+    var(--surface-cut-original) var(--surface-original-mix, 100%)
+  );
+
+  --on-surface-leveled: var(--on-surface);
+  --on-surface-dark-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * var(--surface-multiplier, 0)),
+    var(--on-surface-dark) var(--surface-original-mix, 100%)
+  );
+  --on-surface-darker-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * var(--surface-multiplier, 0)),
+    var(--on-surface-darker) var(--surface-original-mix, 100%)
+  );
+  --on-surface-darkest-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * var(--surface-multiplier, 0)),
+    var(--on-surface-darkest) var(--surface-original-mix, 100%)
+  );
+  --surface-outline-leveled: color-mix(
+    in oklab,
+    var(--surface-mix-color)
+      calc(var(--surface-mix-amount) * var(--surface-multiplier, 0)),
+    var(--surface-outline-original)
+  );
+
+  --color-surface: var(--surface-leveled);
+  --color-surface-prev: var(--surface-prev-leveled);
+  --color-surface-minus: var(--surface-minus-leveled);
+  --color-surface-plus: var(--surface-plus-leveled);
+  --color-surface-next: var(--surface-next-leveled);
+  --color-surface-cut: var(--surface-cut-leveled);
+  --color-surface-outline: var(--surface-outline-leveled);
+  --color-on-surface: var(--on-surface-leveled);
+  --color-on-surface-dark: var(--on-surface-dark-leveled);
+  --color-on-surface-darker: var(--on-surface-darker-leveled);
+  --color-on-surface-darkest: var(--on-surface-darkest-leveled);
   --color-surface-highlight: color-mix(
     in oklab,
     var(--color-surface-white) var(--highlight-white-mix, 3%),
@@ -494,67 +382,22 @@
   );
 }
 .surface-level-1,
-.surface-level-1[class*='color-'] {
-  --color-surface: var(--surface-1);
-  --color-surface-cut: var(--surface-1-cut);
-  --color-surface-minus: var(--surface-1-minus);
-  --color-surface-plus: var(--surface-1-plus);
-  --color-surface-next: var(--surface-2);
-  --color-surface-outline: var(--surface-1-outline);
-  --color-on-surface: var(--on-surface);
-  --color-on-surface-dark: var(--on-surface-1-dark);
-  --color-on-surface-darker: var(--on-surface-1-darker);
-  --color-on-surface-darkest: var(--on-surface-1-darkest);
+.surface-level-1[class*="color-"] {
+  --surface-multiplier: 0;
 }
 .surface-level-2,
-.surface-level-2[class*='color-'] {
-  --color-surface: var(--surface-2);
-  --color-surface-cut: var(--surface-2-cut);
-  --color-surface-minus: var(--surface-1-plus);
-  --color-surface-plus: var(--surface-2-plus);
-  --color-surface-next: var(--surface-3);
-  --color-surface-outline: var(--surface-2-outline);
-  --color-on-surface: var(--on-surface-2);
-  --color-on-surface-dark: var(--on-surface-2-dark);
-  --color-on-surface-darker: var(--on-surface-2-darker);
-  --color-on-surface-darkest: var(--on-surface-2-darkest);
+.surface-level-2[class*="color-"] {
+  --surface-multiplier: 1;
 }
 .surface-level-3,
-.surface-level-3[class*='color-'] {
-  --color-surface: var(--surface-3);
-  --color-surface-cut: var(--surface-3-cut);
-  --color-surface-minus: var(--surface-2-plus);
-  --color-surface-plus: var(--surface-3-plus);
-  --color-surface-next: var(--surface-4);
-  --color-surface-outline: var(--surface-3-outline);
-  --color-on-surface: var(--on-surface-3);
-  --color-on-surface-dark: var(--on-surface-3-dark);
-  --color-on-surface-darker: var(--on-surface-3-darker);
-  --color-on-surface-darkest: var(--on-surface-3-darkest);
+.surface-level-3[class*="color-"] {
+  --surface-multiplier: 2;
 }
 .surface-level-4,
-.surface-level-4[class*='color-'] {
-  --color-surface: var(--surface-4);
-  --color-surface-cut: var(--surface-4-cut);
-  --color-surface-minus: var(--surface-3-plus);
-  --color-surface-plus: var(--surface-4-plus);
-  --color-surface-next: var(--surface-5);
-  --color-surface-outline: var(--surface-4-outline);
-  --color-on-surface: var(--on-surface-4);
-  --color-on-surface-dark: var(--on-surface-4-dark);
-  --color-on-surface-darker: var(--on-surface-4-darker);
-  --color-on-surface-darkest: var(--on-surface-4-darkest);
+.surface-level-4[class*="color-"] {
+  --surface-multiplier: 3;
 }
 .surface-level-5,
-.surface-level-5[class*='color-'] {
-  --color-surface: var(--surface-5);
-  --color-surface-cut: var(--surface-5-cut);
-  --color-surface-minus: var(--surface-4-plus);
-  --color-surface-plus: var(--surface-5-plus);
-  --color-surface-next: var(--surface-6);
-  --color-surface-outline: var(--surface-5-outline);
-  --color-on-surface: var(--on-surface-5);
-  --color-on-surface-dark: var(--on-surface-5-dark);
-  --color-on-surface-darker: var(--on-surface-5-darker);
-  --color-on-surface-darkest: var(--on-surface-5-darkest);
+.surface-level-5[class*="color-"] {
+  --surface-multiplier: 4;
 }

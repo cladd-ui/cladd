@@ -372,7 +372,7 @@ function App() {
                 key={Math.random()}
                 // variant="gradient"
                 outline
-                className="rounded-3xl"
+                className="rounded-3xl text-xs"
                 contentClassName="p-4"
                 color={color}
               >
@@ -394,6 +394,11 @@ function App() {
                   <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
                     Surface {color}: 2
                   </BlockTitle>
+                  <div className="mb-1 bg-surface-prev p-1">Prev</div>
+                  <div className="mb-1 bg-surface-minus p-1">Minus</div>
+                  <div className="mb-1 bg-surface p-1">Current</div>
+                  <div className="mb-1 bg-surface-plus p-1">Plus</div>
+                  <div className="mb-1 bg-surface-next p-1">Next</div>
                   <SurfaceCut
                     className="mb-2 rounded-full"
                     outline
@@ -409,6 +414,11 @@ function App() {
                     <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
                       Surface {color}: 3
                     </BlockTitle>
+                    <div className="mb-1 bg-surface-prev p-1">Prev</div>
+                    <div className="mb-1 bg-surface-minus p-1">Minus</div>
+                    <div className="mb-1 bg-surface p-1">Current</div>
+                    <div className="mb-1 bg-surface-plus p-1">Plus</div>
+                    <div className="mb-1 bg-surface-next p-1">Next</div>
                     <SurfaceCut
                       className="mb-2 rounded-full"
                       outline
@@ -424,6 +434,11 @@ function App() {
                       <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
                         Surface {color}: 4
                       </BlockTitle>
+                      <div className="mb-1 bg-surface-prev p-1">Prev</div>
+                      <div className="mb-1 bg-surface-minus p-1">Minus</div>
+                      <div className="mb-1 bg-surface p-1">Current</div>
+                      <div className="mb-1 bg-surface-plus p-1">Plus</div>
+                      <div className="mb-1 bg-surface-next p-1">Next</div>
                       <SurfaceCut
                         className="mb-2 rounded-full"
                         outline
@@ -439,6 +454,11 @@ function App() {
                         <BlockTitle className="mb-4 text-[10px] whitespace-nowrap">
                           Surface {color}: 5
                         </BlockTitle>
+                        <div className="mb-1 bg-surface-prev p-1">Prev</div>
+                        <div className="mb-1 bg-surface-minus p-1">Minus</div>
+                        <div className="mb-1 bg-surface p-1">Current</div>
+                        <div className="mb-1 bg-surface-plus p-1">Plus</div>
+                        <div className="mb-1 bg-surface-next p-1">Next</div>
                         <SurfaceCut
                           className="mb-2 rounded-full"
                           outline
@@ -528,10 +548,8 @@ function App() {
             </PopoverTrigger>
 
             <Popover offset={['-50%', 16]} position="bottom-end">
-              <PopoverClose>
-                <Button>Close</Button>
-              </PopoverClose>
               <List>
+                <BlockTitle className="px-2 pt-2 pb-2">Block Title</BlockTitle>
                 <ListItem>
                   <Radio checked /> Item 1
                 </ListItem>
@@ -542,6 +560,7 @@ function App() {
                 <ListItem>Item 3</ListItem>
                 <ListItem>Item 4</ListItem>
                 <ListSeparator />
+                <BlockTitle className="p-2">Block Title</BlockTitle>
                 <ListButton
                   header="Header text"
                   footer="Footer text"
