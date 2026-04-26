@@ -5,6 +5,8 @@ import { Input, InputSize } from './Input';
 import { useOTPFieldContext } from './OTPFieldContext';
 
 interface OTPFieldInputOwnProps {
+  /** Input placeholder. */
+  placeholder?: string;
   /** Extra classes for the cell wrapper. */
   className?: string;
   /** Extra classes for the underlying `<input>` element. */
@@ -26,7 +28,7 @@ const widthClasses: Record<InputSize, string> = {
 };
 
 export const OTPFieldInput = (props: OTPFieldInputProps) => {
-  const { className, inputClassName, ref, index = 0 } = props;
+  const { placeholder, className, inputClassName, ref, index = 0 } = props;
   const {
     size,
     pattern,
@@ -57,6 +59,7 @@ export const OTPFieldInput = (props: OTPFieldInputProps) => {
       onChange={(value, event) => onCellChange(index, value, event)}
       onKeyDown={(event) => onCellKeyDown(index, event)}
       onFocus={(event) => onCellFocus(index, event)}
+      placeholder={placeholder}
       inputComponentProps={{
         autoComplete: index === 0 ? 'one-time-code' : 'off',
         onPaste: (event: ClipboardEvent<HTMLInputElement>) =>
