@@ -278,9 +278,7 @@ export const Input = <
           if (externalRef) {
             if (typeof externalRef === 'function') externalRef(el);
             else
-              (
-                externalRef as React.MutableRefObject<HTMLElement | null>
-              ).current = el;
+              (externalRef as React.RefObject<HTMLElement | null>).current = el;
           }
         }}
       >
@@ -307,7 +305,7 @@ export const Input = <
               if (typeof externalInputRef === 'function') externalInputRef(el);
               else
                 (
-                  externalInputRef as React.MutableRefObject<HTMLInputElement | null>
+                  externalInputRef as React.RefObject<HTMLInputElement | null>
                 ).current = el;
             }
           }}

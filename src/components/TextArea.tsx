@@ -223,9 +223,7 @@ export const TextArea = <C extends ElementType = 'div'>(
           if (externalRef) {
             if (typeof externalRef === 'function') externalRef(el);
             else
-              (
-                externalRef as React.MutableRefObject<HTMLElement | null>
-              ).current = el;
+              (externalRef as React.RefObject<HTMLElement | null>).current = el;
           }
         }}
       >

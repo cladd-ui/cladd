@@ -507,7 +507,7 @@ export function Select<T = string>(props: SelectProps<T>) {
             elRef.current = el;
             if (ref && typeof ref === 'function') ref(el);
             else if (ref && typeof ref === 'object')
-              (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+              (ref as React.RefObject<HTMLElement | null>).current = el;
           }}
           size={size}
           rounded={rounded}

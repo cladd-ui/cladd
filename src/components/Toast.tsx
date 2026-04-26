@@ -228,7 +228,7 @@ const ToastInner = (props: ToastInnerProps) => {
         if (typeof ref === 'function') {
           ref(el);
         } else if (ref) {
-          (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+          (ref as React.RefObject<HTMLDivElement | null>).current = el;
         }
       }}
       level={surfaceLevel}

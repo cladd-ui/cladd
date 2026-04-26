@@ -165,8 +165,7 @@ const TooltipRoot = (props: TooltipRootProps) => {
       <Surface
         ref={(el: any) => {
           elRef.current = el;
-          if (ref)
-            (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+          if (ref) (ref as React.RefObject<HTMLDivElement | null>).current = el;
         }}
         style={tooltipStyle}
         level={surfaceLevel}

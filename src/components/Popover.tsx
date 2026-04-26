@@ -109,7 +109,7 @@ export const PopoverTrigger = ({
       typeof originalRef === 'object' &&
       'current' in originalRef
     ) {
-      (originalRef as React.MutableRefObject<any>).current = el;
+      (originalRef as React.RefObject<any>).current = el;
     }
   };
 
@@ -571,7 +571,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
             elRef.current = el;
             if (typeof ref === 'function') ref(el);
             else if (ref && 'current' in ref)
-              (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+              (ref as React.RefObject<HTMLElement | null>).current = el;
           }}
           style={popoverStyle}
           className={cn(

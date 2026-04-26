@@ -285,7 +285,7 @@ const DialogInner = (props: DialogInnerProps) => {
     containerRef.current = el;
     if (typeof ref === 'function') ref(el);
     else if (ref && typeof ref === 'object')
-      (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+      (ref as React.RefObject<HTMLDivElement | null>).current = el;
   };
 
   const content = (

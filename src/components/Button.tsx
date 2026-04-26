@@ -186,7 +186,7 @@ export const Button = <C extends ElementType = 'button'>(
         if (ref && typeof ref === 'function') {
           ref(el as HTMLElement);
         } else if (ref) {
-          (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+          (ref as React.RefObject<HTMLElement | null>).current = el;
         }
       }}
       onContextMenuCapture={(e: React.MouseEvent) => e.preventDefault()}

@@ -90,7 +90,7 @@ export const WithTooltip = ({
       typeof forwardedRef === 'object' &&
       'current' in forwardedRef
     ) {
-      (forwardedRef as React.MutableRefObject<any>).current = el;
+      (forwardedRef as React.RefObject<any>).current = el;
     }
   };
 
