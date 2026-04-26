@@ -13,7 +13,7 @@ export interface UIProviderProps {
   theme?: 'dark' | 'light';
   /**
    * App-wide accent color. Default `'brand'`. Read by `useAccentColor` and used as the default
-   * `color` for interactive components (Button, Toggle, Checkbox, Radio, etc.).
+   * `color` for interactive components (Button, Switch, Checkbox, Radio, etc.).
    */
   accentColor?: Color;
   children?: React.ReactNode;

@@ -37,8 +37,8 @@ import {
   Shortcut,
   Surface,
   SurfaceCut,
+  Switch,
   TextArea,
-  Toggle,
   Toolbar,
   ToolbarButton,
   ToolbarSeparator,
@@ -719,7 +719,7 @@ function App() {
                     >
                       In Progress
                     </Select>
-                    <Toggle size="md" />
+                    <Switch size="md" />
                   </div>
                 </div>
                 <div className="font-base h-16 font-bold">Task Title</div>
@@ -947,9 +947,9 @@ function App() {
           className="rounded-3xl"
         >
           <div className="flex items-center gap-8">
-            <Toggle disabled />
-            <Toggle disabled checked />
-            <Toggle checked={checked} onChange={setChecked} />
+            <Switch disabled />
+            <Switch disabled checked />
+            <Switch checked={checked} onChange={setChecked} />
             <Button size="md">Button MD</Button>
             <Surface
               contentClassName="p-1 flex items-center"
@@ -963,7 +963,7 @@ function App() {
               <Button rounded variant="transparent" outline={false}>
                 <Icon />
               </Button>
-              <Toggle checked={checked} onChange={setChecked} />
+              <Switch checked={checked} onChange={setChecked} />
             </Surface>
           </div>
         </Surface>
@@ -1657,7 +1657,7 @@ function App() {
             <Input icon={<Icon />} size="sm" value="Ta-da" clearButton></Input>
             <TextArea icon={<Icon />} size="sm" value="Ta-da" rounded />
 
-            <Toggle size="sm" />
+            <Switch size="sm" />
             <Checkbox size="sm" />
             <Radio size="sm" />
             <Range size="sm" />
@@ -1669,7 +1669,7 @@ function App() {
             <Input size="md" value="Ta-da" clearButton></Input>
             <TextArea size="md" value="Ta-da" rounded />
 
-            <Toggle size="md" />
+            <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
@@ -1681,7 +1681,7 @@ function App() {
             <Input size="lg" value="Ta-da" clearButton></Input>
             <TextArea size="lg" value="Ta-da" />
 
-            <Toggle size="md" />
+            <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
@@ -1693,7 +1693,7 @@ function App() {
             <Input size="xl" value="Ta-da" clearButton></Input>
             <TextArea size="xl" value="Ta-da" />
 
-            <Toggle size="md" />
+            <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />
@@ -1705,7 +1705,7 @@ function App() {
             <Input size="2xl" value="Ta-da" clearButton></Input>
             <TextArea size="2xl" value="Ta-da" />
 
-            <Toggle size="md" />
+            <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
             <Range size="md" />

@@ -12,12 +12,12 @@ import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface, SurfaceVariant } from './Surface';
 
-export type ToggleSize = 'sm' | 'md';
+export type SwitchSize = 'sm' | 'md';
 
-interface ToggleOwnProps<C extends ElementType = 'label'> {
+interface SwitchOwnProps<C extends ElementType = 'label'> {
   /** Controlled checked state. Default `false`. */
   checked?: boolean;
-  /** Visually dim the toggle and disable interaction. */
+  /** Visually dim the switch and disable interaction. */
   disabled?: boolean;
   /** Block toggling without the disabled visual treatment. */
   readOnly?: boolean;
@@ -36,11 +36,11 @@ interface ToggleOwnProps<C extends ElementType = 'label'> {
   component?: C;
   /**
    * Icon rendered inside the knob. Pass either a static `ReactNode`, or a function
-   * `(checked) => ReactNode` to render different content based on the toggle state.
+   * `(checked) => ReactNode` to render different content based on the switch state.
    * If omitted, the built-in animated cross/check glyph is used.
    */
   icon?: ReactNode | ((checked: boolean) => ReactNode);
-  size?: ToggleSize;
+  size?: SwitchSize;
   /** Extra classes for the outer label/element. */
   className?: string;
   /**
@@ -79,10 +79,10 @@ interface ToggleOwnProps<C extends ElementType = 'label'> {
   knobSurfaceLevel?: string | number;
 }
 
-export type ToggleProps<C extends ElementType = 'label'> = ToggleOwnProps<C> &
-  Omit<ComponentPropsWithoutRef<C>, keyof ToggleOwnProps<C>>;
+export type SwitchProps<C extends ElementType = 'label'> = SwitchOwnProps<C> &
+  Omit<ComponentPropsWithoutRef<C>, keyof SwitchOwnProps<C>>;
 
-export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
+export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
   const accentColor = useAccentColor();
 
   const {
@@ -140,7 +140,7 @@ export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
   return (
     <Component
       className={cn(
-        'toggle group/toggle relative flex shrink-0 rounded-full select-none',
+        'switch group/switch relative flex shrink-0 rounded-full select-none',
         size === 'sm' && 'w-10 p-1',
         size === 'md' && 'w-12 p-1',
         className,
@@ -215,7 +215,7 @@ export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
           >
             <span
               className={cn(
-                'absolute inset-0 duration-300 group-active/toggle:scale-90',
+                'absolute inset-0 duration-300 group-active/switch:scale-90',
                 checked && 'rotate-180',
                 !checked && size === 'sm' && 'rotate-90',
               )}
@@ -243,7 +243,7 @@ export function Toggle<C extends ElementType = 'label'>(props: ToggleProps<C>) {
         )}
 
         {focusableComputed && !disabled && !readOnly && (
-          <FocusableLayer className="rounded-full" group="toggle" />
+          <FocusableLayer className="rounded-full" group="switch" />
         )}
       </Surface>
     </Component>

@@ -101,6 +101,7 @@ export {
   SurfaceCutContent,
   type SurfaceCutContentProps,
 } from "./components/SurfaceCutContent";
+export { Switch, type SwitchProps, type SwitchSize } from "./components/Switch";
 export {
   TextArea,
   type TextAreaProps,
@@ -113,7 +114,6 @@ export {
   ToastTrigger,
   type ToastProps,
 } from "./components/Toast";
-export { Toggle, type ToggleProps, type ToggleSize } from "./components/Toggle";
 export { Toolbar, type ToolbarProps } from "./components/Toolbar";
 export {
   ToolbarButton,

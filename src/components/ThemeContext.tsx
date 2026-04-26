@@ -17,7 +17,7 @@ export const ThemeContext = createContext<ThemeContextValue>({
  *
  * Components read these values via `useTheme()` and `useAccentColor()` to pick:
  * - per-theme defaults (Dialog/Popover/Tooltip variant, outline, surfaceLevel),
- * - the default `color` for interactive components (Button/Toggle/Checkbox/Radio default to `accentColor`).
+ * - the default `color` for interactive components (Button/Switch/Checkbox/Radio default to `accentColor`).
  */
 export const ThemeProvider = ({
   children,
