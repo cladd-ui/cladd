@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.7 (2026-04-26)
+
+### Features
+
+- add icons to xport (1613597)
+
 ## 0.0.6 (2026-04-26)
 
 ### Features
