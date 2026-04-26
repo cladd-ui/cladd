@@ -123,7 +123,7 @@ function App() {
           className="rounded-3xl"
           contentClassName="flex flex-col gap-4 p-4"
         >
-          <Shortcut>cmd shift alt return up esc</Shortcut>
+          <Shortcut variant="solid-fill">cmd shift alt return up esc</Shortcut>
           <Button size="sm" rounded>
             Button SM{' '}
             <Shortcut size="sm">alt tab cmd shift alt return up esc</Shortcut>
