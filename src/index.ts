@@ -5,6 +5,8 @@ export { useTheme } from './hooks/use-theme';
 export { useToast } from './hooks/use-toast';
 export { useAccentColor } from './hooks/use-accent-color';
 
+export { type Color } from './types';
+
 export { cn } from './shared/cn';
 export { nextTick } from './shared/next-tick';
 

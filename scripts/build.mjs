@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { spawn } from 'node:child_process';
-import { cp, readdir, rm, stat } from 'node:fs/promises';
+import { cp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -67,6 +67,93 @@ const compile = async () => {
   await run(tscBin, ['-p', tsconfig]);
 };
 
+// TypeScript with `moduleResolution: Bundler` emits extensionless imports.
+// Node ESM (and Next.js server bundling) needs explicit `.js` extensions, so
+// we walk the emitted output and append them to relative specifiers.
+const RELATIVE_IMPORT_RE =
+  /(\bfrom\s*|\bimport\s*|\bexport\s*\*\s*from\s*|\bexport\s*\{[^}]*\}\s*from\s*|\bimport\s*\(\s*)(['"])(\.\.?\/[^'"]*)(['"])/g;
+const KNOWN_EXTENSIONS = new Set([
+  '.js',
+  '.mjs',
+  '.cjs',
+  '.json',
+  '.css',
+  '.svg',
+  '.png',
+  '.jpg',
+  '.jpeg',
+  '.gif',
+  '.webp',
+]);
+
+const hasKnownExtension = (specifier) => {
+  const last = specifier.slice(specifier.lastIndexOf('/') + 1);
+  const dot = last.lastIndexOf('.');
+  if (dot <= 0) return false;
+  return KNOWN_EXTENSIONS.has(last.slice(dot).toLowerCase());
+};
+
+const resolveSpecifier = async (fileDir, specifier) => {
+  if (hasKnownExtension(specifier)) return specifier;
+  const absBase = resolve(fileDir, specifier);
+  if (await exists(absBase + '.js')) return specifier + '.js';
+  if (await exists(join(absBase, 'index.js'))) {
+    const sep = specifier.endsWith('/') ? '' : '/';
+    return specifier + sep + 'index.js';
+  }
+  return null;
+};
+
+const walk = async function* (dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      yield* walk(full);
+    } else if (entry.isFile()) {
+      yield full;
+    }
+  }
+};
+
+const rewriteFileImports = async (file) => {
+  const original = await readFile(file, 'utf8');
+  const fileDir = dirname(file);
+  const replacements = [];
+  let match;
+  RELATIVE_IMPORT_RE.lastIndex = 0;
+  while ((match = RELATIVE_IMPORT_RE.exec(original)) !== null) {
+    const [whole, prefix, openQuote, specifier, closeQuote] = match;
+    const resolved = await resolveSpecifier(fileDir, specifier);
+    if (!resolved || resolved === specifier) continue;
+    replacements.push({
+      start: match.index,
+      end: match.index + whole.length,
+      replacement: `${prefix}${openQuote}${resolved}${closeQuote}`,
+    });
+  }
+  if (replacements.length === 0) return false;
+  let out = '';
+  let cursor = 0;
+  for (const { start, end, replacement } of replacements) {
+    out += original.slice(cursor, start) + replacement;
+    cursor = end;
+  }
+  out += original.slice(cursor);
+  await writeFile(file, out);
+  return true;
+};
+
+const addExtensionsToImports = async () => {
+  log('rewriting relative imports with .js extensions');
+  let changed = 0;
+  for await (const file of walk(pkgDir)) {
+    if (!/\.(js|d\.ts)$/.test(file)) continue;
+    if (await rewriteFileImports(file)) changed += 1;
+  }
+  log(`rewrote imports in ${changed} file(s)`);
+};
+
 const copyAssets = async () => {
   log('copying css assets');
   await cp(join(srcDir, 'ui.css'), join(pkgDir, 'ui.css'));
@@ -93,6 +180,7 @@ const main = async () => {
   }
   await cleanArtifacts();
   await compile();
+  await addExtensionsToImports();
   await copyAssets();
   log(`done -> ${pkgDir}`);
 };
