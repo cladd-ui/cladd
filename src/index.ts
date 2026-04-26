@@ -8,6 +8,11 @@ export { useAccentColor } from "./hooks/use-accent-color";
 export { cn } from "./shared/cn";
 export { nextTick } from "./shared/next-tick";
 
+export { CloseIcon } from "./components/icons/CloseIcon";
+export { SearchIcon } from "./components/icons/SearchIcon";
+export { DropdownIcon } from "./components/icons/DropdownIcon";
+export { CheckIcon } from "./components/icons/CheckIcon";
+
 export { Backdrop, type BackdropProps } from "./components/Backdrop";
 export { BlockTitle, type BlockTitleProps } from "./components/BlockTitle";
 export { Button, type ButtonProps, type ButtonSize } from "./components/Button";
