@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node scripts/build.mjs",
     "check-types": "tsc --noEmit",
     "dev": "cd playground && vite",
     "format": "oxfmt",

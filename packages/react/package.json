@@ -13,6 +13,24 @@
     "url": "https://github.com/cladd-ui/cladd.git"
   },
   "type": "module",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./ui.css": "./ui.css",
+    "./styles/*": "./styles/*",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
   "dependencies": {
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.5.0"

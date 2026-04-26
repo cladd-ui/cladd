@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# @cladd-ui/react build artifacts emitted by scripts/build.mjs
+/packages/react/**/*.js
+/packages/react/**/*.d.ts
+/packages/react/**/*.map
+/packages/react/**/*.css
+/packages/react/LICENSE
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
