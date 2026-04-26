@@ -77,7 +77,6 @@ export const Segmented = <C extends ElementType = 'div'>(
     <Component
       className={cn(
         'segmented',
-
         disabled && 'pointer-events-none opacity-40',
         'flex items-center justify-center',
         color && `color-${color}`,

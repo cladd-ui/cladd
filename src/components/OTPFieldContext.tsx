@@ -32,7 +32,10 @@ interface OTPFieldContextValue {
     value: string,
     event: ChangeEvent<HTMLInputElement>,
   ) => void;
-  onCellKeyDown: (index: number, event: KeyboardEvent<HTMLInputElement>) => void;
+  onCellKeyDown: (
+    index: number,
+    event: KeyboardEvent<HTMLInputElement>,
+  ) => void;
   onCellFocus: (index: number, event: FocusEvent<HTMLInputElement>) => void;
   onCellPaste: (index: number, event: ClipboardEvent<HTMLInputElement>) => void;
 }

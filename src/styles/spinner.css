@@ -1,16 +1,16 @@
 @layer base {
-  .preloader-wrap {
+  .spinner-wrap {
     transform-origin: center;
-    animation: preloader-rotate 4s infinite;
+    animation: spinner-rotate 4s infinite;
   }
-  .preloader-knob {
+  .spinner-knob {
     transform-origin: left;
     animation:
-      preloader-knob-move 1s infinite,
-      preloader-knob-scale 1s infinite;
+      spinner-knob-move 1s infinite,
+      spinner-knob-scale 1s infinite;
   }
 
-  @keyframes preloader-rotate {
+  @keyframes spinner-rotate {
     0% {
       transform: rotate(0deg);
     }
@@ -33,7 +33,7 @@
     }
   }
 
-  @keyframes preloader-knob-move {
+  @keyframes spinner-knob-move {
     0%,
     10% {
       translate: 0px;
@@ -48,7 +48,7 @@
     }
   }
 
-  @keyframes preloader-knob-scale {
+  @keyframes spinner-knob-scale {
     0% {
       scale: 0.9 1;
       transform-origin: left;

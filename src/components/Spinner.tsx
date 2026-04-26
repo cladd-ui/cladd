@@ -2,21 +2,21 @@ import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 
-export type PreloaderSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export interface PreloaderProps {
-  /** Preloader dimension. Default `'sm'`. Drives the size, knob position, and border thickness. */
-  size?: PreloaderSize;
+export interface SpinnerProps {
+  /** Spinner dimension. Default `'sm'`. Drives the size, knob position, and border thickness. */
+  size?: SpinnerSize;
   /** Accent color for the spinning knob and ring. Default: theme accent. */
   color?: Color;
-  /** Extra classes for the preloader root element. */
+  /** Extra classes for the spinner root element. */
   className?: string;
 }
 
-export function Preloader(props: PreloaderProps) {
+export function Spinner(props: SpinnerProps) {
   const accentColor = useAccentColor();
   const { size = 'sm', color = accentColor, className } = props;
-  const sizes: Record<PreloaderSize, string> = {
+  const sizes: Record<SpinnerSize, string> = {
     sm: 'size-4',
     md: 'size-5',
     lg: 'size-7',
@@ -42,14 +42,14 @@ export function Preloader(props: PreloaderProps) {
   return (
     <div
       className={cn(
-        'preloader',
+        'spinner',
         `color-${color}`,
         'relative',
         sizes[size],
         className,
       )}
     >
-      <div className="preloader-wrap absolute inset-0">
+      <div className="spinner-wrap absolute inset-0">
         <div
           className={cn(
             'absolute top-1/2 left-0 aspect-[16/10] w-full -translate-y-1/2 rounded-full border-primary',
@@ -62,7 +62,7 @@ export function Preloader(props: PreloaderProps) {
             sizeClasses,
           )}
         >
-          <div className="preloader-knob absolute top-0 left-0 h-full w-1/2 rounded-full bg-primary" />
+          <div className="spinner-knob absolute top-0 left-0 h-full w-1/2 rounded-full bg-primary" />
         </div>
       </div>
     </div>

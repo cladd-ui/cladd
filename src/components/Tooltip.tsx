@@ -1,205 +1,223 @@
-import { useEffect, useRef, ReactNode, Ref } from 'react';
-import { createPortal } from 'react-dom';
+import { cloneElement, useEffect, useRef, useState, ReactNode } from 'react';
 
-import { useModalUtils } from '../hooks/use-modal-utils';
-import { useTheme } from '../hooks/use-theme';
-import { cn } from '../shared/cn';
-import { Color } from '../types';
-import { ModalPhase, ModalController } from './ModalController';
-import { Surface, SurfaceProps } from './Surface';
+import { useDevice } from '../hooks/use-device';
+import {
+  TooltipPrimitive,
+  TooltipPrimitiveProps,
+  TooltipPosition,
+} from './TooltipPrimitive';
 
-type OffsetValue = number | string;
+export type { TooltipPosition };
 
-export type TooltipPosition = 'top' | 'bottom';
+let tooltipGlobalTimeout: number = 0;
+let tooltipGlobalTimeoutId: number = 0;
 
-const resolveOffset = (value: OffsetValue): string => {
-  if (typeof value === 'number') return `${value}px`;
-  if (value.endsWith('%')) {
-    const fraction = parseFloat(value) / 100;
-    return `calc(anchor-size(height) * ${fraction})`;
-  }
-  return value;
+const resetGlobalTimeout = () => {
+  const device = useDevice();
+  tooltipGlobalTimeout = device.mobile ? 500 : 1000;
 };
 
-interface TooltipOwnProps {
-  /** Controlled open state. Default `false`. Pair with `onOpenChange`. */
-  open?: boolean;
-  /** Fires whenever the open state should change. */
-  onOpenChange?: (open: boolean) => void;
-  /** Tailwind z-index utility for the tooltip surface. Default `'z-50'`. */
-  zIndex?: string;
-  /** Extra classes applied to the tooltip root `Surface`. */
-  className?: string;
-  /** Extra classes applied to the inner content area. Default includes `px-2 py-1`. */
-  contentClassName?: string;
-  /** Ref to the element the tooltip should anchor against (CSS anchor positioning). */
-  anchorRef?: React.RefObject<HTMLElement | null>;
-  /** Portal target selector. Default `'#app, #__next, #root'`. */
-  root?: string;
-  /** Anchor side. Default `'top'`. */
-  position?: TooltipPosition;
+const getGlobalTimeout = () => {
+  if (tooltipGlobalTimeout === null) {
+    resetGlobalTimeout();
+  }
+  return tooltipGlobalTimeout;
+};
+
+export interface TooltipProps extends Omit<
+  TooltipPrimitiveProps,
+  'children' | 'ref'
+> {
   /**
-   * Forwarded to the underlying `Surface` as `level`. Default depends on theme:
-   * `1` for light theme, `5` for dark theme - so the tooltip pops on top of any surface.
+   * When provided, the component acts as a wrapper around `children` (a single element)
+   * and shows this content as a tooltip on hover/focus/touch. When omitted, the component
+   * forwards all props to the underlying `TooltipPrimitive` and `children` is rendered as
+   * the tooltip content (controlled mode via `open`/`anchorRef`).
    */
-  surfaceLevel?: number | string;
-  /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
-  offset?: OffsetValue;
-  /** Accent color token. Sets the tooltip's `color-{name}` class. */
-  color?: Color;
-  /** Tooltip content. */
+  tooltip?: ReactNode;
+  /**
+   * Wrapper mode: the single element to attach the tooltip to.
+   * Primitive mode: the tooltip content.
+   */
   children?: ReactNode;
-  /** Fires when the open transition begins. */
-  onOpen?: () => void;
-  /** Fires after the open transition completes. */
-  onOpened?: () => void;
-  /** Fires when the close transition begins. */
-  onClose?: () => void;
-  /** Fires after the close transition completes. */
-  onClosed?: () => void;
-  /** Forwarded to the tooltip surface root. */
-  ref?: Ref<HTMLDivElement>;
+  /**
+   * Wrapper mode only. When `true` (default), delays showing the tooltip (500ms on touch,
+   * 1000ms on mouse) and uses a shared global timer so successive hovers feel snappier -
+   * same UX as system tooltips. When `false`, the tooltip appears immediately on pointer enter.
+   */
+  timeout?: boolean;
+  /** Wrapper mode only. Composed onto the wrapped child element's `onClick`. */
+  onClick?: (e: React.MouseEvent) => void;
+  /**
+   * Wrapper mode: composed onto the wrapped child's ref (alongside the internal anchor ref).
+   * Primitive mode: forwarded to the tooltip surface root.
+   */
+  ref?: React.Ref<any>;
 }
 
-export type TooltipProps = TooltipOwnProps &
-  Omit<SurfaceProps, keyof TooltipOwnProps>;
+const TooltipWrapper = ({
+  tooltip,
+  children: originalChild,
+  timeout = true,
+  onClick: forwardedOnClick,
+  ref: forwardedRef,
+  ...primitiveProps
+}: TooltipProps) => {
+  const [modalState, setModalState] = useState<boolean>(false);
+  const elRef = useRef<HTMLElement | null>(null);
+  const tooltipVisibleRef = useRef(false);
+  const preventContextMenuRef = useRef(false);
+  const pointerTimeoutRef = useRef<number | null>(null);
 
-type TooltipRootProps = Omit<TooltipProps, 'open' | 'onOpenChange'> & {
-  phase?: ModalPhase;
-  onPhaseChange?: (phase: ModalPhase) => void;
-};
-
-const TooltipRoot = (props: TooltipRootProps) => {
-  const theme = useTheme();
-  const {
-    phase = 'closed',
-    onPhaseChange = () => {},
-    zIndex = 'z-50',
-    className = '',
-    contentClassName = '',
-    anchorRef,
-    root = '#app, #__next, #root',
-    position = 'top',
-    offset = 4,
-    surfaceLevel = theme === 'light' ? 1 : 5,
-    color,
-    children,
-    onOpen = () => {},
-    onOpened = () => {},
-    onClose = () => {},
-    onClosed = () => {},
-    ref,
-    ...rest
-  } = props;
-
-  const anchorNameRef = useRef('');
-
-  // Reuse existing anchor-name if target already has one (e.g. from Popover),
-  // otherwise generate a shared one
-  if (anchorRef?.current) {
-    const existing = anchorRef.current.style.getPropertyValue('anchor-name');
-    if (existing) {
-      anchorNameRef.current = existing;
-    } else if (!anchorNameRef.current) {
-      anchorNameRef.current = `--anchor-${Math.random().toString(36).slice(2, 8)}`;
+  const newRef = (el: any) => {
+    elRef.current = el;
+    const originalChildRef = (originalChild as any)?.props?.ref as any;
+    if (originalChildRef && typeof originalChildRef === 'function')
+      originalChildRef(el);
+    else if (
+      originalChildRef &&
+      Object.keys(originalChildRef).includes('current')
+    ) {
+      originalChildRef.current = el;
     }
-  }
-  const anchorName = anchorNameRef.current;
+    if (typeof forwardedRef === 'function') forwardedRef(el);
+    else if (
+      forwardedRef &&
+      typeof forwardedRef === 'object' &&
+      'current' in forwardedRef
+    ) {
+      (forwardedRef as React.RefObject<any>).current = el;
+    }
+  };
 
-  const elRef = useRef<HTMLDivElement | null>(null);
-  const containerElRef = useRef<HTMLDivElement | null>(null);
-
-  const { opened, open, close } = useModalUtils({
-    phase,
-    onPhaseChange,
-    onOpen,
-    onOpened,
-    onClose,
-    onClosed,
-    transitionEndElRef: elRef,
-    closeOnEscape() {
-      if (containerElRef.current && containerElRef.current.nextElementSibling) {
-        const nextEl = containerElRef.current.nextElementSibling;
-        if (nextEl.matches('.popover, .dialog')) {
-          return false;
+  const showTooltip = () => {
+    if (!tooltip) return;
+    clearTimeout(tooltipGlobalTimeoutId);
+    pointerTimeoutRef.current = setTimeout(
+      () => {
+        tooltipVisibleRef.current = true;
+        setModalState(true);
+        if (timeout) {
+          tooltipGlobalTimeout = 0;
         }
+      },
+      timeout ? getGlobalTimeout() : 0,
+    ) as unknown as number;
+  };
+  const hideTooltip = () => {
+    if (!tooltip) return;
+    tooltipVisibleRef.current = false;
+    setModalState(false);
+    clearTimeout(pointerTimeoutRef.current as number);
+    if (timeout) {
+      tooltipGlobalTimeoutId = setTimeout(() => {
+        resetGlobalTimeout();
+      }, 1000) as unknown as number;
+    }
+  };
+  const onContextMenu = (e: any) => {
+    if (!tooltip) return;
+    if (preventContextMenuRef.current) {
+      e.preventDefault();
+    }
+  };
+  const onClick = (_e: any) => {
+    if (!tooltip) return;
+    if (tooltipVisibleRef.current) {
+      hideTooltip();
+    }
+  };
+  const onPointer = (e: PointerEvent) => {
+    if (!tooltip) return;
+    const mouseEvents = ['pointerenter', 'pointerleave', 'pointercancel'];
+    const touchEvents = ['pointerdown', 'pointerup', 'pointercancel'];
+
+    if (
+      (e.pointerType === 'mouse' && !mouseEvents.includes(e.type)) ||
+      (e.pointerType === 'touch' && !touchEvents.includes(e.type))
+    ) {
+      return;
+    }
+    if (e.type === 'pointerenter') {
+      showTooltip();
+    }
+    if (e.type === 'pointerleave' || e.type === 'pointercancel') {
+      preventContextMenuRef.current = false;
+      hideTooltip();
+    }
+    if (e.type === 'pointerdown' && !tooltipVisibleRef.current) {
+      preventContextMenuRef.current = true;
+      showTooltip();
+    }
+    if (e.type === 'pointerup') {
+      preventContextMenuRef.current = false;
+      hideTooltip();
+    }
+  };
+
+  useEffect(() => {
+    const el = elRef.current as HTMLElement;
+    if (el) {
+      el.addEventListener('click', onClick);
+      el.addEventListener('contextmenu', onContextMenu);
+      el.addEventListener('pointerenter', onPointer);
+      el.addEventListener('pointerdown', onPointer);
+      document.addEventListener('pointerup', onPointer);
+      document.addEventListener('pointercancel', onPointer);
+      el.addEventListener('pointerleave', onPointer);
+    }
+    return () => {
+      if (el) {
+        el.removeEventListener('click', onClick);
+        el.removeEventListener('contextmenu', onContextMenu);
+        el.removeEventListener('pointerenter', onPointer);
+        el.removeEventListener('pointerdown', onPointer);
+        document.removeEventListener('pointerup', onPointer);
+        document.removeEventListener('pointercancel', onPointer);
+        el.removeEventListener('pointerleave', onPointer);
       }
-      return true;
-    },
+    };
   });
 
-  // Set anchor-name on target element if not already set
-  useEffect(() => {
-    const anchorEl = anchorRef?.current;
-    if (!anchorEl || !anchorName) return;
-    if (!anchorEl.style.getPropertyValue('anchor-name')) {
-      anchorEl.style.setProperty('anchor-name', anchorName);
-    }
-  }, [anchorRef, anchorName]);
-
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      open();
-    });
-  }, []);
-
-  useEffect(() => {
-    if (containerElRef.current) {
-      (containerElRef.current as any).__Tooltip = { close };
-    }
-  }, []);
-
-  const isTop = position === 'top';
-
-  const tooltipStyle = {
-    positionAnchor: anchorName,
-    positionArea: isTop ? 'top center' : 'bottom center',
-    positionTryFallbacks: 'flip-block',
-    ...(offset
-      ? { [isTop ? 'marginBottom' : 'marginTop']: resolveOffset(offset) }
-      : {}),
-  } as React.CSSProperties;
-
-  const content = (
-    <div className="tooltip pointer-events-none" ref={containerElRef}>
-      <Surface
-        ref={(el: any) => {
-          elRef.current = el;
-          if (ref) (ref as React.RefObject<HTMLDivElement | null>).current = el;
-        }}
-        style={tooltipStyle}
-        level={surfaceLevel}
-        outline
-        variant="gradient"
-        contentClassName={cn('px-2 py-1', contentClassName)}
-        className={cn(
-          'pointer-events-none fixed max-h-[50vh] w-max max-w-50 overflow-auto rounded-xl text-xs leading-normal font-medium transition-[opacity,transform,scale]',
-          color && `color-` + color,
-
-          opened ? 'scale-100 opacity-100' : '',
-          phase === 'opened' && 'duration-200',
-          phase === 'closing' && 'duration-200',
-          (phase === 'closing' || !opened) && 'scale-50 opacity-0',
-          zIndex,
-          isTop ? 'origin-bottom' : 'origin-top',
-          className,
-        )}
-        {...rest}
-      >
-        {children}
-      </Surface>
-    </div>
+  const cloneProps: Record<string, any> = { ref: newRef };
+  if (forwardedOnClick) {
+    const originalOnClick = (originalChild as any)?.props?.onClick;
+    cloneProps.onClick = (e: React.MouseEvent) => {
+      forwardedOnClick(e);
+      if (originalOnClick) originalOnClick(e);
+    };
+  }
+  const newChild = cloneElement(
+    originalChild as React.ReactElement<any>,
+    cloneProps,
   );
 
-  return root ? createPortal(content, document.querySelector(root)!) : content;
+  return (
+    <>
+      {newChild}
+      {tooltip && (
+        <TooltipPrimitive
+          {...primitiveProps}
+          open={modalState}
+          onOpenChange={setModalState}
+          anchorRef={elRef}
+        >
+          {tooltip}
+        </TooltipPrimitive>
+      )}
+    </>
+  );
 };
 
-export const Tooltip = ({
-  open = false,
-  onOpenChange = () => {},
-  ...rest
-}: TooltipProps) => (
-  <ModalController open={open} onOpenChange={onOpenChange}>
-    <TooltipRoot {...rest} />
-  </ModalController>
-);
+export const Tooltip = (props: TooltipProps) => {
+  if (props.tooltip === undefined) {
+    const {
+      tooltip: _t,
+      timeout: _to,
+      onClick: _oc,
+      ...primitiveProps
+    } = props;
+    return <TooltipPrimitive {...(primitiveProps as TooltipPrimitiveProps)} />;
+  }
+  return <TooltipWrapper {...props} />;
+};

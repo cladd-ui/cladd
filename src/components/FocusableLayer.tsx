@@ -12,7 +12,7 @@ export const FocusableLayer = (props: {
    * - `'button'` - reveals on `:focus-visible` (keyboard focus only).
    * - `'input'` - reveals when the wrapper has a focused `<input>`.
    * - `'textarea'` - reveals when the wrapper has a focused `[contenteditable]`.
-   * - `'checkbox'` / `'switch'` / `'radio'` / `'range'` - reveal on `:focus-visible` of the
+   * - `'checkbox'` / `'switch'` / `'radio'` / `'slider'` - reveal on `:focus-visible` of the
    *   wrapper's hidden native input.
    *
    * Pass an unknown value to opt out of the auto-reveal classes (use `force` instead).
@@ -41,8 +41,8 @@ export const FocusableLayer = (props: {
         'group-has-[input:focus-visible]/switch:scale-100 group-has-[input:focus-visible]/switch:opacity-100',
       radio:
         'group-has-[input:focus-visible]/radio:scale-100 group-has-[input:focus-visible]/radio:opacity-100',
-      range:
-        'group-has-[input:focus-visible]/range:scale-100 group-has-[input:focus-visible]/range:opacity-100',
+      slider:
+        'group-has-[input:focus-visible]/slider:scale-100 group-has-[input:focus-visible]/slider:opacity-100',
     }[group as keyof Record<string, string>] || '';
   return (
     <span

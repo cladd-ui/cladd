@@ -12,7 +12,6 @@ import {
 import { useDevice } from '../hooks/use-device';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
-import { SectionTitle } from './SectionTitle';
 import { Button, buttonIconSizes, ButtonSize } from './Button';
 import { Checkbox } from './Checkbox';
 import { DropdownIcon } from './icons/DropdownIcon';
@@ -20,7 +19,8 @@ import { List } from './List';
 import { ListButton } from './ListButton';
 import { Popover, PopoverOffset, PopoverPosition } from './Popover';
 import { Radio } from './Radio';
-import { Searchbar } from './Searchbar';
+import { SearchField } from './SearchField';
+import { SectionTitle } from './SectionTitle';
 
 interface SelectOptionRenderParams<T> {
   value: T;
@@ -81,7 +81,7 @@ interface SelectOwnProps<T = string> {
    * Use to render a richer value display (e.g. with icons or formatting).
    */
   children?: ReactNode;
-  /** Slot rendered inside the popover, **above** the option list (after title/searchbar). */
+  /** Slot rendered inside the popover, **above** the option list (after title/search field). */
   beforeOptions?: ReactNode;
   /** Slot rendered inside the popover, **below** the option list. */
   afterOptions?: ReactNode;
@@ -265,7 +265,7 @@ export function Select<T = string>(props: SelectProps<T>) {
 
   const elRef = useRef<HTMLElement | null>(null);
   const listElRef = useRef<HTMLDivElement | null>(null);
-  const searchbarRef = useRef<HTMLElement | null>(null);
+  const searchFieldRef = useRef<HTMLElement | null>(null);
   const device = useDevice();
   const reactId = useId();
   const listboxId = `select-listbox-${reactId}`;
@@ -352,9 +352,9 @@ export function Select<T = string>(props: SelectProps<T>) {
   };
 
   const focusSearchOnOpened = () => {
-    if (searchFocus && searchbarRef.current) {
+    if (searchFocus && searchFieldRef.current) {
       if (device.ios || device.android) return;
-      const input = searchbarRef.current.querySelector('input');
+      const input = searchFieldRef.current.querySelector('input');
       if (input) input.focus();
     }
   };
@@ -368,7 +368,7 @@ export function Select<T = string>(props: SelectProps<T>) {
     if (
       keyboardHints &&
       /^[0-9]$/.test(e.key) &&
-      !searchbarRef.current?.querySelector('input:focus')
+      !searchFieldRef.current?.querySelector('input:focus')
     ) {
       e.preventDefault();
       const digit = parseInt(e.key);
@@ -457,7 +457,8 @@ export function Select<T = string>(props: SelectProps<T>) {
     }
     if ((e.key === 'Enter' || e.key === ' ') && selectedItemIndex >= 0) {
       if (
-        document.activeElement === searchbarRef.current?.querySelector('input')
+        document.activeElement ===
+        searchFieldRef.current?.querySelector('input')
       ) {
         return; // Don't select option when pressing Enter/Space in search input
       }
@@ -581,11 +582,11 @@ export function Select<T = string>(props: SelectProps<T>) {
         >
           {title && <SectionTitle className="px-4 pt-4">{title}</SectionTitle>}
           {search && (
-            <Searchbar
+            <SearchField
               value={searchQuery}
               placeholder={searchPlaceholder}
               inset={!!title}
-              ref={searchbarRef}
+              ref={searchFieldRef}
               className={cn(title && 'mt-2')}
               onChange={setSearchQuery}
             />

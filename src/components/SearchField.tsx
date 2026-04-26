@@ -5,7 +5,7 @@ import { SearchIcon } from './icons/SearchIcon';
 import { Input, InputSize } from './Input';
 import { Surface, SurfaceProps } from './Surface';
 
-interface SearchbarOwnProps {
+interface SearchFieldOwnProps {
   /** Controlled query string. Default `''`. */
   value?: string;
   /**
@@ -14,24 +14,24 @@ interface SearchbarOwnProps {
    *   (uses `surface level "+1"`, top-rounded corners, outlined).
    * - `true` - a floating pill **inset** within the parent surface (uses `surface level "+0"`,
    *   `rounded-full`, no outline, inset margins). Use inside a list/popover where the
-   *   searchbar should look like one item among many.
+   *   search field should look like one item among many.
    */
   inset?: boolean;
   size?: InputSize;
   /** Default `'Search'`. */
   placeholder?: string;
-  /** Extra classes for the searchbar `Surface`. */
+  /** Extra classes for the search field `Surface`. */
   className?: string;
   /** Fires on every keystroke. Also fires with `''` when the clear button is pressed. */
   onChange?: (value: string, event?: ChangeEvent<HTMLInputElement>) => void;
-  /** Forwarded to the searchbar `Surface` root. */
+  /** Forwarded to the search field `Surface` root. */
   ref?: Ref<HTMLElement>;
 }
 
-export type SearchbarProps = SearchbarOwnProps &
-  Omit<SurfaceProps, keyof SearchbarOwnProps>;
+export type SearchFieldProps = SearchFieldOwnProps &
+  Omit<SurfaceProps, keyof SearchFieldOwnProps>;
 
-export const Searchbar = (props: SearchbarProps) => {
+export const SearchField = (props: SearchFieldProps) => {
   const {
     value = '',
     inset = false,

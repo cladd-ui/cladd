@@ -7,8 +7,8 @@ import { FocusableLayer } from './FocusableLayer';
 import { Surface } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
-export type RangeSize = 'sm' | 'md';
-export interface RangeProps {
+export type SliderSize = 'sm' | 'md';
+export interface SliderProps {
   /** Controlled value. When omitted, the component falls back to uncontrolled mode using `defaultValue`. */
   value?: number;
   /** Initial value (uncontrolled). Default `0`. Ignored when `value` is provided. */
@@ -19,14 +19,14 @@ export interface RangeProps {
   max?: number;
   /** Default `1`. */
   step?: number;
-  size?: RangeSize;
-  /** Visually dim the range and disable interaction. */
+  size?: SliderSize;
+  /** Visually dim the slider and disable interaction. */
   disabled?: boolean;
   /** Block dragging without the disabled visual treatment. */
   readOnly?: boolean;
   /** Fires while the user drags or types a new value (subject to `debounce`). */
   onChange?: (value: number, event?: ChangeEvent<HTMLInputElement>) => void;
-  /** Extra classes for the range container. */
+  /** Extra classes for the slider container. */
   className?: string;
   /** Accent color for the active track segment and knob. Default: theme accent. */
   color?: Color;
@@ -39,7 +39,7 @@ export interface RangeProps {
   debounce?: number;
 }
 
-export function Range(props: RangeProps) {
+export function Slider(props: SliderProps) {
   const accentColor = useAccentColor();
 
   const {
@@ -117,7 +117,7 @@ export function Range(props: RangeProps) {
   return (
     <div
       className={cn(
-        'range group/range relative flex h-7 touch-pan-y rounded-xl select-none',
+        'slider group/slider relative flex h-7 touch-pan-y rounded-xl select-none',
         className,
       )}
       onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
@@ -144,7 +144,7 @@ export function Range(props: RangeProps) {
             `color-${color}`,
             !disabled &&
               !readOnly &&
-              'group-focus-within/range:-translate-x-3 group-active/range:-translate-x-3',
+              'group-focus-within/slider:-translate-x-3 group-active/slider:-translate-x-3',
             disabled && 'opacity-50',
             durationClass,
           )}
@@ -175,13 +175,13 @@ export function Range(props: RangeProps) {
               'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-[11px] leading-none font-medium text-primary duration-300',
               !disabled &&
                 !readOnly &&
-                'group-focus-within/range:scale-100 group-active/range:scale-100',
+                'group-focus-within/slider:scale-100 group-active/slider:scale-100',
               `color-${color}`,
             )}
             beforeContent={
               !readOnly &&
               !disabled && (
-                <FocusableLayer group="range" className="rounded-full" />
+                <FocusableLayer group="slider" className="rounded-full" />
               )
             }
           >

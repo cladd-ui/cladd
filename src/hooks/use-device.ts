@@ -12,8 +12,8 @@ interface DeviceInfo {
 
 function calcDevice({ userAgent }: { userAgent?: string } = {}): DeviceInfo {
   const supportTouch =
-    typeof window !== "undefined" &&
-    ("ontouchstart" in window ||
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window ||
       ((window as any).DocumentTouch &&
         document instanceof (window as any).DocumentTouch));
   const platform = window.navigator.platform;
@@ -35,20 +35,20 @@ function calcDevice({ userAgent }: { userAgent?: string } = {}): DeviceInfo {
   const iphone =
     !ipad && ua.match(/(iPhone\sOS|iOS|iPhone;\sCPU\sOS)\s([\d_]+)/);
 
-  const electron = ua.toLowerCase().indexOf("electron") >= 0;
+  const electron = ua.toLowerCase().indexOf('electron') >= 0;
   const nwjs =
-    typeof (window as any).nw !== "undefined" &&
+    typeof (window as any).nw !== 'undefined' &&
     // @ts-ignore
-    typeof process !== "undefined" &&
+    typeof process !== 'undefined' &&
     // @ts-ignore
-    typeof process.versions !== "undefined" &&
+    typeof process.versions !== 'undefined' &&
     // @ts-ignore
-    typeof process.versions.nw !== "undefined";
-  let macos = platform === "MacIntel";
+    typeof process.versions.nw !== 'undefined';
+  let macos = platform === 'MacIntel';
 
   if (!ipad && macos && supportTouch) {
     ipad = ua.match(/(Version)\/([\d.]+)/);
-    if (!ipad) ipad = ["", "Version", "13_0_0"] as RegExpMatchArray;
+    if (!ipad) ipad = ['', 'Version', '13_0_0'] as RegExpMatchArray;
     macos = false;
   }
 

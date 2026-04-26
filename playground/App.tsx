@@ -27,15 +27,15 @@ import {
   PopupContent,
   PopupRoot,
   PopupTrigger,
-  Preloader,
-  PreloaderSize,
   Radio,
-  Range,
   SectionTitle,
   Segmented,
   SegmentedButton,
   Select,
   Shortcut,
+  Slider,
+  Spinner,
+  SpinnerSize,
   Surface,
   SurfaceCut,
   Switch,
@@ -43,8 +43,8 @@ import {
   Toolbar,
   ToolbarButton,
   ToolbarSeparator,
+  Tooltip,
   UIProvider,
-  WithTooltip,
   cn,
   useDialog,
   useToast,
@@ -152,15 +152,9 @@ function App() {
         <SectionTitle>Nested Popovers Test</SectionTitle>
         <PopoverRoot>
           <PopoverTrigger>
-            <WithTooltip
-              tooltip={
-                <>
-                  Tooltip text <Shortcut />
-                </>
-              }
-            >
+            <Tooltip tooltip={''}>
               <Button>Popover</Button>
-            </WithTooltip>
+            </Tooltip>
           </PopoverTrigger>
           <Popover contentClassName="p-4">
             <PopoverClose>
@@ -536,7 +530,7 @@ function App() {
           </Button>
         </div>
 
-        <SectionTitle>Preloaders</SectionTitle>
+        <SectionTitle>Spinners</SectionTitle>
         <Surface
           contentClassName={
             'flex p-4 flex-col gap-4 justify-center items-start '
@@ -547,9 +541,9 @@ function App() {
           {['sm', 'md', 'lg', 'xl', '2xl'].map((size) => (
             <div className="flex items-center gap-4">
               <span className="font-mono">{size.toUpperCase()}:</span>
-              <Preloader size={size as PreloaderSize} />
+              <Spinner size={size as SpinnerSize} />
               <Button size={size as ButtonSize}>
-                Button <Preloader size={size as PreloaderSize} />
+                Button <Spinner size={size as SpinnerSize} />
               </Button>
             </div>
           ))}
@@ -590,11 +584,11 @@ function App() {
         >
           <PopoverRoot>
             <PopoverTrigger>
-              <WithTooltip tooltip="Ta-da">
+              <Tooltip tooltip="Ta-da">
                 <Button rounded surfaceLevel={1}>
                   Open Popover
                 </Button>
-              </WithTooltip>
+              </Tooltip>
             </PopoverTrigger>
 
             <Popover offset={['-50%', 16]} position="bottom-end">
@@ -676,9 +670,9 @@ function App() {
           </DialogRoot>
           <PopupRoot>
             <PopupTrigger>
-              <WithTooltip tooltip="Popup">
+              <Tooltip tooltip="Popup">
                 <Button>Open Popup</Button>
-              </WithTooltip>
+              </Tooltip>
             </PopupTrigger>
             <Popup
               headerLeft="Some Project"
@@ -932,15 +926,15 @@ function App() {
             </SegmentedButton>
           </Segmented>
         </Surface>
-        <SectionTitle>Range Slider</SectionTitle>
+        <SectionTitle>Slider</SectionTitle>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}
           outline
           className="rounded-3xl"
         >
-          <Range />
-          <Range readOnly />
-          <Range disabled value={50} />
+          <Slider />
+          <Slider readOnly />
+          <Slider disabled value={50} />
         </Surface>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}
@@ -1661,7 +1655,7 @@ function App() {
             <Switch size="sm" />
             <Checkbox size="sm" />
             <Radio size="sm" />
-            <Range size="sm" />
+            <Slider size="sm" />
             <Chip size="sm">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
@@ -1673,7 +1667,7 @@ function App() {
             <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
-            <Range size="md" />
+            <Slider size="md" />
             <Chip size="md">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
@@ -1685,7 +1679,7 @@ function App() {
             <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
-            <Range size="md" />
+            <Slider size="md" />
             <Chip size="lg">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
@@ -1697,7 +1691,7 @@ function App() {
             <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
-            <Range size="md" />
+            <Slider size="md" />
             <Chip size="xl">Chip</Chip>
           </div>
           <div className="flex items-center gap-2">
@@ -1709,7 +1703,7 @@ function App() {
             <Switch size="md" />
             <Checkbox size="md" />
             <Radio size="md" />
-            <Range size="md" />
+            <Slider size="md" />
             <Chip size="2xl">Chip</Chip>
           </div>
         </Surface>
