@@ -1,10 +1,11 @@
-import { ReactNode, Ref, ComponentPropsWithoutRef } from 'react';
+import { ReactNode, Ref } from 'react';
 
 import { cn } from '../shared/cn';
+import { roundedClasses } from '../shared/rounded-classes';
 import { Color } from '../types';
 import { Button } from './Button';
 import { Input, InputSize } from './Input';
-import { SurfaceVariant } from './Surface';
+import { Surface, SurfaceProps, SurfaceVariant } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
 export type NumberFieldSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -22,18 +23,20 @@ interface NumberFieldOwnProps {
   inputClassName?: string;
   /** Extra classes for the number field container. */
   className?: string;
+  /** Extra classes for the inner `SurfaceContent` wrapper (where the −/value/+ row is laid out). */
+  contentClassName?: string;
   /** Visually dim the number field and disable both buttons. */
   disabled?: boolean;
   /** Block changes without the disabled visual treatment. */
   readOnly?: boolean;
-  /** Pill-shape the +/− buttons. Default `true`. */
+  /** Pill-shape the container and the +/− buttons. Default `true`. */
   rounded?: boolean;
   /** Pill-shape the value display. Default `false`. */
   valueRounded?: boolean;
   size?: NumberFieldSize;
-  /** Accent color for the +/− buttons. */
+  /** Accent color token. Sets the container's `color-{name}` class - cascades to the +/− buttons. */
   color?: Color;
-  /** Outline ring on the +/− buttons. Default `false`. */
+  /** Outline ring on the number field **container**. Default `true`. */
   outline?: boolean;
   /** Default `0`. */
   min?: number;
@@ -43,16 +46,22 @@ interface NumberFieldOwnProps {
   value?: number;
   /** Increment per +/− press. Default `1`. */
   step?: number;
-  /** Surface variant for the +/− buttons. Default `'transparent'`. */
+  /** Surface variant for the number field **container**. Default `'gradient'`. */
   variant?: SurfaceVariant;
+  /** Surface variant applied to the +/− buttons. Default `'transparent'`. */
+  buttonVariant?: SurfaceVariant;
+  /** Outline ring on the +/− buttons. Default `false`. */
+  buttonOutline?: boolean;
+  /** Forwarded to the underlying `Surface` as `level` - see `SurfaceProps.level`. */
+  surfaceLevel?: number | string;
   /** Fires after a +/− button press, with the new value (already clamped to `[min, max]`). */
   onChange?: (value: number) => void;
-  /** Forwarded to the number field container `<div>`. */
+  /** Forwarded to the number field container. */
   ref?: Ref<HTMLDivElement>;
 }
 
 export type NumberFieldProps = NumberFieldOwnProps &
-  Omit<ComponentPropsWithoutRef<'div'>, keyof NumberFieldOwnProps>;
+  Omit<SurfaceProps, keyof NumberFieldOwnProps>;
 
 export const NumberField = (props: NumberFieldProps) => {
   const {
@@ -60,14 +69,18 @@ export const NumberField = (props: NumberFieldProps) => {
     input = true,
     inputClassName = '',
     className = '',
+    contentClassName = '',
     disabled = false,
     readOnly = false,
     rounded = true,
     valueRounded = false,
     size = 'md',
     color = '',
-    outline = false,
-    variant = 'transparent',
+    outline = true,
+    variant = 'gradient',
+    buttonVariant = 'transparent',
+    buttonOutline = false,
+    surfaceLevel,
     min = 0,
     max = 1000000,
     value = 0,
@@ -95,29 +108,36 @@ export const NumberField = (props: NumberFieldProps) => {
     '2xl': 'px-3.5',
   };
 
-  const roundedSizes: Record<NumberFieldSize, string> = {
-    sm: 'rounded-md',
-    md: 'rounded-lg',
-    lg: 'rounded-[10px]',
-    xl: 'rounded-xl',
-    '2xl': 'rounded-xl',
-  };
+  const { itemRoundedClasses } = roundedClasses(size, valueRounded, false);
+  const { wrapRoundedClasses } = roundedClasses(size, rounded, false);
 
   return (
-    <div
-      className={cn('number-field flex items-center gap-0.5', className)}
+    <Surface
+      className={cn(
+        'number-field flex items-center gap-0.5',
+        wrapRoundedClasses,
+        className,
+      )}
+      outline={outline}
+      variant={variant}
+      level={surfaceLevel}
+      color={color}
+      contentClassName={cn('flex items-center p-1', contentClassName)}
       ref={ref}
       {...rest}
     >
       <Button
         size={size}
-        variant={variant}
-        color={color}
-        outline={outline}
+        variant={buttonVariant}
+        outline={buttonOutline}
         rounded={rounded}
         readOnly={readOnly}
         disabled={value <= min || disabled}
         onClick={decrease}
+        className={cn(
+          size === 'xl' && 'min-w-11',
+          size === '2xl' && 'min-w-13',
+        )}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +166,7 @@ export const NumberField = (props: NumberFieldProps) => {
           className={cn(
             'w-auto min-w-9 self-stretch text-center',
 
-            valueRounded ? 'rounded-full' : roundedSizes[size],
+            itemRoundedClasses,
           )}
           contentClassName={cn(
             'flex items-center justify-center text-xs',
@@ -159,13 +179,17 @@ export const NumberField = (props: NumberFieldProps) => {
 
       <Button
         size={size}
-        variant={variant}
         color={color}
-        outline={outline}
+        variant={buttonVariant}
+        outline={buttonOutline}
         rounded={rounded}
         readOnly={readOnly}
         disabled={value >= max || disabled}
         onClick={increase}
+        className={cn(
+          size === 'xl' && 'min-w-11',
+          size === '2xl' && 'min-w-13',
+        )}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -179,6 +203,6 @@ export const NumberField = (props: NumberFieldProps) => {
           </g>
         </svg>
       </Button>
-    </div>
+    </Surface>
   );
 };
