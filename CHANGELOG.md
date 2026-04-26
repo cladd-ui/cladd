@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.0.11 (2026-04-26)
+
+### Features
+
+- new ListTitle + BlockTitle -> SectionTitle (9e2a1d6)
+- tooltip forwards surfaceLevel (34080fd)
+- tweak shortcut styles (ece529d)
+
+### Refactoring
+
+- Preloader -> Spinner, Range -> Slider, WithTooltip -> Tooltip, Searchbar -> SearchField (8df4dea)
+
 ## 0.0.10 (2026-04-26)
 
 ### Refactoring
