@@ -117,6 +117,8 @@ export const Shortcut = (props: ShortcutProps) => {
     }
   });
 
+  const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
+
   const isTextKey = (key: ReactNode) => {
     const icons = [
       'cmd',
@@ -207,7 +209,8 @@ export const Shortcut = (props: ShortcutProps) => {
           variant={variant}
           level={surfaceLevel}
           className={cn(
-            'relative shrink-0 font-semibold text-primary',
+            'relative shrink-0 font-semibold',
+            !isFill && 'text-primary',
             fontSizeClass,
             roundedClass,
             sizeClass,
