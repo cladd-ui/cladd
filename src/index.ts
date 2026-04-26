@@ -93,6 +93,16 @@ export {
   type ToastProps,
 } from "./components/Toast";
 export { Toggle, type ToggleProps, type ToggleSize } from "./components/Toggle";
+export { Toolbar, type ToolbarProps } from "./components/Toolbar";
+export {
+  ToolbarButton,
+  type ToolbarButtonProps,
+} from "./components/ToolbarButton";
+export {
+  ToolbarSeparator,
+  type ToolbarSeparatorProps,
+} from "./components/ToolbarSeparator";
+
 export { Tooltip, type TooltipProps } from "./components/Tooltip";
 export { UIProvider, type UIProviderProps } from "./components/UIProvider";
 export { WithTooltip, type WithTooltipProps } from "./components/WithTooltip";
