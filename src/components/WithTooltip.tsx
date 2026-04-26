@@ -30,6 +30,11 @@ export interface WithTooltipProps {
   position?: TooltipPosition;
   /** Forwarded to `Tooltip.offset`. */
   offset?: TooltipProps['offset'];
+  /**
+   * Forwarded to the underlying `Surface` as `level`. Default depends on theme:
+   * `1` for light theme, `5` for dark theme - so the tooltip pops on top of any surface.
+   */
+  surfaceLevel?: string | number;
   /** Accent color token, forwarded to `Tooltip.color`. */
   color?: Color;
   /**
@@ -59,6 +64,7 @@ export const WithTooltip = ({
   position,
   offset,
   color,
+  surfaceLevel,
   timeout = true,
   onOpen,
   onOpened,
@@ -208,6 +214,7 @@ export const WithTooltip = ({
           position={position}
           offset={offset}
           color={color}
+          surfaceLevel={surfaceLevel}
           onOpen={onOpen}
           onOpened={onOpened}
           onClose={onClose}

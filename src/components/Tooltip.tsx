@@ -42,7 +42,7 @@ interface TooltipOwnProps {
    * Forwarded to the underlying `Surface` as `level`. Default depends on theme:
    * `1` for light theme, `5` for dark theme - so the tooltip pops on top of any surface.
    */
-  surfaceLevel?: number;
+  surfaceLevel?: number | string;
   /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
   offset?: OffsetValue;
   /** Accent color token. Sets the tooltip's `color-{name}` class. */
