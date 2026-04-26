@@ -39,6 +39,18 @@ export {
   type NumberFieldSize,
 } from "./components/NumberField";
 export {
+  OTPField,
+  type OTPFieldProps,
+} from "./components/OTPField";
+export {
+  OTPFieldInput,
+  type OTPFieldInputProps,
+} from "./components/OTPFieldInput";
+export {
+  OTPFieldSeparator,
+  type OTPFieldSeparatorProps,
+} from "./components/OTPFieldSeparator";
+export {
   Popover,
   PopoverClose,
   PopoverRoot,

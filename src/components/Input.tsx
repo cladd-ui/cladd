@@ -102,6 +102,8 @@ interface InputOwnProps<
   surfaceClassName?: string;
   /** Forwarded to the wrapper element. */
   ref?: Ref<HTMLElement>;
+  /** Forwarded to the inner `<input>` (or `inputComponent`) element. */
+  inputRef?: Ref<HTMLInputElement>;
   /** Native `autoFocus` - focus the input on mount. */
   autoFocus?: boolean;
   /**
@@ -168,6 +170,7 @@ export const Input = <
     inputComponent = 'input',
     inputComponentProps = {},
     ref: externalRef,
+    inputRef: externalInputRef,
   } = props;
 
   const fontSizes: Record<InputSize, string> = {
@@ -298,7 +301,16 @@ export const Input = <
           autoFocus={autoFocus}
           readOnly={readOnly}
           inputMode={inputMode}
-          ref={inputElRef}
+          ref={(el: HTMLInputElement | null) => {
+            inputElRef.current = el;
+            if (externalInputRef) {
+              if (typeof externalInputRef === 'function') externalInputRef(el);
+              else
+                (
+                  externalInputRef as React.MutableRefObject<HTMLInputElement | null>
+                ).current = el;
+            }
+          }}
           id={inputId}
           type={type}
           disabled={disabled}

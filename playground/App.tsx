@@ -15,6 +15,9 @@ import {
   ListItem,
   ListSeparator,
   NumberField,
+  OTPField,
+  OTPFieldInput,
+  OTPFieldSeparator,
   Popover,
   PopoverClose,
   PopoverRoot,
@@ -69,6 +72,9 @@ function App() {
   const [checked, setChecked] = useState(false);
   const [active, setActive] = useState(0);
   const [selectValue, setSelectValue] = useState('');
+  const [otp, setOtp] = useState('');
+  const [otpGrouped, setOtpGrouped] = useState('');
+  const [otpAlpha, setOtpAlpha] = useState('');
 
   const DialogTest = () => {
     const dialog = useDialog();
@@ -746,6 +752,116 @@ function App() {
           </Surface>
         </div>
 
+        <BlockTitle>OTPField</BlockTitle>
+        <Surface
+          contentClassName={'flex p-4 flex-col gap-4 items-start'}
+          outline
+          className="rounded-3xl"
+        >
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">SM:</span>
+            <OTPField size="sm" value={otp} onChange={setOtp}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">MD:</span>
+            <OTPField size="md" value={otp} onChange={setOtp}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">LG:</span>
+            <OTPField size="lg" value={otp} onChange={setOtp}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">XL:</span>
+            <OTPField size="xl" value={otp} onChange={setOtp}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">2XL:</span>
+            <OTPField size="2xl" value={otp} onChange={setOtp}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">Grouped:</span>
+            <OTPField size="lg" value={otpGrouped} onChange={setOtpGrouped}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldSeparator />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+            <span className="font-mono text-xs">{otpGrouped || ' '}</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">Invalid:</span>
+            <OTPField size="lg" value={otp} onChange={setOtp} valid={false}>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">Disabled:</span>
+            <OTPField size="lg" value="42" onChange={() => {}} disabled>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">ReadOnly:</span>
+            <OTPField size="lg" value="42" onChange={() => {}} readOnly>
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs">Alpha:</span>
+            <OTPField
+              size="lg"
+              pattern="[A-Za-z0-9]"
+              inputMode="text"
+              value={otpAlpha}
+              onChange={(v) => setOtpAlpha(v.toUpperCase())}
+            >
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldSeparator />
+              <OTPFieldInput />
+              <OTPFieldInput />
+              <OTPFieldInput />
+            </OTPField>
+          </div>
+        </Surface>
         <BlockTitle>NumberField</BlockTitle>
         <Surface
           contentClassName={
@@ -1249,9 +1365,9 @@ function App() {
               <Input
                 infoMessage="Tadamba parapamba"
                 size="sm"
-                value="Ta-da"
-                readOnly
+                value="5"
                 clearButton
+                displayValue="$5"
               ></Input>
             </div>
             <div className="flex items-start gap-4">
