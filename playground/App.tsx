@@ -711,7 +711,7 @@ function App() {
                   </span>
                   <div className={'flex items-center gap-1'}>
                     <Select
-                      optionToggleColor={() => 'red'}
+                      optionIndicatorColor={() => 'red'}
                       options={['S1', 'S2', 'S3']}
                       rounded
                       color="green"

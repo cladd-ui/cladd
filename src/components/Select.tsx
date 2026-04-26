@@ -137,10 +137,10 @@ interface SelectOwnProps<T = string> {
    * Default `true`. See `noneOptionValue` for how the digits map to options.
    */
   keyboardHints?: boolean;
-  /** Default color for the per-option toggle (Radio/Checkbox). Overridden per-option by `optionToggleColor`. */
-  togglesColor?: Color;
-  /** Per-option toggle color. Return `undefined` to fall back to `togglesColor`. */
-  optionToggleColor?: (
+  /** Default color for the per-option indicator (Radio/Checkbox). Overridden per-option by `optionIndicatorColor`. */
+  indicatorColor?: Color;
+  /** Per-option indicator color. Return `undefined` to fall back to `indicatorColor`. */
+  optionIndicatorColor?: (
     params: SelectOptionRenderParams<T>,
   ) => Color | undefined;
   /** Custom "is this option selected?" predicate - overrides the built-in equality check. */
@@ -238,8 +238,8 @@ export function Select<T = string>(props: SelectProps<T>) {
 
     // OPTIONS
     keyboardHints = true,
-    togglesColor,
-    optionToggleColor = () => undefined,
+    indicatorColor,
+    optionIndicatorColor = () => undefined,
     isChecked,
     isOptionDisabled,
     getOptionValue = (option: T) => option as unknown,
@@ -635,11 +635,11 @@ export function Select<T = string>(props: SelectProps<T>) {
                         !isOptionDisabled || !isOptionDisabled(optionValue)
                       }
                       color={
-                        optionToggleColor({
+                        optionIndicatorColor({
                           value: optionValue,
                           index: options.indexOf(optionValue),
                           selected: getOptionIsChecked(optionValue),
-                        }) || togglesColor
+                        }) || indicatorColor
                       }
                       disabled={
                         isOptionDisabled && isOptionDisabled(optionValue)
