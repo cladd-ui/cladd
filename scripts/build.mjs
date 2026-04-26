@@ -78,6 +78,13 @@ const copyAssets = async () => {
     log('copying LICENSE');
     await cp(licenseFrom, licenseTo);
   }
+
+  const changelogFrom = join(repoRoot, 'CHANGELOG.md');
+  const changelogTo = join(pkgDir, 'CHANGELOG.md');
+  if (await exists(changelogFrom)) {
+    log('copying CHANGELOG.md');
+    await cp(changelogFrom, changelogTo);
+  }
 };
 
 const main = async () => {

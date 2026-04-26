@@ -6,11 +6,14 @@ import { createInterface } from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import { fileURLToPath } from 'node:url';
 
+import { generateChangelog } from './changelog.mjs';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
 const pkgDir = join(repoRoot, 'packages', 'react');
 const pkgJsonPath = join(pkgDir, 'package.json');
 const srcPkgJsonPath = join(repoRoot, 'src', 'package.json');
+const changelogPath = join(repoRoot, 'CHANGELOG.md');
 const buildScript = join(__dirname, 'build.mjs');
 
 const SEMVER = /^(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/;
@@ -107,6 +110,41 @@ const confirm = async (message) => {
   }
 };
 
+const pause = async (message) => {
+  const rl = createInterface({ input, output });
+  try {
+    await rl.question(message);
+  } finally {
+    rl.close();
+  }
+};
+
+const writeChangelog = async (version) => {
+  const result = generateChangelog({ version });
+  console.log(
+    `\n[release] ${result.commitCount} commit(s) since ${result.fromRef ?? 'beginning'}`
+  );
+  console.log('\n--- changelog preview ---');
+  process.stdout.write(result.content);
+  console.log('--- end preview ---\n');
+
+  let existing = '';
+  try {
+    existing = await readFile(changelogPath, 'utf8');
+  } catch {
+    // file doesn't exist yet
+  }
+
+  const header = '# Changelog\n\n';
+  const body = existing.startsWith('# Changelog')
+    ? existing.slice(existing.indexOf('\n')).replace(/^\n+/, '')
+    : existing;
+
+  const next = `${header}${result.content}${body ? `\n${body}` : ''}`;
+  await writeFile(changelogPath, next);
+  console.log(`[release] wrote ${changelogPath}`);
+};
+
 const main = async () => {
   const pkg = await readJson(pkgJsonPath);
   const currentVersion = pkg.version;
@@ -149,6 +187,11 @@ const main = async () => {
   } catch {
     // src/package.json is optional — skip silently if missing
   }
+
+  await writeChangelog(newVersion);
+  await pause(
+    '[release] CHANGELOG.md updated. Press Enter to continue with build & publish, or Ctrl+C to abort and edit it first... '
+  );
 
   console.log('\n[release] building');
   await run(process.execPath, [buildScript]);

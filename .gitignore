@@ -18,6 +18,7 @@ dist-ssr
 /packages/react/**/*.map
 /packages/react/**/*.css
 /packages/react/LICENSE
+/packages/react/CHANGELOG.md
 
 # Editor directories and files
 .vscode/*
