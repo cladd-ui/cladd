@@ -12,6 +12,8 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
   children?: ReactNode;
   /** Extra classes for the toolbar surface root. */
   className?: string;
+  /** Extra classes for the inner `SurfaceContent` wrapper (where toolbar items are laid out). */
+  contentClassName?: string;
   /**
    * Pill-shape the toolbar container (`rounded-full`). Default `true`. Also forwarded via
    * context as the default `rounded` for child `ToolbarButton`s.
@@ -50,6 +52,7 @@ export const Toolbar = <C extends ElementType = 'div'>(
   const {
     children,
     className = '',
+    contentClassName = '',
     rounded = true,
     size = 'md',
     component = 'div' as ElementType<any>,
@@ -77,7 +80,10 @@ export const Toolbar = <C extends ElementType = 'div'>(
       outline={outline}
       variant={variant}
       level={surfaceLevel}
-      contentClassName="p-1 flex items-center justify-center h-auto"
+      contentClassName={cn(
+        'flex h-auto items-center justify-center p-1',
+        contentClassName,
+      )}
       ref={(el: HTMLElement | null) => {
         elRef.current = el;
         if (ref)
