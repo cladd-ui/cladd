@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.12 (2026-04-26)
+
+### Features
+
+- correct support for fill variants in Shortcut (da71422)
+
+### Other
+
+- Update App.tsx (e1c64f0)
+
 ## 0.0.11 (2026-04-26)
 
 ### Features
