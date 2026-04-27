@@ -24,6 +24,7 @@
       "import": "./index.js"
     },
     "./ui.css": "./ui.css",
+    "./ui": "./ui.css",
     "./styles/*": "./styles/*",
     "./package.json": "./package.json"
   },
