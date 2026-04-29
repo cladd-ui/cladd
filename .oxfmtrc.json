@@ -19,6 +19,12 @@
     "stylesheet": "./playground/index.css",
     "functions": ["cn", "clsx", "twMerge"]
   },
+  "overrides": [
+    {
+      "files": ["*.css"],
+      "options": { "singleQuote": false }
+    }
+  ],
   "sortImports": {},
   "sortPackageJson": true,
   "ignorePatterns": []

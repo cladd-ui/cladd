@@ -1,9 +1,9 @@
 @layer base {
-  input[type='range'] {
+  input[type="range"] {
     appearance: none;
     background: transparent;
   }
-  input[type='range']::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     background: transparent;
     border: none;
     outline: none;
