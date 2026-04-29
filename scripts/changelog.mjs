@@ -110,22 +110,23 @@ export const generateChangelog = ({
 
   const lines = [`## ${version} (${today})`, ''];
 
-  if (commits.length === 0) {
-    lines.push('- _No changes since previous release_', '');
-  } else {
-    const sectionOrder = [...TYPE_ORDER, 'other'];
-    for (const type of sectionOrder) {
-      const items = groups[type];
-      if (!items?.length) continue;
-      const label = type === 'other' ? 'Other' : TYPE_LABELS[type];
-      lines.push(`### ${label}`, '');
-      for (const item of items) {
-        const breaking = item.breaking ? '**BREAKING** ' : '';
-        const scope = item.scope ? `**${item.scope}:** ` : '';
-        lines.push(`- ${breaking}${scope}${item.message} (${item.hash})`);
-      }
-      lines.push('');
+  let rendered = 0;
+  for (const type of TYPE_ORDER) {
+    if (type === 'chore') continue;
+    const items = groups[type];
+    if (!items?.length) continue;
+    lines.push(`### ${TYPE_LABELS[type]}`, '');
+    for (const item of items) {
+      const breaking = item.breaking ? '**BREAKING** ' : '';
+      const scope = item.scope ? `**${item.scope}:** ` : '';
+      lines.push(`- ${breaking}${scope}${item.message} (${item.hash})`);
+      rendered++;
     }
+    lines.push('');
+  }
+
+  if (rendered === 0) {
+    lines.push('- _No notable changes since previous release_', '');
   }
 
   return {
