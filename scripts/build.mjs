@@ -157,6 +157,7 @@ const addExtensionsToImports = async () => {
 const copyAssets = async () => {
   log('copying css assets');
   await cp(join(srcDir, 'ui.css'), join(pkgDir, 'ui.css'));
+  await cp(join(srcDir, 'ui.css.d.ts'), join(pkgDir, 'ui.css.d.ts'));
   await cp(join(srcDir, 'styles'), join(pkgDir, 'styles'), { recursive: true });
 
   const licenseFrom = join(repoRoot, 'LICENSE');

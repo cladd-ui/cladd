@@ -23,8 +23,14 @@
       "types": "./index.d.ts",
       "import": "./index.js"
     },
-    "./ui.css": "./ui.css",
-    "./ui": "./ui.css",
+    "./ui.css": {
+      "default": "./ui.css",
+      "types": "./ui.css.d.ts"
+    },
+    "./css": {
+      "default": "./ui.css",
+      "types": "./ui.css.d.ts"
+    },
     "./styles/*": "./styles/*",
     "./package.json": "./package.json"
   },
