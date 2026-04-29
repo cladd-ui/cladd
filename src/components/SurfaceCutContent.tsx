@@ -7,7 +7,7 @@ interface SurfaceCutContentOwnProps<C extends ElementType = 'div'> {
   /** Stretch the content to `h-full`. Default `true`. Set `false` for content sized by intrinsic height. */
   fullHeight?: boolean;
   /** Polymorphic root element. Defaults to `'div'`. */
-  component?: C;
+  as?: C;
   /** Extra classes for the wrapper. */
   className?: string;
   /** Forwarded to the polymorphic root element. */
@@ -24,12 +24,12 @@ export const SurfaceCutContent = <C extends ElementType = 'div'>(
   const {
     children,
     fullHeight = true,
-    component = 'div',
+    as: asProp = 'div',
     className = '',
     ref,
     ...rest
   } = props;
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
   return (
     <Component
       ref={ref}

@@ -33,7 +33,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
    * input on click. Use a non-label container when nesting inside an existing label —
    * see `hoverable`/`focusable` for how this changes interactivity.
    */
-  component?: C;
+  as?: C;
   /**
    * Icon rendered inside the knob. Pass either a static `ReactNode`, or a function
    * `(checked) => ReactNode` to render different content based on the switch state.
@@ -50,12 +50,12 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
    */
   input?: boolean;
   /**
-   * Auto-computed when omitted: `true` if `component === 'label'`, otherwise `false`.
+   * Auto-computed when omitted: `true` if `as === 'label'`, otherwise `false`.
    * Override explicitly for custom containers that should still show hover affordances.
    */
   hoverable?: boolean;
   /**
-   * Auto-computed when omitted: `true` if `component === 'label'` OR `input` is `true`.
+   * Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`.
    * Drives whether the focus ring (`FocusableLayer`) is rendered on the knob.
    */
   focusable?: boolean;
@@ -91,7 +91,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     readOnly,
     onChange = () => {},
     color = accentColor,
-    component = 'label',
+    as: asProp = 'label',
     icon,
     size = 'md',
     className,
@@ -110,13 +110,13 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
   let focusableComputed = focusable;
 
   if (typeof hoverableComputed === 'undefined') {
-    hoverableComputed = component === 'label';
+    hoverableComputed = asProp === 'label';
   }
   if (typeof focusableComputed === 'undefined') {
-    focusableComputed = component === 'label' || input;
+    focusableComputed = asProp === 'label' || input;
   }
 
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
   const ariaFallback = !input
     ? {
         role: 'switch',

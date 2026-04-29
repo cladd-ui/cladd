@@ -49,14 +49,14 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
    * input on click. Use a non-label container when the radio lives inside an existing label —
    * see `hoverable`/`focusable` for how this changes interactivity.
    */
-  component?: C;
+  as?: C;
   /**
-   * Auto-computed when omitted: `true` if `component === 'label'`, otherwise `false`.
+   * Auto-computed when omitted: `true` if `as === 'label'`, otherwise `false`.
    * Override explicitly for custom containers that should still show hover affordances.
    */
   hoverable?: boolean;
   /**
-   * Auto-computed when omitted: `true` if `component === 'label'` OR `input` is `true`.
+   * Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`.
    * Drives whether the focus ring (`FocusableLayer`) is rendered.
    */
   focusable?: boolean;
@@ -83,7 +83,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     inputId,
     className,
     color = accentColor,
-    component = 'label',
+    as: asProp = 'label',
     hoverable,
     focusable,
     ...rest
@@ -94,11 +94,11 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
   let focusableComputed = focusable;
 
   if (typeof hoverableComputed === 'undefined')
-    hoverableComputed = component === 'label';
+    hoverableComputed = asProp === 'label';
   if (typeof focusableComputed === 'undefined')
-    focusableComputed = component === 'label' || input;
+    focusableComputed = asProp === 'label' || input;
 
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
   const ariaFallback = !input
     ? {
         role: 'radio',

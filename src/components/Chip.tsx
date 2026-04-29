@@ -29,7 +29,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
    * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip
    * becomes interactive automatically (see `clickable`).
    */
-  component?: C;
+  as?: C;
   /**
    * Render an outline ring. When `true`, also forces the underlying surface variant to
    * `'transparent'`; when `false`/omitted, the surface is `'gradient'`.
@@ -39,7 +39,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   hoverable?: boolean;
   /**
    * Make the chip react to pointer activity (active/pressed state, hover overlay).
-   * Auto-computed when omitted: `true` if `component === 'a'` or `'button'`, otherwise `false`.
+   * Auto-computed when omitted: `true` if `as === 'a'` or `'button'`, otherwise `false`.
    * Set explicitly to override (e.g. force a `<span>` to be clickable, or suppress the
    * default for an `<a>` used purely as a navigation anchor).
    */
@@ -66,7 +66,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     contentClassName = '',
     rounded = false,
     size = 'md',
-    component = 'span',
+    as: Component = 'span',
     outline,
     hoverable,
     clickable,
@@ -116,13 +116,13 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   let clickableComputed =
     clickable === true ||
     (typeof clickable === 'undefined' &&
-      (component === 'a' || component === 'button'));
+      (Component === 'a' || Component === 'button'));
 
   const SurfaceComponent = Surface as ElementType;
 
   return (
     <SurfaceComponent
-      component={component}
+      as={Component}
       hoverable={hoverable || clickableComputed}
       clickable={clickableComputed}
       outline={outline}
@@ -137,7 +137,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
         `chip group/chip relative inline-flex font-semibold text-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
         rounded ? 'rounded-full' : roundedClasses[size],
         clickableComputed && 'duration-200',
-        clickableComputed && component === 'a'
+        clickableComputed && Component === 'a'
           ? 'cursor-pointer'
           : 'cursor-auto',
         heights[size],

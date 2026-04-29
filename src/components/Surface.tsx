@@ -50,7 +50,7 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
    * Polymorphic root element. Defaults to `'div'`. Use `'button'`, `'a'`, etc. when the
    * surface is itself the interactive target (forwarding props of that element).
    */
-  component?: C;
+  as?: C;
   /** Enables active/pressed visual states (scale + pressed background). Combine with `hoverable`. */
   clickable?: boolean;
   /** Force the pressed visual state regardless of pointer activity (controlled press). */
@@ -90,7 +90,7 @@ export const Surface = <C extends ElementType = 'div'>(
     bgClassName = '',
     outline = false,
     variant = 'solid',
-    component = 'div',
+    as: asProp = 'div',
     clickable = false,
     pressed,
     hoverable = false,
@@ -119,7 +119,7 @@ export const Surface = <C extends ElementType = 'div'>(
     ),
   );
 
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
   const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
 
   return (

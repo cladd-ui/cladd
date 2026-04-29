@@ -15,7 +15,7 @@ interface LinkOwnProps<C extends ElementType = 'button'> {
    * Polymorphic element. When omitted, defaults to `'a'` if `href` is provided, otherwise
    * `'button'`. Pass an explicit value to override (e.g. a router `Link` component).
    */
-  component?: C;
+  as?: C;
   /** Reserved for focus-ring styling hooks. Default `true`. */
   focusable?: boolean;
   /** Click handler. */
@@ -34,7 +34,7 @@ export const Link = <C extends ElementType = 'button'>({
   className = '',
   disabled = false,
   readOnly = false,
-  component,
+  as,
   focusable = true,
   onClick,
   href,
@@ -44,11 +44,7 @@ export const Link = <C extends ElementType = 'button'>({
   const elRef = useRef(null);
 
   const Component = (
-    typeof component === 'undefined'
-      ? typeof href === 'string'
-        ? 'a'
-        : 'button'
-      : component
+    typeof as === 'undefined' ? (typeof href === 'string' ? 'a' : 'button') : as
   ) as ElementType;
 
   return (

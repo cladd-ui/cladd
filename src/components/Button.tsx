@@ -34,7 +34,7 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
    * (cursor switches to pointer automatically), or any custom component to retain
    * Button styling on a different DOM node. The component's own props become valid here.
    */
-  component?: C;
+  as?: C;
   /** Underlying `Surface` variant - see `SurfaceVariant`. Defaults to `'gradient'`. */
   variant?: SurfaceVariant;
   /** Accent color token. Sets the button's `color-{name}` class - drives text and ring colors. */
@@ -91,7 +91,7 @@ export const Button = <C extends ElementType = 'button'>(
     readOnly,
     rounded = false,
     size = 'md',
-    component = 'button',
+    as: Component = 'button',
     color = '',
     outline = true,
     contentClassName = '',
@@ -148,7 +148,7 @@ export const Button = <C extends ElementType = 'button'>(
 
   return (
     <WrapComponent
-      component={component}
+      as={Component}
       className={cn(
         `button group/button inline-block appearance-none text-left font-semibold outline-0 select-none focus:ring-0 focus:outline-0`,
         color &&
@@ -159,7 +159,7 @@ export const Button = <C extends ElementType = 'button'>(
         fontSizes[size],
         heights[size],
         disabled && 'pointer-events-none',
-        !disabled && component === 'a' ? 'cursor-pointer' : 'cursor-auto',
+        !disabled && Component === 'a' ? 'cursor-pointer' : 'cursor-auto',
         itemRoundedClasses,
 
         className,

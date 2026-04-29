@@ -34,7 +34,7 @@ interface ListButtonOwnProps<C extends ElementType = 'button'> {
   /** Default `'lg'` (vs Button's `'md'`) - list rows usually want more vertical space. */
   size?: ButtonSize;
   /** Polymorphic root element. Defaults to `'button'`. Pass `'a'` for navigation list rows. */
-  component?: C;
+  as?: C;
   /** Accent color token. Forwarded to `Button.color`. */
   color?: Color;
 
@@ -76,7 +76,7 @@ export const ListButton = <C extends ElementType = 'button'>(
     disabled = false,
     readOnly = false,
     size = 'lg',
-    component = 'button',
+    as: Component = 'button',
     color = '',
     icon,
     iconClassName = '',
@@ -98,7 +98,7 @@ export const ListButton = <C extends ElementType = 'button'>(
 
   return (
     <ButtonEl
-      component={component}
+      as={Component}
       rounded={rounded}
       className={cn('list-button z-10 w-full', className)}
       contentClassName={cn('gap-4 px-2', contentClassName)}

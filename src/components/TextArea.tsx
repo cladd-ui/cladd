@@ -25,7 +25,7 @@ export type TextAreaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface TextAreaOwnProps<C extends ElementType = 'div'> {
   /** Polymorphic wrapper element. Defaults to `'div'`. The editable area itself is always a `contenteditable` `<div>`. */
-  component?: C;
+  as?: C;
   /** Forwarded to the wrapper element. */
   ref?: Ref<HTMLElement>;
   /** Controlled value. Synced into the editable `innerText` on change (see `updateContentOnChange`). */
@@ -86,7 +86,7 @@ export const TextArea = <C extends ElementType = 'div'>(
 ) => {
   const accentColor = useAccentColor();
   const {
-    component = 'div',
+    as: asProp = 'div',
     ref: externalRef,
     value,
     placeholder,
@@ -193,7 +193,7 @@ export const TextArea = <C extends ElementType = 'div'>(
     }
   }, [value]);
 
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
 
   return (
     <Component

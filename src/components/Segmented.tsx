@@ -26,7 +26,7 @@ interface SegmentedOwnProps<C extends ElementType = 'div'> {
   /** Segment button size. Default `'md'`. Forwarded via context. */
   size?: ButtonSize;
   /** Polymorphic root element. Defaults to `'div'`. Use `'fieldset'`/`'ul'`/etc. for semantic groupings. */
-  component?: C;
+  as?: C;
   /** Accent color applied to **inactive** segment buttons. */
   color?: Color;
   /** Forwarded to the polymorphic root element. */
@@ -61,7 +61,7 @@ export const Segmented = <C extends ElementType = 'div'>(
     disabled = false,
     rounded = true,
     size = 'md',
-    component = 'div' as ElementType<any>,
+    as: asProp = 'div' as ElementType<any>,
     color = '',
     ref,
     variant = 'transparent',
@@ -72,7 +72,7 @@ export const Segmented = <C extends ElementType = 'div'>(
     ...rest
   } = props;
 
-  const Component = component as ElementType<any>;
+  const Component = asProp as ElementType<any>;
   return (
     <Component
       className={cn(

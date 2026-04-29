@@ -27,7 +27,7 @@ interface InputOwnProps<
   IC extends ElementType = 'input',
 > {
   /** Polymorphic **wrapper** element. Defaults to `'div'`. (For the inner input, see `inputComponent`.) */
-  component?: C;
+  as?: C;
   /** Native `<input type>`. Default `'text'`. */
   type?: string;
   /** Controlled value. */
@@ -131,7 +131,7 @@ export const Input = <
   const accentColor = useAccentColor();
 
   const {
-    component = 'div',
+    as: asProp = 'div',
     type = 'text',
     value,
     displayValue,
@@ -243,7 +243,7 @@ export const Input = <
     onBlur(e);
   };
 
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
 
   const InputComponent = inputComponent as ElementType<any>;
 

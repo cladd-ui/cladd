@@ -22,7 +22,7 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
   /** Toolbar button size. Default `'md'`. Forwarded via context to child `ToolbarButton`s. */
   size?: ButtonSize;
   /** Polymorphic root element. Defaults to `'div'`. */
-  component?: C;
+  as?: C;
   /** Accent color token. Sets the toolbar's `color-{name}` class. */
   color?: Color;
   /** Forwarded to the polymorphic root element. */
@@ -55,7 +55,7 @@ export const Toolbar = <C extends ElementType = 'div'>(
     contentClassName = '',
     rounded = true,
     size = 'md',
-    component = 'div' as ElementType<any>,
+    as: Component = 'div' as ElementType<any>,
     color = '',
     ref,
     variant = 'gradient',
@@ -70,7 +70,7 @@ export const Toolbar = <C extends ElementType = 'div'>(
 
   return (
     <Surface
-      component={component}
+      as={Component}
       className={cn(
         'toolbar flex',
         color && `color-${color}`,

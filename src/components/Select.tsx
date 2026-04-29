@@ -613,7 +613,7 @@ export function Select<T = string>(props: SelectProps<T>) {
                   renderBeforeOption(optionValue, optionIndex)}
                 <ListButton
                   selected={optionIndex === selectedItemIndex}
-                  component="label"
+                  as="label"
                   contentClassName="pl-1"
                   disabled={isOptionDisabled && isOptionDisabled(optionValue)}
                   outline={false}
@@ -628,7 +628,7 @@ export function Select<T = string>(props: SelectProps<T>) {
                 >
                   <div className="flex w-full items-center gap-3">
                     <InputComponent
-                      component="div"
+                      as="div"
                       className="shrink-0"
                       focusable={false}
                       hoverable={false}

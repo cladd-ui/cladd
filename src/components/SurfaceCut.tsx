@@ -22,7 +22,7 @@ interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   /** Force the pressed visual state regardless of pointer activity. */
   pressed?: boolean;
   /** Polymorphic root element. Defaults to `'div'`. */
-  component?: C;
+  as?: C;
   /**
    * When `true` (default), `children` are wrapped in `SurfaceCutContent`. Set to `false`
    * to render `children` directly when you need full layout control of the inner DOM.
@@ -49,14 +49,14 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
     hoverable = false,
     clickable = false,
     pressed = false,
-    component = 'div',
+    as: asProp = 'div',
     wrapContent = true,
     contentClassName = '',
     ref,
     ...rest
   } = props;
 
-  const Component = component as ElementType;
+  const Component = asProp as ElementType;
 
   const contextLevel = useSurface();
 
