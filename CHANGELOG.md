@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.16 (2026-04-29)
+
+### Features
+
+- add export types for CSS (1ef3f7b)
+
+### Refactoring
+
+- rename prop component -> as (1876bf2)
+
+### Other
+
+- format (432469a)
+
 ## 0.0.15 (2026-04-27)
 
 ### Features
