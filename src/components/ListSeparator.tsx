@@ -15,7 +15,7 @@ export const ListSeparator = (props: ListSeparatorProps) => {
     <div
       ref={ref}
       className={cn(
-        'list-separator -mx-2 my-2 h-px bg-surface-outline',
+        'cladd-list-separator -mx-2 my-2 h-px bg-surface-outline',
         className,
       )}
       {...rest}

@@ -136,7 +136,7 @@ export function Checkbox<C extends ElementType = 'label'>(
   return (
     <Component
       className={cn(
-        'checkbox group/checkbox relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
+        'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
         size === 'sm' && 'size-5',
         size === 'md' && 'size-6',
         disabled && 'opacity-50',
@@ -195,11 +195,14 @@ export function Checkbox<C extends ElementType = 'label'>(
           size === 'sm' && 'size-3',
           size === 'md' && 'size-4',
           !checked && 'scale-75 text-on-surface-dark',
-          checked && !disabled && !readOnly && 'group-active/checkbox:scale-90',
+          checked &&
+            !disabled &&
+            !readOnly &&
+            'group-active/cladd-checkbox:scale-90',
           !checked &&
             !disabled &&
             !readOnly &&
-            'group-group-active/checkbox:scale-65',
+            'group-active/cladd-checkbox:scale-65',
           checked && cn('text-on-primary', `color-${color}`),
           checkClassName,
         )}

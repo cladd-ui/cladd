@@ -14,7 +14,7 @@ export const List = (props: ListProps) => {
   return (
     <div
       ref={ref}
-      className={cn('list flex flex-col p-2', className)}
+      className={cn('cladd-list flex flex-col p-2', className)}
       {...rest}
     >
       {children}

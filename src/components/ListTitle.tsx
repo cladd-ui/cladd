@@ -18,7 +18,7 @@ export const ListTitle = (props: ListTitleProps) => {
     <div
       ref={ref}
       className={cn(
-        'list-title flex items-end gap-4 p-2 text-xs font-medium text-on-surface-dark uppercase select-none',
+        'cladd-list-title flex items-end gap-4 p-2 text-xs font-medium text-on-surface-dark uppercase select-none',
         className,
       )}
       {...rest}

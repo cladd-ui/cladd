@@ -248,17 +248,9 @@ function PopupInner(props: PopupInnerProps) {
     lazy,
     closeOnEscape() {
       if (!closeOnEscape) return false;
-      if (
-        containerElRef.current &&
-        containerElRef.current.querySelector(
-          '.task-item-edit, .task-drop-target, .onboarding-el, .onboarding-el-clickable',
-        )
-      ) {
-        return false;
-      }
       if (containerElRef.current && containerElRef.current.nextElementSibling) {
         const nextEl = containerElRef.current.nextElementSibling;
-        if (nextEl.matches('.popover, .dialog, .popup')) {
+        if (nextEl.matches('.cladd-popover, .cladd-dialog, .cladd-popup')) {
           return false;
         }
       }
@@ -274,7 +266,7 @@ function PopupInner(props: PopupInnerProps) {
     if (containerElRef.current) {
       const allPopups = [
         ...(containerElRef.current.parentElement as HTMLElement).children,
-      ].filter((el) => el.classList.contains('popup'));
+      ].filter((el) => el.classList.contains('cladd-popup'));
       const previousPopups = allPopups.slice(
         0,
         allPopups.indexOf(containerElRef.current),
@@ -289,7 +281,7 @@ function PopupInner(props: PopupInnerProps) {
       if (!inertContainer) return;
       if (
         document.querySelector(inertContainer) &&
-        document.querySelectorAll('.popup').length === 0
+        document.querySelectorAll('.cladd-popup').length === 0
       ) {
         (document.querySelector(inertContainer) as HTMLElement).inert = false;
       }
@@ -304,7 +296,7 @@ function PopupInner(props: PopupInnerProps) {
           ? previousPopups.length - index
           : previousPopups.length - index - 1;
         const popupContentEl = popupEl.querySelector(
-          '.popup-content',
+          '.cladd-popup-content',
         ) as HTMLElement;
         popupContentEl.style.transformOrigin = 'top';
         popupContentEl.style.transform = `translateY(-${16 * step}px) scale(${1 - 0.1 * step})`;
@@ -352,14 +344,14 @@ function PopupInner(props: PopupInnerProps) {
     if (!e.target) return;
     const target = e.target as HTMLElement;
     if (
-      target.closest('.popup-content, .popover, .dialog, .keyboard-toolbar') ||
+      target.closest('.cladd-popup-content, .cladd-popover, .cladd-dialog') ||
       !document.documentElement.contains(target)
     ) {
       return;
     }
     const isInAnotherPopup =
-      target.closest('.popup') &&
-      containerElRef.current !== target.closest('.popup');
+      target.closest('.cladd-popup') &&
+      containerElRef.current !== target.closest('.cladd-popup');
     if (isInAnotherPopup) return;
     const pointer = pointerRef.current;
     if (
@@ -368,14 +360,7 @@ function PopupInner(props: PopupInnerProps) {
     ) {
       return;
     }
-    if (
-      containerElRef.current &&
-      containerElRef.current.querySelector(
-        '.onboarding-el, .onboarding-el-clickable',
-      )
-    ) {
-      return;
-    }
+
     if (!closeOnBackdropClick) return;
     close();
   };
@@ -383,7 +368,7 @@ function PopupInner(props: PopupInnerProps) {
   const content = (
     <div
       className={cn(
-        'popup absolute inset-0 z-50 overflow-hidden',
+        'cladd-popup absolute inset-0 z-50 overflow-hidden',
         opened && 'popup-opened',
         className,
       )}
@@ -410,7 +395,7 @@ function PopupInner(props: PopupInnerProps) {
 
       <div
         className={cn(
-          'popup-wrap absolute inset-0 z-50 overflow-auto pt-safe-12 pb-safe-12',
+          'cladd-popup-wrap absolute inset-0 z-50 overflow-auto pt-safe-12 pb-safe-12',
           opened && 'duration-500 ease-[cubic-bezier(0,1,0.2,1)]',
           !opened &&
             'translate-y-[100vh] scale-x-65 duration-200 ease-[ease-in]',
@@ -420,7 +405,7 @@ function PopupInner(props: PopupInnerProps) {
       >
         <div
           className={cn(
-            'popup-content pointer-events-auto relative mx-auto flex min-h-full w-full max-w-162 flex-col gap-2',
+            'cladd-popup-content pointer-events-auto relative mx-auto flex min-h-full w-full max-w-162 flex-col gap-2',
             contentClassName,
           )}
         >

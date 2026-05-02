@@ -198,7 +198,7 @@ export const Shortcut = (props: ShortcutProps) => {
     <div
       ref={ref}
       className={cn(
-        'shortcut inline-flex shrink-0 items-center gap-0.5 self-center align-middle font-mono leading-0 tabular-nums',
+        'cladd-shortcut inline-flex shrink-0 items-center gap-0.5 self-center align-middle font-mono leading-0 tabular-nums',
         className,
       )}
       {...rest}

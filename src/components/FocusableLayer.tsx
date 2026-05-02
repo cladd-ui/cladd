@@ -30,19 +30,19 @@ export const FocusableLayer = (props: {
   const groupClasses =
     {
       button:
-        'group-focus-visible/button:scale-100 group-focus-visible/button:opacity-100',
+        'group-focus-visible/cladd-button:scale-100 group-focus-visible/cladd-button:opacity-100',
       input:
-        'group-has-[input:focus]/input:scale-100 group-has-[input:focus]/input:opacity-100',
+        'group-has-[input:focus]/cladd-input:scale-100 group-has-[input:focus]/cladd-input:opacity-100',
       textarea:
-        'group-has-[[contenteditable]:focus]/textarea:scale-100 group-has-[[contenteditable]:focus]/textarea:opacity-100',
+        'group-has-[[contenteditable]:focus]/cladd-textarea:scale-100 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
       checkbox:
-        'group-has-[input:focus-visible]/checkbox:scale-100 group-has-[input:focus-visible]/checkbox:opacity-100',
+        'group-has-[input:focus-visible]/cladd-checkbox:scale-100 group-has-[input:focus-visible]/cladd-checkbox:opacity-100',
       switch:
-        'group-has-[input:focus-visible]/switch:scale-100 group-has-[input:focus-visible]/switch:opacity-100',
+        'group-has-[input:focus-visible]/cladd-switch:scale-100 group-has-[input:focus-visible]/cladd-switch:opacity-100',
       radio:
-        'group-has-[input:focus-visible]/radio:scale-100 group-has-[input:focus-visible]/radio:opacity-100',
+        'group-has-[input:focus-visible]/cladd-radio:scale-100 group-has-[input:focus-visible]/cladd-radio:opacity-100',
       slider:
-        'group-has-[input:focus-visible]/slider:scale-100 group-has-[input:focus-visible]/slider:opacity-100',
+        'group-has-[input:focus-visible]/cladd-slider:scale-100 group-has-[input:focus-visible]/cladd-slider:opacity-100',
     }[group as keyof Record<string, string>] || '';
   return (
     <span

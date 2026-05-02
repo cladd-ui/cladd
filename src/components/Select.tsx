@@ -504,7 +504,7 @@ export function Select<T = string>(props: SelectProps<T>) {
     <>
       {!elRefExternal && (
         <Button
-          className={cn('select w-full', className)}
+          className={cn('cladd-select w-full', className)}
           ref={(el: HTMLElement | null) => {
             elRef.current = el;
             if (ref && typeof ref === 'function') ref(el);

@@ -53,7 +53,7 @@ export const OTPFieldInput = (props: OTPFieldInputProps) => {
       readOnly={readOnly}
       maxLength={1}
       value={getCellValue(index)}
-      className={cn(widthClasses[size], className)}
+      className={cn('cladd-otp-field-input', widthClasses[size], className)}
       inputClassName={cn('px-0 text-center', inputClassName)}
       inputRef={(el) => registerInput(index, el)}
       onChange={(value, event) => onCellChange(index, value, event)}

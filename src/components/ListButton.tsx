@@ -100,7 +100,7 @@ export const ListButton = <C extends ElementType = 'button'>(
     <ButtonEl
       as={Component}
       rounded={rounded}
-      className={cn('list-button z-10 w-full', className)}
+      className={cn('cladd-list-button z-10 w-full', className)}
       contentClassName={cn('gap-4 px-2', contentClassName)}
       variant={selected ? 'gradient' : variant}
       outline={outline || selected}

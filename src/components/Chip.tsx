@@ -134,7 +134,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
         contentClassName,
       )}
       className={cn(
-        `chip group/chip relative inline-flex font-semibold text-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
+        `cladd-chip group/cladd-chip relative inline-flex font-semibold text-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
         rounded ? 'rounded-full' : roundedClasses[size],
         clickableComputed && 'duration-200',
         clickableComputed && Component === 'a'

@@ -117,7 +117,7 @@ export function Slider(props: SliderProps) {
   return (
     <div
       className={cn(
-        'slider group/slider relative flex h-7 touch-pan-y rounded-xl select-none',
+        'cladd-slider group/cladd-slider relative flex h-7 touch-pan-y rounded-xl select-none',
         className,
       )}
       onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}

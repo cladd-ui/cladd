@@ -114,7 +114,7 @@ export const NumberField = (props: NumberFieldProps) => {
   return (
     <Surface
       className={cn(
-        'number-field flex items-center gap-0.5',
+        'cladd-number-field flex items-center gap-0.5',
         wrapRoundedClasses,
         className,
       )}

@@ -264,7 +264,9 @@ const DialogInner = (props: DialogInnerProps) => {
     },
     onClose() {
       const container = document.querySelector(inertContainer);
-      const otherModals = document.querySelectorAll('.popover, .popup');
+      const otherModals = document.querySelectorAll(
+        '.cladd-popover, .cladd-popup',
+      );
       if (container && otherModals.length === 0) {
         (container as HTMLElement).inert = false;
       }
@@ -290,7 +292,7 @@ const DialogInner = (props: DialogInnerProps) => {
 
   const content = (
     <div
-      className="dialog"
+      className="cladd-dialog"
       ref={setRefs}
       role="dialog"
       aria-modal="true"

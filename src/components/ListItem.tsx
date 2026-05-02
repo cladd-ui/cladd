@@ -15,7 +15,7 @@ export const ListItem = (props: ListItemProps, ref?: Ref<HTMLDivElement>) => {
     <div
       ref={ref}
       className={cn(
-        'flex min-h-9 items-center gap-4 px-2 py-1 text-xs font-medium',
+        'cladd-list-item flex min-h-9 items-center gap-4 px-2 py-1 text-xs font-medium',
         className,
       )}
       {...rest}

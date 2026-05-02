@@ -63,8 +63,8 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
   return (
     <Component
       className={cn(
-        'surface-cut group/surface-cut relative',
-        hoverable && 'group/surface-cut-hoverable',
+        'cladd-surface-cut group/cladd-surface-cut relative',
+        hoverable && 'group/cladd-surface-cut-hoverable',
         color && `color-${color}`,
         className,
       )}
@@ -84,11 +84,11 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
             className={cn(
               'absolute inset-0 rounded-[inherit] opacity-0 duration-200',
               hoverable &&
-                'group-hover/surface-cut-hoverable:bg-surface-hover group-hover/surface-cut-hoverable:opacity-100',
+                'group-hover/cladd-surface-cut-hoverable:bg-surface-hover group-hover/cladd-surface-cut-hoverable:opacity-100',
               clickable &&
                 (pressed
                   ? 'bg-surface-pressed opacity-100'
-                  : 'group-active/surface-cut:bg-surface-pressed group-active/surface-cut:opacity-100'),
+                  : 'group-active/cladd-surface-cut:bg-surface-pressed group-active/cladd-surface-cut:opacity-100'),
             )}
           />
         )}
@@ -98,7 +98,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
           <SurfaceCutContent
             className={cn(
               clickable &&
-                'duration-200 group-active/surface-cut:scale-95 group-active/surface-cut:opacity-75',
+                'duration-200 group-active/cladd-surface-cut:scale-95 group-active/cladd-surface-cut:opacity-75',
               contentClassName,
             )}
           >

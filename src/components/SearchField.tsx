@@ -47,7 +47,7 @@ export const SearchField = (props: SearchFieldProps) => {
     <Surface
       level={inset ? '+0' : '+1'}
       className={cn(
-        'sticky z-20',
+        'cladd-search-field sticky z-20',
         !inset && 'top-0 ml-px rounded-t-3xl',
         inset && 'top-2 mx-2 w-auto rounded-full',
         className,

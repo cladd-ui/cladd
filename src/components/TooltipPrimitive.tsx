@@ -123,7 +123,7 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
     closeOnEscape() {
       if (containerElRef.current && containerElRef.current.nextElementSibling) {
         const nextEl = containerElRef.current.nextElementSibling;
-        if (nextEl.matches('.popover, .dialog')) {
+        if (nextEl.matches('.cladd-popover, .cladd-dialog')) {
           return false;
         }
       }
@@ -164,7 +164,7 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
   } as React.CSSProperties;
 
   const content = (
-    <div className="tooltip pointer-events-none" ref={containerElRef}>
+    <div className="cladd-tooltip pointer-events-none" ref={containerElRef}>
       <Surface
         ref={(el: any) => {
           elRef.current = el;

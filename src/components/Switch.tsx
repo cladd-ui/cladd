@@ -140,7 +140,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
   return (
     <Component
       className={cn(
-        'switch group/switch relative flex shrink-0 rounded-full select-none',
+        'cladd-switch group/cladd-switch relative flex shrink-0 rounded-full select-none',
         size === 'sm' && 'w-10 p-1',
         size === 'md' && 'w-12 p-1',
         className,
@@ -215,7 +215,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
           >
             <span
               className={cn(
-                'absolute inset-0 duration-300 group-active/switch:scale-90',
+                'absolute inset-0 duration-300 group-active/cladd-switch:scale-90',
                 checked && 'rotate-180',
                 !checked && size === 'sm' && 'rotate-90',
               )}

@@ -252,7 +252,7 @@ export const Input = <
   return (
     <Component
       className={cn(
-        'input group/input relative',
+        'cladd-input group/cladd-input relative',
         disabled && 'opacity-50',
         className,
       )}

@@ -150,7 +150,7 @@ export const Button = <C extends ElementType = 'button'>(
     <WrapComponent
       as={Component}
       className={cn(
-        `button group/button inline-block appearance-none text-left font-semibold outline-0 select-none focus:ring-0 focus:outline-0`,
+        `cladd-button group/cladd-button inline-block appearance-none text-left font-semibold outline-0 select-none focus:ring-0 focus:outline-0`,
         color &&
           color !== 'neutral' &&
           cn(isFill ? 'text-on-primary' : 'text-primary'),

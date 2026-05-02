@@ -198,7 +198,7 @@ export const TextArea = <C extends ElementType = 'div'>(
   return (
     <Component
       className={cn(
-        'input group/textarea relative',
+        'cladd-textarea group/cladd-textarea relative',
         disabled && 'opacity-50',
         className,
       )}
@@ -281,7 +281,7 @@ export const TextArea = <C extends ElementType = 'div'>(
       {infoMessage && valid !== false && !readOnly && (
         <div
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/textarea:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
             `color-${color}`,
           )}
         >

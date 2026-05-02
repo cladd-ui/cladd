@@ -416,7 +416,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
       if (!closeOnEscape) return false;
       if (containerElRef.current && containerElRef.current.nextElementSibling) {
         const nextEl = containerElRef.current.nextElementSibling;
-        if (nextEl.matches('.popover, .dialog')) {
+        if (nextEl.matches('.cladd-popover, .cladd-dialog')) {
           return false;
         }
       }
@@ -439,7 +439,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
     const target = e.target as HTMLElement;
     if (containerElRef.current && containerElRef.current.contains(target))
       return;
-    const targetPopoverEl = target.closest('.popover');
+    const targetPopoverEl = target.closest('.cladd-popover');
     if (targetPopoverEl) {
       const isParentPopoverClicked =
         targetPopoverEl &&
@@ -456,7 +456,9 @@ const PopoverInner = (props: PopoverInnerProps) => {
     if (
       containerElRef.current &&
       containerElRef.current.nextElementSibling &&
-      containerElRef.current.nextElementSibling.classList.contains('popover')
+      containerElRef.current.nextElementSibling.classList.contains(
+        'cladd-popover',
+      )
     ) {
       return;
     }
@@ -531,7 +533,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
   const content = (
     <PopoverContext.Provider value={popoverContextValue}>
       <div
-        className="popover"
+        className="cladd-popover"
         ref={containerElRef as React.RefObject<HTMLDivElement>}
       >
         {backdrop && (

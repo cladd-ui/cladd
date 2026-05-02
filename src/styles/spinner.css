@@ -1,16 +1,16 @@
 @layer base {
-  .spinner-wrap {
+  .cladd-spinner-wrap {
     transform-origin: center;
-    animation: spinner-rotate 4s infinite;
+    animation: cladd-spinner-rotate 4s infinite;
   }
-  .spinner-knob {
+  .cladd-spinner-knob {
     transform-origin: left;
     animation:
-      spinner-knob-move 1s infinite,
-      spinner-knob-scale 1s infinite;
+      cladd-spinner-knob-move 1s infinite,
+      cladd-spinner-knob-scale 1s infinite;
   }
 
-  @keyframes spinner-rotate {
+  @keyframes cladd-spinner-rotate {
     0% {
       transform: rotate(0deg);
     }
@@ -33,7 +33,7 @@
     }
   }
 
-  @keyframes spinner-knob-move {
+  @keyframes cladd-spinner-knob-move {
     0%,
     10% {
       translate: 0px;
@@ -48,7 +48,7 @@
     }
   }
 
-  @keyframes spinner-knob-scale {
+  @keyframes cladd-spinner-knob-scale {
     0% {
       scale: 0.9 1;
       transform-origin: left;

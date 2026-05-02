@@ -125,9 +125,9 @@ export const Surface = <C extends ElementType = 'div'>(
   return (
     <Component
       className={cn(
-        'surface relative',
+        'cladd-surface relative',
         isFill ? 'text-on-primary' : 'text-on-surface',
-        (clickable || hoverable) && 'group/surface',
+        (clickable || hoverable) && 'group/cladd-surface',
         `surface-level-${currentLevel}`,
         color && `color-${color}`,
         className,
@@ -152,8 +152,8 @@ export const Surface = <C extends ElementType = 'div'>(
             ),
           variant === 'transparent' &&
             hoverable &&
-            'duration-200 group-hover/surface:bg-surface',
-          hoverable && clickable && 'group-active/surface:bg-surface',
+            'duration-200 group-hover/cladd-surface:bg-surface',
+          hoverable && clickable && 'group-active/cladd-surface:bg-surface',
           bgClassName,
         )}
       >
@@ -165,15 +165,15 @@ export const Surface = <C extends ElementType = 'div'>(
               hoverable &&
                 !pressed &&
                 cn(
-                  'group-hover/surface:opacity-100',
+                  'group-hover/cladd-surface:opacity-100',
                   isFill
-                    ? 'group-hover/surface:bg-surface-hover-fill'
-                    : 'group-hover/surface:bg-surface-hover',
+                    ? 'group-hover/cladd-surface:bg-surface-hover-fill'
+                    : 'group-hover/cladd-surface:bg-surface-hover',
                 ),
               clickable &&
                 (pressed
                   ? 'bg-surface-pressed opacity-100'
-                  : 'group-active/surface:bg-surface-pressed group-active/surface:opacity-100'),
+                  : 'group-active/cladd-surface:bg-surface-pressed group-active/cladd-surface:opacity-100'),
             )}
           />
         )}
@@ -189,7 +189,7 @@ export const Surface = <C extends ElementType = 'div'>(
             className={cn(
               'duration-200',
               clickable &&
-                'group-active/surface:scale-95 group-active/surface:opacity-75',
+                'group-active/cladd-surface:scale-95 group-active/cladd-surface:opacity-75',
               contentClassName,
             )}
           >

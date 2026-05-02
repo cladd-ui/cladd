@@ -72,7 +72,7 @@ export const Toolbar = <C extends ElementType = 'div'>(
     <Surface
       as={Component}
       className={cn(
-        'toolbar flex',
+        'cladd-toolbar flex',
         color && `color-${color}`,
         wrapRoundedClasses,
         className,

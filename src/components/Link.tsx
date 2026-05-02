@@ -58,7 +58,7 @@ export const Link = <C extends ElementType = 'button'>({
         }
       }}
       className={cn(
-        'group/link relative cursor-pointer appearance-none duration-200 select-none focus:ring-0 focus:outline-0 active:opacity-50 active:duration-0',
+        'group/cladd-link cladd-link relative cursor-pointer appearance-none duration-200 select-none focus:ring-0 focus:outline-0 active:opacity-50 active:duration-0',
         className,
       )}
       readOnly={readOnly}

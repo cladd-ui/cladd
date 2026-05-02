@@ -215,11 +215,11 @@ const ToastInner = (props: ToastInnerProps) => {
   const content = (
     <Surface
       className={cn(
-        `toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-3xl`,
+        `cladd-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-3xl`,
         !opened &&
           cn('translate-y-4 scale-75 opacity-0 duration-200 ease-out!'),
         opened &&
-          'scale-100 opacity-100 duration-500 ease-[cubic-bezier(0,1,0.2,1.1)] has-[+.toast+.toast+.toast:not(.toast-closing)]:opacity-0 has-[+.toast+.toast:not(.toast-closing)]:-translate-y-8 has-[+.toast+.toast:not(.toast-closing)]:scale-80 has-[+.toast:not(.toast-closing)]:origin-top has-[+.toast:not(.toast-closing)]:-translate-y-4 has-[+.toast:not(.toast-closing)]:scale-90',
+          'scale-100 opacity-100 duration-500 ease-[cubic-bezier(0,1,0.2,1.1)] has-[+.cladd-toast+.cladd-toast+.cladd-toast:not(.toast-closing)]:opacity-0 has-[+.cladd-toast+.cladd-toast:not(.toast-closing)]:-translate-y-8 has-[+.cladd-toast+.cladd-toast:not(.toast-closing)]:scale-80 has-[+.cladd-toast:not(.toast-closing)]:origin-top has-[+.cladd-toast:not(.toast-closing)]:-translate-y-4 has-[+.cladd-toast:not(.toast-closing)]:scale-90',
         phase === 'closing' && 'toast-closing',
         className,
       )}

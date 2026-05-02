@@ -127,7 +127,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
   return (
     <Component
       className={cn(
-        'checkbox group/radio relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
+        'cladd-radio group/cladd-radio relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
         size === 'sm' && 'size-5',
         size === 'md' && 'size-6',
 
@@ -188,13 +188,13 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
           !checked &&
             cn(
               'scale-75 bg-on-surface-dark',
-              !readOnly && !disabled && 'group-active/radio:scale-65',
+              !readOnly && !disabled && 'group-active/cladd-radio:scale-65',
             ),
           checked &&
             cn(
               'bg-on-primary',
               `color-${color}`,
-              !disabled && !readOnly && 'group-active/radio:scale-90',
+              !disabled && !readOnly && 'group-active/cladd-radio:scale-90',
             ),
         )}
       />
