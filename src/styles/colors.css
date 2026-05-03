@@ -219,7 +219,7 @@
     1px 1px 0px 0px color-mix(in oklab, var(--surface-white) 30%, transparent)
       inset;
   &,
-  [class*="surface-level-"] {
+  [data-level] {
     --shadow-surface-outline:
       0px 0px 0px 1px var(--color-surface-outline) inset,
       1.5px 1.5px 0px 0px
@@ -275,7 +275,7 @@
       color-mix(in oklab, var(--surface-white) 30%, transparent) inset;
 
   &,
-  [class*="surface-level-"] {
+  [data-level] {
     --shadow-surface-outline:
       0px 0px 0px 1px var(--color-surface-outline) inset,
       1.5px 1.5px 0px 0px
@@ -299,7 +299,7 @@
 }
 
 /* LEVELS */
-[class*="surface-level-"],
+[data-level],
 [data-color] {
   --surface-leveled: color-mix(
     in oklab,
@@ -381,23 +381,23 @@
     var(--color-surface) var(--highlight-original-mix, 100%)
   );
 }
-.surface-level-1,
-.surface-level-1[data-color] {
+[data-level="1"],
+[data-level="1"][data-color] {
   --surface-multiplier: 0;
 }
-.surface-level-2,
-.surface-level-2[data-color] {
+[data-level="2"],
+[data-level="2"][data-color] {
   --surface-multiplier: 1;
 }
-.surface-level-3,
-.surface-level-3[data-color] {
+[data-level="3"],
+[data-level="3"][data-color] {
   --surface-multiplier: 2;
 }
-.surface-level-4,
-.surface-level-4[data-color] {
+[data-level="4"],
+[data-level="4"][data-color] {
   --surface-multiplier: 3;
 }
-.surface-level-5,
-.surface-level-5[data-color] {
+[data-level="5"],
+[data-level="5"][data-color] {
   --surface-multiplier: 4;
 }
