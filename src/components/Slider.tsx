@@ -145,8 +145,8 @@ export function Slider(props: SliderProps) {
         )}
       >
         <span
-          data-color={color}
           className={cn(
+            `cladd-color-${color}`,
             'absolute inset-0 rounded-full bg-cladd-primary ease-out',
             !disabled &&
               !readOnly &&

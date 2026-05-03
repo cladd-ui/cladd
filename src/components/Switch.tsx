@@ -215,8 +215,11 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         {!icon && (
           <span
             data-part="indicator"
-            {...(checked && { 'data-color': color })}
-            className={cn('absolute inset-0', size === 'sm' && 'scale-80')}
+            className={cn(
+              'absolute inset-0',
+              size === 'sm' && 'scale-80',
+              checked && `cladd-color-${color}`,
+            )}
           >
             <span
               className={cn(

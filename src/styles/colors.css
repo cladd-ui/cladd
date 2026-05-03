@@ -37,42 +37,42 @@
 }
 
 :root,
-[data-color="neutral"] {
+.cladd-color-neutral {
   --cladd-theme: #fff;
 }
-[data-color="brand"] {
+.cladd-color-brand {
   --cladd-theme: #d7ff38;
 }
-[data-color="red"] {
+.cladd-color-red {
   --cladd-theme: #ff0b0b;
 }
-[data-color="pink"] {
+.cladd-color-pink {
   --cladd-theme: #ff0bac;
 }
-[data-color="purple"] {
+.cladd-color-purple {
   --cladd-theme: #a20bff;
 }
-[data-color="blue"] {
+.cladd-color-blue {
   --cladd-theme: #0047ff;
 }
-[data-color="cyan"] {
+.cladd-color-cyan {
   --cladd-theme: #00f9ff;
 }
-[data-color="lime"] {
+.cladd-color-lime {
   --cladd-theme: #7dff0b;
 }
-[data-color="green"] {
+.cladd-color-green {
   --cladd-theme: #0bff23;
 }
-[data-color="yellow"] {
+.cladd-color-yellow {
   --cladd-theme: #fff800;
 }
-[data-color="orange"] {
+.cladd-color-orange {
   --cladd-theme: #ff7a00;
 }
 /* NEUTRAL */
 :root,
-[data-color="neutral"] {
+.cladd-color-neutral {
   --cladd-bg: #0f0f0f;
   --cladd-backdrop: #000;
   --cladd-primary: oklch(
@@ -129,7 +129,7 @@
 }
 
 /* COLORS */
-[data-color]:not([data-color="neutral"]) {
+[class*="cladd-color-"]:not(.cladd-color-neutral) {
   --cladd-bg: oklch(from var(--cladd-theme) 0.15 0.02 h);
   --cladd-backdrop: #000;
   --cladd-primary: oklch(
@@ -193,9 +193,9 @@
 :root.light,
 .dark .light,
 :root .light,
-.light[data-color="neutral"],
-.light [data-color="neutral"],
-[data-color="neutral"] .light {
+.light .cladd-color-neutral,
+.light .cladd-color-neutral,
+.cladd-color-neutral .light {
   --cladd-bg: #fff;
   --cladd-backdrop: oklch(0.91 0 0);
   --cladd-primary: oklch(from var(--cladd-theme) 0.1 0 h);
@@ -244,9 +244,9 @@
   }
 }
 /* COLORS LIGHT */
-.light [data-color]:not([data-color="neutral"]),
-.dark .light [data-color]:not([data-color="neutral"]),
-.light[data-color]:not([data-color="neutral"]) {
+.light [class*="cladd-color-"]:not(.cladd-color-neutral),
+.dark .light [class*="cladd-color-"]:not(.cladd-color-neutral),
+.light[class*="cladd-color-"]:not(.cladd-color-neutral) {
   --cladd-bg: oklch(0.91 0.015 100);
   --cladd-backdrop: oklch(0.74 0.018 100);
   --cladd-primary: oklch(
@@ -308,7 +308,7 @@
 /* COMMON */
 .light,
 .dark,
-[data-color] {
+[class*="cladd-color-"] {
   --color-cladd-bg: var(--cladd-bg);
   --color-cladd-primary: var(--cladd-primary);
   --color-cladd-on-primary: var(--cladd-on-primary);
@@ -322,7 +322,7 @@
 
 /* LEVELS */
 [data-level],
-[data-color] {
+[class*="cladd-color-"] {
   --cladd-surface-leveled: color-mix(
     in oklab,
     var(--cladd-surface-mix-color)
@@ -416,22 +416,22 @@
   );
 }
 [data-level="1"],
-[data-level="1"][data-color] {
+[data-level="1"][class*="cladd-color-"] {
   --cladd-surface-multiplier: 0;
 }
 [data-level="2"],
-[data-level="2"][data-color] {
+[data-level="2"][class*="cladd-color-"] {
   --cladd-surface-multiplier: 1;
 }
 [data-level="3"],
-[data-level="3"][data-color] {
+[data-level="3"][class*="cladd-color-"] {
   --cladd-surface-multiplier: 2;
 }
 [data-level="4"],
-[data-level="4"][data-color] {
+[data-level="4"][class*="cladd-color-"] {
   --cladd-surface-multiplier: 3;
 }
 [data-level="5"],
-[data-level="5"][data-color] {
+[data-level="5"][class*="cladd-color-"] {
   --cladd-surface-multiplier: 4;
 }

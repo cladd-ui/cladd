@@ -194,7 +194,6 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         data-part="indicator"
         className={cn(
           'pointer-events-none relative size-2 rounded-full duration-200',
-          { ...(checked && { 'data-color': color }) },
           !checked &&
             cn(
               'scale-75 bg-cladd-fg-soft',
@@ -202,6 +201,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
             ),
           checked &&
             cn(
+              `cladd-color-${color}`,
               'bg-cladd-on-primary',
               !disabled && !readOnly && 'group-active/cladd-radio:scale-90',
             ),

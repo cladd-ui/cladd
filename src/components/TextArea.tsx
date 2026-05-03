@@ -278,8 +278,8 @@ export const Textarea = <C extends ElementType = 'div'>(
       {infoMessage && valid !== false && !readOnly && (
         <div
           data-part="info"
-          data-color={color}
           className={cn(
+            `cladd-color-${color}`,
             'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
           )}
         >
@@ -289,9 +289,8 @@ export const Textarea = <C extends ElementType = 'div'>(
       {errorMessage && valid === false && (
         <div
           data-part="error"
-          data-color="red"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
+            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

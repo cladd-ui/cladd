@@ -75,8 +75,8 @@ export const Segmented = <C extends ElementType = 'div'>(
   const Component = asProp as ElementType<any>;
   return (
     <Component
-      {...(color ? { 'data-color': color } : {})}
       className={cn(
+        color && `cladd-color-${color}`,
         'cladd-segmented',
         disabled && 'pointer-events-none opacity-40',
         'flex items-center justify-center',

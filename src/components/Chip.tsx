@@ -45,7 +45,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
    * default for an `<a>` used purely as a navigation anchor).
    */
   clickable?: boolean;
-  /** Accent color token. Sets the chip's `data-color={name}` attribute - drives text and ring colors. */
+  /** Accent color token. Sets the chip's `cladd-color-{name}` class - drives text and ring colors. */
   color?: Color;
   /** Icon component rendered before `children`. Receives `iconProps`. */
   icon?: ElementType<any>;

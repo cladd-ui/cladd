@@ -47,9 +47,9 @@ export const FocusableLayer = (props: {
   return (
     <span
       data-part="focus-ring"
-      data-color={color}
       className={cn(
         'pointer-events-none absolute -inset-1.5 z-1 scale-95 border-2 border-cladd-primary opacity-0 duration-200',
+        `cladd-color-${color}`,
 
         force && 'scale-100 opacity-100',
         !force && groupClasses,

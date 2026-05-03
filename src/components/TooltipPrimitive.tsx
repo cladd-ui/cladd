@@ -46,7 +46,7 @@ interface TooltipPrimitiveOwnProps {
   surfaceLevel?: number | string;
   /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
   offset?: OffsetValue;
-  /** Accent color token. Sets the tooltip's `data-color` attribute. */
+  /** Accent color token. Sets the tooltip's `cladd-color-{name}` class. */
   color?: Color;
   /** Tooltip content. */
   children?: ReactNode;

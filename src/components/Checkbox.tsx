@@ -199,7 +199,6 @@ export function Checkbox<C extends ElementType = 'label'>(
 
       <CheckIcon
         data-part="indicator"
-        {...(checked && { 'data-color': color })}
         className={cn(
           'pointer-events-none relative duration-200',
           size === 'sm' && 'size-3',
@@ -214,6 +213,7 @@ export function Checkbox<C extends ElementType = 'label'>(
             !readOnly &&
             'group-active/cladd-checkbox:scale-65',
           checked && cn('text-cladd-on-primary'),
+          checked && `cladd-color-${color}`,
           checkClassName,
         )}
       />

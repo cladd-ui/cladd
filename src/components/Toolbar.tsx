@@ -23,7 +23,7 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
   size?: ButtonSize;
   /** Polymorphic root element. Defaults to `'div'`. */
   as?: C;
-  /** Accent color token. Sets the toolbar's `data-color` attribute. */
+  /** Accent color token. Sets the toolbar's `cladd-color-{name}` class. */
   color?: Color;
   /** Forwarded to the polymorphic root element. */
   ref?: Ref<HTMLElement>;
