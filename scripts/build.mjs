@@ -57,7 +57,7 @@ const cleanArtifacts = async () => {
       continue;
     }
 
-    // Plain assets co-located in src/ (e.g. ui.css) — drop the prior copy.
+    // Plain assets co-located in src/ (e.g. cladd.css) — drop the prior copy.
     await rm(join(pkgDir, entry.name), { force: true });
   }
 };
@@ -156,8 +156,8 @@ const addExtensionsToImports = async () => {
 
 const copyAssets = async () => {
   log('copying css assets');
-  await cp(join(srcDir, 'ui.css'), join(pkgDir, 'ui.css'));
-  await cp(join(srcDir, 'ui.css.d.ts'), join(pkgDir, 'ui.css.d.ts'));
+  await cp(join(srcDir, 'cladd.css'), join(pkgDir, 'cladd.css'));
+  await cp(join(srcDir, 'cladd.css.d.ts'), join(pkgDir, 'cladd.css.d.ts'));
   await cp(join(srcDir, 'styles'), join(pkgDir, 'styles'), { recursive: true });
 
   const licenseFrom = join(repoRoot, 'LICENSE');
