@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.19 (2026-05-03)
+
+### Features
+
+- add custom spacings and radii to cn util (8cf80de)
+
 ## 0.0.18 (2026-05-03)
 
 ### Features
