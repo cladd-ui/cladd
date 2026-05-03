@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.20 (2026-05-03)
+
+### Refactoring
+
+- data-level -> cladd-surface-level- class (b63661e)
+- data-color -> cladd-color- class (ad62894)
+
 ## 0.0.19 (2026-05-03)
 
 ### Features
