@@ -236,7 +236,7 @@
     1px 1px 0px 0px
       color-mix(in oklab, var(--cladd-surface-white) 30%, transparent) inset;
   &,
-  [data-level] {
+  [class*="cladd-surface-level-"] {
     --shadow-cladd-outline:
       0px 0px 0px 1px var(--color-cladd-outline) inset,
       1.5px 1.5px 0px 0px
@@ -297,7 +297,7 @@
       color-mix(in oklab, var(--cladd-surface-white) 30%, transparent) inset;
 
   &,
-  [data-level] {
+  [class*="cladd-surface-level-"] {
     --shadow-cladd-outline:
       0px 0px 0px 1px var(--color-cladd-outline) inset,
       1.5px 1.5px 0px 0px
@@ -321,7 +321,7 @@
 }
 
 /* LEVELS */
-[data-level],
+[class*="cladd-surface-level-"],
 [class*="cladd-color-"] {
   --cladd-surface-leveled: color-mix(
     in oklab,
@@ -415,23 +415,23 @@
     var(--color-cladd-surface) var(--highlight-original-mix, 100%)
   );
 }
-[data-level="1"],
-[data-level="1"][class*="cladd-color-"] {
+.cladd-surface-level-1,
+.cladd-surface-level-1[class*="cladd-color-"] {
   --cladd-surface-multiplier: 0;
 }
-[data-level="2"],
-[data-level="2"][class*="cladd-color-"] {
+.cladd-surface-level-2,
+.cladd-surface-level-2[class*="cladd-color-"] {
   --cladd-surface-multiplier: 1;
 }
-[data-level="3"],
-[data-level="3"][class*="cladd-color-"] {
+.cladd-surface-level-3,
+.cladd-surface-level-3[class*="cladd-color-"] {
   --cladd-surface-multiplier: 2;
 }
-[data-level="4"],
-[data-level="4"][class*="cladd-color-"] {
+.cladd-surface-level-4,
+.cladd-surface-level-4[class*="cladd-color-"] {
   --cladd-surface-multiplier: 3;
 }
-[data-level="5"],
-[data-level="5"][class*="cladd-color-"] {
+.cladd-surface-level-5,
+.cladd-surface-level-5[class*="cladd-color-"] {
   --cladd-surface-multiplier: 4;
 }

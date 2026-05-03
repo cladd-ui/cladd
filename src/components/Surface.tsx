@@ -15,7 +15,7 @@ export type SurfaceVariant =
 
 interface SurfaceOwnProps<C extends ElementType = 'div'> {
   /**
-   * Surface depth level (1–5). Drives the background tone via `data-level="N"` attribute
+   * Surface depth level (1–5). Drives the background tone via `cladd-surface-level="N"` class
    * and propagates to nested surfaces through `SurfaceContext`.
    *
    * Accepts:
@@ -124,9 +124,9 @@ export const Surface = <C extends ElementType = 'div'>(
 
   return (
     <Component
-      data-level={currentLevel}
       className={cn(
         'cladd-surface relative',
+        `cladd-surface-level-${currentLevel}`,
         color && `cladd-color-${color}`,
         isFill ? 'text-cladd-on-primary' : 'text-cladd-fg',
         (clickable || hoverable) && 'group/cladd-surface',
