@@ -51,6 +51,8 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   icon?: ElementType<any>;
   /** Props forwarded to the `icon` component. */
   iconProps?: Record<string, unknown>;
+  /** Forwarded to the underlying `Surface` as `level` - see `SurfaceProps.level` for the relative-offset (`"+1"`/`"-1"`) syntax. */
+  surfaceLevel?: string | number;
   /** Forwarded to the polymorphic root element. */
   ref?: Ref<HTMLElement>;
 }
@@ -74,6 +76,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     color = '',
     icon: IconComponent,
     iconProps = {},
+    surfaceLevel,
     ref,
     ...rest
   } = props;
@@ -122,6 +125,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
       clickable={clickableComputed}
       outline={outline}
       variant={outline ? 'transparent' : 'gradient'}
+      level={surfaceLevel}
       contentClassName={cn(
         'relative flex items-center justify-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap [&>svg]:shrink-0',
         iconSizes[size],
