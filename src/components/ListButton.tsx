@@ -115,6 +115,7 @@ export const ListButton = <C extends ElementType = 'button'>(
     >
       {icon && (
         <div
+          data-part="icon"
           className={cn(
             'relative shrink-0 [&>svg]:shrink-0',
             buttonIconSizes[size],
@@ -133,6 +134,7 @@ export const ListButton = <C extends ElementType = 'button'>(
         >
           {header && (
             <div
+              data-part="header"
               className={cn(
                 'text-xs leading-tight font-normal text-cladd-fg-soft',
                 headerClassName,
@@ -142,6 +144,7 @@ export const ListButton = <C extends ElementType = 'button'>(
             </div>
           )}
           <div
+            data-part="title"
             className={cn(
               'flex items-center gap-4 [&>svg]:shrink-0',
               buttonIconSizes[size],
@@ -152,6 +155,7 @@ export const ListButton = <C extends ElementType = 'button'>(
           </div>
           {footer && (
             <div
+              data-part="footer"
               className={cn(
                 'text-xs leading-tight font-normal text-cladd-fg-softer',
                 footerClassName,
@@ -164,6 +168,7 @@ export const ListButton = <C extends ElementType = 'button'>(
       )}
       {after && (
         <div
+          data-part="after"
           className={cn(
             'ml-auto shrink-0 [&>svg]:shrink-0',
             buttonIconSizes[size],
