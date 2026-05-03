@@ -30,7 +30,8 @@ interface SelectOptionRenderParams<T> {
 
 import { Color } from '../types';
 import { ButtonProps } from './Button';
-import { Shortcut } from './Shortcut';
+import { Shortcut, ShortcutSize } from './Shortcut';
+import { SurfaceVariant } from './Surface';
 
 interface SelectOwnProps<T = string> {
   /** Selected value (single-select) or array of selected values (when `multiple`). */
@@ -137,6 +138,10 @@ interface SelectOwnProps<T = string> {
    * Default `true`. See `noneOptionValue` for how the digits map to options.
    */
   keyboardHints?: boolean;
+  keyboardHintsVariant?: SurfaceVariant;
+  keyboardHintsOutline?: boolean;
+  keyboardHintsClassName?: string;
+  keyboardHintsSize?: ShortcutSize;
   /** Default color for the per-option indicator (Radio/Checkbox). Overridden per-option by `optionIndicatorColor`. */
   indicatorColor?: Color;
   /** Per-option indicator color. Return `undefined` to fall back to `indicatorColor`. */
@@ -238,6 +243,11 @@ export function Select<T = string>(props: SelectProps<T>) {
 
     // OPTIONS
     keyboardHints = true,
+    keyboardHintsVariant = 'transparent',
+    keyboardHintsSize = 'md',
+    keyboardHintsOutline = false,
+    keyboardHintsClassName = '',
+
     indicatorColor,
     optionIndicatorColor = () => undefined,
     isChecked,
@@ -704,8 +714,14 @@ export function Select<T = string>(props: SelectProps<T>) {
                         }
                         return hint !== null ? (
                           <Shortcut
-                            className="ml-auto shrink-0 font-semibold tabular-nums"
-                            size="md"
+                            className="ml-auto shrink-0 tabular-nums"
+                            keyClassName={cn(
+                              'font-normal text-cladd-fg-soft',
+                              keyboardHintsClassName,
+                            )}
+                            size={keyboardHintsSize}
+                            variant={keyboardHintsVariant}
+                            outline={keyboardHintsOutline}
                           >
                             {hint}
                           </Shortcut>

@@ -2,6 +2,7 @@ import { useEffect, useRef, ReactNode, Ref } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useModalUtils } from '../hooks/use-modal-utils';
+import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
@@ -74,6 +75,8 @@ type TooltipPrimitiveRootProps = Omit<
 
 const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
   const theme = useTheme();
+  const overlaysRoot = useOverlaysRoot();
+
   const {
     phase = 'closed',
     onPhaseChange = () => {},
@@ -81,7 +84,7 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
     className = '',
     contentClassName = '',
     anchorRef,
-    root = '#app, #__next, #root',
+    root = overlaysRoot,
     position = 'top',
     offset = 4,
     surfaceLevel = theme === 'light' ? 1 : 5,
@@ -179,7 +182,7 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
         contentClassName={cn('px-2 py-1', contentClassName)}
         color={color}
         className={cn(
-          'pointer-events-none fixed max-h-[50vh] w-max max-w-50 overflow-auto rounded-xl text-xs leading-normal font-medium transition-[opacity,transform,scale]',
+          'pointer-events-none fixed max-h-[50vh] w-max max-w-50 overflow-auto rounded-cladd-tooltip text-xs leading-normal font-medium transition-[opacity,transform,scale]',
 
           opened ? 'scale-100 opacity-100' : '',
           phase === 'opened' && 'duration-200',

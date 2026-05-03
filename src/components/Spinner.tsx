@@ -1,5 +1,6 @@
 import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
+import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 
 export type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -16,13 +17,7 @@ export interface SpinnerProps {
 export function Spinner(props: SpinnerProps) {
   const accentColor = useAccentColor();
   const { size = 'sm', color = accentColor, className } = props;
-  const sizes: Record<SpinnerSize, string> = {
-    sm: 'size-4',
-    md: 'size-5',
-    lg: 'size-7',
-    xl: 'size-8',
-    '2xl': 'size-10',
-  };
+  const sizeClass = nestedSizeClasses(size, 'size');
   const borderWidth = {
     sm: 'border',
     md: 'border-1',
@@ -31,7 +26,7 @@ export function Spinner(props: SpinnerProps) {
     '2xl': 'border-2',
   }[size];
 
-  const sizeClasses = {
+  const positionClasses = {
     sm: 'left-0.5 right-0.5',
     md: 'left-0.5 right-0.5',
     lg: 'left-1 right-1',
@@ -42,7 +37,7 @@ export function Spinner(props: SpinnerProps) {
   return (
     <div
       data-color={color}
-      className={cn('cladd-spinner', 'relative', sizes[size], className)}
+      className={cn('cladd-spinner', 'relative', sizeClass, className)}
     >
       <div className="cladd-spinner-wrap absolute inset-0">
         <div
@@ -54,7 +49,7 @@ export function Spinner(props: SpinnerProps) {
         <div
           className={cn(
             'absolute top-1/2 aspect-2/1 -translate-y-1/2 rounded-full',
-            sizeClasses,
+            positionClasses,
           )}
         >
           <div className="cladd-spinner-knob absolute top-0 left-0 h-full w-1/2 rounded-full bg-cladd-primary" />

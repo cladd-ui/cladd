@@ -13,6 +13,7 @@ import {
 import { createPortal } from 'react-dom';
 
 import { useModalUtils } from '../hooks/use-modal-utils';
+import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
@@ -165,8 +166,9 @@ type ToastInnerProps = Omit<ToastProps, 'open' | 'onOpenChange'> & {
 
 const ToastInner = (props: ToastInnerProps) => {
   const theme = useTheme();
+  const overlaysRoot = useOverlaysRoot();
   const {
-    root = '#app, #__next, #root',
+    root = overlaysRoot,
     phase = 'closed',
     onPhaseChange = () => {},
     onClosed = () => {},
@@ -216,7 +218,7 @@ const ToastInner = (props: ToastInnerProps) => {
     <Surface
       data-open={opened || undefined}
       className={cn(
-        `cladd-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-3xl`,
+        `cladd-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-cladd-toast`,
         !opened &&
           cn('translate-y-4 scale-75 opacity-0 duration-200 ease-out!'),
         opened &&

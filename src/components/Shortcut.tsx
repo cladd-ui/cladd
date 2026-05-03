@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { cn } from '../shared/cn';
+import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { KeyboardArrowLeftIcon } from './icons/KeyboardArrowLeftIcon';
 import { KeyboardBackspaceIcon } from './icons/KeyboardBackspaceIcon';
@@ -74,13 +75,10 @@ export const Shortcut = (props: ShortcutProps) => {
   } = props;
 
   const [isMac, setIsMac] = useState(false);
-  const sizeClass = {
-    sm: 'h-4 min-w-4',
-    md: 'h-5 min-w-5',
-    lg: 'h-6 min-w-6',
-    xl: 'h-7 min-w-7',
-    '2xl': 'h-8 min-w-8',
-  }[size];
+  const sizeClass = [
+    nestedSizeClasses(size, 'height'),
+    nestedSizeClasses(size, 'min-width'),
+  ].join(' ');
   const iconSizeClass = {
     sm: 'size-3',
     md: 'size-3.5',
@@ -89,11 +87,11 @@ export const Shortcut = (props: ShortcutProps) => {
     '2xl': 'size-6',
   }[size];
   const roundedClass = {
-    sm: 'rounded',
-    md: 'rounded-md',
-    lg: 'rounded-lg',
-    xl: 'rounded-lg',
-    '2xl': 'rounded-lg',
+    sm: 'rounded-cladd-xs',
+    md: 'rounded-cladd-sm',
+    lg: 'rounded-cladd-md',
+    xl: 'rounded-cladd-lg',
+    '2xl': 'rounded-cladd-xl',
   }[size];
   const fontSizeClass = {
     sm: 'text-[10px]',

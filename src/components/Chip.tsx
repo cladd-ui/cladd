@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { cn } from '../shared/cn';
+import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { Surface } from './Surface';
 
@@ -76,13 +77,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     ref,
     ...rest
   } = props;
-  const heights: Record<ChipSize, string> = {
-    sm: 'h-4',
-    md: 'h-5',
-    lg: 'h-7',
-    xl: 'h-8',
-    '2xl': 'h-10',
-  };
+  const height = nestedSizeClasses(size, 'height');
   const paddings: Record<ChipSize, string> = {
     sm: 'px-2 [&:has(>svg)]:pl-1',
     md: 'px-2 [&:has(>svg)]:pl-1',
@@ -94,8 +89,8 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     sm: 'text-[10px]',
     md: 'text-[10px]',
     lg: 'text-xs',
-    xl: 'text-sm',
-    '2xl': 'text-sm',
+    xl: 'text-xs',
+    '2xl': 'text-xs',
   };
   const iconSizes: Record<ChipSize, string> = {
     sm: '[&>svg]:size-3',
@@ -106,11 +101,11 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   };
 
   const roundedClasses = {
-    sm: 'rounded-[5px]',
-    md: 'rounded-md',
-    lg: 'rounded-lg',
-    xl: 'rounded-lg',
-    '2xl': 'rounded-lg',
+    sm: 'rounded-cladd-xs',
+    md: 'rounded-cladd-sm',
+    lg: 'rounded-cladd-md',
+    xl: 'rounded-cladd-lg',
+    '2xl': 'rounded-cladd-xl',
   };
 
   let clickableComputed =
@@ -141,7 +136,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
         clickableComputed && Component === 'a'
           ? 'cursor-pointer'
           : 'cursor-auto',
-        heights[size],
+        height,
         fontSizes[size],
         className,
       )}

@@ -9,6 +9,7 @@ import {
 import { createPortal } from 'react-dom';
 
 import { useModalUtils } from '../hooks/use-modal-utils';
+import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
@@ -346,6 +347,7 @@ type PopoverInnerProps = Omit<PopoverProps, 'open' | 'onOpenChange'> & {
 
 const PopoverInner = (props: PopoverInnerProps) => {
   const theme = useTheme();
+  const overlaysRoot = useOverlaysRoot();
   const {
     phase = 'closed',
     onPhaseChange = () => {},
@@ -354,7 +356,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
     contentClassName = '',
     anchorRef,
     anchorRect,
-    root = '#app, #__next, #root',
+    root = overlaysRoot,
     position = 'bottom',
     offset,
     backdrop = false,
@@ -580,7 +582,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
           }}
           style={popoverStyle}
           className={cn(
-            'pointer-events-auto z-50 w-40 max-w-[calc(100vw-16px)] rounded-3xl shadow-cladd-popover transition-[opacity,transform,scale] duration-0',
+            'pointer-events-auto z-50 w-40 max-w-[calc(100vw-16px)] rounded-cladd-popover shadow-cladd-popover transition-[opacity,transform,scale] duration-0',
             opened && 'scale-100 opacity-100 ease-[cubic-bezier(0,1,0,1.025)]',
             (phase === 'opened' || (phase === 'opening' && opened)) &&
               'duration-400',

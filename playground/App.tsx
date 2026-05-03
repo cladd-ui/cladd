@@ -39,7 +39,7 @@ import {
   Surface,
   SurfaceCut,
   Switch,
-  TextArea,
+  Textarea,
   Toolbar,
   ToolbarButton,
   ToolbarSeparator,
@@ -1371,11 +1371,9 @@ function App() {
           contentClassName="p-4 flex gap-2 flex-wrap"
           level={1}
         >
-          <Button size="sm" color="red" rounded>
+          <Button size="sm" color="red">
             SM
-            <Chip size="sm" rounded>
-              CHIP
-            </Chip>
+            <Chip size="sm">CHIP</Chip>
           </Button>
           <Button size="md">
             MD
@@ -1621,37 +1619,37 @@ function App() {
             placeholder="MD: Add text"
             size="md"
           />
-          <TextArea
+          <Textarea
             disabled
             icon={<Icon />}
             placeholder="MD: Add text"
             size="md"
           />
           <Input icon={<Icon />} placeholder="LG: Add text" size="lg" />
-          <TextArea icon={<Icon />} placeholder="LG: Add text" size="lg" />
+          <Textarea icon={<Icon />} placeholder="LG: Add text" size="lg" />
           <Input icon={<Icon />} placeholder="XL: Add text" size="xl" />
-          <TextArea icon={<Icon />} placeholder="XL: Add text" size="xl" />
+          <Textarea icon={<Icon />} placeholder="XL: Add text" size="xl" />
           <Input icon={<Icon />} placeholder="2XL: Add text" size="2xl" />
-          <TextArea icon={<Icon />} placeholder="2XL: Add text" size="2xl" />
-          <TextArea
+          <Textarea icon={<Icon />} placeholder="2XL: Add text" size="2xl" />
+          <Textarea
             icon={<Icon />}
             placeholder="Rounded MD: Add text"
             size="md"
             rounded
           />
-          <TextArea
+          <Textarea
             icon={<Icon />}
             placeholder="Rounded LG: Add text"
             size="lg"
             rounded
           />
-          <TextArea
+          <Textarea
             icon={<Icon />}
             placeholder="Rounded XL: Add text"
             size="xl"
             rounded
           />
-          <TextArea
+          <Textarea
             icon={<Icon />}
             placeholder="Rounded 2XL: Add text"
             size="2xl"
@@ -1668,7 +1666,7 @@ function App() {
             <div>SM:</div>
             <Button size="sm">Button</Button>
             <Input icon={<Icon />} size="sm" value="Ta-da" clearButton></Input>
-            <TextArea icon={<Icon />} size="sm" value="Ta-da" rounded />
+            <Textarea icon={<Icon />} size="sm" value="Ta-da" rounded />
 
             <Switch size="sm" />
             <Checkbox size="sm" />
@@ -1680,7 +1678,7 @@ function App() {
             <div>MD:</div>
             <Button size="md">Button</Button>
             <Input size="md" value="Ta-da" clearButton></Input>
-            <TextArea size="md" value="Ta-da" rounded />
+            <Textarea size="md" value="Ta-da" rounded />
 
             <Switch size="md" />
             <Checkbox size="md" />
@@ -1692,7 +1690,7 @@ function App() {
             <div>LG:</div>
             <Button size="lg">Button</Button>
             <Input size="lg" value="Ta-da" clearButton></Input>
-            <TextArea size="lg" value="Ta-da" />
+            <Textarea size="lg" value="Ta-da" />
 
             <Switch size="md" />
             <Checkbox size="md" />
@@ -1704,7 +1702,7 @@ function App() {
             <div>XL:</div>
             <Button size="xl">Button</Button>
             <Input size="xl" value="Ta-da" clearButton></Input>
-            <TextArea size="xl" value="Ta-da" />
+            <Textarea size="xl" value="Ta-da" />
 
             <Switch size="md" />
             <Checkbox size="md" />
@@ -1716,7 +1714,7 @@ function App() {
             <div>2XL:</div>
             <Button size="2xl">Button</Button>
             <Input size="2xl" value="Ta-da" clearButton></Input>
-            <TextArea size="2xl" value="Ta-da" />
+            <Textarea size="2xl" value="Ta-da" />
 
             <Switch size="md" />
             <Checkbox size="md" />

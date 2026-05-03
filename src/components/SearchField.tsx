@@ -48,7 +48,7 @@ export const SearchField = (props: SearchFieldProps) => {
       level={inset ? '+0' : '+1'}
       className={cn(
         'cladd-search-field sticky z-20',
-        !inset && 'top-0 ml-px rounded-t-3xl',
+        !inset && 'top-0 ml-px rounded-t-cladd-popover',
         inset && 'top-2 mx-2 w-auto rounded-full',
         className,
       )}

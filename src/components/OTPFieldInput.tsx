@@ -1,7 +1,8 @@
 import { ClipboardEvent, Ref } from 'react';
 
 import { cn } from '../shared/cn';
-import { Input, InputSize } from './Input';
+import { rootSizeClasses } from '../shared/size-utls';
+import { Input } from './Input';
 import { useOTPFieldContext } from './OTPFieldContext';
 
 interface OTPFieldInputOwnProps {
@@ -18,14 +19,6 @@ interface OTPFieldInputOwnProps {
 }
 
 export type OTPFieldInputProps = OTPFieldInputOwnProps;
-
-const widthClasses: Record<InputSize, string> = {
-  sm: 'w-6',
-  md: 'w-7',
-  lg: 'w-8',
-  xl: 'w-10',
-  '2xl': 'w-12',
-};
 
 export const OTPFieldInput = (props: OTPFieldInputProps) => {
   const { placeholder, className, inputClassName, ref, index = 0 } = props;
@@ -53,7 +46,11 @@ export const OTPFieldInput = (props: OTPFieldInputProps) => {
       readOnly={readOnly}
       maxLength={1}
       value={getCellValue(index)}
-      className={cn('cladd-otp-field-input', widthClasses[size], className)}
+      className={cn(
+        'cladd-otp-field-input',
+        rootSizeClasses(size, 'width'),
+        className,
+      )}
       inputClassName={cn('px-0 text-center', inputClassName)}
       inputRef={(el) => registerInput(index, el)}
       onChange={(value, event) => onCellChange(index, value, event)}

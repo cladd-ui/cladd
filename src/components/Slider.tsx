@@ -119,7 +119,9 @@ export function Slider(props: SliderProps) {
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       className={cn(
-        'cladd-slider group/cladd-slider relative flex h-7 touch-pan-y rounded-xl select-none',
+        'cladd-slider group/cladd-slider relative flex touch-pan-y select-none',
+        size === 'sm' && 'h-cladd-thumb-sm',
+        size === 'md' && 'h-cladd-thumb-md',
         className,
       )}
       onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
@@ -130,7 +132,7 @@ export function Slider(props: SliderProps) {
         data-part="track"
         className={cn(
           'pointer-events-none absolute inset-0 top-1/2 right-0 left-0 rounded-full',
-          size === 'sm' ? '-mt-0.5 h-1' : '-mt-1 h-2',
+          size === 'sm' ? '-mt-0.75 h-1.5' : '-mt-1 h-2',
         )}
       />
 
@@ -153,7 +155,7 @@ export function Slider(props: SliderProps) {
             durationClass,
           )}
           style={{
-            width: `calc((100% - ${size === 'sm' ? 20 : 24}px) * ${progress})`,
+            width: `calc((100% - ${size === 'sm' ? 'var(--spacing-cladd-thumb-sm)' : 'var(--spacing-cladd-thumb-md)'}) * ${progress})`,
           }}
         />
       </span>
@@ -180,7 +182,7 @@ export function Slider(props: SliderProps) {
               'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-[11px] leading-none font-medium text-cladd-primary duration-300',
               !disabled &&
                 !readOnly &&
-                'group-focus-within/slider:scale-100 group-active/slider:scale-100',
+                'group-focus-within/cladd-slider:scale-100 group-active/cladd-slider:scale-100',
             )}
             beforeContent={
               !readOnly &&
@@ -196,9 +198,9 @@ export function Slider(props: SliderProps) {
         <Surface
           data-part="thumb"
           className={cn(
-            'z-10 size-6 shrink-0 rounded-full',
-            size === 'sm' && 'size-5',
-            size === 'md' && 'size-6',
+            'z-10 shrink-0 rounded-full',
+            size === 'sm' && 'size-cladd-thumb-sm',
+            size === 'md' && 'size-cladd-thumb-md',
           )}
           outline
           variant="gradient-fill"

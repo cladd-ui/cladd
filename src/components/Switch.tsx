@@ -182,10 +182,10 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         data-part="thumb"
         className={cn(
           'z-10 rounded-full duration-300',
-          size === 'sm' && 'size-4',
-          size === 'md' && 'size-5',
-          checked && size === 'sm' && `translate-x-4`,
-          checked && size === 'md' && `translate-x-5`,
+          size === 'sm' && 'size-cladd-thumb-xs',
+          size === 'md' && 'size-cladd-thumb-sm',
+          checked && size === 'sm' && `translate-x-cladd-thumb-xs`,
+          checked && size === 'md' && `translate-x-cladd-thumb-sm`,
           disabled && 'opacity-50',
         )}
         contentClassName="flex items-center justify-center"

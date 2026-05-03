@@ -31,7 +31,7 @@ export const PopupContent = (props: PopupContentProps) => {
   return (
     <Surface
       level={surfaceLevel}
-      className={cn('rounded-3xl', className)}
+      className={cn('rounded-cladd-popup', className)}
       ref={ref}
       variant={variant}
       outline={outline}

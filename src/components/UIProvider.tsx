@@ -16,14 +16,27 @@ export interface UIProviderProps {
    * `color` for interactive components (Button, Switch, Checkbox, Radio, etc.).
    */
   accentColor?: Color;
+  /**
+   * The root element(s) to insert overlays to. Default `'#app, #__next, #root'`.
+   */
+  overlaysRoot?: string;
   children?: React.ReactNode;
 }
 
 export const UIProvider = (props: UIProviderProps) => {
-  const { theme = 'dark', accentColor = 'brand', children } = props;
+  const {
+    theme = 'dark',
+    accentColor = 'brand',
+    overlaysRoot = '#app, #__next, #root',
+    children,
+  } = props;
 
   return (
-    <ThemeProvider theme={theme} accentColor={accentColor}>
+    <ThemeProvider
+      theme={theme}
+      accentColor={accentColor}
+      overlaysRoot={overlaysRoot}
+    >
       <DialogsPortalProvider>
         <ToastsPortalProvider>
           {children}

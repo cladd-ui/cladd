@@ -142,8 +142,8 @@ export function Checkbox<C extends ElementType = 'label'>(
       data-required={required || undefined}
       className={cn(
         'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
-        size === 'sm' && 'size-5',
-        size === 'md' && 'size-6',
+        size === 'sm' && 'size-cladd-thumb-sm',
+        size === 'md' && 'size-cladd-thumb-md',
         disabled && 'opacity-50',
         className,
       )}

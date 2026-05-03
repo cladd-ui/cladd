@@ -16,6 +16,7 @@ import { useAccentColor } from '../hooks/use-accent-color';
 import { useDevice } from '../hooks/use-device';
 import { useFocusTrap } from '../hooks/use-focus-trap';
 import { useModalUtils } from '../hooks/use-modal-utils';
+import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { nextTick } from '../shared/next-tick';
@@ -200,8 +201,10 @@ type DialogInnerProps = Omit<DialogProps, 'open' | 'onOpenChange'> & {
 const DialogInner = (props: DialogInnerProps) => {
   const theme = useTheme();
   const accentColor = useAccentColor();
+  const overlaysRoot = useOverlaysRoot();
+
   const {
-    root = '#app, #__next, #root',
+    root = overlaysRoot,
     inertContainer = '.app-container',
     phase = 'closed',
     onPhaseChange = () => {},
@@ -313,7 +316,7 @@ const DialogInner = (props: DialogInnerProps) => {
         data-part="content"
         data-open={opened || undefined}
         className={cn(
-          `fixed top-1/2 left-1/2 z-50 w-80 max-w-full -translate-x-1/2 -translate-y-1/2 rounded-3xl`,
+          `fixed top-1/2 left-1/2 z-50 w-80 max-w-full -translate-x-1/2 -translate-y-1/2 rounded-cladd-dialog`,
           !opened && 'scale-75 opacity-0 duration-200 ease-out!',
           opened &&
             'scale-100 opacity-100 duration-500 ease-[cubic-bezier(0,1,0.2,1.1)]',
@@ -340,11 +343,7 @@ const DialogInner = (props: DialogInnerProps) => {
           </div>
         )}
         {text && (
-          <div
-            data-part="text"
-            id={descId}
-            className="text-sm leading-relaxed"
-          >
+          <div data-part="text" id={descId} className="text-sm leading-relaxed">
             {text}
           </div>
         )}

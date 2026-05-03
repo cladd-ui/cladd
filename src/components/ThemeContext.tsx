@@ -5,10 +5,12 @@ import { Color } from '../types';
 type ThemeContextValue = {
   theme: 'dark' | 'light';
   accentColor: Color;
+  overlaysRoot: string;
 };
 export const ThemeContext = createContext<ThemeContextValue>({
   theme: 'dark',
   accentColor: 'brand',
+  overlaysRoot: '#app, #__next, #root',
 });
 
 /**
@@ -23,15 +25,24 @@ export const ThemeProvider = ({
   children,
   theme,
   accentColor,
+  overlaysRoot,
 }: {
   children: React.ReactNode;
   /** Color scheme to expose to descendants. */
   theme: 'dark' | 'light';
   /** App-wide accent color token used as the default for interactive components. */
   accentColor: string;
+  /** The root element(s) to insert overlays to. Default `'#app, #__next, #root'`. */
+  overlaysRoot?: string;
 }) => {
   return (
-    <ThemeContext.Provider value={{ theme, accentColor }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        accentColor,
+        overlaysRoot: overlaysRoot ?? '#app, #__next, #root',
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

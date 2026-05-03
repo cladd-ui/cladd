@@ -109,8 +109,8 @@ export {
 } from './components/SurfaceCutContent';
 export { Switch, type SwitchProps, type SwitchSize } from './components/Switch';
 export {
-  TextArea,
-  type TextAreaProps,
+  Textarea,
+  type TextareaProps as TextAreaProps,
   type TextAreaSize,
 } from './components/TextArea';
 export {

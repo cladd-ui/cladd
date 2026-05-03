@@ -8,6 +8,6 @@
     ".": {
       "import": "./index.ts"
     },
-    "./ui.css": "./ui.css"
+    "./css": "./cladd.css"
   }
 }

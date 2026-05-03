@@ -23,13 +23,13 @@
       "types": "./index.d.ts",
       "import": "./index.js"
     },
-    "./ui.css": {
-      "default": "./ui.css",
-      "types": "./ui.css.d.ts"
+    "./cladd.css": {
+      "default": "./cladd.css",
+      "types": "./cladd.css.d.ts"
     },
     "./css": {
-      "default": "./ui.css",
-      "types": "./ui.css.d.ts"
+      "default": "./cladd.css",
+      "types": "./cladd.css.d.ts"
     },
     "./styles/*": "./styles/*",
     "./package.json": "./package.json"

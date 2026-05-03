@@ -1,0 +1,58 @@
+@theme {
+  --cladd-radius: 8px;
+  --cladd-radius-ratio: calc(var(--cladd-radius) / var(--spacing-cladd-md));
+  --radius-cladd: var(--cladd-radius);
+  --radius-cladd-2xs: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-2xs));
+  --radius-cladd-xs: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-xs));
+  --radius-cladd-sm: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-sm));
+  --radius-cladd-md: var(--cladd-radius);
+  --radius-cladd-lg: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-lg));
+  --radius-cladd-xl: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-xl));
+  --radius-cladd-2xl: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-2xl));
+
+  --radius-cladd-full-2xs: calc(var(--spacing-cladd-2xs) / 2);
+  --radius-cladd-full-xs: calc(var(--spacing-cladd-xs) / 2);
+  --radius-cladd-full-sm: calc(var(--spacing-cladd-sm) / 2);
+  --radius-cladd-full-md: calc(var(--spacing-cladd-md) / 2);
+  --radius-cladd-full-lg: calc(var(--spacing-cladd-lg) / 2);
+  --radius-cladd-full-xl: calc(var(--spacing-cladd-xl) / 2);
+  --radius-cladd-full-2xl: calc(var(--spacing-cladd-2xl) / 2);
+
+  --radius-cladd-wrap-2xs: calc(var(--radius-cladd-2xs) + 4px);
+  --radius-cladd-wrap-xs: calc(var(--radius-cladd-xs) + 4px);
+  --radius-cladd-wrap-sm: calc(var(--radius-cladd-sm) + 4px);
+  --radius-cladd-wrap-md: calc(var(--radius-cladd-md) + 4px);
+  --radius-cladd-wrap-lg: calc(var(--radius-cladd-lg) + 4px);
+  --radius-cladd-wrap-xl: calc(var(--radius-cladd-xl) + 4px);
+  --radius-cladd-wrap-2xl: calc(var(--radius-cladd-2xl) + 4px);
+
+  --radius-cladd-wrap-full-2xs: calc(var(--radius-cladd-full-2xs) + 4px);
+  --radius-cladd-wrap-full-xs: calc(var(--radius-cladd-full-xs) + 4px);
+  --radius-cladd-wrap-full-sm: calc(var(--radius-cladd-full-sm) + 4px);
+  --radius-cladd-wrap-full-md: calc(var(--radius-cladd-full-md) + 4px);
+  --radius-cladd-wrap-full-lg: calc(var(--radius-cladd-full-lg) + 4px);
+  --radius-cladd-wrap-full-xl: calc(var(--radius-cladd-full-xl) + 4px);
+  --radius-cladd-wrap-full-2xl: calc(var(--radius-cladd-full-2xl) + 4px);
+
+  --radius-cladd-focus-2xs: calc(var(--radius-cladd-2xs) + 6px);
+  --radius-cladd-focus-xs: calc(var(--radius-cladd-xs) + 6px);
+  --radius-cladd-focus-sm: calc(var(--radius-cladd-sm) + 6px);
+  --radius-cladd-focus-md: calc(var(--radius-cladd-md) + 6px);
+  --radius-cladd-focus-lg: calc(var(--radius-cladd-lg) + 6px);
+  --radius-cladd-focus-xl: calc(var(--radius-cladd-xl) + 6px);
+  --radius-cladd-focus-2xl: calc(var(--radius-cladd-2xl) + 6px);
+
+  --radius-cladd-focus-full-2xs: calc(var(--radius-cladd-full-2xs) + 6px);
+  --radius-cladd-focus-full-xs: calc(var(--radius-cladd-full-xs) + 6px);
+  --radius-cladd-focus-full-sm: calc(var(--radius-cladd-full-sm) + 6px);
+  --radius-cladd-focus-full-md: calc(var(--radius-cladd-full-md) + 6px);
+  --radius-cladd-focus-full-lg: calc(var(--radius-cladd-full-lg) + 6px);
+  --radius-cladd-focus-full-xl: calc(var(--radius-cladd-full-xl) + 6px);
+  --radius-cladd-focus-full-2xl: calc(var(--radius-cladd-full-2xl) + 6px);
+
+  --radius-cladd-popover: 24px;
+  --radius-cladd-dialog: 24px;
+  --radius-cladd-toast: 24px;
+  --radius-cladd-popup: 24px;
+  --radius-cladd-tooltip: 12px;
+}

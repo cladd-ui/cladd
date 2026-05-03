@@ -16,10 +16,10 @@ import {
 import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
+import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { SurfaceCut } from './SurfaceCut';
-import { SurfaceCutContent } from './SurfaceCutContent';
 
 export type TextAreaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
@@ -78,11 +78,11 @@ interface TextAreaOwnProps<C extends ElementType = 'div'> {
   inputPadding?: string;
 }
 
-export type TextAreaProps<C extends ElementType = 'div'> = TextAreaOwnProps<C> &
+export type TextareaProps<C extends ElementType = 'div'> = TextAreaOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof TextAreaOwnProps<C>>;
 
-export const TextArea = <C extends ElementType = 'div'>(
-  props: TextAreaProps<C>,
+export const Textarea = <C extends ElementType = 'div'>(
+  props: TextareaProps<C>,
 ) => {
   const accentColor = useAccentColor();
   const {
@@ -153,14 +153,7 @@ export const TextArea = <C extends ElementType = 'div'>(
     rounded,
     true,
   );
-
-  const heights: Record<TextAreaSize, string> = {
-    sm: 'min-h-6',
-    md: 'min-h-7',
-    lg: 'min-h-8',
-    xl: 'min-h-10',
-    '2xl': 'min-h-12',
-  };
+  const height = rootSizeClasses(size, 'min-height');
 
   const inputPadding = cn(
     inputPaddingVertical[size],
@@ -251,7 +244,7 @@ export const TextArea = <C extends ElementType = 'div'>(
             ref={inputElRef}
             className={cn(
               inputPadding,
-              heights[size],
+              height,
               itemRoundedClasses,
               fontSizes[size],
               'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
@@ -287,7 +280,7 @@ export const TextArea = <C extends ElementType = 'div'>(
           data-part="info"
           data-color={color}
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
           )}
         >
           {infoMessage}
@@ -298,7 +291,7 @@ export const TextArea = <C extends ElementType = 'div'>(
           data-part="error"
           data-color="red"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

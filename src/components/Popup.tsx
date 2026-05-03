@@ -10,6 +10,7 @@ import { createPortal } from 'react-dom';
 
 import { useFocusTrap } from '../hooks/use-focus-trap';
 import { useModalUtils } from '../hooks/use-modal-utils';
+import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { Backdrop } from './Backdrop';
@@ -193,12 +194,13 @@ type PopupInnerProps = Omit<PopupProps, 'open' | 'onOpenChange'> & {
 };
 
 function PopupInner(props: PopupInnerProps) {
+  const overlaysRoot = useOverlaysRoot();
   const {
     phase = 'closed',
     onPhaseChange = () => {},
 
     className = '',
-    root = '#app, #__next, #root',
+    root = overlaysRoot,
     inertContainer = '.app-container',
     lazy = false,
     contentClassName = '',
@@ -368,7 +370,7 @@ function PopupInner(props: PopupInnerProps) {
   const content = (
     <div
       className={cn(
-        'cladd-popup fixed inset-0 z-50 overflow-hidden',
+        'cladd-popup fixed inset-0 z-50 flex flex-col justify-center overflow-hidden',
         opened && 'popup-opened',
         className,
       )}
@@ -397,7 +399,7 @@ function PopupInner(props: PopupInnerProps) {
       <div
         data-part="wrapper"
         className={cn(
-          'cladd-popup-wrapper absolute inset-0 z-50 overflow-auto pt-safe-12 pb-safe-12',
+          'cladd-popup-wrapper absolute inset-0 z-50 h-fit max-h-full self-center overflow-auto pt-safe-12 pb-safe-12',
           opened && 'duration-500 ease-[cubic-bezier(0,1,0.2,1)]',
           !opened &&
             'translate-y-[100vh] scale-x-65 duration-200 ease-[ease-in]',
@@ -409,7 +411,7 @@ function PopupInner(props: PopupInnerProps) {
           data-part="content"
           data-open={opened || undefined}
           className={cn(
-            'cladd-popup-content pointer-events-auto relative mx-auto flex min-h-full w-full max-w-162 flex-col gap-2',
+            'cladd-popup-content pointer-events-auto relative mx-auto flex min-h-full w-full max-w-162 flex-col justify-center gap-2',
             contentClassName,
           )}
         >

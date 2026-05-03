@@ -14,6 +14,7 @@ import {
 import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
+import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { Button, ButtonSize } from './Button';
 import { FocusableLayer } from './FocusableLayer';
@@ -209,20 +210,14 @@ export const Input = <
     false,
   );
 
-  const heights: Record<InputSize, string> = {
-    sm: 'h-6',
-    md: 'h-7',
-    lg: 'h-8',
-    xl: 'h-10',
-    '2xl': 'h-12',
-  };
+  const height = rootSizeClasses(size, 'height');
 
   const prevSize: ButtonSize = {
-    sm: 'sm',
-    md: 'sm',
-    lg: 'md',
-    xl: 'lg',
-    '2xl': 'xl',
+    sm: '2xs',
+    md: 'xs',
+    lg: 'sm',
+    xl: 'md',
+    '2xl': 'lg',
   }[size] as ButtonSize;
 
   const inputPadding = icon
@@ -325,7 +320,7 @@ export const Input = <
           placeholder={placeholder}
           className={cn(
             inputPadding,
-            heights[size],
+            height,
             fontSizes[size],
             itemRoundedClasses,
             'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
@@ -353,7 +348,7 @@ export const Input = <
             data-part="display-value"
             className={cn(
               inputPadding,
-              heights[size],
+              height,
               fontSizes[size],
               'pointer-events-none absolute inset-0 flex items-center font-medium',
               disabled && 'text-cladd-fg-softer',
@@ -364,35 +359,38 @@ export const Input = <
           </span>
         )}
         {clearButton && !disabled && !readOnly && (
-          <Button
-            data-part="clear"
+          <div
             className={cn(
-              'mr-1 -ml-2 w-auto shrink-0 transform-gpu duration-200',
-              size === 'sm' && 'h-4 w-5',
-              size === 'md' && 'h-5 w-6',
-              size === 'lg' && 'h-6 w-7',
-              size === 'xl' && 'h-8 w-9',
-              size === '2xl' && 'h-10 w-11',
-              !value && 'pointer-events-none scale-0',
+              'relative mr-1 shrink-0',
+              rootSizeClasses(size, 'height'),
+              rootSizeClasses(size, 'width'),
             )}
-            contentClassName="px-0"
-            disabled={!value}
-            rounded={rounded}
-            size={prevSize}
-            outline={false}
-            onClick={onClear}
           >
-            <CloseIcon
+            <Button
+              data-part="clear"
               className={cn(
-                'text-cladd-fg-soft',
-                size === 'sm'
-                  ? 'size-3!'
-                  : size === 'md'
-                    ? 'size-3.5!'
-                    : 'size-4',
+                'absolute top-1 right-0 bottom-1 left-0 h-auto w-auto transform-gpu duration-200',
+                !value && 'pointer-events-none scale-0',
               )}
-            />
-          </Button>
+              contentClassName="px-0"
+              disabled={!value}
+              rounded={rounded}
+              size={prevSize}
+              outline={false}
+              onClick={onClear}
+            >
+              <CloseIcon
+                className={cn(
+                  'text-cladd-fg-soft',
+                  size === 'sm'
+                    ? 'size-3!'
+                    : size === 'md'
+                      ? 'size-3.5!'
+                      : 'size-4',
+                )}
+              />
+            </Button>
+          </div>
         )}
 
         {suffix}
@@ -403,7 +401,7 @@ export const Input = <
           data-part="info"
           data-color={color}
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
           )}
         >
           {infoMessage}
@@ -414,7 +412,7 @@ export const Input = <
           data-part="error"
           data-color="red"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

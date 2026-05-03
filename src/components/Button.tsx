@@ -9,12 +9,13 @@ import {
 
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
+import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface, SurfaceVariant } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
-export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ButtonSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 type ButtonSurface = 'surface' | 'cut';
 
 interface ButtonOwnProps<C extends ElementType = 'button'> {
@@ -73,6 +74,8 @@ export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps<C>>;
 
 export const buttonIconSizes: Record<ButtonSize, string> = {
+  '2xs': '[&>svg]:size-3',
+  xs: '[&>svg]:size-3',
   sm: '[&>svg]:size-4',
   md: '[&>svg]:size-4',
   lg: '[&>svg]:size-4',
@@ -111,13 +114,9 @@ export const Button = <C extends ElementType = 'button'>(
 
   let surface: ButtonSurface = propSurface || 'surface';
 
-  const heights: Record<ButtonSize, string> = {
-    sm: multiline ? 'min-h-[24px]' : 'h-6',
-    md: multiline ? 'min-h-[28px]' : 'h-7',
-    lg: multiline ? 'min-h-[32px]' : 'h-8',
-    xl: multiline ? 'min-h-[40px]' : 'h-10',
-    '2xl': multiline ? 'min-h-[48px]' : 'h-12',
-  };
+  const height = multiline
+    ? rootSizeClasses(size, 'min-height')
+    : rootSizeClasses(size, 'height');
 
   const { itemRoundedClasses, focusRoundedClasses } = roundedClasses(
     size,
@@ -126,6 +125,8 @@ export const Button = <C extends ElementType = 'button'>(
   );
 
   const paddings: Record<ButtonSize, string> = {
+    '2xs': 'px-2.5',
+    xs: 'px-2.5',
     sm: 'px-2.5',
     md: 'px-2.5',
     lg: 'px-2.5',
@@ -133,6 +134,8 @@ export const Button = <C extends ElementType = 'button'>(
     '2xl': 'px-3.5',
   };
   const fontSizes: Record<ButtonSize, string> = {
+    '2xs': 'text-xs',
+    xs: 'text-xs',
     sm: 'text-xs',
     md: 'text-xs',
     lg: 'text-xs',
@@ -160,7 +163,7 @@ export const Button = <C extends ElementType = 'button'>(
         color && color === 'neutral' && isFill && 'text-cladd-on-primary',
 
         fontSizes[size],
-        heights[size],
+        height,
         disabled && 'pointer-events-none',
         !disabled && Component === 'a' ? 'cursor-pointer' : 'cursor-auto',
         itemRoundedClasses,
@@ -169,7 +172,7 @@ export const Button = <C extends ElementType = 'button'>(
       )}
       contentClassName={cn(
         'flex w-full items-center justify-center gap-2 py-1 [&>svg]:shrink-0',
-        multiline && heights[size],
+        multiline && height,
         buttonIconSizes[size],
         disabled && 'opacity-40',
         paddings[size],
