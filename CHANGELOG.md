@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.18 (2026-05-03)
+
+### Features
+
+- add surfaceLevel prop to Chip (2c4901e)
+
 ## 0.0.17 (2026-05-03)
 
 ### Features
