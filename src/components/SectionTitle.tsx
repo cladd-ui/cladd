@@ -18,7 +18,7 @@ export const SectionTitle = (props: SectionTitleProps) => {
     <div
       ref={ref}
       className={cn(
-        'cladd-section-title flex items-end gap-4 text-xs font-medium text-on-surface-dark uppercase select-none',
+        'cladd-section-title flex items-end gap-4 text-xs font-medium text-cladd-fg-soft uppercase select-none',
         className,
       )}
       {...rest}

@@ -211,7 +211,7 @@ export const Shortcut = (props: ShortcutProps) => {
           level={surfaceLevel}
           className={cn(
             'relative shrink-0 font-semibold',
-            !isFill && 'text-primary',
+            !isFill && 'text-cladd-primary',
             fontSizeClass,
             roundedClass,
             sizeClass,

@@ -42,7 +42,7 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
    * - `transparent` - no background; children render at the parent level (used for nested groupings).
    * - `solid` - flat surface fill (default).
    * - `gradient` - diagonal highlight→surface gradient.
-   * - `solid-fill` - flat primary/accent fill (text inverts to `text-on-primary`).
+   * - `solid-fill` - flat primary/accent fill (text inverts to `text-cladd-on-primary`).
    * - `gradient-fill` - diagonal accent gradient (text inverts).
    */
   variant?: SurfaceVariant;
@@ -128,7 +128,7 @@ export const Surface = <C extends ElementType = 'div'>(
       data-level={currentLevel}
       className={cn(
         'cladd-surface relative',
-        isFill ? 'text-on-primary' : 'text-on-surface',
+        isFill ? 'text-cladd-on-primary' : 'text-cladd-fg',
         (clickable || hoverable) && 'group/cladd-surface',
         className,
       )}
@@ -139,21 +139,22 @@ export const Surface = <C extends ElementType = 'div'>(
       <div
         className={cn(
           'pointer-events-none absolute inset-0 rounded-[inherit]',
-          variant === 'solid' && 'bg-surface',
-          variant === 'solid-fill' && 'bg-primary',
+          variant === 'solid' && 'bg-cladd-surface',
+          variant === 'solid-fill' && 'bg-cladd-primary',
           variant === 'gradient' &&
-            'bg-linear-to-br from-surface-highlight to-surface',
+            'bg-linear-to-br from-cladd-surface-highlight to-cladd-surface',
           variant === 'gradient-fill' &&
-            'bg-linear-to-br from-primary to-primary/85 light:from-primary/80 light:to-primary',
+            'bg-linear-to-br from-cladd-primary to-cladd-primary/85 light:from-cladd-primary/80 light:to-cladd-primary',
 
           outline &&
-            cn(
-              isFill ? 'shadow-surface-outline-fill' : 'shadow-surface-outline',
-            ),
+            cn(isFill ? 'shadow-cladd-outline-fill' : 'shadow-cladd-outline'),
           variant === 'transparent' &&
             hoverable &&
-            'duration-200 group-hover/cladd-surface:bg-surface',
-          hoverable && clickable && 'group-active/cladd-surface:bg-surface',
+            'duration-200 group-hover/cladd-surface:bg-cladd-surface',
+          variant === 'transparent' &&
+            hoverable &&
+            clickable &&
+            'group-active/cladd-surface:bg-cladd-surface',
           bgClassName,
         )}
       >
@@ -167,13 +168,13 @@ export const Surface = <C extends ElementType = 'div'>(
                 cn(
                   'group-hover/cladd-surface:opacity-100',
                   isFill
-                    ? 'group-hover/cladd-surface:bg-surface-hover-fill'
-                    : 'group-hover/cladd-surface:bg-surface-hover',
+                    ? 'group-hover/cladd-surface:bg-cladd-surface-hover-fill'
+                    : 'group-hover/cladd-surface:bg-cladd-surface-hover',
                 ),
               clickable &&
                 (pressed
-                  ? 'bg-surface-pressed opacity-100'
-                  : 'group-active/cladd-surface:bg-surface-pressed group-active/cladd-surface:opacity-100'),
+                  ? 'bg-cladd-surface-pressed opacity-100'
+                  : 'group-active/cladd-surface:bg-cladd-surface-pressed group-active/cladd-surface:opacity-100'),
             )}
           />
         )}

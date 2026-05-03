@@ -322,8 +322,8 @@ export const Input = <
             fontSizes[size],
             itemRoundedClasses,
             'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
-            disabled && 'text-on-surface-darker',
-            'placeholder-on-surface-darker',
+            disabled && 'text-cladd-fg-softer',
+            'placeholder-cladd-fg-softer',
             !showRealValue && 'text-transparent! placeholder-transparent!',
             inputClassName,
           )}
@@ -348,7 +348,7 @@ export const Input = <
               heights[size],
               fontSizes[size],
               'pointer-events-none absolute inset-0 flex items-center font-medium',
-              disabled && 'text-on-surface-darker',
+              disabled && 'text-cladd-fg-softer',
               inputClassName,
             )}
           >
@@ -375,7 +375,7 @@ export const Input = <
           >
             <CloseIcon
               className={cn(
-                'text-on-surface-dark',
+                'text-cladd-fg-soft',
                 size === 'sm'
                   ? 'size-3!'
                   : size === 'md'
@@ -393,7 +393,7 @@ export const Input = <
         <div
           data-color={color}
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
           )}
         >
           {infoMessage}
@@ -403,7 +403,7 @@ export const Input = <
         <div
           data-color="red"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-on-primary opacity-100 duration-200',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

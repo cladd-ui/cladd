@@ -153,8 +153,8 @@ export const Button = <C extends ElementType = 'button'>(
         `cladd-button group/cladd-button inline-block appearance-none text-left font-semibold outline-0 select-none focus:ring-0 focus:outline-0`,
         color &&
           color !== 'neutral' &&
-          cn(isFill ? 'text-on-primary' : 'text-primary'),
-        color && color === 'neutral' && isFill && 'text-on-primary',
+          cn(isFill ? 'text-cladd-on-primary' : 'text-cladd-primary'),
+        color && color === 'neutral' && isFill && 'text-cladd-on-primary',
 
         fontSizes[size],
         heights[size],

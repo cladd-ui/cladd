@@ -141,7 +141,7 @@ export function Slider(props: SliderProps) {
         <span
           data-color={color}
           className={cn(
-            'absolute inset-0 rounded-full bg-primary ease-out',
+            'absolute inset-0 rounded-full bg-cladd-primary ease-out',
             !disabled &&
               !readOnly &&
               'group-focus-within/slider:-translate-x-3 group-active/slider:-translate-x-3',
@@ -172,7 +172,7 @@ export function Slider(props: SliderProps) {
             className={cn(
               size === 'sm' && '-left-1.5',
               size === 'md' && '-left-1',
-              'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-[11px] leading-none font-medium text-primary duration-300',
+              'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-[11px] leading-none font-medium text-cladd-primary duration-300',
               !disabled &&
                 !readOnly &&
                 'group-focus-within/slider:scale-100 group-active/slider:scale-100',

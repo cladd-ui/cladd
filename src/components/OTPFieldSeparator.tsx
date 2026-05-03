@@ -22,12 +22,12 @@ export const OTPFieldSeparator = (props: OTPFieldSeparatorProps) => {
       ref={ref}
       aria-hidden
       className={cn(
-        'cladd-otp-field-separator flex items-center text-surface-outline select-none',
+        'cladd-otp-field-separator flex items-center text-cladd-outline select-none',
         className,
       )}
       {...rest}
     >
-      {children ?? <span className="h-0.5 w-2 bg-surface-outline" />}
+      {children ?? <span className="h-0.5 w-2 bg-cladd-outline" />}
     </div>
   );
 };

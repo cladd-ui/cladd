@@ -79,7 +79,9 @@ export const useFocusTrap = ({
       if (!container.isConnected) return;
 
       // Only trap if this container is the topmost modal layer
-      const allModals = document.querySelectorAll('.dialog, .popup');
+      const allModals = document.querySelectorAll(
+        '.cladd-dialog, .cladd-popup',
+      );
       if (allModals.length > 0) {
         const lastModal = allModals[allModals.length - 1];
         if (lastModal !== container && !container.contains(lastModal)) return;

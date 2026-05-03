@@ -11,5 +11,5 @@ body {
   /* background-color: #0f0f0f; */
   /* background-color: #fff; */
   font-family: Inter;
-  @apply bg-background;
+  @apply bg-cladd-bg;
 }

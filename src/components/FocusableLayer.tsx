@@ -48,7 +48,7 @@ export const FocusableLayer = (props: {
     <span
       data-color={color}
       className={cn(
-        'pointer-events-none absolute -inset-1.5 z-1 scale-95 border-2 border-primary opacity-0 duration-200',
+        'pointer-events-none absolute -inset-1.5 z-1 scale-95 border-2 border-cladd-primary opacity-0 duration-200',
 
         force && 'scale-100 opacity-100',
         !force && groupClasses,

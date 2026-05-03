@@ -195,7 +195,7 @@ export function Checkbox<C extends ElementType = 'label'>(
           'pointer-events-none relative duration-200',
           size === 'sm' && 'size-3',
           size === 'md' && 'size-4',
-          !checked && 'scale-75 text-on-surface-dark',
+          !checked && 'scale-75 text-cladd-fg-soft',
           checked &&
             !disabled &&
             !readOnly &&
@@ -204,7 +204,7 @@ export function Checkbox<C extends ElementType = 'label'>(
             !disabled &&
             !readOnly &&
             'group-active/cladd-checkbox:scale-65',
-          checked && cn('text-on-primary'),
+          checked && cn('text-cladd-on-primary'),
           checkClassName,
         )}
       />

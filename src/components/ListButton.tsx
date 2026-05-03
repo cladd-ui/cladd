@@ -133,7 +133,7 @@ export const ListButton = <C extends ElementType = 'button'>(
           {header && (
             <div
               className={cn(
-                'text-xs leading-tight font-normal text-on-surface-dark',
+                'text-xs leading-tight font-normal text-cladd-fg-soft',
                 headerClassName,
               )}
             >
@@ -152,7 +152,7 @@ export const ListButton = <C extends ElementType = 'button'>(
           {footer && (
             <div
               className={cn(
-                'text-xs leading-tight font-normal text-on-surface-darker',
+                'text-xs leading-tight font-normal text-cladd-fg-softer',
                 footerClassName,
               )}
             >

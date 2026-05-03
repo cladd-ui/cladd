@@ -251,7 +251,7 @@ export const TextArea = <C extends ElementType = 'div'>(
                 itemRoundedClasses,
                 fontSizes[size],
                 'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
-                disabled && 'text-on-surface-darker',
+                disabled && 'text-cladd-fg-softer',
                 inputClassName,
               )}
               onPaste={onPaste}
@@ -263,7 +263,7 @@ export const TextArea = <C extends ElementType = 'div'>(
             {!text && placeholder && (
               <div
                 className={cn(
-                  'pointer-events-none absolute top-0 left-0 h-full w-full text-on-surface-darker select-none',
+                  'pointer-events-none absolute top-0 left-0 h-full w-full text-cladd-fg-softer select-none',
                   fontSizes[size],
                   inputPadding,
                   placeholderClassName,
@@ -282,7 +282,7 @@ export const TextArea = <C extends ElementType = 'div'>(
         <div
           data-color={color}
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
           )}
         >
           {infoMessage}
@@ -292,7 +292,7 @@ export const TextArea = <C extends ElementType = 'div'>(
         <div
           data-color="red"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-on-primary opacity-100 duration-200',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

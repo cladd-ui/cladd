@@ -543,7 +543,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
             }}
             className={cn(
               'duration-200',
-              backdropTransparent ? 'bg-transparent' : 'bg-backdrop/50',
+              backdropTransparent ? 'bg-transparent' : 'bg-cladd-backdrop/50',
               opened ? 'opacity-100' : 'opacity-0',
             )}
           />
@@ -577,7 +577,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
           }}
           style={popoverStyle}
           className={cn(
-            'pointer-events-auto z-50 w-40 max-w-[calc(100vw-16px)] rounded-3xl shadow-popover transition-[opacity,transform,scale] duration-0',
+            'pointer-events-auto z-50 w-40 max-w-[calc(100vw-16px)] rounded-3xl shadow-cladd-popover transition-[opacity,transform,scale] duration-0',
             opened && 'scale-100 opacity-100 ease-[cubic-bezier(0,1,0,1.025)]',
             (phase === 'opened' || (phase === 'opening' && opened)) &&
               'duration-400',

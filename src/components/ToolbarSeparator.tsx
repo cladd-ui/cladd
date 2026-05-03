@@ -21,7 +21,7 @@ export const ToolbarSeparator = (props: ToolbarSeparatorProps) => {
     <div
       ref={ref}
       className={cn(
-        'cladd-toolbar-separator mx-1 h-1/2 w-px bg-surface-outline',
+        'cladd-toolbar-separator mx-1 h-1/2 w-px bg-cladd-outline',
         className,
       )}
       {...rest}

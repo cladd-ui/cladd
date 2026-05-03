@@ -74,8 +74,8 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
       {/* bg */}
       <div
         className={cn(
-          `pointer-events-none absolute inset-0 rounded-[inherit] bg-surface-cut`,
-          outline && 'shadow-surface-cut-outline',
+          `pointer-events-none absolute inset-0 rounded-[inherit] bg-cladd-surface-cut`,
+          outline && 'shadow-cladd-cut-outline',
         )}
       >
         {/* Hoverable/Clickable */}
@@ -84,11 +84,11 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
             className={cn(
               'absolute inset-0 rounded-[inherit] opacity-0 duration-200',
               hoverable &&
-                'group-hover/cladd-surface-cut-hoverable:bg-surface-hover group-hover/cladd-surface-cut-hoverable:opacity-100',
+                'group-hover/cladd-surface-cut-hoverable:bg-cladd-surface-hover group-hover/cladd-surface-cut-hoverable:opacity-100',
               clickable &&
                 (pressed
-                  ? 'bg-surface-pressed opacity-100'
-                  : 'group-active/cladd-surface-cut:bg-surface-pressed group-active/cladd-surface-cut:opacity-100'),
+                  ? 'bg-cladd-surface-pressed opacity-100'
+                  : 'group-active/cladd-surface-cut:bg-cladd-surface-pressed group-active/cladd-surface-cut:opacity-100'),
             )}
           />
         )}

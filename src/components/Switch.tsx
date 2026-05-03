@@ -220,7 +220,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
               <span
                 className={cn(
                   'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 rotate-45 rounded-full duration-300',
-                  checked ? 'bg-on-primary' : 'bg-on-surface-dark',
+                  checked ? 'bg-cladd-on-primary' : 'bg-cladd-fg-soft',
                   checked
                     ? 'translate-x-0.5 translate-y-[-1.75px] scale-x-40'
                     : 'scale-x-75',
@@ -229,7 +229,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
               <span
                 className={cn(
                   'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 -rotate-45 rounded-full duration-300',
-                  checked ? 'bg-on-primary' : 'bg-on-surface-dark',
+                  checked ? 'bg-cladd-on-primary' : 'bg-cladd-fg-soft',
                   checked
                     ? 'translate-x-[-1.5px] scale-x-60 -rotate-60'
                     : 'scale-x-75',

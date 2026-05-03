@@ -113,9 +113,7 @@ function App() {
 
   return (
     <UIProvider theme="dark">
-      <div
-        className={cn('flex flex-col items-start gap-8 p-8 text-on-surface')}
-      >
+      <div className={cn('flex flex-col items-start gap-8 p-8 text-cladd-fg')}>
         <SectionTitle>Shortcuts</SectionTitle>
         <Surface
           outline
@@ -182,7 +180,7 @@ function App() {
 
         <div
           className={cn(
-            'flex max-w-full flex-col gap-2 overflow-auto bg-background',
+            'flex max-w-full flex-col gap-2 overflow-auto bg-cladd-bg',
           )}
         >
           <div className="flex gap-4">
@@ -438,11 +436,11 @@ function App() {
                   <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                     Surface {color}: 2
                   </SectionTitle>
-                  <div className="mb-1 bg-surface-prev p-1">Prev</div>
-                  <div className="mb-1 bg-surface-minus p-1">Minus</div>
-                  <div className="mb-1 bg-surface p-1">Current</div>
-                  <div className="mb-1 bg-surface-plus p-1">Plus</div>
-                  <div className="mb-1 bg-surface-next p-1">Next</div>
+                  <div className="mb-1 bg-cladd-surface-prev p-1">Prev</div>
+                  <div className="mb-1 bg-cladd-surface-minus p-1">Minus</div>
+                  <div className="mb-1 bg-cladd-surface p-1">Current</div>
+                  <div className="mb-1 bg-cladd-surface-plus p-1">Plus</div>
+                  <div className="mb-1 bg-cladd-surface-next p-1">Next</div>
                   <SurfaceCut
                     className="mb-2 rounded-full"
                     outline
@@ -458,11 +456,11 @@ function App() {
                     <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                       Surface {color}: 3
                     </SectionTitle>
-                    <div className="mb-1 bg-surface-prev p-1">Prev</div>
-                    <div className="mb-1 bg-surface-minus p-1">Minus</div>
-                    <div className="mb-1 bg-surface p-1">Current</div>
-                    <div className="mb-1 bg-surface-plus p-1">Plus</div>
-                    <div className="mb-1 bg-surface-next p-1">Next</div>
+                    <div className="mb-1 bg-cladd-surface-prev p-1">Prev</div>
+                    <div className="mb-1 bg-cladd-surface-minus p-1">Minus</div>
+                    <div className="mb-1 bg-cladd-surface p-1">Current</div>
+                    <div className="mb-1 bg-cladd-surface-plus p-1">Plus</div>
+                    <div className="mb-1 bg-cladd-surface-next p-1">Next</div>
                     <SurfaceCut
                       className="mb-2 rounded-full"
                       outline
@@ -478,11 +476,13 @@ function App() {
                       <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                         Surface {color}: 4
                       </SectionTitle>
-                      <div className="mb-1 bg-surface-prev p-1">Prev</div>
-                      <div className="mb-1 bg-surface-minus p-1">Minus</div>
-                      <div className="mb-1 bg-surface p-1">Current</div>
-                      <div className="mb-1 bg-surface-plus p-1">Plus</div>
-                      <div className="mb-1 bg-surface-next p-1">Next</div>
+                      <div className="mb-1 bg-cladd-surface-prev p-1">Prev</div>
+                      <div className="mb-1 bg-cladd-surface-minus p-1">
+                        Minus
+                      </div>
+                      <div className="mb-1 bg-cladd-surface p-1">Current</div>
+                      <div className="mb-1 bg-cladd-surface-plus p-1">Plus</div>
+                      <div className="mb-1 bg-cladd-surface-next p-1">Next</div>
                       <SurfaceCut
                         className="mb-2 rounded-full"
                         outline
@@ -498,11 +498,19 @@ function App() {
                         <SectionTitle className="mb-4 text-[10px] whitespace-nowrap">
                           Surface {color}: 5
                         </SectionTitle>
-                        <div className="mb-1 bg-surface-prev p-1">Prev</div>
-                        <div className="mb-1 bg-surface-minus p-1">Minus</div>
-                        <div className="mb-1 bg-surface p-1">Current</div>
-                        <div className="mb-1 bg-surface-plus p-1">Plus</div>
-                        <div className="mb-1 bg-surface-next p-1">Next</div>
+                        <div className="mb-1 bg-cladd-surface-prev p-1">
+                          Prev
+                        </div>
+                        <div className="mb-1 bg-cladd-surface-minus p-1">
+                          Minus
+                        </div>
+                        <div className="mb-1 bg-cladd-surface p-1">Current</div>
+                        <div className="mb-1 bg-cladd-surface-plus p-1">
+                          Plus
+                        </div>
+                        <div className="mb-1 bg-cladd-surface-next p-1">
+                          Next
+                        </div>
                         <SurfaceCut
                           className="mb-2 rounded-full"
                           outline
@@ -701,7 +709,7 @@ function App() {
                   <Button>Close</Button>
                 </PopupClose>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-on-surface-darker">
+                  <span className="font-mono text-xs text-cladd-fg-softer">
                     PROJ-45
                   </span>
                   <div className={'flex items-center gap-1'}>
@@ -1709,7 +1717,7 @@ function App() {
         </Surface>
 
         <SectionTitle>Nested + Colors</SectionTitle>
-        <div className="h-px w-full shrink-0 bg-background-outline" />
+        <div className="h-px w-full shrink-0 bg-cladd-bg-outline" />
         <div className="flex justify-start gap-8">
           {[
             'neutral',
@@ -1732,15 +1740,15 @@ function App() {
               color={color}
             >
               <div>Surface 1</div>
-              <div className="text-on-surface-dark">
-                Surface 1 On Surface Dark
+              <div className="text-cladd-fg-soft">
+                Surface 1 On Surface Soft
               </div>
-              <div className="text-on-surface-darker">
-                Surface 1 On Surface Darker
+              <div className="text-cladd-fg-softer">
+                Surface 1 On Surface Softer
               </div>
-              <div className="h-px bg-surface-outline" />
-              <div className="text-on-surface-darkest">
-                Surface 1 On Surface Darkest
+              <div className="h-px bg-cladd-outline" />
+              <div className="text-cladd-fg-softest">
+                Surface 1 On Surface Softest
               </div>
               <SurfaceCut hoverable clickable className="rounded-xl p-4">
                 Surface Cut
@@ -1760,15 +1768,15 @@ function App() {
                 outline
               >
                 <div>Surface 2</div>
-                <div className="text-on-surface-dark">
-                  Surface 1 On Surface Dark
+                <div className="text-cladd-fg-soft">
+                  Surface 1 On Surface Soft
                 </div>
-                <div className="text-on-surface-darker">
-                  Surface 1 On Surface Darker
+                <div className="text-cladd-fg-softer">
+                  Surface 1 On Surface Softer
                 </div>
-                <div className="h-px bg-surface-outline" />
-                <div className="text-on-surface-darkest">
-                  Surface 1 On Surface Darkest
+                <div className="h-px bg-cladd-outline" />
+                <div className="text-cladd-fg-softest">
+                  Surface 1 On Surface Softest
                 </div>
                 <SurfaceCut hoverable clickable className="rounded-xl p-4">
                   Surface Cut
@@ -1781,15 +1789,15 @@ function App() {
                   outline
                 >
                   <div>Surface 3</div>
-                  <div className="text-on-surface-dark">
-                    Surface 1 On Surface Dark
+                  <div className="text-cladd-fg-soft">
+                    Surface 1 On Surface Soft
                   </div>
-                  <div className="text-on-surface-darker">
-                    Surface 1 On Surface Darker
+                  <div className="text-cladd-fg-softer">
+                    Surface 1 On Surface Softer
                   </div>
-                  <div className="h-px bg-surface-outline" />
-                  <div className="text-on-surface-darkest">
-                    Surface 1 On Surface Darkest
+                  <div className="h-px bg-cladd-outline" />
+                  <div className="text-cladd-fg-softest">
+                    Surface 1 On Surface Softest
                   </div>
                   <SurfaceCut hoverable clickable className="rounded-xl p-4">
                     Surface Cut
@@ -1801,15 +1809,15 @@ function App() {
                     outline
                   >
                     <div>Surface 4</div>
-                    <div className="text-on-surface-dark">
-                      Surface 1 On Surface Dark
+                    <div className="text-cladd-fg-soft">
+                      Surface 1 On Surface Soft
                     </div>
-                    <div className="text-on-surface-darker">
-                      Surface 1 On Surface Darker
+                    <div className="text-cladd-fg-softer">
+                      Surface 1 On Surface Softer
                     </div>
-                    <div className="h-px bg-surface-outline" />
-                    <div className="text-on-surface-darkest">
-                      Surface 1 On Surface Darkest
+                    <div className="h-px bg-cladd-outline" />
+                    <div className="text-cladd-fg-softest">
+                      Surface 1 On Surface Softest
                     </div>
                     <SurfaceCut hoverable clickable className="rounded-xl p-4">
                       Surface Cut
@@ -1823,15 +1831,15 @@ function App() {
                       clickable
                     >
                       <div>Surface 5</div>
-                      <div className="text-on-surface-dark">
-                        Surface 1 On Surface Dark
+                      <div className="text-cladd-fg-soft">
+                        Surface 1 On Surface Soft
                       </div>
-                      <div className="text-on-surface-darker">
-                        Surface 1 On Surface Darker
+                      <div className="text-cladd-fg-softer">
+                        Surface 1 On Surface Softer
                       </div>
-                      <div className="h-px bg-surface-outline" />
-                      <div className="text-on-surface-darkest">
-                        Surface 1 On Surface Darkest
+                      <div className="h-px bg-cladd-outline" />
+                      <div className="text-cladd-fg-softest">
+                        Surface 1 On Surface Softest
                       </div>
                       <SurfaceCut
                         hoverable

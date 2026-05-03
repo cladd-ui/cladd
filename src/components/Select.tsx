@@ -549,7 +549,7 @@ export function Select<T = string>(props: SelectProps<T>) {
             <div
               className={cn(
                 'w-full min-w-0 shrink',
-                !children && !String(value) && 'text-on-surface-darker',
+                !children && !String(value) && 'text-cladd-fg-softer',
                 placeholderClassName,
                 valueClassName,
               )}
@@ -558,7 +558,7 @@ export function Select<T = string>(props: SelectProps<T>) {
             </div>
             {dropdownIcon && (
               <DropdownIcon
-                className={cn('size-4', 'shrink-0 text-on-surface-darker')}
+                className={cn('size-4', 'shrink-0 text-cladd-fg-softer')}
               />
             )}
           </div>
@@ -601,7 +601,7 @@ export function Select<T = string>(props: SelectProps<T>) {
             {search && onSearch && searchQuery && !displayOptions.length && (
               <div
                 className={cn(
-                  'mb-2 flex h-8 w-full items-center pr-4 pl-4 text-xs font-medium text-on-surface-darker',
+                  'mb-2 flex h-8 w-full items-center pr-4 pl-4 text-xs font-medium text-cladd-fg-softer',
                 )}
               >
                 {searchNotFound}
@@ -662,7 +662,7 @@ export function Select<T = string>(props: SelectProps<T>) {
                           index: options.indexOf(optionValue),
                           selected: getOptionIsChecked(optionValue),
                         }) && (
-                          <div className="text-xs font-normal text-on-surface-dark">
+                          <div className="text-xs font-normal text-cladd-fg-soft">
                             {renderOptionInfo({
                               value: optionValue,
                               index: options.indexOf(optionValue),

@@ -437,7 +437,7 @@ function PopupInner(props: PopupInnerProps) {
                       {/* CLOSE BUTTON */}
 
                       <Button
-                        contentClassName="text-on-surface-dark"
+                        contentClassName="text-cladd-fg-soft"
                         rounded
                         variant="transparent"
                         outline={false}

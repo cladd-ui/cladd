@@ -47,7 +47,7 @@ export function Spinner(props: SpinnerProps) {
       <div className="cladd-spinner-wrap absolute inset-0">
         <div
           className={cn(
-            'absolute top-1/2 left-0 aspect-16/10 w-full -translate-y-1/2 rounded-full border-primary',
+            'absolute top-1/2 left-0 aspect-16/10 w-full -translate-y-1/2 rounded-full border-cladd-primary',
             borderWidth,
           )}
         />
@@ -57,7 +57,7 @@ export function Spinner(props: SpinnerProps) {
             sizeClasses,
           )}
         >
-          <div className="cladd-spinner-knob absolute top-0 left-0 h-full w-1/2 rounded-full bg-primary" />
+          <div className="cladd-spinner-knob absolute top-0 left-0 h-full w-1/2 rounded-full bg-cladd-primary" />
         </div>
       </div>
     </div>

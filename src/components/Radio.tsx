@@ -188,12 +188,12 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
           { ...(checked && { 'data-color': color }) },
           !checked &&
             cn(
-              'scale-75 bg-on-surface-dark',
+              'scale-75 bg-cladd-fg-soft',
               !readOnly && !disabled && 'group-active/cladd-radio:scale-65',
             ),
           checked &&
             cn(
-              'bg-on-primary',
+              'bg-cladd-on-primary',
               !disabled && !readOnly && 'group-active/cladd-radio:scale-90',
             ),
         )}
