@@ -310,6 +310,7 @@ const DialogInner = (props: DialogInnerProps) => {
         }}
       />
       <Surface
+        data-cladd-part="content"
         className={cn(
           `fixed top-1/2 left-1/2 z-50 w-80 max-w-full -translate-x-1/2 -translate-y-1/2 rounded-3xl`,
           !opened && 'scale-75 opacity-0 duration-200 ease-out!',
@@ -329,18 +330,27 @@ const DialogInner = (props: DialogInnerProps) => {
         }}
       >
         {title && (
-          <div id={titleId} className="text-base font-semibold">
+          <div
+            data-cladd-part="title"
+            id={titleId}
+            className="text-base font-semibold"
+          >
             {title}
           </div>
         )}
         {text && (
-          <div id={descId} className="text-sm leading-relaxed">
+          <div
+            data-cladd-part="text"
+            id={descId}
+            className="text-sm leading-relaxed"
+          >
             {text}
           </div>
         )}
         {children}
         {requireConfirmText && confirmButtonText && (
           <Input
+            data-cladd-part="input"
             value={inputText}
             infoMessage={`Type ${requireConfirmText} to confirm`}
             color={confirmButtonColor}
@@ -350,9 +360,13 @@ const DialogInner = (props: DialogInnerProps) => {
           />
         )}
         {(buttons || cancelButtonText || confirmButtonText) && (
-          <div className="mt-8! flex flex-wrap items-center justify-end gap-2">
+          <div
+            data-cladd-part="buttons"
+            className="mt-8! flex flex-wrap items-center justify-end gap-2"
+          >
             {cancelButtonText && (
               <Button
+                data-cladd-part="cancel"
                 tabIndex={0}
                 rounded
                 size="lg"
@@ -369,6 +383,7 @@ const DialogInner = (props: DialogInnerProps) => {
             )}
             {confirmButtonText && (
               <Button
+                data-cladd-part="confirm"
                 ref={confirmButtonRef}
                 tabIndex={0}
                 color={

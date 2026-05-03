@@ -569,6 +569,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
             ) : null;
           })()}
         <Surface
+          data-part="content"
           ref={(el: HTMLElement) => {
             elRef.current = el;
             if (typeof ref === 'function') ref(el);

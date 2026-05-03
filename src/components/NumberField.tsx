@@ -127,6 +127,7 @@ export const NumberField = (props: NumberFieldProps) => {
       {...rest}
     >
       <Button
+        data-cladd-part="decrease"
         size={size}
         variant={buttonVariant}
         outline={buttonOutline}
@@ -153,6 +154,7 @@ export const NumberField = (props: NumberFieldProps) => {
 
       {input ? (
         <Input
+          data-cladd-part="control"
           size={size as InputSize}
           value={value}
           disabled={disabled}
@@ -163,6 +165,7 @@ export const NumberField = (props: NumberFieldProps) => {
         />
       ) : (
         <SurfaceCut
+          data-cladd-part="control"
           className={cn(
             'w-auto min-w-9 self-stretch text-center',
 
@@ -178,6 +181,7 @@ export const NumberField = (props: NumberFieldProps) => {
       )}
 
       <Button
+        data-cladd-part="increase"
         size={size}
         color={color}
         variant={buttonVariant}

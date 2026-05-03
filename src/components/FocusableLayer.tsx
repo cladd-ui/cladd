@@ -46,6 +46,7 @@ export const FocusableLayer = (props: {
     }[group as keyof Record<string, string>] || '';
   return (
     <span
+      data-cladd-part="focus-ring"
       data-color={color}
       className={cn(
         'pointer-events-none absolute -inset-1.5 z-1 scale-95 border-2 border-cladd-primary opacity-0 duration-200',

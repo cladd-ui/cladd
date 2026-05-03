@@ -56,7 +56,10 @@ export const SearchField = (props: SearchFieldProps) => {
       ref={ref}
       {...rest}
     >
-      <div className={cn('flex items-center', !inset && 'p-1.5')}>
+      <div
+        data-cladd-part="wrapper"
+        className={cn('flex items-center', !inset && 'p-1.5')}
+      >
         <Input
           className="w-full"
           placeholder={placeholder}

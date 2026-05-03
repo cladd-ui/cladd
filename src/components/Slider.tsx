@@ -125,6 +125,7 @@ export function Slider(props: SliderProps) {
     >
       {/* Track */}
       <SurfaceCut
+        data-cladd-part="track"
         className={cn(
           'pointer-events-none absolute inset-0 top-1/2 right-0 left-0 rounded-full',
           size === 'sm' ? '-mt-0.5 h-1' : '-mt-1 h-2',
@@ -133,6 +134,7 @@ export function Slider(props: SliderProps) {
 
       {/* Active BG */}
       <span
+        data-cladd-part="track-active"
         className={cn(
           'absolute top-1/2 -mt-px h-0.5 overflow-hidden rounded-full',
           size === 'sm' ? 'right-px left-px' : 'right-0.75 left-0.75',
@@ -156,6 +158,7 @@ export function Slider(props: SliderProps) {
 
       {/* Knob Wrap */}
       <span
+        data-cladd-part="thumb-wrapper"
         className={cn(
           'pointer-events-none absolute inset-0 flex items-center ease-out',
           durationClass,
@@ -164,7 +167,7 @@ export function Slider(props: SliderProps) {
           paddingLeft: `calc((100% - ${size === 'sm' ? 20 : 24}px) * ${progress})`,
         }}
       >
-        <span className="relative top-0 h-0 w-0">
+        <span className="relative top-0 h-0 w-0" data-cladd-part="value">
           <Surface
             color={color}
             variant="gradient"
@@ -189,6 +192,7 @@ export function Slider(props: SliderProps) {
         </span>
         {/* Knob */}
         <Surface
+          data-cladd-part="thumb"
           className={cn(
             'z-10 size-6 shrink-0 rounded-full',
             size === 'sm' && 'size-5',
@@ -201,6 +205,7 @@ export function Slider(props: SliderProps) {
         />
       </span>
       <input
+        data-cladd-part="control"
         className="relative m-0 block w-full appearance-none border-transparent bg-transparent p-0 focus:outline-none"
         type="range"
         disabled={disabled || readOnly}

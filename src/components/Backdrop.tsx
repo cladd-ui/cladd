@@ -14,6 +14,7 @@ export const Backdrop = (props: BackdropProps) => {
   return (
     <div
       ref={ref}
+      data-part="backdrop"
       className={cn(
         'cladd-backdrop fixed inset-0 z-50 bg-cladd-backdrop/90',
         className,

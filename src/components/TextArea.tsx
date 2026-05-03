@@ -215,9 +215,11 @@ export const TextArea = <C extends ElementType = 'div'>(
 
       {/* input */}
       <SurfaceCut
+        data-cladd-part="wrapper"
         className={cn(itemRoundedClasses, surfaceClassName)}
         hoverable={!disabled && !readOnly}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
+        contentClassName={cn('flex items-center', contentClassName)}
         ref={(el: HTMLElement | null) => {
           elRef.current = el;
           if (externalRef) {
@@ -227,59 +229,59 @@ export const TextArea = <C extends ElementType = 'div'>(
           }
         }}
       >
-        <SurfaceCutContent
-          className={cn('flex items-center', contentClassName)}
-        >
-          {prefix}
-          {icon && (
+        {prefix}
+        {icon && (
+          <div
+            data-cladd-part="icon"
+            className={cn(
+              'pointer-events-none absolute',
+              iconWrapClasses[size],
+            )}
+          >
+            {icon}
+          </div>
+        )}
+        <div className="relative w-full">
+          <div
+            data-cladd-part="control"
+            contentEditable={!disabled && !readOnly}
+            ref={inputElRef}
+            className={cn(
+              inputPadding,
+              heights[size],
+              itemRoundedClasses,
+              fontSizes[size],
+              'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
+              disabled && 'text-cladd-fg-softer',
+              inputClassName,
+            )}
+            onPaste={onPaste}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onKeyDown={onKeyDown}
+            onInput={onInput}
+          />
+          {!text && placeholder && (
             <div
+              data-cladd-part="placeholder"
               className={cn(
-                'pointer-events-none absolute',
-                iconWrapClasses[size],
+                'pointer-events-none absolute top-0 left-0 h-full w-full text-cladd-fg-softer select-none',
+                fontSizes[size],
+                inputPadding,
+                placeholderClassName,
               )}
             >
-              {icon}
+              {placeholder}
             </div>
           )}
-          <div className="relative w-full">
-            <div
-              contentEditable={!disabled && !readOnly}
-              ref={inputElRef}
-              className={cn(
-                inputPadding,
-                heights[size],
-                itemRoundedClasses,
-                fontSizes[size],
-                'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
-                disabled && 'text-cladd-fg-softer',
-                inputClassName,
-              )}
-              onPaste={onPaste}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onKeyDown={onKeyDown}
-              onInput={onInput}
-            />
-            {!text && placeholder && (
-              <div
-                className={cn(
-                  'pointer-events-none absolute top-0 left-0 h-full w-full text-cladd-fg-softer select-none',
-                  fontSizes[size],
-                  inputPadding,
-                  placeholderClassName,
-                )}
-              >
-                {placeholder}
-              </div>
-            )}
-          </div>
+        </div>
 
-          {suffix}
-        </SurfaceCutContent>
+        {suffix}
       </SurfaceCut>
 
       {infoMessage && valid !== false && !readOnly && (
         <div
+          data-cladd-part="info"
           data-color={color}
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
@@ -290,6 +292,7 @@ export const TextArea = <C extends ElementType = 'div'>(
       )}
       {errorMessage && valid === false && (
         <div
+          data-cladd-part="error"
           data-color="red"
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',

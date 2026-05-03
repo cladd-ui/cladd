@@ -394,8 +394,9 @@ function PopupInner(props: PopupInnerProps) {
       )}
 
       <div
+        data-cladd-part="wrapper"
         className={cn(
-          'cladd-popup-wrap absolute inset-0 z-50 overflow-auto pt-safe-12 pb-safe-12',
+          'cladd-popup-wrapper absolute inset-0 z-50 overflow-auto pt-safe-12 pb-safe-12',
           opened && 'duration-500 ease-[cubic-bezier(0,1,0.2,1)]',
           !opened &&
             'translate-y-[100vh] scale-x-65 duration-200 ease-[ease-in]',
@@ -404,6 +405,7 @@ function PopupInner(props: PopupInnerProps) {
         ref={transitionEndElRef}
       >
         <div
+          data-cladd-part="content"
           className={cn(
             'cladd-popup-content pointer-events-auto relative mx-auto flex min-h-full w-full max-w-162 flex-col gap-2',
             contentClassName,
@@ -413,21 +415,29 @@ function PopupInner(props: PopupInnerProps) {
           {/* TOP HEADER */}
           {header && (
             <div
+              data-cladd-part="header"
               className={cn(
                 'flex items-end justify-between px-4',
                 headerClassName,
               )}
             >
               {/* HEADER LEFT */}
-              <div className="flex min-w-0 shrink items-end gap-4">
+              <div
+                data-cladd-part="header-left"
+                className="flex min-w-0 shrink items-end gap-4"
+              >
                 {headerLeft}
               </div>
               {/* HEADER RIGHT */}
               {(headerRight || closeButton) && (
-                <div className="flex items-center gap-2">
+                <div
+                  data-cladd-part="header-right"
+                  className="flex items-center gap-2"
+                >
                   {headerRight}
                   {closeButton && (
                     <Surface
+                      data-cladd-part="close-wrapper"
                       className="rounded-full"
                       contentClassName="flex items-center p-1"
                       variant="gradient"
@@ -435,8 +445,8 @@ function PopupInner(props: PopupInnerProps) {
                       level={1}
                     >
                       {/* CLOSE BUTTON */}
-
                       <Button
+                        data-cladd-part="close"
                         contentClassName="text-cladd-fg-soft"
                         rounded
                         variant="transparent"

@@ -708,6 +708,16 @@ function App() {
                 <PopupClose>
                   <Button>Close</Button>
                 </PopupClose>
+                <PopupRoot>
+                  <PopupTrigger>
+                    <Tooltip tooltip="Popup">
+                      <Button>Open Popup</Button>
+                    </Tooltip>
+                  </PopupTrigger>
+                  <Popup>
+                    <PopupContent>Another Popup</PopupContent>
+                  </Popup>
+                </PopupRoot>
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-cladd-fg-softer">
                     PROJ-45

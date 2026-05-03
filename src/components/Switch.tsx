@@ -151,6 +151,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     >
       {input && (
         <input
+          data-cladd-part="input"
           checked={checked}
           type="checkbox"
           role="switch"
@@ -164,6 +165,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
 
       {/* BG */}
       <Surface
+        data-cladd-part="track"
         level={surfaceLevel}
         className="absolute inset-0 rounded-full"
         outline={outline}
@@ -173,6 +175,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
 
       {/* Knob */}
       <Surface
+        data-cladd-part="thumb"
         className={cn(
           'z-10 rounded-full duration-300',
           size === 'sm' && 'size-4',
@@ -207,6 +210,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         {icon && typeof icon !== 'function' && icon}
         {!icon && (
           <span
+            data-cladd-part="icon"
             {...(checked && { 'data-color': color })}
             className={cn('absolute inset-0', size === 'sm' && 'scale-80')}
           >

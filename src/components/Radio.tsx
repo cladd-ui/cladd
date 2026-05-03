@@ -143,6 +143,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     >
       {input && (
         <input
+          data-cladd-part="control"
           id={inputId}
           disabled={disabled || readOnly}
           readOnly={readOnly}
@@ -158,6 +159,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Knob */}
       <Surface
+        data-cladd-part="thumb"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
         )}
@@ -169,6 +171,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Checked Knob */}
       <Surface
+        data-cladd-part="thumb-checked"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
           !checked && 'scale-0',
@@ -183,6 +186,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Check */}
       <span
+        data-cladd-part="icon"
         className={cn(
           'pointer-events-none relative size-2 rounded-full duration-200',
           { ...(checked && { 'data-color': color }) },

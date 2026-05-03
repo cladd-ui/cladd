@@ -244,23 +244,35 @@ const ToastInner = (props: ToastInnerProps) => {
     >
       {icon ||
         (iconComponent && (
-          <div className="flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0">
+          <div
+            data-cladd-part="icon"
+            className="flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0"
+          >
             {icon}
             {iconComponent && <IconComponent />}
           </div>
         ))}
       {(title || text) && (
-        <div className="flex flex-col gap-1">
-          {title && <div className="text-sm font-semibold">{title}</div>}
-          {text && <div className="text-xs leading-relaxed">{text}</div>}
+        <div data-cladd-part="content" className="flex flex-col gap-1">
+          {title && (
+            <div data-cladd-part="title" className="text-sm font-semibold">
+              {title}
+            </div>
+          )}
+          {text && (
+            <div data-cladd-part="text" className="text-xs leading-relaxed">
+              {text}
+            </div>
+          )}
         </div>
       )}
 
       {children}
 
       {closeButton && (
-        <div className="ml-auto">
+        <div className="ml-auto" data-cladd-part="close-wrapper">
           <Button
+            data-cladd-part="close"
             rounded
             outline={false}
             variant="transparent"
