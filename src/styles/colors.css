@@ -38,42 +38,42 @@
 }
 
 :root,
-.color-neutral {
+[data-color="neutral"] {
   --theme: #fff;
 }
-.color-brand {
+[data-color="brand"] {
   --theme: #d7ff38;
 }
-.color-red {
+[data-color="red"] {
   --theme: #ff0b0b;
 }
-.color-pink {
+[data-color="pink"] {
   --theme: #ff0bac;
 }
-.color-purple {
+[data-color="purple"] {
   --theme: #a20bff;
 }
-.color-blue {
+[data-color="blue"] {
   --theme: #0047ff;
 }
-.color-cyan {
+[data-color="cyan"] {
   --theme: #00f9ff;
 }
-.color-lime {
+[data-color="lime"] {
   --theme: #7dff0b;
 }
-.color-green {
+[data-color="green"] {
   --theme: #0bff23;
 }
-.color-yellow {
+[data-color="yellow"] {
   --theme: #fff800;
 }
-.color-orange {
+[data-color="orange"] {
   --theme: #ff7a00;
 }
 /* DEFAULT */
 :root,
-.color-neutral {
+[data-color="neutral"] {
   --background: #0f0f0f;
   --backdrop: #000;
   --primary: oklch(from var(--theme) var(--dark-primary-lightness) 0 h);
@@ -123,7 +123,7 @@
 }
 
 /* COLORS */
-[class*="color-"]:not(.color-neutral) {
+[data-color]:not([data-color="neutral"]) {
   --background: oklch(from var(--theme) 0.15 0.02 h);
   --backdrop: #000;
   --primary: oklch(
@@ -181,9 +181,9 @@
 :root.light,
 .dark .light,
 :root .light,
-.light.color-neutral,
-.light .color-neutral,
-.color-neutral .light {
+.light[data-color="neutral"],
+.light [data-color="neutral"],
+[data-color="neutral"] .light {
   --background: #fff;
   --backdrop: oklch(0.91 0 0);
   --primary: oklch(from var(--theme) 0.1 0 h);
@@ -227,9 +227,9 @@
   }
 }
 /* COLORS LIGHT */
-.light [class*="color-"]:not(.color-neutral),
-.dark .light [class*="color-"]:not(.color-neutral),
-.light[class*="color-"]:not(.color-neutral) {
+.light [data-color]:not([data-color="neutral"]),
+.dark .light [data-color]:not([data-color="neutral"]),
+.light[data-color]:not([data-color="neutral"]) {
   --background: oklch(0.91 0.015 100);
   --backdrop: oklch(0.74 0.018 100);
   --primary: oklch(
@@ -286,7 +286,7 @@
 /* COMMON */
 .light,
 .dark,
-[class*="color-"] {
+[data-color] {
   --color-background: var(--background);
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);
@@ -300,7 +300,7 @@
 
 /* LEVELS */
 [class*="surface-level-"],
-[class*="color-"] {
+[data-color] {
   --surface-leveled: color-mix(
     in oklab,
     var(--surface-mix-color)
@@ -382,22 +382,22 @@
   );
 }
 .surface-level-1,
-.surface-level-1[class*="color-"] {
+.surface-level-1[data-color] {
   --surface-multiplier: 0;
 }
 .surface-level-2,
-.surface-level-2[class*="color-"] {
+.surface-level-2[data-color] {
   --surface-multiplier: 1;
 }
 .surface-level-3,
-.surface-level-3[class*="color-"] {
+.surface-level-3[data-color] {
   --surface-multiplier: 2;
 }
 .surface-level-4,
-.surface-level-4[class*="color-"] {
+.surface-level-4[data-color] {
   --surface-multiplier: 3;
 }
 .surface-level-5,
-.surface-level-5[class*="color-"] {
+.surface-level-5[data-color] {
   --surface-multiplier: 4;
 }

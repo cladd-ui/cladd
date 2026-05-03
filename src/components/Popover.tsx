@@ -305,7 +305,7 @@ type PopoverOwnProps = {
   backdrop?: boolean;
   /** Make the backdrop transparent (still captures clicks for outside-close). */
   backdropTransparent?: boolean;
-  /** Accent color token (`Color` enum). Sets the popover's `color-{name}` class - used by border/ring/text helpers. */
+  /** Accent color token (`Color` enum). Sets the popover's `data-color` attribute - used by border/ring/text helpers. */
   color?: Color;
   /** Popover content. */
   children?: React.ReactNode;

@@ -260,7 +260,7 @@ export const Input = <
       {/* focus layer */}
       {!readOnly && !disabled && (
         <FocusableLayer
-          className={cn(focusRoundedClasses, valid === false && 'color-red')}
+          className={cn(focusRoundedClasses)}
           force={valid === false}
           color={valid === false ? 'red' : color}
           group="input"
@@ -391,9 +391,9 @@ export const Input = <
 
       {infoMessage && valid !== false && !readOnly && (
         <div
+          data-color={color}
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
-            `color-${color}`,
           )}
         >
           {infoMessage}
@@ -401,9 +401,9 @@ export const Input = <
       )}
       {errorMessage && valid === false && (
         <div
+          data-color="red"
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-on-primary opacity-100 duration-200',
-            `color-red`,
           )}
         >
           {errorMessage}

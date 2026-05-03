@@ -315,7 +315,7 @@ export const OTPField = (props: OTPFieldProps) => {
       >
         {!readOnly && !disabled && !valid && (
           <FocusableLayer
-            className={cn(focusRoundedClasses, 'color-red')}
+            className={cn(focusRoundedClasses)}
             force
             color="red"
           />

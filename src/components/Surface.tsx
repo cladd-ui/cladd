@@ -57,7 +57,7 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
   pressed?: boolean;
   /** Enables hover background overlay. For `variant="transparent"`, also reveals the surface fill on hover. */
   hoverable?: boolean;
-  /** Accent color token. Sets the surface's `color-{name}` class - drives accent-aware borders, fills, and text colors. */
+  /** Accent color token. Sets the surface's `data-color` attribute - drives accent-aware borders, fills, and text colors. */
   color?: Color;
   /**
    * Slot rendered between the background layer and the content wrapper, **outside** the
@@ -124,12 +124,12 @@ export const Surface = <C extends ElementType = 'div'>(
 
   return (
     <Component
+      {...(color && { 'data-color': color })}
       className={cn(
         'cladd-surface relative',
         isFill ? 'text-on-primary' : 'text-on-surface',
         (clickable || hoverable) && 'group/cladd-surface',
         `surface-level-${currentLevel}`,
-        color && `color-${color}`,
         className,
       )}
       ref={ref}

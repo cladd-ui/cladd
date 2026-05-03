@@ -75,11 +75,11 @@ export const Segmented = <C extends ElementType = 'div'>(
   const Component = asProp as ElementType<any>;
   return (
     <Component
+      {...(color ? { 'data-color': color } : {})}
       className={cn(
         'cladd-segmented',
         disabled && 'pointer-events-none opacity-40',
         'flex items-center justify-center',
-        color && `color-${color}`,
         className,
       )}
       ref={(el: HTMLElement | null) => {

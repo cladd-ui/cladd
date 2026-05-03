@@ -44,7 +44,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
    * default for an `<a>` used purely as a navigation anchor).
    */
   clickable?: boolean;
-  /** Accent color token. Sets the chip's `color-{name}` class - drives text and ring colors. */
+  /** Accent color token. Sets the chip's `data-color={name}` attribute - drives text and ring colors. */
   color?: Color;
   /** Icon component rendered before `children`. Receives `iconProps`. */
   icon?: ElementType<any>;
@@ -133,6 +133,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
         paddings[size],
         contentClassName,
       )}
+      color={color}
       className={cn(
         `cladd-chip group/cladd-chip relative inline-flex font-semibold text-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
         rounded ? 'rounded-full' : roundedClasses[size],
@@ -142,7 +143,6 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
           : 'cursor-auto',
         heights[size],
         fontSizes[size],
-        color && `color-${color}`,
         className,
       )}
       ref={(el: HTMLElement | null) => {

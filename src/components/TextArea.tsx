@@ -206,7 +206,7 @@ export const TextArea = <C extends ElementType = 'div'>(
       {/* focus layer */}
       {!readOnly && !disabled && (
         <FocusableLayer
-          className={cn(focusRoundedClasses, valid === false && 'color-red')}
+          className={cn(focusRoundedClasses)}
           force={valid === false}
           color={valid === false ? 'red' : color}
           group="textarea"
@@ -280,9 +280,9 @@ export const TextArea = <C extends ElementType = 'div'>(
 
       {infoMessage && valid !== false && !readOnly && (
         <div
+          data-color={color}
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
-            `color-${color}`,
           )}
         >
           {infoMessage}
@@ -290,9 +290,9 @@ export const TextArea = <C extends ElementType = 'div'>(
       )}
       {errorMessage && valid === false && (
         <div
+          data-color="red"
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-on-primary opacity-100 duration-200',
-            `color-red`,
           )}
         >
           {errorMessage}

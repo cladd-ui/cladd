@@ -37,7 +37,7 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   as?: C;
   /** Underlying `Surface` variant - see `SurfaceVariant`. Defaults to `'gradient'`. */
   variant?: SurfaceVariant;
-  /** Accent color token. Sets the button's `color-{name}` class - drives text and ring colors. */
+  /** Accent color token. Sets the button's `data-color={name}` attribute - drives text and ring colors. */
   color?: Color;
   /** Render the surface outline ring. Defaults to `true`. */
   outline?: boolean;
@@ -193,10 +193,12 @@ export const Button = <C extends ElementType = 'button'>(
       color={color}
       style={style}
       beforeContent={
-        focusable &&
-        !readOnly &&
-        !disabled && (
-          <FocusableLayer group="button" className={cn(focusRoundedClasses)} />
+        (focused || (focusable && !readOnly && !disabled)) && (
+          <FocusableLayer
+            force={focused}
+            group="button"
+            className={cn(focusRoundedClasses)}
+          />
         )
       }
       {...rest}

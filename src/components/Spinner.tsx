@@ -41,18 +41,13 @@ export function Spinner(props: SpinnerProps) {
 
   return (
     <div
-      className={cn(
-        'cladd-spinner',
-        `color-${color}`,
-        'relative',
-        sizes[size],
-        className,
-      )}
+      data-color={color}
+      className={cn('cladd-spinner', 'relative', sizes[size], className)}
     >
       <div className="cladd-spinner-wrap absolute inset-0">
         <div
           className={cn(
-            'absolute top-1/2 left-0 aspect-[16/10] w-full -translate-y-1/2 rounded-full border-primary',
+            'absolute top-1/2 left-0 aspect-16/10 w-full -translate-y-1/2 rounded-full border-primary',
             borderWidth,
           )}
         />

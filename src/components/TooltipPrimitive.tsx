@@ -45,7 +45,7 @@ interface TooltipPrimitiveOwnProps {
   surfaceLevel?: number | string;
   /** Distance from anchor in pixels (number) or any CSS length (`'8px'`, `'50%'`). Default `4`. */
   offset?: OffsetValue;
-  /** Accent color token. Sets the tooltip's `color-{name}` class. */
+  /** Accent color token. Sets the tooltip's `data-color` attribute. */
   color?: Color;
   /** Tooltip content. */
   children?: ReactNode;
@@ -175,9 +175,9 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
         outline
         variant="gradient"
         contentClassName={cn('px-2 py-1', contentClassName)}
+        color={color}
         className={cn(
           'pointer-events-none fixed max-h-[50vh] w-max max-w-50 overflow-auto rounded-xl text-xs leading-normal font-medium transition-[opacity,transform,scale]',
-          color && `color-` + color,
 
           opened ? 'scale-100 opacity-100' : '',
           phase === 'opened' && 'duration-200',

@@ -207,11 +207,8 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         {icon && typeof icon !== 'function' && icon}
         {!icon && (
           <span
-            className={cn(
-              'absolute inset-0',
-              checked && `color-${color}`,
-              size === 'sm' && 'scale-80',
-            )}
+            {...(checked && { 'data-color': color })}
+            className={cn('absolute inset-0', size === 'sm' && 'scale-80')}
           >
             <span
               className={cn(
@@ -225,7 +222,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
                   'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 rotate-45 rounded-full duration-300',
                   checked ? 'bg-on-primary' : 'bg-on-surface-dark',
                   checked
-                    ? 'translate-x-0.5 -translate-y-[1.75px] scale-x-40'
+                    ? 'translate-x-0.5 translate-y-[-1.75px] scale-x-40'
                     : 'scale-x-75',
                 )}
               />
@@ -234,7 +231,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
                   'absolute top-1/2 left-1/2 -mt-px -ml-2 h-0.5 w-4 -rotate-45 rounded-full duration-300',
                   checked ? 'bg-on-primary' : 'bg-on-surface-dark',
                   checked
-                    ? '-translate-x-[1.5px] scale-x-60 -rotate-60'
+                    ? 'translate-x-[-1.5px] scale-x-60 -rotate-60'
                     : 'scale-x-75',
                 )}
               />

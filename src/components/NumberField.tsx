@@ -34,7 +34,7 @@ interface NumberFieldOwnProps {
   /** Pill-shape the value display. Default `false`. */
   valueRounded?: boolean;
   size?: NumberFieldSize;
-  /** Accent color token. Sets the container's `color-{name}` class - cascades to the +/− buttons. */
+  /** Accent color token. Sets the container's `data-color` attribute - cascades to the +/− buttons. */
   color?: Color;
   /** Outline ring on the number field **container**. Default `true`. */
   outline?: boolean;

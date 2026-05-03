@@ -13,7 +13,7 @@ interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   className?: string;
   /** Render the inset outline ring. Default `true`. */
   outline?: boolean;
-  /** Accent color token. Sets the surface's `color-{name}` class. */
+  /** Accent color token. Sets the surface's `data-color` attribute. */
   color?: Color;
   /** Show hover overlay on the cut surface. Default `false`. */
   hoverable?: boolean;
@@ -62,10 +62,10 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
 
   return (
     <Component
+      {...(color && { 'data-color': color })}
       className={cn(
         'cladd-surface-cut group/cladd-surface-cut relative',
         hoverable && 'group/cladd-surface-cut-hoverable',
-        color && `color-${color}`,
         className,
       )}
       {...rest}

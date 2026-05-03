@@ -139,9 +139,9 @@ export function Slider(props: SliderProps) {
         )}
       >
         <span
+          data-color={color}
           className={cn(
             'absolute inset-0 rounded-full bg-primary ease-out',
-            `color-${color}`,
             !disabled &&
               !readOnly &&
               'group-focus-within/slider:-translate-x-3 group-active/slider:-translate-x-3',
@@ -176,7 +176,6 @@ export function Slider(props: SliderProps) {
               !disabled &&
                 !readOnly &&
                 'group-focus-within/slider:scale-100 group-active/slider:scale-100',
-              `color-${color}`,
             )}
             beforeContent={
               !readOnly &&

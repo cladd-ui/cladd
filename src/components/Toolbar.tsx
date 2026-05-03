@@ -23,7 +23,7 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
   size?: ButtonSize;
   /** Polymorphic root element. Defaults to `'div'`. */
   as?: C;
-  /** Accent color token. Sets the toolbar's `color-{name}` class. */
+  /** Accent color token. Sets the toolbar's `data-color` attribute. */
   color?: Color;
   /** Forwarded to the polymorphic root element. */
   ref?: Ref<HTMLElement>;
@@ -71,12 +71,8 @@ export const Toolbar = <C extends ElementType = 'div'>(
   return (
     <Surface
       as={Component}
-      className={cn(
-        'cladd-toolbar flex',
-        color && `color-${color}`,
-        wrapRoundedClasses,
-        className,
-      )}
+      className={cn('cladd-toolbar flex', wrapRoundedClasses, className)}
+      color={color}
       outline={outline}
       variant={variant}
       level={surfaceLevel}
