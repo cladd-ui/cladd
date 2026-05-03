@@ -32,6 +32,7 @@ export const SegmentedButton = <C extends ElementType = 'button'>(
 
   return (
     <ButtonEl
+      data-active={active || undefined}
       size={size}
       rounded={rounded}
       color={active && activeColor ? activeColor : color}

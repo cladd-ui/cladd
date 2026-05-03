@@ -126,6 +126,11 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
   return (
     <Component
+      data-checked={checked || undefined}
+      data-unchecked={!checked || undefined}
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
+      data-required={required || undefined}
       className={cn(
         'cladd-radio group/cladd-radio relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
         size === 'sm' && 'size-5',
@@ -143,7 +148,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     >
       {input && (
         <input
-          data-cladd-part="control"
+          data-part="input"
           id={inputId}
           disabled={disabled || readOnly}
           readOnly={readOnly}
@@ -159,7 +164,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Knob */}
       <Surface
-        data-cladd-part="thumb"
+        data-part="thumb"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
         )}
@@ -171,7 +176,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Checked Knob */}
       <Surface
-        data-cladd-part="thumb-checked"
+        data-part="thumb-checked"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
           !checked && 'scale-0',
@@ -186,7 +191,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Check */}
       <span
-        data-cladd-part="icon"
+        data-part="indicator"
         className={cn(
           'pointer-events-none relative size-2 rounded-full duration-200',
           { ...(checked && { 'data-color': color }) },

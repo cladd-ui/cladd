@@ -504,6 +504,7 @@ export function Select<T = string>(props: SelectProps<T>) {
     <>
       {!elRefExternal && (
         <Button
+          data-part="trigger"
           className={cn('cladd-select w-full', className)}
           ref={(el: HTMLElement | null) => {
             elRef.current = el;
@@ -545,8 +546,13 @@ export function Select<T = string>(props: SelectProps<T>) {
               contentClassName,
             )}
           >
-            {icon && <div className={buttonIconSizes[size]}>{icon}</div>}
+            {icon && (
+              <div data-part="icon" className={buttonIconSizes[size]}>
+                {icon}
+              </div>
+            )}
             <div
+              data-part="value"
               className={cn(
                 'w-full min-w-0 shrink',
                 !children && !String(value) && 'text-cladd-fg-softer',
@@ -558,6 +564,7 @@ export function Select<T = string>(props: SelectProps<T>) {
             </div>
             {dropdownIcon && (
               <DropdownIcon
+                data-part="dropdown-icon"
                 className={cn('size-4', 'shrink-0 text-cladd-fg-softer')}
               />
             )}
@@ -600,6 +607,7 @@ export function Select<T = string>(props: SelectProps<T>) {
           >
             {search && onSearch && searchQuery && !displayOptions.length && (
               <div
+                data-part="empty"
                 className={cn(
                   'mb-2 flex h-8 w-full items-center pr-4 pl-4 text-xs font-medium text-cladd-fg-softer',
                 )}

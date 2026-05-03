@@ -139,6 +139,10 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     : {};
   return (
     <Component
+      data-checked={checked || undefined}
+      data-unchecked={!checked || undefined}
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
       className={cn(
         'cladd-switch group/cladd-switch relative flex shrink-0 rounded-full select-none',
         size === 'sm' && 'w-10 p-1',
@@ -151,7 +155,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     >
       {input && (
         <input
-          data-cladd-part="input"
+          data-part="input"
           checked={checked}
           type="checkbox"
           role="switch"
@@ -165,7 +169,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
 
       {/* BG */}
       <Surface
-        data-cladd-part="track"
+        data-part="track"
         level={surfaceLevel}
         className="absolute inset-0 rounded-full"
         outline={outline}
@@ -175,7 +179,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
 
       {/* Knob */}
       <Surface
-        data-cladd-part="thumb"
+        data-part="thumb"
         className={cn(
           'z-10 rounded-full duration-300',
           size === 'sm' && 'size-4',
@@ -210,7 +214,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         {icon && typeof icon !== 'function' && icon}
         {!icon && (
           <span
-            data-cladd-part="icon"
+            data-part="indicator"
             {...(checked && { 'data-color': color })}
             className={cn('absolute inset-0', size === 'sm' && 'scale-80')}
           >

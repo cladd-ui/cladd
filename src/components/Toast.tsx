@@ -214,6 +214,7 @@ const ToastInner = (props: ToastInnerProps) => {
 
   const content = (
     <Surface
+      data-open={opened || undefined}
       className={cn(
         `cladd-toast fixed right-safe-4 bottom-safe-4 z-50 max-w-full origin-bottom rounded-3xl`,
         !opened &&
@@ -245,7 +246,7 @@ const ToastInner = (props: ToastInnerProps) => {
       {icon ||
         (iconComponent && (
           <div
-            data-cladd-part="icon"
+            data-part="icon"
             className="flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0"
           >
             {icon}
@@ -253,14 +254,14 @@ const ToastInner = (props: ToastInnerProps) => {
           </div>
         ))}
       {(title || text) && (
-        <div data-cladd-part="content" className="flex flex-col gap-1">
+        <div data-part="content" className="flex flex-col gap-1">
           {title && (
-            <div data-cladd-part="title" className="text-sm font-semibold">
+            <div data-part="title" className="text-sm font-semibold">
               {title}
             </div>
           )}
           {text && (
-            <div data-cladd-part="text" className="text-xs leading-relaxed">
+            <div data-part="text" className="text-xs leading-relaxed">
               {text}
             </div>
           )}
@@ -270,9 +271,9 @@ const ToastInner = (props: ToastInnerProps) => {
       {children}
 
       {closeButton && (
-        <div className="ml-auto" data-cladd-part="close-wrapper">
+        <div className="ml-auto">
           <Button
-            data-cladd-part="close"
+            data-part="close"
             rounded
             outline={false}
             variant="transparent"

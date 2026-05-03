@@ -99,6 +99,7 @@ export const ListButton = <C extends ElementType = 'button'>(
   return (
     <ButtonEl
       as={Component}
+      data-selected={selected || undefined}
       rounded={rounded}
       className={cn('cladd-list-button z-10 w-full', className)}
       contentClassName={cn('gap-4 px-2', contentClassName)}

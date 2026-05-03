@@ -368,10 +368,11 @@ function PopupInner(props: PopupInnerProps) {
   const content = (
     <div
       className={cn(
-        'cladd-popup absolute inset-0 z-50 overflow-hidden',
+        'cladd-popup fixed inset-0 z-50 overflow-hidden',
         opened && 'popup-opened',
         className,
       )}
+      data-open={opened || undefined}
       ref={containerElRef}
       role="dialog"
       aria-modal="true"
@@ -394,7 +395,7 @@ function PopupInner(props: PopupInnerProps) {
       )}
 
       <div
-        data-cladd-part="wrapper"
+        data-part="wrapper"
         className={cn(
           'cladd-popup-wrapper absolute inset-0 z-50 overflow-auto pt-safe-12 pb-safe-12',
           opened && 'duration-500 ease-[cubic-bezier(0,1,0.2,1)]',
@@ -405,7 +406,8 @@ function PopupInner(props: PopupInnerProps) {
         ref={transitionEndElRef}
       >
         <div
-          data-cladd-part="content"
+          data-part="content"
+          data-open={opened || undefined}
           className={cn(
             'cladd-popup-content pointer-events-auto relative mx-auto flex min-h-full w-full max-w-162 flex-col gap-2',
             contentClassName,
@@ -415,7 +417,7 @@ function PopupInner(props: PopupInnerProps) {
           {/* TOP HEADER */}
           {header && (
             <div
-              data-cladd-part="header"
+              data-part="header"
               className={cn(
                 'flex items-end justify-between px-4',
                 headerClassName,
@@ -423,7 +425,7 @@ function PopupInner(props: PopupInnerProps) {
             >
               {/* HEADER LEFT */}
               <div
-                data-cladd-part="header-left"
+                data-part="header-left"
                 className="flex min-w-0 shrink items-end gap-4"
               >
                 {headerLeft}
@@ -431,13 +433,13 @@ function PopupInner(props: PopupInnerProps) {
               {/* HEADER RIGHT */}
               {(headerRight || closeButton) && (
                 <div
-                  data-cladd-part="header-right"
+                  data-part="header-right"
                   className="flex items-center gap-2"
                 >
                   {headerRight}
                   {closeButton && (
                     <Surface
-                      data-cladd-part="close-wrapper"
+                      data-part="close-wrapper"
                       className="rounded-full"
                       contentClassName="flex items-center p-1"
                       variant="gradient"
@@ -446,7 +448,7 @@ function PopupInner(props: PopupInnerProps) {
                     >
                       {/* CLOSE BUTTON */}
                       <Button
-                        data-cladd-part="close"
+                        data-part="close"
                         contentClassName="text-cladd-fg-soft"
                         rounded
                         variant="transparent"

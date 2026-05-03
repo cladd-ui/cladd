@@ -113,6 +113,8 @@ export const NumberField = (props: NumberFieldProps) => {
 
   return (
     <Surface
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
       className={cn(
         'cladd-number-field flex items-center gap-0.5',
         wrapRoundedClasses,
@@ -127,7 +129,7 @@ export const NumberField = (props: NumberFieldProps) => {
       {...rest}
     >
       <Button
-        data-cladd-part="decrease"
+        data-part="decrease"
         size={size}
         variant={buttonVariant}
         outline={buttonOutline}
@@ -154,7 +156,7 @@ export const NumberField = (props: NumberFieldProps) => {
 
       {input ? (
         <Input
-          data-cladd-part="control"
+          data-part="control"
           size={size as InputSize}
           value={value}
           disabled={disabled}
@@ -165,7 +167,7 @@ export const NumberField = (props: NumberFieldProps) => {
         />
       ) : (
         <SurfaceCut
-          data-cladd-part="control"
+          data-part="control"
           className={cn(
             'w-auto min-w-9 self-stretch text-center',
 
@@ -181,7 +183,7 @@ export const NumberField = (props: NumberFieldProps) => {
       )}
 
       <Button
-        data-cladd-part="increase"
+        data-part="increase"
         size={size}
         color={color}
         variant={buttonVariant}

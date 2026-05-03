@@ -57,6 +57,8 @@ export const Link = <C extends ElementType = 'button'>({
           ref.current = el;
         }
       }}
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
       className={cn(
         'group/cladd-link cladd-link relative cursor-pointer appearance-none duration-200 select-none focus:ring-0 focus:outline-0 active:opacity-50 active:duration-0',
         className,

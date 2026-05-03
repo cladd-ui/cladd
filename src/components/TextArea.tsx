@@ -197,6 +197,9 @@ export const TextArea = <C extends ElementType = 'div'>(
 
   return (
     <Component
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
+      data-invalid={valid === false || undefined}
       className={cn(
         'cladd-textarea group/cladd-textarea relative',
         disabled && 'opacity-50',
@@ -215,7 +218,7 @@ export const TextArea = <C extends ElementType = 'div'>(
 
       {/* input */}
       <SurfaceCut
-        data-cladd-part="wrapper"
+        data-part="wrapper"
         className={cn(itemRoundedClasses, surfaceClassName)}
         hoverable={!disabled && !readOnly}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
@@ -232,7 +235,7 @@ export const TextArea = <C extends ElementType = 'div'>(
         {prefix}
         {icon && (
           <div
-            data-cladd-part="icon"
+            data-part="icon"
             className={cn(
               'pointer-events-none absolute',
               iconWrapClasses[size],
@@ -243,7 +246,7 @@ export const TextArea = <C extends ElementType = 'div'>(
         )}
         <div className="relative w-full">
           <div
-            data-cladd-part="control"
+            data-part="control"
             contentEditable={!disabled && !readOnly}
             ref={inputElRef}
             className={cn(
@@ -263,7 +266,7 @@ export const TextArea = <C extends ElementType = 'div'>(
           />
           {!text && placeholder && (
             <div
-              data-cladd-part="placeholder"
+              data-part="placeholder"
               className={cn(
                 'pointer-events-none absolute top-0 left-0 h-full w-full text-cladd-fg-softer select-none',
                 fontSizes[size],
@@ -281,7 +284,7 @@ export const TextArea = <C extends ElementType = 'div'>(
 
       {infoMessage && valid !== false && !readOnly && (
         <div
-          data-cladd-part="info"
+          data-part="info"
           data-color={color}
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
@@ -292,7 +295,7 @@ export const TextArea = <C extends ElementType = 'div'>(
       )}
       {errorMessage && valid === false && (
         <div
-          data-cladd-part="error"
+          data-part="error"
           data-color="red"
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',

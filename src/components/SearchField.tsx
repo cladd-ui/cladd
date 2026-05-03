@@ -57,7 +57,7 @@ export const SearchField = (props: SearchFieldProps) => {
       {...rest}
     >
       <div
-        data-cladd-part="wrapper"
+        data-part="wrapper"
         className={cn('flex items-center', !inset && 'p-1.5')}
       >
         <Input
@@ -73,6 +73,7 @@ export const SearchField = (props: SearchFieldProps) => {
           onClear={() => onChange('')}
         />
         <SearchIcon
+          data-part="icon"
           className={cn(
             'pointer-events-none absolute top-1/2 left-2 size-4 -translate-y-1/2 text-cladd-fg-softer',
             inset ? 'left-2' : 'left-4',

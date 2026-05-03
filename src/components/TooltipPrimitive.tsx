@@ -166,6 +166,8 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
   const content = (
     <div className="cladd-tooltip pointer-events-none" ref={containerElRef}>
       <Surface
+        data-open={opened || undefined}
+        data-position={position}
         ref={(el: any) => {
           elRef.current = el;
           if (ref) (ref as React.RefObject<HTMLDivElement | null>).current = el;

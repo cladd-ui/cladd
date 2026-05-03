@@ -307,6 +307,9 @@ export const OTPField = (props: OTPFieldProps) => {
     <OTPFieldContextProvider value={contextValue}>
       <div
         ref={ref}
+        data-disabled={disabled || undefined}
+        data-readonly={readOnly || undefined}
+        data-invalid={valid === false || undefined}
         className={cn(
           'cladd-otp-field relative flex items-center gap-1',
           className,

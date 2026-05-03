@@ -251,6 +251,10 @@ export const Input = <
   const showRealValue = !showDisplayValue;
   return (
     <Component
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
+      data-invalid={valid === false || undefined}
+      data-required={required || undefined}
       className={cn(
         'cladd-input group/cladd-input relative',
         disabled && 'opacity-50',
@@ -269,7 +273,7 @@ export const Input = <
 
       {/* input */}
       <SurfaceCut
-        data-cladd-part="wrapper"
+        data-part="wrapper"
         className={cn(itemRoundedClasses, surfaceClassName)}
         hoverable={!disabled && !readOnly}
         contentClassName={cn('flex items-center', contentClassName)}
@@ -286,7 +290,7 @@ export const Input = <
         {prefix}
         {icon && (
           <div
-            data-cladd-part="icon"
+            data-part="icon"
             className={cn(
               'pointer-events-none absolute top-1/2 -translate-y-1/2',
               iconWrapClasses[size],
@@ -297,7 +301,7 @@ export const Input = <
         )}
 
         <InputComponent
-          data-cladd-part="control"
+          data-part="control"
           tabIndex={disabled || readOnly ? -1 : undefined}
           autoFocus={autoFocus}
           readOnly={readOnly}
@@ -346,7 +350,7 @@ export const Input = <
 
         {showDisplayValue && (
           <span
-            data-cladd-part="display-value"
+            data-part="display-value"
             className={cn(
               inputPadding,
               heights[size],
@@ -361,7 +365,7 @@ export const Input = <
         )}
         {clearButton && !disabled && !readOnly && (
           <Button
-            data-cladd-part="clear"
+            data-part="clear"
             className={cn(
               'mr-1 -ml-2 w-auto shrink-0 transform-gpu duration-200',
               size === 'sm' && 'h-4 w-5',
@@ -379,7 +383,6 @@ export const Input = <
             onClick={onClear}
           >
             <CloseIcon
-              data-cladd-part="clear-icon"
               className={cn(
                 'text-cladd-fg-soft',
                 size === 'sm'
@@ -397,7 +400,7 @@ export const Input = <
 
       {infoMessage && valid !== false && !readOnly && (
         <div
-          data-cladd-part="info"
+          data-part="info"
           data-color={color}
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-lg bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
@@ -408,7 +411,7 @@ export const Input = <
       )}
       {errorMessage && valid === false && (
         <div
-          data-cladd-part="error"
+          data-part="error"
           data-color="red"
           className={cn(
             'pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',

@@ -149,6 +149,9 @@ export const Button = <C extends ElementType = 'button'>(
   return (
     <WrapComponent
       as={Component}
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
+      data-pressed={pressed || undefined}
       className={cn(
         `cladd-button group/cladd-button inline-block appearance-none text-left font-semibold outline-0 select-none focus:ring-0 focus:outline-0`,
         color &&

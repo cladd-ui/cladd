@@ -205,7 +205,7 @@ export const Shortcut = (props: ShortcutProps) => {
     >
       {keys.map((key, index) => (
         <Surface
-          data-cladd-part="key"
+          data-part="key"
           as="kbd"
           color={color}
           variant={variant}

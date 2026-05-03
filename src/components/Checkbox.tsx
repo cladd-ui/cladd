@@ -135,6 +135,11 @@ export function Checkbox<C extends ElementType = 'label'>(
 
   return (
     <Component
+      data-checked={checked || undefined}
+      data-unchecked={!checked || undefined}
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
+      data-required={required || undefined}
       className={cn(
         'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
         size === 'sm' && 'size-5',
@@ -151,7 +156,7 @@ export function Checkbox<C extends ElementType = 'label'>(
     >
       {input && (
         <input
-          data-cladd-part="control"
+          data-part="input"
           id={inputId}
           disabled={disabled || readOnly}
           readOnly={readOnly}
@@ -167,7 +172,7 @@ export function Checkbox<C extends ElementType = 'label'>(
 
       {/* Knob */}
       <Surface
-        data-cladd-part="thumb"
+        data-part="thumb"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
         )}
@@ -179,7 +184,7 @@ export function Checkbox<C extends ElementType = 'label'>(
 
       {/* Checked Knob */}
       <Surface
-        data-cladd-part="thumb-checked"
+        data-part="thumb-checked"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
           !checked && 'scale-0',
@@ -193,7 +198,7 @@ export function Checkbox<C extends ElementType = 'label'>(
       />
 
       <CheckIcon
-        data-cladd-part="icon"
+        data-part="indicator"
         {...(checked && { 'data-color': color })}
         className={cn(
           'pointer-events-none relative duration-200',

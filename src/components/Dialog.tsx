@@ -310,7 +310,8 @@ const DialogInner = (props: DialogInnerProps) => {
         }}
       />
       <Surface
-        data-cladd-part="content"
+        data-part="content"
+        data-open={opened || undefined}
         className={cn(
           `fixed top-1/2 left-1/2 z-50 w-80 max-w-full -translate-x-1/2 -translate-y-1/2 rounded-3xl`,
           !opened && 'scale-75 opacity-0 duration-200 ease-out!',
@@ -331,7 +332,7 @@ const DialogInner = (props: DialogInnerProps) => {
       >
         {title && (
           <div
-            data-cladd-part="title"
+            data-part="title"
             id={titleId}
             className="text-base font-semibold"
           >
@@ -340,7 +341,7 @@ const DialogInner = (props: DialogInnerProps) => {
         )}
         {text && (
           <div
-            data-cladd-part="text"
+            data-part="text"
             id={descId}
             className="text-sm leading-relaxed"
           >
@@ -350,7 +351,7 @@ const DialogInner = (props: DialogInnerProps) => {
         {children}
         {requireConfirmText && confirmButtonText && (
           <Input
-            data-cladd-part="input"
+            data-part="input"
             value={inputText}
             infoMessage={`Type ${requireConfirmText} to confirm`}
             color={confirmButtonColor}
@@ -361,12 +362,12 @@ const DialogInner = (props: DialogInnerProps) => {
         )}
         {(buttons || cancelButtonText || confirmButtonText) && (
           <div
-            data-cladd-part="buttons"
+            data-part="buttons"
             className="mt-8! flex flex-wrap items-center justify-end gap-2"
           >
             {cancelButtonText && (
               <Button
-                data-cladd-part="cancel"
+                data-part="cancel"
                 tabIndex={0}
                 rounded
                 size="lg"
@@ -383,7 +384,7 @@ const DialogInner = (props: DialogInnerProps) => {
             )}
             {confirmButtonText && (
               <Button
-                data-cladd-part="confirm"
+                data-part="confirm"
                 ref={confirmButtonRef}
                 tabIndex={0}
                 color={
