@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.0.17 (2026-05-03)
+
+### Features
+
+- lots of refacotring, css variables and renames (a193ff8)
+- finalize parts and data- states (17450a9)
+- begin parts (a7fcac9)
+- remove unused popup.css (ced8499)
+- namespace CSS vars and props (0b52fa3)
+- class surface-level-n -> [data-level="n"] (a590e85)
+- class color-* to data-color=* (0284752)
+- zed oxfmt (42f4edd)
+- rename classes to scoped (e011fb2)
+
+### Build System
+
+- fix build (9a795c9)
+
 ## 0.0.16 (2026-04-29)
 
 ### Features
