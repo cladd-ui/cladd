@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.22 (2026-05-04)
+
+### Documentation
+
+- more docs tweaks (99eb11f)
+
 ## 0.0.21 (2026-05-04)
 
 ### Documentation
