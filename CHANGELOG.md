@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.21 (2026-05-04)
+
+### Documentation
+
+- update types docs (e35e726)
+
 ## 0.0.20 (2026-05-03)
 
 ### Refactoring
