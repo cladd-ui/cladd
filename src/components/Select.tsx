@@ -76,6 +76,7 @@ interface SelectOwnProps<T = string> {
   placeholderClassName?: string;
   /**
    * Custom node rendered inside the trigger button in place of `String(value) || placeholder`.
+   *
    * Use to render a richer value display (e.g. with icons or formatting).
    */
   children?: ReactNode;
@@ -94,6 +95,7 @@ interface SelectOwnProps<T = string> {
   searchFocus?: boolean;
   /**
    * Filter callback invoked with the current query - return the filtered list of options.
+   *
    * The Select does not maintain any internal filter state; callers control matching.
    */
   onSearch?: (query: string) => T[];
@@ -106,8 +108,9 @@ interface SelectOwnProps<T = string> {
   /** Default `'w-auto min-w-[160px]'`. */
   popoverClassName?: string;
   /**
-   * Surface level for the popover. Default depends on theme:
-   * `'+1'` for dark (one level above the trigger), `1` (absolute) for light.
+   * Surface level for the popover.
+   *
+   * Default depends on theme: `'+1'` for dark (one level above the trigger), `1` (absolute) for light.
    */
   popoverSurfaceLevel?: number | string;
   /**
@@ -127,6 +130,7 @@ interface SelectOwnProps<T = string> {
   // OPTIONS
   /**
    * Show numeric quick-pick hints (0–9) next to options, and bind `0`–`9` keys to select them.
+   *
    * Default `true`. See `noneOptionValue` for how the digits map to options.
    */
   keyboardHints?: boolean;
@@ -145,11 +149,13 @@ interface SelectOwnProps<T = string> {
   isOptionDisabled?: (value: T) => boolean;
   /**
    * Extracts the comparable key from an option object. Default: identity.
+   *
    * Use when `T` is an object and selection should compare by `id` rather than reference.
    */
   getOptionValue?: (option: T) => unknown;
   /**
    * Inverse of `getOptionValue` - given a key, return the matching option from `options`.
+   *
    * Required for multi-select with object options so emitted `value[]` arrays can be rebuilt.
    */
   getOptionByValue?: (options: T[], value: unknown) => T;
@@ -164,7 +170,9 @@ interface SelectOwnProps<T = string> {
 
   /**
    * Value of the "none/initial" option that should be mapped to the 0 key.
+   *
    *  If set, this option gets hint "0" and remaining options get 1-9 in order.
+   *
    *  If not set, straight ordering: 1, 2, 3, ..., 9, 0 (for 10th).
    */
   noneOptionValue?: T;

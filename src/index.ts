@@ -110,9 +110,9 @@ export {
 export { Switch, type SwitchProps, type SwitchSize } from './components/Switch';
 export {
   Textarea,
-  type TextareaProps as TextAreaProps,
-  type TextAreaSize,
-} from './components/TextArea';
+  type TextareaProps,
+  type TextareaSize,
+} from './components/Textarea';
 export {
   Toast,
   ToastClose,

@@ -65,9 +65,7 @@ export const ToastRoot = ({
 };
 
 /**
- * Wraps a single child element to act as the toast trigger. **Clones** the child to attach
- * an `onClick` handler that toggles the surrounding `ToastRoot`'s open state (composed with
- * any existing `onClick` on the child).
+ * Wraps a single child element to act as the toast trigger. **Clones** the child to attach an `onClick` handler that toggles the surrounding `ToastRoot`'s open state (composed with any existing `onClick` on the child).
  *
  * No-ops (renders the child as-is) when used outside a `ToastRoot`.
  */
@@ -87,9 +85,7 @@ export const ToastTrigger = ({ children }: { children: ReactNode }) => {
 };
 
 /**
- * Wraps a single child element to close the surrounding toast when clicked. **Clones** the
- * child to attach an `onClick` handler that flips the surrounding `ToastRoot`'s open state
- * to `false` (composed with any existing `onClick` on the child).
+ * Wraps a single child element to close the surrounding toast when clicked. **Clones** the child to attach an `onClick` handler that flips the surrounding `ToastRoot`'s open state to `false` (composed with any existing `onClick` on the child).
  *
  * ```tsx
  * <ToastRoot>
@@ -141,7 +137,9 @@ export interface ToastProps {
   /** Render the auto close button on the right. Default `true`. */
   closeButton?: boolean;
   /**
-   * Forwarded to the underlying `Surface` as `level`. Default depends on theme: `3` for dark theme, `1` for light theme - keeps the toast visually elevated above page content.
+   * Forwarded to the underlying `Surface` as `level`.
+   *
+   * Default depends on theme: `3` for dark theme, `1` for light theme - keeps the toast visually elevated above page content.
    */
   surfaceLevel?: string | number;
   /** Default `'neutral'`. */

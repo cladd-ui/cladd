@@ -29,22 +29,30 @@ export interface TooltipProps extends Omit<
   'children' | 'ref'
 > {
   /**
-   * When provided, the component acts as a wrapper around `children` (a single element) and shows this content as a tooltip on hover/focus/touch. When omitted, the component forwards all props to the underlying `TooltipPrimitive` and `children` is rendered as the tooltip content (controlled mode via `open`/`anchorRef`).
+   * When provided, the component acts as a wrapper around `children` (a single element) and shows this content as a tooltip on hover/focus/touch.
+   *
+   * When omitted, the component forwards all props to the underlying `TooltipPrimitive` and `children` is rendered as the tooltip content (controlled mode via `open`/`anchorRef`).
    */
   tooltip?: ReactNode;
   /**
    * Wrapper mode: the single element to attach the tooltip to.
+   *
    * Primitive mode: the tooltip content.
    */
   children?: ReactNode;
   /**
-   * Wrapper mode only. When `true` (default), delays showing the tooltip (500ms on touch, 1000ms on mouse) and uses a shared global timer so successive hovers feel snappier - same UX as system tooltips. When `false`, the tooltip appears immediately on pointer enter.
+   * Wrapper mode only.
+   *
+   * When `true` (default), delays showing the tooltip (500ms on touch, 1000ms on mouse) and uses a shared global timer so successive hovers feel snappier - same UX as system tooltips.
+   *
+   * When `false`, the tooltip appears immediately on pointer enter.
    */
   timeout?: boolean;
   /** Wrapper mode only. Composed onto the wrapped child element's `onClick`. */
   onClick?: (e: React.MouseEvent) => void;
   /**
    * Wrapper mode: composed onto the wrapped child's ref (alongside the internal anchor ref).
+   *
    * Primitive mode: forwarded to the tooltip surface root.
    */
   ref?: React.Ref<any>;

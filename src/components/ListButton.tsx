@@ -49,6 +49,7 @@ interface ListButtonOwnProps<C extends ElementType = 'button'> {
   after?: ReactNode;
   /**
    * Surface variant. Default `'transparent'` so rows blend into the list surface.
+   *
    * Overridden to `'gradient'` when `selected` is `true`.
    */
   variant?: SurfaceVariant;

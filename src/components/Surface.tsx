@@ -39,6 +39,7 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
   outline?: boolean;
   /**
    * Visual treatment of the surface background:
+   *
    * - `transparent` - no background; children render at the parent level (used for nested groupings).
    * - `solid` - flat surface fill (default).
    * - `gradient` - diagonal highlight→surface gradient.
@@ -63,7 +64,9 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
    */
   beforeContent?: ReactNode;
   /**
-   * When `true` (default), `children` are rendered inside a `SurfaceContent` flex wrapper styled by `contentClassName`. Set to `false` to render `children` directly - useful when the surface is the layout root and you want full control of the inner DOM.
+   * When `true` (default), `children` are rendered inside a `SurfaceContent` flex wrapper styled by `contentClassName`.
+   *
+   * Set to `false` to render `children` directly - useful when the surface is the layout root and you want full control of the inner DOM.
    */
   wrapContent?: boolean;
   /** Forwarded to the polymorphic root element. */

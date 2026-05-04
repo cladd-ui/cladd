@@ -34,6 +34,7 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   onPointerDown?: (e: PointerEvent) => void;
   /**
    * When `true` (default), renders a hidden native input for form submission and accessibility.
+   *
    * When `false`, the component falls back to ARIA roles (`role="radio"`, `aria-checked`, keyboard `Space`/`Enter` toggling) and `onChange` fires from the click handler.
    */
   input?: boolean;
@@ -49,11 +50,13 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   as?: C;
   /**
    * Auto-computed when omitted: `true` if `as === 'label'`, otherwise `false`.
+   *
    * Override explicitly for custom containers that should still show hover affordances.
    */
   hoverable?: boolean;
   /**
    * Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`.
+   *
    * Drives whether the focus ring (`FocusableLayer`) is rendered.
    */
   focusable?: boolean;

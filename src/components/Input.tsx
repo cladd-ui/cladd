@@ -35,6 +35,7 @@ interface InputOwnProps<
   value?: string | number;
   /**
    * Custom node displayed in place of the raw `value` while the input is `readOnly` or unfocused.
+   *
    * Useful for formatted display (e.g. show "1,234.56" while the underlying value is `1234.56`) - the real value re-appears on focus for editing.
    */
   displayValue?: ReactNode;

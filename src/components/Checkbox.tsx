@@ -34,10 +34,9 @@ interface CheckboxOwnProps<C extends ElementType = 'label'> {
   onClick?: (e: MouseEvent) => void;
   onPointerDown?: (e: PointerEvent) => void;
   /**
-   * When `true` (default), renders a hidden native `<input type="checkbox">` for form submission
-   * and accessibility. When `false`, the component falls back to ARIA roles (`role="checkbox"`,
-   * `aria-checked`, keyboard `Space`/`Enter` toggling) and `onChange` is fired from the click
-   * handler - useful for non-form contexts (e.g. menu items) or custom controlled wrappers.
+   * When `true` (default), renders a hidden native `<input type="checkbox">` for form submission and accessibility.
+   *
+   * When `false`, the component falls back to ARIA roles (`role="checkbox"`, `aria-checked`, keyboard `Space`/`Enter` toggling) and `onChange` is fired from the click handler - useful for non-form contexts (e.g. menu items) or custom controlled wrappers.
    */
   input?: boolean;
   /** `id` for the hidden `<input>`. Used to wire an external `<label htmlFor>` to this checkbox. */
@@ -49,9 +48,9 @@ interface CheckboxOwnProps<C extends ElementType = 'label'> {
   /** Accent color for the checked state. Default: theme accent. */
   color?: Color;
   /**
-   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden
-   * input on click. Use `'div'`/`'span'` (etc.) when the checkbox lives inside an existing label
-   * or needs a non-label container - see `hoverable`/`focusable` for how this changes interactivity.
+   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden input on click.
+   *
+   *  Use `'div'`/`'span'` (etc.) when the checkbox lives inside an existing label or needs a non-label container - see `hoverable`/`focusable` for how this changes interactivity.
    */
   as?: C;
   /**
@@ -61,8 +60,8 @@ interface CheckboxOwnProps<C extends ElementType = 'label'> {
   hoverable?: boolean;
   /**
    * Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`.
-   * Drives whether the focus ring (`FocusableLayer`) is rendered. Override for non-label,
-   * input-less containers that still need a visible keyboard focus state.
+   *
+   * Drives whether the focus ring (`FocusableLayer`) is rendered. Override for non-label, input-less containers that still need a visible keyboard focus state.
    */
   focusable?: boolean;
 }

@@ -7,6 +7,7 @@ export type SegmentedButtonProps<C extends ElementType = 'button'> =
   ButtonProps<C> & {
     /**
      * Marks this button as the selected segment.
+     *
      * When `true`, switches to the `activeColor` / `activeVariant` / `activeOutline` from the surrounding `Segmented`, raises `surfaceLevel` by `+2` for visual elevation, and sets `readOnly` so the already-selected segment is not pressable again.
      */
     active?: boolean;

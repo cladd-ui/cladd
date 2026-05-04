@@ -7,15 +7,23 @@ import { ToastsPortalProvider } from './ToastsPortalContext';
 
 export interface UIProviderProps {
   /**
-   * Color scheme. Default `'dark'`. Read by `useTheme` and used to switch surface defaults (e.g. Popover/Dialog/Tooltip pick different `variant`, `outline`, and `surfaceLevel` per theme).
+   * Color scheme. Default `'dark'`.
+   *
+   * Read by `useTheme` and used to switch surface defaults (e.g. Popover/Dialog/Tooltip pick different `variant`, `outline`, and `surfaceLevel` per theme).
    */
   theme?: 'dark' | 'light';
   /**
-   * App-wide accent color. Default `'brand'`. Read by `useAccentColor` and used as the default `color` for interactive components (Button, Switch, Checkbox, Radio, etc.).
+   * App-wide accent color.
+   *
+   * Default `'brand'`.
+   *
+   * Read by `useAccentColor` and used as the default `color` for interactive components (Button, Switch, Checkbox, Radio, etc.).
    */
   accentColor?: Color;
   /**
-   * The root element(s) to insert overlays to. Default `'#app, #__next, #root'`.
+   * The root element(s) to insert overlays to.
+   *
+   * Default `'#app, #__next, #root'`.
    */
   overlaysRoot?: string;
   children?: React.ReactNode;

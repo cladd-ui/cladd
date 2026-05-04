@@ -279,7 +279,9 @@ type PopoverOwnProps = {
   /** Extra classes applied to the inner scrollable content area. Default includes `max-h-[70vh] overflow-auto`. */
   contentClassName?: string;
   /**
-   * Ref to the element the popover should anchor against. Defaults to the anchor registered by `PopoverRoot` + `PopoverTrigger`. CSS anchor positioning is used - an `anchor-name` is auto-applied to the element if it doesn't already have one.
+   * Ref to the element the popover should anchor against. Defaults to the anchor registered by `PopoverRoot` + `PopoverTrigger`.
+   *
+   * CSS anchor positioning is used - an `anchor-name` is auto-applied to the element if it doesn't already have one.
    */
   anchorRef?: React.RefObject<HTMLElement | null>;
   /**
@@ -294,6 +296,7 @@ type PopoverOwnProps = {
   position?: PopoverPosition;
   /**
    * Spacing from anchor. Either a single value (main axis only) or `[main, cross]`.
+   *
    * Numbers are pixels; strings pass through (e.g. `'8px'`, `'50%'` - `%` resolves against `anchor-size(width|height)` depending on the position).
    */
   offset?: OffsetValue | [OffsetValue, OffsetValue];

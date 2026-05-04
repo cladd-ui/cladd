@@ -15,7 +15,9 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
   /** Extra classes for the inner `SurfaceContent` wrapper (where toolbar items are laid out). */
   contentClassName?: string;
   /**
-   * Pill-shape the toolbar container (`rounded-full`). Default `true`. Also forwarded via context as the default `rounded` for child `ToolbarButton`s.
+   * Pill-shape the toolbar container (`rounded-full`). Default `true`.
+   *
+   * Also forwarded via context as the default `rounded` for child `ToolbarButton`s.
    */
   rounded?: boolean;
   /** Toolbar button size. Default `'md'`. Forwarded via context to child `ToolbarButton`s. */
@@ -31,7 +33,9 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
   /** Outline ring on the toolbar **container**. Default `true`. */
   outline?: boolean;
   /**
-   * Surface variant applied to child `ToolbarButton`s through context. Default `'transparent'` - buttons fade into the toolbar surface until hovered.
+   * Surface variant applied to child `ToolbarButton`s through context.
+   *
+   * Default `'transparent'` - buttons fade into the toolbar surface until hovered.
    */
   buttonVariant?: SurfaceVariant;
   /** Outline ring on child `ToolbarButton`s. Default `false`. */

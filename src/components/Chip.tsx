@@ -27,7 +27,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   rounded?: boolean;
   size?: ChipSize;
   /**
-   * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip * becomes interactive automatically (see `clickable`).
+   * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip becomes interactive automatically (see `clickable`).
    */
   as?: C;
   /**
@@ -38,7 +38,9 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   hoverable?: boolean;
   /**
    * Make the chip react to pointer activity (active/pressed state, hover overlay).
+   *
    * Auto-computed when omitted: `true` if `as === 'a'` or `'button'`, otherwise `false`.
+   *
    * Set explicitly to override (e.g. force a `<span>` to be clickable, or suppress the default for an `<a>` used purely as a navigation anchor).
    */
   clickable?: boolean;

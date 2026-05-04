@@ -172,7 +172,9 @@ export interface PopupProps {
   /** Fires before the popup closes from the close-button click. The popup also closes regardless. */
   onCloseButtonClick?: () => void;
   /**
-   * Imperative escape hatch - assigned the popup's `close()` function so callers can dismiss it from outside the React tree (e.g. from a non-child callback). The ref's `.current` is set on mount.
+   * Imperative escape hatch - assigned the popup's `close()` function so callers can dismiss it from outside the React tree (e.g. from a non-child callback).
+   *
+   * The ref's `.current` is set on mount.
    */
   closeRef?: React.RefObject<(() => void) | null>;
   /** ARIA label for the dialog role. Use when there's no visible title. */

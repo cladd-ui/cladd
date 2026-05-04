@@ -11,7 +11,10 @@ export type SliderSize = 'sm' | 'md';
 export interface SliderProps {
   /** Controlled value. When omitted, the component falls back to uncontrolled mode using `defaultValue`. */
   value?: number;
-  /** Initial value (uncontrolled). Default `0`. Ignored when `value` is provided. */
+  /** Initial value (uncontrolled). Default `0`.
+   *
+   * Ignored when `value` is provided.
+   */
   defaultValue?: number;
   /** Default `0`. */
   min?: number;

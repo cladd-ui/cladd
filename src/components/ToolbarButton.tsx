@@ -4,9 +4,7 @@ import { Button, ButtonProps } from './Button';
 import { useToolbarContext } from './ToolbarContext';
 
 /**
- * `ToolbarButton` accepts the full `Button` API. When rendered inside a `Toolbar`,
- * `size`, `rounded`, `variant`, and `outline` default to the values supplied by the
- * parent toolbar context - pass them explicitly here to override per-button.
+ * `ToolbarButton` accepts the full `Button` API. When rendered inside a `Toolbar`, `size`, `rounded`, `variant`, and `outline` default to the values supplied by the parent toolbar context - pass them explicitly here to override per-button.
  */
 export type ToolbarButtonProps<C extends ElementType = 'button'> =
   ButtonProps<C>;

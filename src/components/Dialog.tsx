@@ -141,6 +141,7 @@ export interface DialogProps {
   root?: string;
   /**
    * Selector for the container made `inert` while the dialog is open. Default `'.app-container'`.
+   *
    * Used to block focus/interaction with the rest of the app while the modal is shown.
    */
   inertContainer?: string;

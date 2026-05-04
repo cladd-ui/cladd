@@ -36,13 +36,19 @@ interface ShortcutOwnProps {
   /** Extra classes for the inner content of each key. */
   keyContentClassName?: string;
   /**
-   * Surface level for each key. Default `'+2'`. Accepts the same absolute / relative (`"+1"`/`"-1"`) syntax as `Surface.level`.
+   * Surface level for each key. Default `'+2'`.
+   *
+   * Accepts the same absolute / relative (`"+1"`/`"-1"`) syntax as `Surface.level`.
    */
   surfaceLevel?: string | number;
   /** Accent color token applied to each key surface. */
   color?: Color;
   /**
-   * Shortcut content. Strings are split on whitespace into individual keys; recognized tokens (`cmd`, `ctrl`, `alt`, `shift`, `enter`, `tab`, `space`, `up`, `down`, `left`, `right`, `backspace`, `delete`, `esc`, etc.) render as glyphs - others render as uppercase text. Non-string children are rendered as-is in their own key.
+   * Shortcut content. Strings are split on whitespace into individual keys.
+   *
+   * Recognized tokens (`cmd`, `ctrl`, `alt`, `shift`, `enter`, `tab`, `space`, `up`, `down`, `left`, `right`, `backspace`, `delete`, `esc`, etc.) render as glyphs - others render as uppercase text.
+   *
+   * Non-string children are rendered as-is in their own key.
    */
   children?: ReactNode;
   /** Key dimension. Default `'md'`. Drives height, font size, icon size, and corner radius. */

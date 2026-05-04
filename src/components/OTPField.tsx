@@ -40,6 +40,7 @@ interface OTPFieldOwnProps {
   size?: InputSize;
   /**
    * Regex source that matches a single allowed character. Default `'[0-9]'`.
+   *
    * Applied as a filter for typed and pasted input.
    */
   pattern?: string;

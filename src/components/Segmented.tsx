@@ -33,6 +33,7 @@ interface SegmentedOwnProps<C extends ElementType = 'div'> {
   ref?: Ref<HTMLElement>;
   /**
    * `Surface` variant applied to **inactive** segment buttons through context.
+   *
    * Default `'transparent'` - inactive segments fade into the parent surface.
    */
   variant?: SurfaceVariant;

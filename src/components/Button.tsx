@@ -27,11 +27,13 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   disabled?: boolean;
   /** Block clicks while keeping the button visually enabled - useful for "selected" segmented buttons. */
   readOnly?: boolean;
-  /** When `true`, applies fully rounded corners (`rounded-full`, or matching pill radius for `multiline`). Default size-specific corner radii are used when `false`. */
+  /** When `true`, applies fully rounded corners (`rounded-full`, or matching pill radius for `multiline`).
+   *
+   * Default size-specific corner radii are used when `false`.
+   */
   rounded?: boolean;
   size?: ButtonSize;
-  /**
-   * Polymorphic element to render. Defaults to `'button'`. Pass `'a'` for links (cursor switches to pointer automatically), or any custom component to retain Button styling on a different DOM node. The component's own props become valid here.
+  /** Polymorphic element to render. Defaults to `'button'`. Pass `'a'` for links (cursor switches to pointer automatically), or any custom component to retain Button styling on a different DOM node. The component's own props become valid here.
    */
   as?: C;
   /** Underlying `Surface` variant - see `SurfaceVariant`. Defaults to `'gradient'`. */
@@ -52,6 +54,7 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   multiline?: boolean;
   /**
    * Which surface primitive to wrap with:
+   *
    * - `'surface'` (default) - uses `Surface` (standard tinted/outlined panel).
    * - `'cut'` - uses `SurfaceCut` (inset/recessed look - for buttons that sit inside another surface).
    */
