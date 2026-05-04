@@ -34,9 +34,8 @@ interface InputOwnProps<
   /** Controlled value. */
   value?: string | number;
   /**
-   * Custom node displayed in place of the raw `value` while the input is `readOnly` or
-   * unfocused. Useful for formatted display (e.g. show "1,234.56" while the underlying
-   * value is `1234.56`) - the real value re-appears on focus for editing.
+   * Custom node displayed in place of the raw `value` while the input is `readOnly` or unfocused.
+   * Useful for formatted display (e.g. show "1,234.56" while the underlying value is `1234.56`) - the real value re-appears on focus for editing.
    */
   displayValue?: ReactNode;
   placeholder?: string;
@@ -79,8 +78,7 @@ interface InputOwnProps<
   /** Render a clear (X) button on the right that fires `onClear`. Hidden when `value` is empty. */
   clearButton?: boolean;
   /**
-   * Validity state. Default `true`. When `false`, switches the focus ring to red and shows
-   * `errorMessage` (instead of `infoMessage`).
+   * Validity state. Default `true`. When `false`, switches the focus ring to red and shows `errorMessage` (instead of `infoMessage`).
    */
   valid?: boolean;
   /** Floating label shown above the input on focus. Hidden when `valid === false` or `readOnly`. */
@@ -108,9 +106,7 @@ interface InputOwnProps<
   /** Native `autoFocus` - focus the input on mount. */
   autoFocus?: boolean;
   /**
-   * Polymorphic **input** element. Defaults to `'input'`. Use this to swap in a custom
-   * component (e.g. a masked input library) that should still inherit the Input chrome
-   * (focus ring, clear button, prefix/suffix, etc.).
+   * Polymorphic **input** element. Defaults to `'input'`. Use this to swap in a custom component (e.g. a masked input library) that should still inherit the Input chrome (focus ring, clear button, prefix/suffix, etc.).
    */
   inputComponent?: IC;
   /** Extra props forwarded to the `inputComponent`. Typed against the chosen component. */

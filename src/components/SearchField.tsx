@@ -10,11 +10,8 @@ interface SearchFieldOwnProps {
   value?: string;
   /**
    * Layout mode:
-   * - `false` (default) - a sticky header bar that sits flush at the top of a list
-   *   (uses `surface level "+1"`, top-rounded corners, outlined).
-   * - `true` - a floating pill **inset** within the parent surface (uses `surface level "+0"`,
-   *   `rounded-full`, no outline, inset margins). Use inside a list/popover where the
-   *   search field should look like one item among many.
+   * - `false` (default) - a sticky header bar that sits flush at the top of a list (uses `surface level "+1"`, top-rounded corners, outlined).
+   * - `true` - a floating pill **inset** within the parent surface (uses `surface level "+0"`, `rounded-full`, no outline, inset margins). Use inside a list/popover where the search field should look like one item among many.
    */
   inset?: boolean;
   size?: InputSize;

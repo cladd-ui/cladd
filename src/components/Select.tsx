@@ -62,8 +62,7 @@ interface SelectOwnProps<T = string> {
   /** Extra classes for the value display inside the trigger button. */
   valueClassName?: string;
   /**
-   * Trigger button surface type, forwarded to the underlying `Button.surface`:
-   * `'surface'` (default) for a regular button, `'cut'` for an inset/recessed look.
+   * Trigger button surface type, forwarded to the underlying `Button.surface`: `'surface'` (default) for a regular button, `'cut'` for an inset/recessed look.
    */
   surface?: 'surface' | 'cut';
   /** Reverse the visual order of `icon` ↔ value inside the trigger button. */
@@ -75,8 +74,6 @@ interface SelectOwnProps<T = string> {
   /** Forwarded to the trigger `Button` - allows wrapping the value across multiple lines. */
   multiline?: boolean;
   placeholderClassName?: string;
-
-  // CONTENT
   /**
    * Custom node rendered inside the trigger button in place of `String(value) || placeholder`.
    * Use to render a richer value display (e.g. with icons or formatting).
@@ -87,7 +84,6 @@ interface SelectOwnProps<T = string> {
   /** Slot rendered inside the popover, **below** the option list. */
   afterOptions?: ReactNode;
 
-  // SEARCH RELATED PROPS
   /** Render a search bar at the top of the popover. Pair with `onSearch` to filter options. */
   search?: boolean;
   /** Default `'Search'`. */
@@ -102,7 +98,6 @@ interface SelectOwnProps<T = string> {
    */
   onSearch?: (query: string) => T[];
 
-  // POPOVER RELATED PROPS
   popoverColor?: Color;
   /** Default `'bottom-end'`. */
   popoverPosition?: PopoverPosition;
@@ -116,9 +111,7 @@ interface SelectOwnProps<T = string> {
    */
   popoverSurfaceLevel?: number | string;
   /**
-   * External anchor ref. When provided, the trigger button is **not rendered** - useful when
-   * the popover should anchor to an existing element controlled by the caller (the caller
-   * is then responsible for the trigger and `popoverState` wiring).
+   * External anchor ref. When provided, the trigger button is **not rendered** - useful when the popover should anchor to an existing element controlled by the caller (the caller is then responsible for the trigger and `popoverState` wiring).
    */
   anchorRef?: React.RefObject<HTMLElement | null>;
   /** Controlled popover open state. Pair with `onPopoverState`. */
@@ -126,7 +119,6 @@ interface SelectOwnProps<T = string> {
   /** Controlled popover open-state setter. */
   onPopoverState?: (state: boolean) => void;
 
-  // CALLBACKS
   /** Fires after a selection. In single-select mode receives `T`; in `multiple` receives `T[]`. */
   onChange?: (value: T | T[]) => void;
   /** Fires when the trigger button is clicked (before the popover state toggles). */

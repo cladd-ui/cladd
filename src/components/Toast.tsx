@@ -141,8 +141,7 @@ export interface ToastProps {
   /** Render the auto close button on the right. Default `true`. */
   closeButton?: boolean;
   /**
-   * Forwarded to the underlying `Surface` as `level`. Default depends on theme:
-   * `3` for dark theme, `1` for light theme - keeps the toast visually elevated above page content.
+   * Forwarded to the underlying `Surface` as `level`. Default depends on theme: `3` for dark theme, `1` for light theme - keeps the toast visually elevated above page content.
    */
   surfaceLevel?: string | number;
   /** Default `'neutral'`. */

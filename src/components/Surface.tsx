@@ -47,8 +47,7 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
    */
   variant?: SurfaceVariant;
   /**
-   * Polymorphic root element. Defaults to `'div'`. Use `'button'`, `'a'`, etc. when the
-   * surface is itself the interactive target (forwarding props of that element).
+   * Polymorphic root element. Defaults to `'div'`. Use `'button'`, `'a'`, etc. when the surface is itself the interactive target (forwarding props of that element).
    */
   as?: C;
   /** Enables active/pressed visual states (scale + pressed background). Combine with `hoverable`. */
@@ -60,14 +59,11 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
   /** Accent color token. Sets the surface's `cladd-color-{name}` class - drives accent-aware borders, fills, and text colors. */
   color?: Color;
   /**
-   * Slot rendered between the background layer and the content wrapper, **outside** the
-   * `SurfaceContent` flex layout (e.g. `FocusableLayer`, decorative overlays).
+   * Slot rendered between the background layer and the content wrapper, **outside** the `SurfaceContent` flex layout (e.g. `FocusableLayer`, decorative overlays).
    */
   beforeContent?: ReactNode;
   /**
-   * When `true` (default), `children` are rendered inside a `SurfaceContent` flex wrapper
-   * styled by `contentClassName`. Set to `false` to render `children` directly - useful
-   * when the surface is the layout root and you want full control of the inner DOM.
+   * When `true` (default), `children` are rendered inside a `SurfaceContent` flex wrapper styled by `contentClassName`. Set to `false` to render `children` directly - useful when the surface is the layout root and you want full control of the inner DOM.
    */
   wrapContent?: boolean;
   /** Forwarded to the polymorphic root element. */

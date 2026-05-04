@@ -29,14 +29,11 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
   /** Accent color for the checked state knob fill. Default: theme accent. */
   color?: Color;
   /**
-   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden
-   * input on click. Use a non-label container when nesting inside an existing label —
-   * see `hoverable`/`focusable` for how this changes interactivity.
+   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden input on click. Use a non-label container when nesting inside an existing label — see `hoverable`/`focusable` for how this changes interactivity.
    */
   as?: C;
   /**
-   * Icon rendered inside the knob. Pass either a static `ReactNode`, or a function
-   * `(checked) => ReactNode` to render different content based on the switch state.
+   * Icon rendered inside the knob. Pass either a static `ReactNode`, or a function `(checked) => ReactNode` to render different content based on the switch state.
    * If omitted, the built-in animated cross/check glyph is used.
    */
   icon?: ReactNode | ((checked: boolean) => ReactNode);
@@ -44,9 +41,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
   /** Extra classes for the outer label/element. */
   className?: string;
   /**
-   * When `true` (default), renders a hidden native `<input type="checkbox" role="switch">`
-   * for form submission and accessibility. When `false`, falls back to ARIA roles
-   * (`role="switch"`, `aria-checked`, keyboard `Space`/`Enter` toggling).
+   * When `true` (default), renders a hidden native `<input type="checkbox" role="switch">` for form submission and accessibility. When `false`, falls back to ARIA roles (`role="switch"`, `aria-checked`, keyboard `Space`/`Enter` toggling).
    */
   input?: boolean;
   /**
@@ -73,8 +68,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
   /** Surface variant for the **knob**. Default `'gradient'`. */
   knobVariant?: SurfaceVariant;
   /**
-   * Surface level for the **knob**. Default `'+2'` - two levels deeper than the parent surface,
-   * so the knob reads as a raised piece on top of the track.
+   * Surface level for the **knob**. Default `'+2'` - two levels deeper than the parent surface, so the knob reads as a raised piece on top of the track.
    */
   knobSurfaceLevel?: string | number;
 }

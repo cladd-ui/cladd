@@ -24,8 +24,7 @@ interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   /** Polymorphic root element. Defaults to `'div'`. */
   as?: C;
   /**
-   * When `true` (default), `children` are wrapped in `SurfaceCutContent`. Set to `false`
-   * to render `children` directly when you need full layout control of the inner DOM.
+   * When `true` (default), `children` are wrapped in `SurfaceCutContent`. Set to `false` to render `children` directly when you need full layout control of the inner DOM.
    */
   wrapContent?: boolean;
   /** Extra classes for the inner `SurfaceCutContent` wrapper. Ignored when `wrapContent` is `false`. */

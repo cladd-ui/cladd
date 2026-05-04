@@ -159,8 +159,7 @@ export interface DialogProps {
   /** Custom button row. Rendered after the auto-generated cancel/confirm buttons (if any). */
   buttons?: ReactNode;
   /**
-   * "Type to confirm" guard. When set, renders an `Input` and disables the confirm button until
-   * the user types this exact string - used for destructive actions (e.g. type the project name to delete).
+   * "Type to confirm" guard. When set, renders an `Input` and disables the confirm button until the user types this exact string - used for destructive actions (e.g. type the project name to delete).
    */
   requireConfirmText?: string;
   /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */

@@ -33,8 +33,7 @@ interface OTPFieldOwnProps {
   /** Fires whenever the OTP value changes (typing, backspace, paste, clear). */
   onChange?: (value: string) => void;
   /**
-   * Maximum number of characters / cells. When omitted, inferred from the count of
-   * `OTPFieldInput` children.
+   * Maximum number of characters / cells. When omitted, inferred from the count of `OTPFieldInput` children.
    */
   maxLength?: number;
   /** Cell size. Default `'lg'`. */
@@ -45,8 +44,7 @@ interface OTPFieldOwnProps {
    */
   pattern?: string;
   /**
-   * Validity state. Default `true`. When `false`, the entire field renders a
-   * single red focus ring around all cells.
+   * Validity state. Default `true`. When `false`, the entire field renders a single red focus ring around all cells.
    */
   valid?: boolean;
   /** Visually dim the field and disable interaction with all cells. */

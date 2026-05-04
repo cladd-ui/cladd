@@ -12,8 +12,7 @@ interface LinkOwnProps<C extends ElementType = 'button'> {
   /** Native `readOnly` attribute. */
   readOnly?: boolean;
   /**
-   * Polymorphic element. When omitted, defaults to `'a'` if `href` is provided, otherwise
-   * `'button'`. Pass an explicit value to override (e.g. a router `Link` component).
+   * Polymorphic element. When omitted, defaults to `'a'` if `href` is provided, otherwise `'button'`. Pass an explicit value to override (e.g. a router `Link` component).
    */
   as?: C;
   /** Reserved for focus-ring styling hooks. Default `true`. */

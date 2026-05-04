@@ -15,8 +15,7 @@ interface NumberFieldOwnProps {
   children?: ReactNode;
   /**
    * When `true` (default), the value is rendered in an editable `Input`.
-   * When `false`, the value is rendered in a read-only `SurfaceCut` chip - useful
-   * when keyboard entry is not desired.
+   * When `false`, the value is rendered in a read-only `SurfaceCut` chip - useful when keyboard entry is not desired.
    */
   input?: boolean;
   /** Extra classes for the value `Input` (or `SurfaceCut`). */

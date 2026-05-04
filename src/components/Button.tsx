@@ -31,9 +31,7 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   rounded?: boolean;
   size?: ButtonSize;
   /**
-   * Polymorphic element to render. Defaults to `'button'`. Pass `'a'` for links
-   * (cursor switches to pointer automatically), or any custom component to retain
-   * Button styling on a different DOM node. The component's own props become valid here.
+   * Polymorphic element to render. Defaults to `'button'`. Pass `'a'` for links (cursor switches to pointer automatically), or any custom component to retain Button styling on a different DOM node. The component's own props become valid here.
    */
   as?: C;
   /** Underlying `Surface` variant - see `SurfaceVariant`. Defaults to `'gradient'`. */

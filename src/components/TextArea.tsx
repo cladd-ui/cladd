@@ -50,10 +50,7 @@ interface TextAreaOwnProps<C extends ElementType = 'div'> {
   /** Slot rendered after the editable area. */
   suffix?: ReactNode;
   /**
-   * When `true` (default), syncs the editable `innerText` whenever `value` changes from
-   * the outside. Set to `false` for performance-sensitive editors that manage their own
-   * DOM (e.g. rich-text editors) - otherwise external `value` updates would stomp on
-   * caret position and selection.
+   * When `true` (default), syncs the editable `innerText` whenever `value` changes from the outside. Set to `false` for performance-sensitive editors that manage their own DOM (e.g. rich-text editors) - otherwise external `value` updates would stomp on caret position and selection.
    */
   updateContentOnChange?: boolean;
   /** Extra classes for the outer wrapper. */

@@ -34,8 +34,7 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   onPointerDown?: (e: PointerEvent) => void;
   /**
    * When `true` (default), renders a hidden native input for form submission and accessibility.
-   * When `false`, the component falls back to ARIA roles (`role="radio"`, `aria-checked`,
-   * keyboard `Space`/`Enter` toggling) and `onChange` fires from the click handler.
+   * When `false`, the component falls back to ARIA roles (`role="radio"`, `aria-checked`, keyboard `Space`/`Enter` toggling) and `onChange` fires from the click handler.
    */
   input?: boolean;
   /** `id` for the hidden `<input>`. Used to wire an external `<label htmlFor>` to this radio. */
@@ -45,9 +44,7 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   /** Accent color for the checked state. Default: theme accent. */
   color?: Color;
   /**
-   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden
-   * input on click. Use a non-label container when the radio lives inside an existing label —
-   * see `hoverable`/`focusable` for how this changes interactivity.
+   * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden input on click. Use a non-label container when the radio lives inside an existing label — see `hoverable`/`focusable` for how this changes interactivity.
    */
   as?: C;
   /**

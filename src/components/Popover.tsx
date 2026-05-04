@@ -279,27 +279,22 @@ type PopoverOwnProps = {
   /** Extra classes applied to the inner scrollable content area. Default includes `max-h-[70vh] overflow-auto`. */
   contentClassName?: string;
   /**
-   * Ref to the element the popover should anchor against. Defaults to the anchor registered
-   * by `PopoverRoot` + `PopoverTrigger`. CSS anchor positioning is used - an `anchor-name`
-   * is auto-applied to the element if it doesn't already have one.
+   * Ref to the element the popover should anchor against. Defaults to the anchor registered by `PopoverRoot` + `PopoverTrigger`. CSS anchor positioning is used - an `anchor-name` is auto-applied to the element if it doesn't already have one.
    */
   anchorRef?: React.RefObject<HTMLElement | null>;
   /**
-   * Static rect (or ref to one) to anchor against when there's no DOM anchor element
-   * (e.g. for a context menu opened at a pointer position). Ignored if `anchorRef.current` exists.
+   * Static rect (or ref to one) to anchor against when there's no DOM anchor element (e.g. for a context menu opened at a pointer position). Ignored if `anchorRef.current` exists.
    */
   anchorRect?: DOMRect | React.RefObject<DOMRect>;
   /**
-   * Portal target. CSS selector string (default `'#app, #__next, #root'` - first match wins),
-   * or `false` to render inline without portalling.
+   * Portal target. CSS selector string (default `'#app, #__next, #root'` - first match wins), or `false` to render inline without portalling.
    */
   root?: string | boolean;
   /** Anchor side + alignment. See `PopoverPosition`. Default `'bottom'`. */
   position?: PopoverPosition;
   /**
    * Spacing from anchor. Either a single value (main axis only) or `[main, cross]`.
-   * Numbers are pixels; strings pass through (e.g. `'8px'`, `'50%'` - `%` resolves against
-   * `anchor-size(width|height)` depending on the position).
+   * Numbers are pixels; strings pass through (e.g. `'8px'`, `'50%'` - `%` resolves against `anchor-size(width|height)` depending on the position).
    */
   offset?: OffsetValue | [OffsetValue, OffsetValue];
   /** Render a backdrop behind the popover. Default `false`. */
@@ -311,8 +306,7 @@ type PopoverOwnProps = {
   /** Popover content. */
   children?: React.ReactNode;
   /**
-   * Forwarded to the underlying `Surface` as `level`. Default depends on theme:
-   * `1` for light theme, `undefined` (parent + 1) for dark theme.
+   * Forwarded to the underlying `Surface` as `level`. Default depends on theme: `1` for light theme, `undefined` (parent + 1) for dark theme.
    */
   surfaceLevel?: number | string;
   /** Surface variant. Default depends on theme: `'gradient'` for dark, `'solid'` for light. */

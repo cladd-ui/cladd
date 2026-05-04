@@ -39,8 +39,7 @@ interface ListButtonOwnProps<C extends ElementType = 'button'> {
   color?: Color;
 
   /**
-   * Marks this list row as selected. When `true`, forces `variant` to `'gradient'` and
-   * `outline` to `true` regardless of the props passed - used for the active row in a list.
+   * Marks this list row as selected. When `true`, forces `variant` to `'gradient'` and `outline` to `true` regardless of the props passed - used for the active row in a list.
    */
   selected?: boolean;
 
@@ -54,8 +53,7 @@ interface ListButtonOwnProps<C extends ElementType = 'button'> {
    */
   variant?: SurfaceVariant;
   /**
-   * Outline ring on the row. Default `false`. Effective value is `outline || selected`,
-   * so a selected row always shows the ring.
+   * Outline ring on the row. Default `false`. Effective value is `outline || selected`, so a selected row always shows the ring.
    */
   outline?: boolean;
   /** Default `true`. Forwarded to the underlying `Button`. */

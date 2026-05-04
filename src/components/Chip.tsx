@@ -27,13 +27,11 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   rounded?: boolean;
   size?: ChipSize;
   /**
-   * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip
-   * becomes interactive automatically (see `clickable`).
+   * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip * becomes interactive automatically (see `clickable`).
    */
   as?: C;
   /**
-   * Render an outline ring. When `true`, also forces the underlying surface variant to
-   * `'transparent'`; when `false`/omitted, the surface is `'gradient'`.
+   * Render an outline ring. When `true`, also forces the underlying surface variant to `'transparent'`; when `false`/omitted, the surface is `'gradient'`.
    */
   outline?: boolean;
   /** Show hover affordance. Implicitly enabled when the chip is clickable. */
@@ -41,8 +39,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   /**
    * Make the chip react to pointer activity (active/pressed state, hover overlay).
    * Auto-computed when omitted: `true` if `as === 'a'` or `'button'`, otherwise `false`.
-   * Set explicitly to override (e.g. force a `<span>` to be clickable, or suppress the
-   * default for an `<a>` used purely as a navigation anchor).
+   * Set explicitly to override (e.g. force a `<span>` to be clickable, or suppress the default for an `<a>` used purely as a navigation anchor).
    */
   clickable?: boolean;
   /** Accent color token. Sets the chip's `cladd-color-{name}` class - drives text and ring colors. */

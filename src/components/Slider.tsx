@@ -31,8 +31,7 @@ export interface SliderProps {
   /** Accent color for the active track segment and knob. Default: theme accent. */
   color?: Color;
   /**
-   * Reserved - currently unused in the rendered output (the underlying `<input type="range">`
-   * is always present). Kept for parity with other form components.
+   * Reserved - currently unused in the rendered output (the underlying `<input type="range">` is always present). Kept for parity with other form components.
    */
   input?: boolean;
   /** Debounce onChange calls in ms. Defaults to 0 (immediate). */
