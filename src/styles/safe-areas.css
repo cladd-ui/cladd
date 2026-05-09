@@ -72,18 +72,28 @@
 }
 
 @utility ml-safe-* {
-  margin-left: calc(var(--cladd-safe-area-left) + var(--spacing) * --value(number));
+  margin-left: calc(
+    var(--cladd-safe-area-left) + var(--spacing) * --value(number)
+  );
 }
 
 @utility mr-safe-* {
-  margin-right: calc(var(--cladd-safe-area-right) + var(--spacing) * --value(number));
+  margin-right: calc(
+    var(--cladd-safe-area-right) + var(--spacing) * --value(number)
+  );
 }
 @utility mx-safe-* {
-  margin-left: calc(var(--cladd-safe-area-left) + var(--spacing) * --value(number));
-  margin-right: calc(var(--cladd-safe-area-right) + var(--spacing) * --value(number));
+  margin-left: calc(
+    var(--cladd-safe-area-left) + var(--spacing) * --value(number)
+  );
+  margin-right: calc(
+    var(--cladd-safe-area-right) + var(--spacing) * --value(number)
+  );
 }
 @utility mt-safe-* {
-  margin-top: calc(var(--cladd-safe-area-top) + var(--spacing) * --value(number));
+  margin-top: calc(
+    var(--cladd-safe-area-top) + var(--spacing) * --value(number)
+  );
 }
 @utility mb-safe-* {
   margin-bottom: calc(
@@ -91,7 +101,9 @@
   );
 }
 @utility my-safe-* {
-  margin-top: calc(var(--cladd-safe-area-top) + var(--spacing) * --value(number));
+  margin-top: calc(
+    var(--cladd-safe-area-top) + var(--spacing) * --value(number)
+  );
   margin-bottom: calc(
     var(--cladd-safe-area-bottom) + var(--spacing) * --value(number)
   );
@@ -117,7 +129,9 @@
   );
 }
 @utility pl-safe-* {
-  padding-left: calc(var(--cladd-safe-area-left) + var(--spacing) * --value(number));
+  padding-left: calc(
+    var(--cladd-safe-area-left) + var(--spacing) * --value(number)
+  );
 }
 @utility pr-safe-* {
   padding-right: calc(
@@ -125,13 +139,17 @@
   );
 }
 @utility px-safe-* {
-  padding-left: calc(var(--cladd-safe-area-left) + var(--spacing) * --value(number));
+  padding-left: calc(
+    var(--cladd-safe-area-left) + var(--spacing) * --value(number)
+  );
   padding-right: calc(
     var(--cladd-safe-area-right) + var(--spacing) * --value(number)
   );
 }
 @utility pt-safe-* {
-  padding-top: calc(var(--cladd-safe-area-top) + var(--spacing) * --value(number));
+  padding-top: calc(
+    var(--cladd-safe-area-top) + var(--spacing) * --value(number)
+  );
 }
 @utility pb-safe-* {
   padding-bottom: calc(
@@ -139,7 +157,9 @@
   );
 }
 @utility py-safe-* {
-  padding-top: calc(var(--cladd-safe-area-top) + var(--spacing) * --value(number));
+  padding-top: calc(
+    var(--cladd-safe-area-top) + var(--spacing) * --value(number)
+  );
   padding-bottom: calc(
     var(--cladd-safe-area-bottom) + var(--spacing) * --value(number)
   );
@@ -154,16 +174,24 @@
   top: calc(var(--cladd-safe-area-top) + var(--spacing) * --value(number));
 }
 @utility bottom-safe-* {
-  bottom: calc(var(--cladd-safe-area-bottom) + var(--spacing) * --value(number));
+  bottom: calc(
+    var(--cladd-safe-area-bottom) + var(--spacing) * --value(number)
+  );
 }
 @utility -left-safe-* {
-  left: calc(0px - var(--cladd-safe-area-left) - var(--spacing) * --value(number));
+  left: calc(
+    0px - var(--cladd-safe-area-left) - var(--spacing) * --value(number)
+  );
 }
 @utility -right-safe-* {
-  right: calc(0px - var(--cladd-safe-area-right) - var(--spacing) * --value(number));
+  right: calc(
+    0px - var(--cladd-safe-area-right) - var(--spacing) * --value(number)
+  );
 }
 @utility -top-safe-* {
-  top: calc(0px - var(--cladd-safe-area-top) - var(--spacing) * --value(number));
+  top: calc(
+    0px - var(--cladd-safe-area-top) - var(--spacing) * --value(number)
+  );
 }
 @utility -bottom-safe-* {
   bottom: calc(

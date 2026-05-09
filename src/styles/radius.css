@@ -2,13 +2,17 @@
   --cladd-radius: 8px;
   --cladd-radius-ratio: calc(var(--cladd-radius) / var(--spacing-cladd-md));
   --radius-cladd: var(--cladd-radius);
-  --radius-cladd-2xs: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-2xs));
+  --radius-cladd-2xs: calc(
+    var(--cladd-radius-ratio) * var(--spacing-cladd-2xs)
+  );
   --radius-cladd-xs: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-xs));
   --radius-cladd-sm: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-sm));
   --radius-cladd-md: var(--cladd-radius);
   --radius-cladd-lg: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-lg));
   --radius-cladd-xl: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-xl));
-  --radius-cladd-2xl: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-2xl));
+  --radius-cladd-2xl: calc(
+    var(--cladd-radius-ratio) * var(--spacing-cladd-2xl)
+  );
 
   --radius-cladd-full-2xs: calc(var(--spacing-cladd-2xs) / 2);
   --radius-cladd-full-xs: calc(var(--spacing-cladd-xs) / 2);
