@@ -142,7 +142,15 @@ function App() {
           contentClassName="flex flex-col gap-4 p-4"
         >
           <Shortcut variant="solid-fill">cmd shift alt return up esc</Shortcut>
-          <Button size="sm" rounded>
+          <Button multiline size="2xs" rounded>
+            Button 2XS{' '}
+            <Shortcut size="2xs">alt tab cmd shift alt return up esc</Shortcut>
+          </Button>
+          <Button multiline size="xs" rounded>
+            Button XS{' '}
+            <Shortcut size="xs">alt tab cmd shift alt return up esc</Shortcut>
+          </Button>
+          <Button multiline size="sm" rounded>
             Button SM{' '}
             <Shortcut size="sm">alt tab cmd shift alt return up esc</Shortcut>
           </Button>
@@ -566,7 +574,7 @@ function App() {
           outline
           className="rounded-3xl"
         >
-          {['sm', 'md', 'lg', 'xl', '2xl'].map((size) => (
+          {['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((size) => (
             <div className="flex items-center gap-4">
               <span className="font-mono">{size.toUpperCase()}:</span>
               <Spinner size={size as SpinnerSize} />
@@ -641,17 +649,29 @@ function App() {
                   Button 1
                 </ListButton>
 
-                <ListButton icon={<svg className="size-4 shrink-0" />}>
-                  Button 2
+                <ListButton
+                  size="2xs"
+                  icon={<svg className="size-4 shrink-0" />}
+                >
+                  Button 2 2xs
                 </ListButton>
-                <ListButton icon={<svg className="size-4 shrink-0" />}>
-                  Button 3
+                <ListButton
+                  size="xs"
+                  icon={<svg className="size-4 shrink-0" />}
+                >
+                  Button 3 xs
                 </ListButton>
-                <ListButton icon={<svg className="size-4 shrink-0" />}>
-                  Button 4
+                <ListButton
+                  size="sm"
+                  icon={<svg className="size-4 shrink-0" />}
+                >
+                  Button 4 sm
                 </ListButton>
-                <ListButton icon={<svg className="size-4 shrink-0" />}>
-                  Button 5
+                <ListButton
+                  size="md"
+                  icon={<svg className="size-4 shrink-0" />}
+                >
+                  Button 5 md
                 </ListButton>
                 <ListButton
                   header="Header text"
@@ -952,6 +972,28 @@ function App() {
           outline
           className="rounded-3xl"
         >
+          <Toolbar>
+            <Segmented activeColor="neutral">
+              <SegmentedButton
+                active={active === 0}
+                onClick={() => setActive(0)}
+              >
+                Button 1
+              </SegmentedButton>
+              <SegmentedButton
+                active={active === 1}
+                onClick={() => setActive(1)}
+              >
+                Button 2
+              </SegmentedButton>
+              <SegmentedButton
+                active={active === 2}
+                onClick={() => setActive(2)}
+              >
+                Button 3
+              </SegmentedButton>
+            </Segmented>
+          </Toolbar>
           <Segmented activeColor="neutral">
             <SegmentedButton active={active === 0} onClick={() => setActive(0)}>
               Button 1
@@ -1391,6 +1433,16 @@ function App() {
           contentClassName="p-4 flex gap-2 flex-wrap"
           level={1}
         >
+          <Button size="2xs" color="red">
+            2XS
+            <Chip color="neutral" size="2xs">
+              CHIP
+            </Chip>
+          </Button>
+          <Button size="xs" color="red">
+            XS
+            <Chip size="xs">CHIP</Chip>
+          </Button>
           <Button size="sm" color="red">
             SM
             <Chip size="sm">CHIP</Chip>
