@@ -1,71 +1,13 @@
-@layer base {
-  .cladd-spinner-wrap {
-    transform-origin: center;
-    animation: cladd-spinner-rotate 4s infinite;
-  }
-  .cladd-spinner-knob {
-    transform-origin: left;
-    animation:
-      cladd-spinner-knob-move 1s infinite,
-      cladd-spinner-knob-scale 1s infinite;
-  }
+@theme {
+  --animate-cladd-spinner: cladd-spinner-rotate 1.5s infinite linear;
 
   @keyframes cladd-spinner-rotate {
     0% {
       transform: rotate(0deg);
     }
-    12.5%,
-    25% {
-      transform: rotate(90deg);
-    }
-
-    37.5%,
-    50% {
-      transform: rotate(180deg);
-    }
-    62.5%,
-    75% {
-      transform: rotate(270deg);
-    }
-    87.5%,
     100% {
       transform: rotate(360deg);
     }
   }
 
-  @keyframes cladd-spinner-knob-move {
-    0%,
-    10% {
-      translate: 0px;
-    }
-    40%,
-    60% {
-      translate: calc(100%);
-    }
-    90%,
-    100% {
-      translate: 0px;
-    }
-  }
-
-  @keyframes cladd-spinner-knob-scale {
-    0% {
-      scale: 0.9 1;
-      transform-origin: left;
-    }
-    25% {
-      scale: 1.2 0.95;
-    }
-    50% {
-      scale: 0.9 1;
-      transform-origin: right;
-    }
-    75% {
-      scale: 1.2 0.95;
-    }
-    100% {
-      scale: 0.9 1;
-      transform-origin: left;
-    }
-  }
 }
