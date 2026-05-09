@@ -45,6 +45,11 @@ export {
   type NumberFieldProps,
   type NumberFieldSize,
 } from './components/NumberField';
+export {
+  NumberScrubber,
+  type NumberScrubberProps,
+  type NumberScrubberSize,
+} from './components/NumberScrubber';
 export { OTPField, type OTPFieldProps } from './components/OTPField';
 export {
   OTPFieldInput,

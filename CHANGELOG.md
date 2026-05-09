@@ -41,7 +41,7 @@
 - remove unused popup.css (ced8499)
 - namespace CSS vars and props (0b52fa3)
 - class surface-level-n -> [data-level="n"] (a590e85)
-- class color-* to data-color=* (0284752)
+- class color-_ to data-color=_ (0284752)
 - zed oxfmt (42f4edd)
 - rename classes to scoped (e011fb2)
 

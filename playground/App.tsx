@@ -15,6 +15,7 @@ import {
   ListSeparator,
   ListTitle,
   NumberField,
+  NumberScrubber,
   OTPField,
   OTPFieldInput,
   OTPFieldSeparator,
@@ -111,9 +112,28 @@ function App() {
     );
   };
 
+  const [scrubValue, setScrubValue] = useState(100);
+
   return (
     <UIProvider theme="dark">
       <div className={cn('flex flex-col items-start gap-8 p-8 text-cladd-fg')}>
+        <SectionTitle>Number Scrubber</SectionTitle>
+        <Surface
+          outline
+          variant="gradient"
+          className="rounded-3xl"
+          contentClassName="flex flex-col gap-4 p-4"
+        >
+          <NumberScrubber
+            value={scrubValue}
+            min={0}
+            max={1000}
+            step={1}
+            rounded
+            displayValue={(v) => `${v} px`}
+            onChange={(v) => setScrubValue(v)}
+          />
+        </Surface>
         <SectionTitle>Shortcuts</SectionTitle>
         <Surface
           outline
