@@ -172,11 +172,11 @@ export const Input = <
   } = props;
 
   const fontSizes: Record<InputSize, string> = {
-    sm: 'text-xs',
-    md: 'text-xs',
-    lg: 'text-xs',
-    xl: 'text-xs',
-    '2xl': 'text-xs',
+    sm: 'text-cladd-xs',
+    md: 'text-cladd-xs',
+    lg: 'text-cladd-xs',
+    xl: 'text-cladd-xs',
+    '2xl': 'text-cladd-xs',
   };
 
   const iconWrapClasses: Record<InputSize, string> = {
@@ -397,7 +397,7 @@ export const Input = <
         <div
           data-part="info"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
             `cladd-color-${color}`,
           )}
         >
@@ -408,7 +408,7 @@ export const Input = <
         <div
           data-part="error"
           className={cn(
-            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
+            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

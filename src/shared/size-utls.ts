@@ -60,11 +60,12 @@ export const rootSizeClasses = (
 };
 
 export const nestedSizeClasses = (
-  size: 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'sm',
+  size: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' = 'sm',
   prop: 'size' | 'width' | 'height' | 'min-width' | 'min-height',
 ) => {
   if (prop === 'size') {
     return {
+      '2xs': 'size-cladd-nested-2xs',
       xs: 'size-cladd-nested-xs',
       sm: 'size-cladd-nested-sm',
       md: 'size-cladd-nested-md',
@@ -75,6 +76,7 @@ export const nestedSizeClasses = (
   }
   if (prop === 'width') {
     return {
+      '2xs': 'w-cladd-nested-2xs',
       xs: 'w-cladd-nested-xs',
       sm: 'w-cladd-nested-sm',
       md: 'w-cladd-nested-md',
@@ -85,6 +87,7 @@ export const nestedSizeClasses = (
   }
   if (prop === 'height') {
     return {
+      '2xs': 'h-cladd-nested-2xs',
       xs: 'h-cladd-nested-xs',
       sm: 'h-cladd-nested-sm',
       md: 'h-cladd-nested-md',
@@ -96,6 +99,7 @@ export const nestedSizeClasses = (
 
   if (prop === 'min-width') {
     return {
+      '2xs': 'min-w-cladd-nested-2xs',
       xs: 'min-w-cladd-nested-xs',
       sm: 'min-w-cladd-nested-sm',
       md: 'min-w-cladd-nested-md',
@@ -106,6 +110,7 @@ export const nestedSizeClasses = (
   }
   if (prop === 'min-height') {
     return {
+      '2xs': 'min-h-cladd-nested-2xs',
       xs: 'min-h-cladd-nested-xs',
       sm: 'min-h-cladd-nested-sm',
       md: 'min-h-cladd-nested-md',

@@ -13,6 +13,7 @@ import { Color } from '../types';
 import { ButtonSize } from './Button';
 import { SegmentedContextProvider } from './SegmentedContext';
 import { SurfaceVariant } from './Surface';
+import { useToolbarContext } from './ToolbarContext';
 
 interface SegmentedOwnProps<C extends ElementType = 'div'> {
   /** Should be one or more `SegmentedButton` elements. */
@@ -56,12 +57,14 @@ export const Segmented = <C extends ElementType = 'div'>(
 ) => {
   const elRef = useRef<HTMLElement | null>(null);
   const accentColor = useAccentColor();
+  const { size: toolbarSize } = useToolbarContext();
+
   const {
     children,
     className = '',
     disabled = false,
     rounded = true,
-    size = 'md',
+    size = toolbarSize || 'md',
     as: asProp = 'div' as ElementType<any>,
     color = '',
     ref,

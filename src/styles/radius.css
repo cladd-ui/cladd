@@ -2,6 +2,9 @@
   --cladd-radius: 8px;
   --cladd-radius-ratio: calc(var(--cladd-radius) / var(--spacing-cladd-md));
   --radius-cladd: var(--cladd-radius);
+  --radius-cladd-3xs: calc(
+    var(--cladd-radius-ratio) * var(--spacing-cladd-3xs)
+  );
   --radius-cladd-2xs: calc(
     var(--cladd-radius-ratio) * var(--spacing-cladd-2xs)
   );

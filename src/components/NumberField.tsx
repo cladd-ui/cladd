@@ -174,7 +174,7 @@ export const NumberField = (props: NumberFieldProps) => {
             itemRoundedClasses,
           )}
           contentClassName={cn(
-            'flex items-center justify-center text-xs',
+            'flex items-center justify-center text-cladd-xs',
             inputPaddingNoIcon[size],
           )}
         >

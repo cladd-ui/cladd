@@ -1,4 +1,5 @@
 @theme {
+  --spacing-cladd-3xs: 12px;
   --spacing-cladd-2xs: 16px;
   --spacing-cladd-xs: 20px;
   --spacing-cladd-sm: 24px;
@@ -11,6 +12,8 @@
   --spacing-cladd-thumb-sm: 20px;
   --spacing-cladd-thumb-md: 24px;
 
+  --spacing-cladd-nested-3xs: calc(var(--spacing-cladd-3xs) - 8px);
+  --spacing-cladd-nested-2xs: calc(var(--spacing-cladd-2xs) - 8px);
   --spacing-cladd-nested-xs: calc(var(--spacing-cladd-xs) - 8px);
   --spacing-cladd-nested-sm: calc(var(--spacing-cladd-sm) - 8px);
   --spacing-cladd-nested-md: calc(var(--spacing-cladd-md) - 8px);

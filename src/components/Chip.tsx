@@ -12,7 +12,7 @@ import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { Surface } from './Surface';
 
-export type ChipSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ChipSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface ChipOwnProps<C extends ElementType = 'span'> {
   /** Chip content - typically a short label, optionally with an icon. */
@@ -81,6 +81,8 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   } = props;
   const height = nestedSizeClasses(size, 'height');
   const paddings: Record<ChipSize, string> = {
+    '2xs': 'px-1 [&:has(>svg)]:pl-1',
+    xs: 'px-1 [&:has(>svg)]:pl-1',
     sm: 'px-2 [&:has(>svg)]:pl-1',
     md: 'px-2 [&:has(>svg)]:pl-1',
     lg: 'px-2.5 [&:has(>svg)]:pl-1.5',
@@ -88,13 +90,17 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     '2xl': 'px-2',
   };
   const fontSizes: Record<ChipSize, string> = {
-    sm: 'text-[10px]',
-    md: 'text-[10px]',
-    lg: 'text-xs',
-    xl: 'text-xs',
-    '2xl': 'text-xs',
+    '2xs': 'text-cladd-4xs',
+    xs: 'text-cladd-3xs',
+    sm: 'text-cladd-2xs',
+    md: 'text-cladd-2xs',
+    lg: 'text-cladd-xs',
+    xl: 'text-cladd-xs',
+    '2xl': 'text-cladd-xs',
   };
   const iconSizes: Record<ChipSize, string> = {
+    '2xs': '[&>svg]:size-1.5',
+    xs: '[&>svg]:size-2.5',
     sm: '[&>svg]:size-3',
     md: '[&>svg]:size-4',
     lg: '[&>svg]:size-4',
@@ -103,6 +109,8 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   };
 
   const roundedClasses = {
+    '2xs': 'rounded-cladd-3xs',
+    xs: 'rounded-cladd-3xs',
     sm: 'rounded-cladd-xs',
     md: 'rounded-cladd-sm',
     lg: 'rounded-cladd-md',

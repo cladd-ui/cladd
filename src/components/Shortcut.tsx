@@ -20,7 +20,7 @@ import { KeyboardSpaceIcon } from './icons/KeyboardSpaceIcon';
 import { KeyboardTabIcon } from './icons/KeyboardTabIcon';
 import { Surface, SurfaceVariant } from './Surface';
 
-export type ShortcutSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type ShortcutSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface ShortcutOwnProps {
   /** Extra classes for the shortcut root container. */
@@ -82,6 +82,8 @@ export const Shortcut = (props: ShortcutProps) => {
     nestedSizeClasses(size, 'min-width'),
   ].join(' ');
   const iconSizeClass = {
+    '2xs': 'size-1.5',
+    xs: 'size-2.5',
     sm: 'size-3',
     md: 'size-3.5',
     lg: 'size-4',
@@ -89,6 +91,8 @@ export const Shortcut = (props: ShortcutProps) => {
     '2xl': 'size-6',
   }[size];
   const roundedClass = {
+    '2xs': 'rounded-cladd-2xs',
+    xs: 'rounded-cladd-xs',
     sm: 'rounded-cladd-xs',
     md: 'rounded-cladd-sm',
     lg: 'rounded-cladd-md',
@@ -96,11 +100,13 @@ export const Shortcut = (props: ShortcutProps) => {
     '2xl': 'rounded-cladd-xl',
   }[size];
   const fontSizeClass = {
-    sm: 'text-[10px]',
-    md: 'text-[11px]',
-    lg: 'text-[12px]',
-    xl: 'text-[12px]',
-    '2xl': 'text-[14px]',
+    '2xs': 'text-cladd-4xs',
+    xs: 'text-cladd-3xs',
+    sm: 'text-cladd-2xs',
+    md: 'text-cladd-2xs',
+    lg: 'text-cladd-xs',
+    xl: 'text-cladd-xs',
+    '2xl': 'text-cladd-sm',
   }[size];
   const iconClass = cn(iconSizeClass, iconClassName);
 

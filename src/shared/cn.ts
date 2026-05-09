@@ -4,7 +4,16 @@ import { extendTailwindMerge } from 'tailwind-merge';
 const customTwMerge = extendTailwindMerge({
   extend: {
     theme: {
+      text: [
+        'cladd-4xs',
+        'cladd-3xs',
+        'cladd-2xs',
+        'cladd-xs',
+        'cladd-sm',
+        'cladd-md',
+      ],
       spacing: [
+        'cladd-3xs',
         'cladd-2xs',
         'cladd-xs',
         'cladd-sm',
@@ -15,6 +24,8 @@ const customTwMerge = extendTailwindMerge({
         'cladd-thumb-xs',
         'cladd-thumb-sm',
         'cladd-thumb-md',
+        'cladd-nested-3xs',
+        'cladd-nested-2xs',
         'cladd-nested-xs',
         'cladd-nested-sm',
         'cladd-nested-md',
@@ -26,6 +37,7 @@ const customTwMerge = extendTailwindMerge({
       ],
       radius: [
         'cladd',
+        'cladd-3xs',
         'cladd-2xs',
         'cladd-xs',
         'cladd-sm',

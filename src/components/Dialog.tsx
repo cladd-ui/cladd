@@ -151,9 +151,9 @@ export interface DialogProps {
   className?: string;
   /** Extra classes applied to the inner content area. Default includes `space-y-4 p-4`. */
   contentClassName?: string;
-  /** Title slot. Rendered as `<div>` with `text-base font-semibold`. Auto-wired to `aria-labelledby`. */
+  /** Title slot. Rendered as `<div>` with `text-cladd-md font-semibold`. Auto-wired to `aria-labelledby`. */
   title?: ReactNode;
-  /** Body text slot. Rendered as `<div>` with `text-sm leading-relaxed`. Auto-wired to `aria-describedby`. */
+  /** Body text slot. Rendered as `<div>` with `text-cladd-sm leading-relaxed`. Auto-wired to `aria-describedby`. */
   text?: ReactNode;
   /** Defer rendering until first opened, and unmount after close. */
   lazy?: boolean;
@@ -337,13 +337,17 @@ const DialogInner = (props: DialogInnerProps) => {
           <div
             data-part="title"
             id={titleId}
-            className="text-base font-semibold"
+            className="text-cladd-md font-semibold"
           >
             {title}
           </div>
         )}
         {text && (
-          <div data-part="text" id={descId} className="text-sm leading-relaxed">
+          <div
+            data-part="text"
+            id={descId}
+            className="text-cladd-sm leading-relaxed"
+          >
             {text}
           </div>
         )}

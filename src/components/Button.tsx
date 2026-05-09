@@ -135,13 +135,13 @@ export const Button = <C extends ElementType = 'button'>(
     '2xl': 'px-3.5',
   };
   const fontSizes: Record<ButtonSize, string> = {
-    '2xs': 'text-xs',
-    xs: 'text-xs',
-    sm: 'text-xs',
-    md: 'text-xs',
-    lg: 'text-xs',
-    xl: 'text-xs',
-    '2xl': 'text-xs',
+    '2xs': 'text-cladd-xs',
+    xs: 'text-cladd-xs',
+    sm: 'text-cladd-xs',
+    md: 'text-cladd-xs',
+    lg: 'text-cladd-xs',
+    xl: 'text-cladd-xs',
+    '2xl': 'text-cladd-xs',
   };
 
   const isSurfaceCut = surface === 'cut';
@@ -172,7 +172,8 @@ export const Button = <C extends ElementType = 'button'>(
         className,
       )}
       contentClassName={cn(
-        'flex w-full items-center justify-center gap-2 py-1 [&>svg]:shrink-0',
+        'flex w-full items-center justify-center gap-2 py-0 [&>svg]:shrink-0',
+        size === '2xs' ? 'py-0' : size === 'xs' ? 'py-0.5' : 'py-1',
         multiline && height,
         buttonIconSizes[size],
         disabled && 'opacity-40',

@@ -183,7 +183,7 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
         contentClassName={cn('px-2 py-1', contentClassName)}
         color={color}
         className={cn(
-          'pointer-events-none fixed max-h-[50vh] w-max max-w-50 overflow-auto rounded-cladd-tooltip text-xs leading-normal font-medium transition-[opacity,transform,scale]',
+          'pointer-events-none fixed max-h-[50vh] w-max max-w-50 overflow-auto rounded-cladd-tooltip text-cladd-xs leading-normal font-medium transition-[opacity,transform,scale]',
 
           opened ? 'scale-100 opacity-100' : '',
           phase === 'opened' && 'duration-200',

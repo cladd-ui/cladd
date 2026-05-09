@@ -115,11 +115,11 @@ export const Textarea = <C extends ElementType = 'div'>(
   } = props;
 
   const fontSizes: Record<TextareaSize, string> = {
-    sm: 'text-xs',
-    md: 'text-xs',
-    lg: 'text-xs',
-    xl: 'text-xs',
-    '2xl': 'text-xs',
+    sm: 'text-cladd-xs',
+    md: 'text-cladd-xs',
+    lg: 'text-cladd-xs',
+    xl: 'text-cladd-xs',
+    '2xl': 'text-cladd-xs',
   };
   const iconWrapClasses: Record<TextareaSize, string> = {
     sm: 'left-2.5 [&>svg]:size-4 top-1',
@@ -281,7 +281,7 @@ export const Textarea = <C extends ElementType = 'div'>(
           data-part="info"
           className={cn(
             `cladd-color-${color}`,
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[[contenteditable]:focus]/cladd-textarea:-translate-y-1/2 group-has-[[contenteditable]:focus]/cladd-textarea:opacity-100',
           )}
         >
           {infoMessage}
@@ -291,7 +291,7 @@ export const Textarea = <C extends ElementType = 'div'>(
         <div
           data-part="error"
           className={cn(
-            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-[10px] leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
+            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}

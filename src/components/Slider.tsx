@@ -181,7 +181,7 @@ export function Slider(props: SliderProps) {
             className={cn(
               size === 'sm' && '-left-1.5',
               size === 'md' && '-left-1',
-              'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-[11px] leading-none font-medium text-cladd-primary duration-300',
+              'text-cladd-xs absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center leading-none font-medium text-cladd-primary duration-300',
               !disabled &&
                 !readOnly &&
                 'group-focus-within/cladd-slider:scale-100 group-active/cladd-slider:scale-100',

@@ -619,7 +619,7 @@ export function Select<T = string>(props: SelectProps<T>) {
               <div
                 data-part="empty"
                 className={cn(
-                  'mb-2 flex h-8 w-full items-center pr-4 pl-4 text-xs font-medium text-cladd-fg-softer',
+                  'mb-2 flex h-8 w-full items-center pr-4 pl-4 text-cladd-xs font-medium text-cladd-fg-softer',
                 )}
               >
                 {searchNotFound}
@@ -680,7 +680,7 @@ export function Select<T = string>(props: SelectProps<T>) {
                           index: options.indexOf(optionValue),
                           selected: getOptionIsChecked(optionValue),
                         }) && (
-                          <div className="text-xs font-normal text-cladd-fg-soft">
+                          <div className="text-cladd-xs font-normal text-cladd-fg-soft">
                             {renderOptionInfo({
                               value: optionValue,
                               index: options.indexOf(optionValue),
