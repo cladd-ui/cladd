@@ -253,7 +253,7 @@ const ToastInner = (props: ToastInnerProps) => {
         </div>
       )}
       {(title || text) && (
-        <div data-part="content" className="flex flex-col gap-1">
+        <div data-part="content" className="flex flex-col">
           {title && (
             <div data-part="title" className="text-cladd-sm font-semibold">
               {title}
