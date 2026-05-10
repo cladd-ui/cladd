@@ -10,7 +10,6 @@ import {
 } from 'react';
 
 import { useDevice } from '../hooks/use-device';
-import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Button, buttonIconSizes, ButtonSize } from './Button';
 import { Checkbox } from './Checkbox';
@@ -110,7 +109,7 @@ interface SelectOwnProps<T = string> {
   /**
    * Surface level for the popover.
    *
-   * Default depends on theme: `'+1'` for dark (one level above the trigger), `1` (absolute) for light.
+   * Default same as Popover's `surfaceLevel` prop.
    */
   popoverSurfaceLevel?: number | string;
   /**
@@ -191,7 +190,6 @@ export type SelectProps<T = string> = SelectOwnProps<T> &
   Omit<ButtonProps, keyof SelectOwnProps<T>>;
 
 export function Select<T = string>(props: SelectProps<T>) {
-  const theme = useTheme();
   const {
     value = '' as T,
     placeholder = '',
@@ -232,7 +230,7 @@ export function Select<T = string>(props: SelectProps<T>) {
     popoverPosition = 'bottom-end',
     popoverOffset = ['-50%', 4],
     popoverClassName = 'w-auto min-w-[160px]',
-    popoverSurfaceLevel = theme === 'dark' ? '+1' : 1,
+    popoverSurfaceLevel,
     anchorRef: elRefExternal,
     popoverState: popoverStateExternal,
     onPopoverState: setPopoverStateExternal,
