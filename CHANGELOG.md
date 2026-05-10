@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.28 (2026-05-10)
+
+### Features
+
+- tweak toast styles (bf9bd12)
+
 ## 0.0.27 (2026-05-10)
 
 ### Features
