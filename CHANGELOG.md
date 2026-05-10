@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.30 (2026-05-10)
+
+### Features
+
+- export overlays compound props (1b928a9)
+
 ## 0.0.29 (2026-05-10)
 
 ### Features
