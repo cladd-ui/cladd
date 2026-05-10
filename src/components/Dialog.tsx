@@ -34,6 +34,17 @@ type DialogRootContextValue = {
 
 const DialogRootContext = createContext<DialogRootContextValue | null>(null);
 
+export interface DialogRootProps {
+  /** Trigger + dialog (+ optional close) elements. */
+  children: ReactNode;
+  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
+  defaultOpen?: boolean;
+  /** Controlled open state. When provided, internal state is bypassed. */
+  open?: boolean;
+  /** Fires whenever the open state should change (trigger click, outside click, escape, button press). */
+  onOpenChange?: (open: boolean) => void;
+}
+
 /**
  * State container for the `Dialog` + `DialogTrigger` + `Dialog` compound. Use when you want
  * the trigger and the dialog to be siblings in JSX:
@@ -52,15 +63,7 @@ export const DialogRoot = ({
   defaultOpen = false,
   open: openProp,
   onOpenChange,
-}: {
-  children: ReactNode;
-  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
-  defaultOpen?: boolean;
-  /** Controlled open state. When provided, internal state is bypassed. */
-  open?: boolean;
-  /** Fires whenever the open state should change (trigger click, outside click, escape, button press). */
-  onOpenChange?: (open: boolean) => void;
-}) => {
+}: DialogRootProps) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
 
   const isControlled = openProp !== undefined;
@@ -77,6 +80,11 @@ export const DialogRoot = ({
   );
 };
 
+export interface DialogTriggerProps {
+  /** Single React element to clone as the trigger. Must accept `onClick`. */
+  children: ReactNode;
+}
+
 /**
  * Wraps a single child element to act as the dialog trigger. **Clones** the child to attach
  * an `onClick` handler that toggles the surrounding `DialogRoot`'s open state (composed with
@@ -85,7 +93,7 @@ export const DialogRoot = ({
  * No-ops (renders the child as-is) when used outside a `DialogRoot`. Unlike `PopoverTrigger`,
  * this does **not** register an anchor ref - dialogs are centered on the viewport, not anchored.
  */
-export const DialogTrigger = ({ children }: { children: ReactNode }) => {
+export const DialogTrigger = ({ children }: DialogTriggerProps) => {
   const ctx = useContext(DialogRootContext);
   if (!ctx) return <>{children}</>;
 
@@ -99,6 +107,11 @@ export const DialogTrigger = ({ children }: { children: ReactNode }) => {
 
   return cloneElement(child, { onClick });
 };
+
+export interface DialogCloseProps {
+  /** Single React element to clone as the close affordance. Must accept `onClick`. */
+  children: ReactNode;
+}
 
 /**
  * Wraps a single child element to close the surrounding dialog when clicked. **Clones** the
@@ -117,7 +130,7 @@ export const DialogTrigger = ({ children }: { children: ReactNode }) => {
  *
  * No-ops (renders the child as-is) when used outside a `DialogRoot`.
  */
-export const DialogClose = ({ children }: { children: ReactNode }) => {
+export const DialogClose = ({ children }: DialogCloseProps) => {
   const ctx = useContext(DialogRootContext);
   if (!ctx) return <>{children}</>;
 

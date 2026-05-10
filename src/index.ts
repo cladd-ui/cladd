@@ -28,7 +28,10 @@ export {
   DialogClose,
   DialogRoot,
   DialogTrigger,
+  type DialogCloseProps,
   type DialogProps,
+  type DialogRootProps,
+  type DialogTriggerProps,
 } from './components/Dialog';
 export { Input, type InputProps, type InputSize } from './components/Input';
 export { Link, type LinkProps } from './components/Link';
@@ -64,14 +67,20 @@ export {
   PopoverClose,
   PopoverRoot,
   PopoverTrigger,
+  type PopoverCloseProps,
   type PopoverProps,
+  type PopoverRootProps,
+  type PopoverTriggerProps,
 } from './components/Popover';
 export {
   Popup,
   PopupClose,
   PopupRoot,
   PopupTrigger,
+  type PopupCloseProps,
   type PopupProps,
+  type PopupRootProps,
+  type PopupTriggerProps,
 } from './components/Popup';
 export {
   PopupContent,
@@ -123,7 +132,10 @@ export {
   ToastClose,
   ToastRoot,
   ToastTrigger,
+  type ToastCloseProps,
   type ToastProps,
+  type ToastRootProps,
+  type ToastTriggerProps,
 } from './components/Toast';
 export { Toolbar, type ToolbarProps } from './components/Toolbar';
 export {

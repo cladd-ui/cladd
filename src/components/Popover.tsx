@@ -32,6 +32,17 @@ type PopoverRootContextValue = {
 
 const PopoverRootContext = createContext<PopoverRootContextValue | null>(null);
 
+export interface PopoverRootProps {
+  /** Trigger + popover (+ optional close) elements. */
+  children: ReactNode;
+  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
+  defaultOpen?: boolean;
+  /** Controlled open state. When provided, internal state is bypassed. */
+  open?: boolean;
+  /** Fires whenever the open state should change (clicks on trigger, outside-clicks, escape). */
+  onOpenChange?: (open: boolean) => void;
+}
+
 /**
  * State container for the `Popover` + `PopoverTrigger` + `Popover` compound. Holds the open
  * state and the anchor ref so a `PopoverTrigger` can register the anchor element and a sibling
@@ -54,15 +65,7 @@ export const PopoverRoot = ({
   defaultOpen = false,
   open: openProp,
   onOpenChange,
-}: {
-  children: ReactNode;
-  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
-  defaultOpen?: boolean;
-  /** Controlled open state. When provided, internal state is bypassed. */
-  open?: boolean;
-  /** Fires whenever the open state should change (clicks on trigger, outside-clicks, escape). */
-  onOpenChange?: (open: boolean) => void;
-}) => {
+}: PopoverRootProps) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const anchorRef = useRef<HTMLElement | null>(null);
 
@@ -80,6 +83,11 @@ export const PopoverRoot = ({
   );
 };
 
+export interface PopoverTriggerProps {
+  /** Single React element to use as the trigger. Must accept `ref` and `onClick`. */
+  children: ReactNode;
+}
+
 /**
  * Wraps a single child element to act as the popover trigger. **Clones** the child to attach:
  * - a `ref` callback that registers the element as the popover's anchor (composed with any
@@ -90,12 +98,7 @@ export const PopoverRoot = ({
  * No-ops (renders the child as-is) when used outside a `PopoverRoot`. Expects exactly one
  * React element child that accepts `ref` and `onClick`.
  */
-export const PopoverTrigger = ({
-  children,
-}: {
-  /** Single React element to use as the trigger. Must accept `ref` and `onClick`. */
-  children: ReactNode;
-}) => {
+export const PopoverTrigger = ({ children }: PopoverTriggerProps) => {
   const ctx = useContext(PopoverRootContext);
   if (!ctx) return <>{children}</>;
 
@@ -123,6 +126,11 @@ export const PopoverTrigger = ({
   return cloneElement(child, { ref: setRef, onClick });
 };
 
+export interface PopoverCloseProps {
+  /** Single React element to use as the close affordance. Must accept `onClick`. */
+  children: ReactNode;
+}
+
 /**
  * Wraps a single child element to close the surrounding popover when clicked. **Clones** the
  * child to attach an `onClick` handler that flips the surrounding `PopoverRoot`'s open state
@@ -140,12 +148,7 @@ export const PopoverTrigger = ({
  *
  * No-ops (renders the child as-is) when used outside a `PopoverRoot`.
  */
-export const PopoverClose = ({
-  children,
-}: {
-  /** Single React element to use as the close affordance. Must accept `onClick`. */
-  children: ReactNode;
-}) => {
+export const PopoverClose = ({ children }: PopoverCloseProps) => {
   const ctx = useContext(PopoverRootContext);
   if (!ctx) return <>{children}</>;
 

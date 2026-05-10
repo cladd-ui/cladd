@@ -29,6 +29,17 @@ type ToastRootContextValue = {
 
 const ToastRootContext = createContext<ToastRootContextValue | null>(null);
 
+export interface ToastRootProps {
+  /** Trigger + toast (+ optional close) elements. */
+  children: ReactNode;
+  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
+  defaultOpen?: boolean;
+  /** Controlled open state. When provided, internal state is bypassed. */
+  open?: boolean;
+  /** Fires whenever the open state should change (trigger click, close button, auto-timeout). */
+  onOpenChange?: (open: boolean) => void;
+}
+
 /**
  * State container for the `Toast` + `ToastTrigger` + `Toast` compound. Less commonly used than
  * the imperative `useToasts()` portal API - prefer the portal for app-wide notifications and
@@ -39,15 +50,7 @@ export const ToastRoot = ({
   defaultOpen = false,
   open: openProp,
   onOpenChange,
-}: {
-  children: ReactNode;
-  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
-  defaultOpen?: boolean;
-  /** Controlled open state. When provided, internal state is bypassed. */
-  open?: boolean;
-  /** Fires whenever the open state should change (trigger click, close button, auto-timeout). */
-  onOpenChange?: (open: boolean) => void;
-}) => {
+}: ToastRootProps) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
 
   const isControlled = openProp !== undefined;
@@ -64,12 +67,17 @@ export const ToastRoot = ({
   );
 };
 
+export interface ToastTriggerProps {
+  /** Single React element to clone as the trigger. Must accept `onClick`. */
+  children: ReactNode;
+}
+
 /**
  * Wraps a single child element to act as the toast trigger. **Clones** the child to attach an `onClick` handler that toggles the surrounding `ToastRoot`'s open state (composed with any existing `onClick` on the child).
  *
  * No-ops (renders the child as-is) when used outside a `ToastRoot`.
  */
-export const ToastTrigger = ({ children }: { children: ReactNode }) => {
+export const ToastTrigger = ({ children }: ToastTriggerProps) => {
   const ctx = useContext(ToastRootContext);
   if (!ctx) return <>{children}</>;
 
@@ -83,6 +91,11 @@ export const ToastTrigger = ({ children }: { children: ReactNode }) => {
 
   return cloneElement(child, { onClick });
 };
+
+export interface ToastCloseProps {
+  /** Single React element to clone as the close affordance. Must accept `onClick`. */
+  children: ReactNode;
+}
 
 /**
  * Wraps a single child element to close the surrounding toast when clicked. **Clones** the child to attach an `onClick` handler that flips the surrounding `ToastRoot`'s open state to `false` (composed with any existing `onClick` on the child).
@@ -98,7 +111,7 @@ export const ToastTrigger = ({ children }: { children: ReactNode }) => {
  *
  * No-ops (renders the child as-is) when used outside a `ToastRoot`.
  */
-export const ToastClose = ({ children }: { children: ReactNode }) => {
+export const ToastClose = ({ children }: ToastCloseProps) => {
   const ctx = useContext(ToastRootContext);
   if (!ctx) return <>{children}</>;
 

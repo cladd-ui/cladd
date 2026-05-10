@@ -27,6 +27,17 @@ type PopupRootContextValue = {
 
 const PopupRootContext = createContext<PopupRootContextValue | null>(null);
 
+export interface PopupRootProps {
+  /** Trigger + popup (+ optional close) elements. */
+  children: ReactNode;
+  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
+  defaultOpen?: boolean;
+  /** Controlled open state. When provided, internal state is bypassed. */
+  open?: boolean;
+  /** Fires whenever the open state should change. */
+  onOpenChange?: (open: boolean) => void;
+}
+
 /**
  * State container for the `Popup` + `PopupTrigger` + `Popup` compound. Use when you want
  * the trigger and the popup to be siblings in JSX:
@@ -45,15 +56,7 @@ export const PopupRoot = ({
   defaultOpen = false,
   open: openProp,
   onOpenChange,
-}: {
-  children: ReactNode;
-  /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
-  defaultOpen?: boolean;
-  /** Controlled open state. When provided, internal state is bypassed. */
-  open?: boolean;
-  /** Fires whenever the open state should change. */
-  onOpenChange?: (open: boolean) => void;
-}) => {
+}: PopupRootProps) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
 
   const isControlled = openProp !== undefined;
@@ -70,6 +73,11 @@ export const PopupRoot = ({
   );
 };
 
+export interface PopupTriggerProps {
+  /** Single React element to clone as the trigger. Must accept `onClick`. */
+  children: ReactNode;
+}
+
 /**
  * Wraps a single child element to act as the popup trigger. **Clones** the child to attach
  * an `onClick` handler that toggles the surrounding `PopupRoot`'s open state (composed with
@@ -77,7 +85,7 @@ export const PopupRoot = ({
  *
  * No-ops (renders the child as-is) when used outside a `PopupRoot`.
  */
-export const PopupTrigger = ({ children }: { children: ReactNode }) => {
+export const PopupTrigger = ({ children }: PopupTriggerProps) => {
   const ctx = useContext(PopupRootContext);
   if (!ctx) return <>{children}</>;
 
@@ -91,6 +99,11 @@ export const PopupTrigger = ({ children }: { children: ReactNode }) => {
 
   return cloneElement(child, { onClick });
 };
+
+export interface PopupCloseProps {
+  /** Single React element to clone as the close affordance. Must accept `onClick`. */
+  children: ReactNode;
+}
 
 /**
  * Wraps a single child element to close the surrounding popup when clicked. **Clones** the
@@ -109,7 +122,7 @@ export const PopupTrigger = ({ children }: { children: ReactNode }) => {
  *
  * No-ops (renders the child as-is) when used outside a `PopupRoot`.
  */
-export const PopupClose = ({ children }: { children: ReactNode }) => {
+export const PopupClose = ({ children }: PopupCloseProps) => {
   const ctx = useContext(PopupRootContext);
   if (!ctx) return <>{children}</>;
 
