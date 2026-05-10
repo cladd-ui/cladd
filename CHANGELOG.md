@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.25 (2026-05-10)
+
+### Features
+
+- tweak chip sizes (9c744e0)
+
 ## 0.0.24 (2026-05-10)
 
 ### Features
