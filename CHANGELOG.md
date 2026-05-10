@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.31 (2026-05-10)
+
+### Features
+
+- tweak Dialog's input (37d0e94)
+
 ## 0.0.30 (2026-05-10)
 
 ### Features
