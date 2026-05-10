@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, ReactNode } from 'react';
 
 import { Color } from '../types';
 
@@ -27,7 +27,7 @@ export const ThemeProvider = ({
   accentColor,
   overlaysRoot,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   /** Color scheme to expose to descendants. */
   theme: 'dark' | 'light';
   /** App-wide accent color token used as the default for interactive components. */

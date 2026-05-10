@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -54,7 +55,7 @@ export const PopoverRoot = ({
   open: openProp,
   onOpenChange,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
   defaultOpen?: boolean;
   /** Controlled open state. When provided, internal state is bypassed. */
@@ -93,7 +94,7 @@ export const PopoverTrigger = ({
   children,
 }: {
   /** Single React element to use as the trigger. Must accept `ref` and `onClick`. */
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const ctx = useContext(PopoverRootContext);
   if (!ctx) return <>{children}</>;
@@ -143,7 +144,7 @@ export const PopoverClose = ({
   children,
 }: {
   /** Single React element to use as the close affordance. Must accept `onClick`. */
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const ctx = useContext(PopoverRootContext);
   if (!ctx) return <>{children}</>;
@@ -307,7 +308,7 @@ type PopoverOwnProps = {
   /** Accent color token (`Color` enum). Sets the popover's `cladd-color-{name}` class - used by border/ring/text helpers. */
   color?: Color;
   /** Popover content. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /**
    * Forwarded to the underlying `Surface` as `level`. Default depends on theme: `1` for light theme, `undefined` (parent + 1) for dark theme.
    */

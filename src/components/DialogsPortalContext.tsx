@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 import { Color } from '../types';
 
@@ -11,17 +11,17 @@ export type DialogsPortalData = {
   /** Dialog title - auto-wired to `aria-labelledby`. */
   title: string;
   /** Dialog body text - auto-wired to `aria-describedby`. */
-  text: string | React.ReactNode;
+  text: string | ReactNode;
   /**
    * Type-to-confirm guard. If string-coercible (truthy), the confirm button is disabled
    * until the user types this exact value. Forwarded to `Dialog.requireConfirmText` after
    * `String(...)` coercion.
    */
-  requireConfirmText?: boolean | string | React.ReactNode;
+  requireConfirmText?: boolean | string | ReactNode;
   /** Stop click propagation on backdrop and surface. */
   stopPropagationOnClick?: boolean;
-  cancelButtonText?: React.ReactNode;
-  confirmButtonText?: React.ReactNode;
+  cancelButtonText?: ReactNode;
+  confirmButtonText?: ReactNode;
   cancelButtonColor?: Color;
   confirmButtonColor?: Color;
   /** Fires when the confirm button is pressed (and the `requireConfirmText` guard passes). Always called with `true`. */
@@ -49,7 +49,7 @@ export const DialogsPortalContext = createContext<{
 export const DialogsPortalProvider = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const [data, setData] = useState<null | DialogsPortalData>(null);
   const [state, setState] = useState<boolean>(false);

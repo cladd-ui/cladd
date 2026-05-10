@@ -1,4 +1,4 @@
-import { useEffect, useState, cloneElement } from 'react';
+import { useEffect, useState, cloneElement, ReactNode } from 'react';
 
 /**
  * Lifecycle phases of an animated modal:
@@ -24,7 +24,7 @@ export const ModalController = (props: {
   /** Fires when the controller resolves an internal phase change back into a boolean (e.g. animation completes). */
   onOpenChange?: (open: boolean) => void;
   /** Single React element accepting `phase` + `onPhaseChange`. */
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const { open, onOpenChange = () => {}, children } = props;
   const [phase, setPhase] = useState<ModalPhase>('closed');

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { cn } from '../shared/cn';
 import { Surface, SurfaceVariant } from './Surface';
 
@@ -5,7 +7,7 @@ export interface PopupContentProps {
   /** Forwarded to the underlying `Surface` as `level`. Default `1`. Accepts the relative (`"+1"`/`"-1"`) syntax via `Surface.level`. */
   surfaceLevel?: number;
   /** Card content. */
-  children: React.ReactNode;
+  children: ReactNode;
   /** Extra classes for the inner content area. Default includes `!h-auto w-full p-4`. */
   contentClassName?: string;
   /** Extra classes for the card `Surface`. */

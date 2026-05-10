@@ -1,10 +1,16 @@
-import { useRef, ElementType, Ref, ComponentPropsWithoutRef } from 'react';
+import {
+  useRef,
+  ElementType,
+  Ref,
+  ComponentPropsWithoutRef,
+  ReactNode,
+} from 'react';
 
 import { cn } from '../shared/cn';
 
 interface LinkOwnProps<C extends ElementType = 'button'> {
   /** Link content. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** Extra classes for the link element. */
   className?: string;
   /** Native `disabled` attribute. */

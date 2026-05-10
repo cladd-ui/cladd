@@ -1,4 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  ElementType,
+  ReactNode,
+} from 'react';
 
 import { Color } from '../types';
 
@@ -12,11 +18,11 @@ export type ToastsPortalData = {
   /** Toast title (bold line). */
   title: string;
   /** Toast body text. */
-  text: string | React.ReactNode;
+  text: string | ReactNode;
   /** Render the auto close button. Default `true` (in `Toast`). */
   closeButton?: boolean;
   /** Icon component rendered before the text content. Receives `iconProps`. */
-  icon?: React.ElementType<any>;
+  icon?: ElementType<any>;
   /** Props forwarded to the `icon` component. */
   iconProps?: Record<string, unknown>;
   /** Accent color token. */
@@ -43,11 +49,7 @@ export const ToastsPortalContext = createContext<{
   setState: () => {},
 });
 
-export const ToastsPortalProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const ToastsPortalProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<ToastsPortalData[]>([]);
   const [state, setState] = useState<Record<string, boolean>>({});
   return (

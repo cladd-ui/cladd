@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useRef,
   useState,
+  ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -45,7 +46,7 @@ export const PopupRoot = ({
   open: openProp,
   onOpenChange,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   /** Initial open state (uncontrolled). Default `false`. Ignored when `open` is provided. */
   defaultOpen?: boolean;
   /** Controlled open state. When provided, internal state is bypassed. */
@@ -76,7 +77,7 @@ export const PopupRoot = ({
  *
  * No-ops (renders the child as-is) when used outside a `PopupRoot`.
  */
-export const PopupTrigger = ({ children }: { children: React.ReactNode }) => {
+export const PopupTrigger = ({ children }: { children: ReactNode }) => {
   const ctx = useContext(PopupRootContext);
   if (!ctx) return <>{children}</>;
 
@@ -108,7 +109,7 @@ export const PopupTrigger = ({ children }: { children: React.ReactNode }) => {
  *
  * No-ops (renders the child as-is) when used outside a `PopupRoot`.
  */
-export const PopupClose = ({ children }: { children: React.ReactNode }) => {
+export const PopupClose = ({ children }: { children: ReactNode }) => {
   const ctx = useContext(PopupRootContext);
   if (!ctx) return <>{children}</>;
 
@@ -152,9 +153,9 @@ export interface PopupProps {
   header?: boolean;
   headerClassName?: string;
   /** Slot rendered on the left side of the header (e.g. title, breadcrumbs). */
-  headerLeft?: React.ReactNode;
+  headerLeft?: ReactNode;
   /** Slot rendered on the right side of the header, before the auto-rendered close button. */
-  headerRight?: React.ReactNode;
+  headerRight?: ReactNode;
   /** Render the backdrop. Default `true`. */
   backdrop?: boolean;
   /** Extra classes for the backdrop element. */
@@ -166,7 +167,7 @@ export interface PopupProps {
   /** Render the auto close button in the header. Default `true`. */
   closeButton?: boolean;
   /** Override the close-button glyph. Default is an inline SVG "X". */
-  closeButtonContent?: React.ReactNode;
+  closeButtonContent?: ReactNode;
   /** Accent color token for the close button. */
   closeButtonColor?: Color;
   /** Fires before the popup closes from the close-button click. The popup also closes regardless. */
@@ -184,9 +185,9 @@ export interface PopupProps {
   /** Id of the element describing this popup. */
   'aria-describedby'?: string;
   /** Popup content. Rendered inside the inner content column, after the header. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** Slot rendered above the header, inside the popup content wrapper. */
-  beforeContent?: React.ReactNode;
+  beforeContent?: ReactNode;
 }
 
 type PopupInnerProps = Omit<PopupProps, 'open' | 'onOpenChange'> & {

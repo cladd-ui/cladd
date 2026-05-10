@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Color } from '../types';
 import { DialogsPortal } from './DialogsPortal';
 import { DialogsPortalProvider } from './DialogsPortalContext';
@@ -26,7 +28,7 @@ export interface UIProviderProps {
    * Default `'#app, #__next, #root'`.
    */
   overlaysRoot?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export const UIProvider = (props: UIProviderProps) => {
