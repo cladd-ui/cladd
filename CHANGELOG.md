@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.29 (2026-05-10)
+
+### Features
+
+- tweak toast (6339637)
+
 ## 0.0.28 (2026-05-10)
 
 ### Features
