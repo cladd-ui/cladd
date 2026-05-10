@@ -81,13 +81,13 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   } = props;
   const height = nestedSizeClasses(size, 'height');
   const paddings: Record<ChipSize, string> = {
-    '2xs': 'px-1 [&:has(>svg)]:pl-1',
-    xs: 'px-1 [&:has(>svg)]:pl-1',
-    sm: 'px-2 [&:has(>svg)]:pl-1',
-    md: 'px-2 [&:has(>svg)]:pl-1',
-    lg: 'px-2.5 [&:has(>svg)]:pl-1.5',
-    xl: 'px-1.5',
-    '2xl': 'px-2',
+    '2xs': 'px-1 [&:has(>svg:first-child)]:pl-1 [&:has(>svg:last-child)]:pr-1',
+    xs: 'px-1 [&:has(>svg:first-child)]:pl-1 [&:has(>svg:last-child)]:pr-1',
+    sm: 'px-2 [&:has(>svg:first-child)]:pl-1.5 [&:has(>svg:last-child)]:pr-1.5',
+    md: 'px-2 [&:has(>svg:first-child)]:pl-1.5 [&:has(>svg:last-child)]:pr-1.5',
+    lg: 'px-2.5 [&:has(>svg:first-child)]:pl-2 [&:has(>svg:last-child)]:pr-2',
+    xl: 'px-2.5 [&:has(>svg:first-child)]:pl-2 [&:has(>svg:last-child)]:pr-2',
+    '2xl': 'px-2.5',
   };
   const fontSizes: Record<ChipSize, string> = {
     '2xs': 'text-cladd-4xs',
@@ -102,7 +102,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     '2xs': '[&>svg]:size-1.5',
     xs: '[&>svg]:size-2.5',
     sm: '[&>svg]:size-3',
-    md: '[&>svg]:size-4',
+    md: '[&>svg]:size-3.5',
     lg: '[&>svg]:size-4',
     xl: '[&>svg]:size-4',
     '2xl': '[&>svg]:size-4',
