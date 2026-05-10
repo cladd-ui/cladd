@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.24 (2026-05-10)
+
+### Features
+
+- rename knob -> thumb (01fac98)
+
 ## 0.0.23 (2026-05-10)
 
 ### Features
