@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.27 (2026-05-10)
+
+### Features
+
+- tweak types (507a149)
+
 ## 0.0.26 (2026-05-10)
 
 ### Features
