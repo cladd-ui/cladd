@@ -128,10 +128,10 @@ export interface ToastProps {
   title?: ReactNode;
   /** Body text slot. Rendered as a smaller line under `title`. */
   text?: ReactNode;
-  /** Icon node rendered before the text content. Pre-rendered. */
-  icon?: ReactNode;
-  /** Icon component rendered before the text content. Instantiated as `<IconComponent />` (no props). */
-  iconComponent?: ElementType<any>;
+  /** Icon component rendered before the text content. Receives `iconProps`. */
+  icon?: ElementType<any>;
+  /** Props forwarded to the `icon` component. */
+  iconProps?: Record<string, unknown>;
   /** Stop click propagation on the toast surface. Use when the toast renders inside a clickable parent. */
   stopPropagationOnClick?: boolean;
   /** Render the auto close button on the right. Default `true`. */
@@ -175,8 +175,8 @@ const ToastInner = (props: ToastInnerProps) => {
     stopPropagationOnClick,
     closeButton = true,
     color = 'neutral',
-    icon,
-    iconComponent,
+    icon: IconComponent,
+    iconProps,
     surfaceLevel = theme === 'dark' ? 3 : 1,
     variant = 'gradient',
     outline = true,
@@ -209,8 +209,6 @@ const ToastInner = (props: ToastInnerProps) => {
     };
   }, []);
 
-  const IconComponent = iconComponent as ElementType<any>;
-
   const content = (
     <Surface
       data-open={opened || undefined}
@@ -242,16 +240,14 @@ const ToastInner = (props: ToastInnerProps) => {
         }
       }}
     >
-      {icon ||
-        (iconComponent && (
-          <div
-            data-part="icon"
-            className="flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0"
-          >
-            {icon}
-            {iconComponent && <IconComponent />}
-          </div>
-        ))}
+      {IconComponent && (
+        <div
+          data-part="icon"
+          className="flex shrink-0 items-center [&>svg]:size-4 [&>svg]:shrink-0"
+        >
+          <IconComponent {...(iconProps || {})} />
+        </div>
+      )}
       {(title || text) && (
         <div data-part="content" className="flex flex-col gap-1">
           {title && (

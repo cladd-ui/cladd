@@ -15,10 +15,10 @@ export type ToastsPortalData = {
   text: string | React.ReactNode;
   /** Render the auto close button. Default `true` (in `Toast`). */
   closeButton?: boolean;
-  /** Icon node rendered before the text content. */
-  icon?: React.ReactNode;
-  /** Icon component instantiated as `<IconComponent />` (no props). */
-  iconComponent?: React.ElementType<any>;
+  /** Icon component rendered before the text content. Receives `iconProps`. */
+  icon?: React.ElementType<any>;
+  /** Props forwarded to the `icon` component. */
+  iconProps?: Record<string, unknown>;
   /** Accent color token. */
   color?: Color;
   /** Internal flag set after `onClosed` fires once - prevents double-removal from the queue. */

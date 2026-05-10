@@ -17,7 +17,7 @@ export function ToastsPortal() {
           text={toast.text}
           closeButton={toast.closeButton}
           icon={toast.icon}
-          iconComponent={toast.iconComponent}
+          iconProps={toast.iconProps}
           color={toast.color}
           timeout={toast.timeout}
           className={toast.className}

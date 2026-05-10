@@ -104,7 +104,7 @@ function App() {
         outline
         variant="solid"
         onClick={() => {
-          toast({ text: 'Text', icon: <Icon /> });
+          toast({ text: 'Text', icon: Icon });
         }}
       >
         Toast

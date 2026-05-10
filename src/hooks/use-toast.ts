@@ -11,7 +11,7 @@ export const useToast = () => {
     color,
     closeButton,
     icon,
-    iconComponent,
+    iconProps,
     onClosed,
   }: Partial<ToastsPortalData>) => {
     const id = Math.random().toString(36).substr(2, 9);
@@ -22,7 +22,7 @@ export const useToast = () => {
       color,
       closeButton,
       icon,
-      iconComponent,
+      iconProps,
       onClosed,
     });
     setData([...data]);
