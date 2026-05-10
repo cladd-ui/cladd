@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.23 (2026-05-10)
+
+### Features
+
+- switch brand color to "blue" (55361d8)
+- Spinner to SVG (1486aea)
+- cladd- font sizes + more sizes uniform (3964b0d)
+- rework spinner to usual cut circle (6688b97)
+- new NumberScrubber component (caec92c)
+
 ## 0.0.22 (2026-05-04)
 
 ### Documentation
