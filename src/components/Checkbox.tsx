@@ -169,7 +169,7 @@ export function Checkbox<C extends ElementType = 'label'>(
         />
       )}
 
-      {/* Knob */}
+      {/* Thumb */}
       <Surface
         data-part="thumb"
         className={cn(
@@ -181,7 +181,7 @@ export function Checkbox<C extends ElementType = 'label'>(
         clickable={hoverableComputed && !disabled && !readOnly}
       />
 
-      {/* Checked Knob */}
+      {/* Checked Thumb */}
       <Surface
         data-part="thumb-checked"
         className={cn(

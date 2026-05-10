@@ -26,7 +26,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
     checked: boolean,
     event?: React.ChangeEvent<HTMLInputElement>,
   ) => void;
-  /** Accent color for the checked state knob fill. Default: theme accent. */
+  /** Accent color for the checked state thumb fill. Default: theme accent. */
   color?: Color;
   /**
    * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden input on click.
@@ -35,7 +35,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
    */
   as?: C;
   /**
-   * Icon rendered inside the knob. Pass either a static `ReactNode`, or a function `(checked) => ReactNode` to render different content based on the switch state.
+   * Icon rendered inside the thumb. Pass either a static `ReactNode`, or a function `(checked) => ReactNode` to render different content based on the switch state.
    *
    * If omitted, the built-in animated cross/check glyph is used.
    */
@@ -58,7 +58,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
   /**
    * Auto-computed when omitted: `true` if `as === 'label'` OR `input` is `true`.
    *
-   * Drives whether the focus ring (`FocusableLayer`) is rendered on the knob.
+   * Drives whether the focus ring (`FocusableLayer`) is rendered on the thumb.
    */
   focusable?: boolean;
   /** Outline ring on the **track** (background surface). Default `true`. */
@@ -71,14 +71,14 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
   surfaceLevel?: string | number;
   /** Surface variant for the **track**. Default `'solid'`. */
   variant?: SurfaceVariant;
-  /** Outline ring on the **knob**. Default `true`. */
-  knobOutline?: boolean;
-  /** Surface variant for the **knob**. Default `'gradient'`. */
-  knobVariant?: SurfaceVariant;
+  /** Outline ring on the **thumb**. Default `true`. */
+  thumbOutline?: boolean;
+  /** Surface variant for the **thumb**. Default `'gradient'`. */
+  thumbVariant?: SurfaceVariant;
   /**
-   * Surface level for the **knob**. Default `'+2'` - two levels deeper than the parent surface, so the knob reads as a raised piece on top of the track.
+   * Surface level for the **thumb**. Default `'+2'` - two levels deeper than the parent surface, so the thumb reads as a raised piece on top of the track.
    */
-  knobSurfaceLevel?: string | number;
+  thumbSurfaceLevel?: string | number;
 }
 
 export type SwitchProps<C extends ElementType = 'label'> = SwitchOwnProps<C> &
@@ -103,9 +103,9 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     outline = true,
     variant = 'solid',
     surfaceLevel = '+1',
-    knobOutline = true,
-    knobVariant = 'gradient',
-    knobSurfaceLevel = '+2',
+    thumbOutline = true,
+    thumbVariant = 'gradient',
+    thumbSurfaceLevel = '+2',
   } = props;
   const elRef = useRef<HTMLElement | null>(null);
   let hoverableComputed = hoverable;
@@ -179,7 +179,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         wrapContent={false}
       />
 
-      {/* Knob */}
+      {/* Thumb */}
       <Surface
         data-part="thumb"
         className={cn(
@@ -191,9 +191,9 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
           disabled && 'opacity-50',
         )}
         contentClassName="flex items-center justify-center"
-        variant={knobVariant}
-        outline={knobOutline}
-        level={knobSurfaceLevel}
+        variant={thumbVariant}
+        outline={thumbOutline}
+        level={thumbSurfaceLevel}
         clickable={!disabled && !readOnly}
         hoverable={!disabled && !readOnly}
         beforeContent={

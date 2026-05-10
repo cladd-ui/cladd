@@ -6,9 +6,9 @@ import { Color } from '../types';
 export type SpinnerSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export interface SpinnerProps {
-  /** Spinner dimension. Default `'sm'`. Drives the size, knob position, and border thickness. */
+  /** Spinner dimension. Default `'sm'`. */
   size?: SpinnerSize;
-  /** Accent color for the spinning knob and ring. Default: theme accent. */
+  /** Accent color for the spinning ring. Default: theme accent. */
   color?: Color;
   /** Extra classes for the spinner root element. */
   className?: string;

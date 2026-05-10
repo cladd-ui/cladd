@@ -59,11 +59,11 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
    * - `'cut'` - uses `SurfaceCut` (inset/recessed look - for buttons that sit inside another surface).
    */
   surface?: ButtonSurface;
-  /** Forwarded to the underlying surface. Defaults to `true`; suppressed automatically when `disabled` or `readOnly`. */
+  /** Forwarded to the underlying surface. Defaults to `true`.  Suppressed automatically when `disabled` or `readOnly`. */
   clickable?: boolean;
-  /** Forwarded to the underlying surface. Defaults to `true`; suppressed automatically when `disabled` or `readOnly`. */
+  /** Forwarded to the underlying surface. Defaults to `true`.  Suppressed automatically when `disabled` or `readOnly`. */
   hoverable?: boolean;
-  /** When `true` (default), renders a `FocusableLayer` ring on keyboard focus. Suppressed automatically when `disabled` or `readOnly`. */
+  /** Renders a `FocusableLayer` ring on keyboard focus. Defaults to `true`. Suppressed automatically when `disabled` or `readOnly`. */
   focusable?: boolean;
   /** Forwarded to the underlying `Surface` as `level` - see `SurfaceProps.level` for the relative-offset (`"+1"`/`"-1"`) syntax. */
   surfaceLevel?: string | number;

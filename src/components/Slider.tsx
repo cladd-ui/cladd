@@ -31,7 +31,7 @@ export interface SliderProps {
   onChange?: (value: number, event?: ChangeEvent<HTMLInputElement>) => void;
   /** Extra classes for the slider container. */
   className?: string;
-  /** Accent color for the active track segment and knob. Default: theme accent. */
+  /** Accent color for the active track segment and thumb. Default: theme accent. */
   color?: Color;
   /**
    * Reserved - currently unused in the rendered output (the underlying `<input type="range">` is always present). Kept for parity with other form components.
@@ -65,7 +65,7 @@ export function Slider(props: SliderProps) {
   const value = isControlled ? (valueProp as number) : uncontrolledValue;
 
   const elRef = useRef<HTMLDivElement | null>(null);
-  const knobElRef = useRef<HTMLDivElement | null>(null);
+  const thumbElRef = useRef<HTMLDivElement | null>(null);
   const progress = (value - min) / (max - min);
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isTouched = useRef(false);
@@ -162,7 +162,7 @@ export function Slider(props: SliderProps) {
         />
       </span>
 
-      {/* Knob Wrap */}
+      {/* Thumb Wrap */}
       <span
         data-part="thumb-wrapper"
         className={cn(
@@ -181,7 +181,7 @@ export function Slider(props: SliderProps) {
             className={cn(
               size === 'sm' && '-left-1.5',
               size === 'md' && '-left-1',
-              'text-cladd-xs absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center leading-none font-medium text-cladd-primary duration-300',
+              'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-cladd-xs leading-none font-medium text-cladd-primary duration-300',
               !disabled &&
                 !readOnly &&
                 'group-focus-within/cladd-slider:scale-100 group-active/cladd-slider:scale-100',
@@ -196,7 +196,7 @@ export function Slider(props: SliderProps) {
             {value}
           </Surface>
         </span>
-        {/* Knob */}
+        {/* Thumb */}
         <Surface
           data-part="thumb"
           className={cn(
@@ -207,7 +207,7 @@ export function Slider(props: SliderProps) {
           outline
           variant="gradient-fill"
           color={color}
-          ref={knobElRef}
+          ref={thumbElRef}
         />
       </span>
       <input

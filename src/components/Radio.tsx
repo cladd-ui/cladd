@@ -162,7 +162,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         />
       )}
 
-      {/* Knob */}
+      {/* Thumb */}
       <Surface
         data-part="thumb"
         className={cn(
@@ -174,7 +174,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         clickable={hoverableComputed && !disabled && !readOnly}
       />
 
-      {/* Checked Knob */}
+      {/* Checked Thumb */}
       <Surface
         data-part="thumb-checked"
         className={cn(
