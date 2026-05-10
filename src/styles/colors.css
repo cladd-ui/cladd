@@ -41,7 +41,7 @@
   --cladd-theme: #fff;
 }
 .cladd-color-brand {
-  --cladd-theme: #d7ff38;
+  --cladd-theme: #388AFF;
 }
 .cladd-color-red {
   --cladd-theme: #ff0b0b;
@@ -70,7 +70,7 @@
 .cladd-color-orange {
   --cladd-theme: #ff7a00;
 }
-/* NEUTRAL */
+/* NEUTRAL DARK */
 :root,
 .cladd-color-neutral {
   --cladd-bg: #0f0f0f;
@@ -128,7 +128,7 @@
       color-mix(in oklab, var(--cladd-surface-white) 20%, transparent) inset;
 }
 
-/* COLORS */
+/* COLORS DARK */
 [class*="cladd-color-"]:not(.cladd-color-neutral) {
   --cladd-bg: oklch(from var(--cladd-theme) 0.15 0.02 h);
   --cladd-backdrop: #000;
@@ -189,7 +189,7 @@
   --highlight-white-mix: 50%;
 }
 
-/* DEFAULT LIGHT */
+/* NEUTRAL LIGHT */
 :root.light,
 .dark .light,
 :root .light,
