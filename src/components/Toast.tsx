@@ -233,7 +233,11 @@ const ToastInner = (props: ToastInnerProps) => {
       variant={variant}
       outline={outline}
       color={color}
-      contentClassName="flex items-center gap-4 pl-4 pr-2 py-2"
+      contentClassName={cn(
+        'flex items-center gap-4 py-2 pl-4',
+        title && text ? 'py-3' : 'py-2',
+        closeButton ? 'pr-2' : 'pr-4',
+      )}
       onClick={(e: MouseEvent) => {
         if (stopPropagationOnClick) {
           e.stopPropagation();
