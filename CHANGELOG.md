@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.26 (2026-05-10)
+
+### Features
+
+- align Toast's icon with how it works in Chip (abb88ae)
+
 ## 0.0.25 (2026-05-10)
 
 ### Features
