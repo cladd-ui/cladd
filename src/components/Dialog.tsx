@@ -372,7 +372,7 @@ const DialogInner = (props: DialogInnerProps) => {
             infoMessage={`Type ${requireConfirmText} to confirm`}
             color={confirmButtonColor}
             placeholder={`Type ${requireConfirmText} to confirm`}
-            size="xl"
+            size="lg"
             onChange={(v: string) => setInputText(v)}
           />
         )}
