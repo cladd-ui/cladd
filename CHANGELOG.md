@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.39 (2026-05-11)
+
+### Features
+
+- tweak Scrubber styles (ace4f41)
+- change number input save logic (095db07)
+
 ## 0.0.38 (2026-05-11)
 
 ### Features
