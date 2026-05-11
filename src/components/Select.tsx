@@ -153,17 +153,12 @@ interface SelectOwnProps<T = string, V = T> {
   isChecked?: (value: T) => boolean;
   isOptionDisabled?: (value: T) => boolean;
   /**
-   * Extracts the comparable key from an option object. Default: identity.
+   * Extracts the comparable key `V` from each option. Default: identity (`V = T`).
    *
-   * Use when `T` is an object and selection should compare by `id` rather than reference.
+   * Required when options are objects and `value` should be a key (e.g. `id`)
+   * rather than a full option reference.
    */
-  getOptionValue?: (option: T) => unknown;
-  /**
-   * Inverse of `getOptionValue` - given a key, return the matching option from `options`.
-   *
-   * Required for multi-select with object options so emitted `value[]` arrays can be rebuilt.
-   */
-  getOptionByValue?: (options: T[], value: unknown) => T;
+  getOptionValue?: (option: T) => V;
   /** Slot rendered above each option (e.g. group header before the first item in a section). */
   renderBeforeOption?: (value: T, index: number) => ReactNode;
   /** Slot rendered below each option. */
@@ -180,7 +175,7 @@ interface SelectOwnProps<T = string, V = T> {
    *
    *  If not set, straight ordering: 1, 2, 3, ..., 9, 0 (for 10th).
    */
-  noneOptionValue?: T;
+  noneOptionValue?: V;
 
   // FUNCTIONALITY
   /** Close the popover after a single-select pick. Default `true`. Has no effect when `multiple`. */
@@ -192,12 +187,12 @@ interface SelectOwnProps<T = string, V = T> {
   ref?: Ref<HTMLElement>;
 }
 
-export type SelectProps<T = string> = SelectOwnProps<T> &
-  Omit<ButtonProps, keyof SelectOwnProps<T>>;
+export type SelectProps<T = string, V = T> = SelectOwnProps<T, V> &
+  Omit<ButtonProps, keyof SelectOwnProps<T, V>>;
 
-export function Select<T = string>(props: SelectProps<T>) {
+export function Select<T = string, V = T>(props: SelectProps<T, V>) {
   const {
-    value = '' as T,
+    value,
     placeholder = '',
     title = '',
     options = [],
@@ -256,8 +251,7 @@ export function Select<T = string>(props: SelectProps<T>) {
     optionIndicatorColor = () => undefined,
     isChecked,
     isOptionDisabled,
-    getOptionValue = (option: T) => option as unknown,
-    getOptionByValue,
+    getOptionValue = (option: T) => option as unknown as V,
     renderBeforeOption,
     renderAfterOption,
     renderOption = ({ value }: SelectOptionRenderParams<T>) => String(value),
@@ -290,21 +284,16 @@ export function Select<T = string>(props: SelectProps<T>) {
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
   const onChangeInternal = (optionValue: T, checked: boolean) => {
+    const optKey = getOptionValue(optionValue);
     if (!multiple) {
-      onChange(getOptionValue(optionValue) as T);
+      onChange(optKey);
     } else {
-      const newValues = getOptionByValue
-        ? [...(value as T[])].map((opt) => getOptionValue(opt))
-        : [...(value as unknown[])];
-      if (checked) newValues.push(getOptionValue(optionValue));
-      else if (newValues.includes(getOptionValue(optionValue))) {
-        newValues.splice(newValues.indexOf(getOptionValue(optionValue)), 1);
+      const newValues = [...((value as V[]) ?? [])];
+      if (checked) newValues.push(optKey);
+      else if (newValues.includes(optKey)) {
+        newValues.splice(newValues.indexOf(optKey), 1);
       }
-      onChange(
-        getOptionByValue
-          ? newValues.map((optValue) => getOptionByValue(options, optValue))
-          : (newValues as T[]),
-      );
+      onChange(newValues);
     }
     if (!multiple && closeOnSelect) {
       if (setPopoverStateExternal) setPopoverStateExternal(false);
@@ -320,19 +309,16 @@ export function Select<T = string>(props: SelectProps<T>) {
     if (isChecked) return isChecked(optionValue);
     const optKey = getOptionValue(optionValue);
     if (multiple) {
-      const arr = (value as unknown[]) ?? [];
-      if (getOptionByValue) {
-        return arr.some((v) => getOptionValue(v as T) === optKey);
-      }
+      const arr = (value as V[]) ?? [];
       return arr.includes(optKey);
-    }
-    if (getOptionByValue && value !== undefined && value !== '') {
-      return getOptionValue(value as T) === optKey;
     }
     return value === optKey;
   };
 
   const effectivePopoverState = popoverStateExternal ?? popoverState;
+
+  const triggerValue =
+    value != null && value !== '' && !Array.isArray(value) ? String(value) : '';
 
   const scrollPopoverToElement = (
     scrollToEl?: HTMLElement,
@@ -572,12 +558,12 @@ export function Select<T = string>(props: SelectProps<T>) {
               data-part="value"
               className={cn(
                 'w-full min-w-0 shrink',
-                !children && !String(value) && 'text-cladd-fg-softer',
+                !children && !triggerValue && 'text-cladd-fg-softer',
                 placeholderClassName,
                 valueClassName,
               )}
             >
-              {children || String(value) || placeholder}
+              {children || triggerValue || placeholder}
             </div>
             {dropdownIcon && (
               <DropdownIcon
