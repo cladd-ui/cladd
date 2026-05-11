@@ -118,6 +118,8 @@ export const Shortcut = (props: ShortcutProps) => {
       const s = shortcut.trim().toLowerCase();
       if (!s.length) return;
       keys.push(...s.split(' ').map((k) => k.trim()));
+    } else if (typeof shortcut === 'number') {
+      keys.push(String(shortcut));
     } else if (shortcut) {
       keys.push(shortcut);
     }

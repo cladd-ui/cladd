@@ -583,7 +583,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
           }}
           style={popoverStyle}
           className={cn(
-            'pointer-events-auto z-50 w-40 max-w-[calc(100vw-16px)] rounded-cladd-popover shadow-cladd-popover transition-[opacity,transform,scale] duration-0',
+            'pointer-events-auto z-50 flex w-40 max-w-[calc(100vw-16px)] rounded-cladd-popover shadow-cladd-popover transition-[opacity,transform,scale] duration-0',
             opened && 'scale-100 opacity-100 ease-[cubic-bezier(0,1,0,1.025)]',
             (phase === 'opened' || (phase === 'opening' && opened)) &&
               'duration-400',
@@ -596,7 +596,10 @@ const PopoverInner = (props: PopoverInnerProps) => {
           level={surfaceLevel}
           variant={variant}
           outline={outline}
-          contentClassName={cn('max-h-[70vh] overflow-auto', contentClassName)}
+          contentClassName={cn(
+            'h-auto max-h-[70vh] overflow-auto',
+            contentClassName,
+          )}
           {...rest}
         >
           {children}

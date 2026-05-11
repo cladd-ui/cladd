@@ -16,6 +16,7 @@ interface SearchFieldOwnProps {
    * - `true` - a floating pill **inset** within the parent surface (uses `surface level "+0"`, `rounded-full`, no outline, inset margins). Use inside a list/popover where the search field should look like one item among many.
    */
   inset?: boolean;
+  /** Search field input size. Default `'md'`. */
   size?: InputSize;
   /** Default `'Search'`. */
   placeholder?: string;
@@ -69,6 +70,7 @@ export const SearchField = (props: SearchFieldProps) => {
           value={value}
           clearButton
           rounded
+          size={size}
           onClear={() => onChange('')}
         />
         <SearchIcon

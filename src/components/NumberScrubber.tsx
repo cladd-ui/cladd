@@ -239,7 +239,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     <Button
       className={cn(
         'cladd-number-scrubber',
-        !disabled && !readOnly && 'cursor-ew-resize',
+        !disabled && !readOnly && 'cursor-ew-resize touch-pan-y',
         className,
       )}
       contentClassName={cn(

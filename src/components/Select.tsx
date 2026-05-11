@@ -32,9 +32,15 @@ import { ButtonProps } from './Button';
 import { Shortcut, ShortcutSize } from './Shortcut';
 import { SurfaceVariant } from './Surface';
 
-interface SelectOwnProps<T = string> {
-  /** Selected value (single-select) or array of selected values (when `multiple`). */
-  value?: T | T[];
+interface SelectOwnProps<T = string, V = T> {
+  /**
+   * Selected value (single-select) or array of selected values (when `multiple`).
+   *
+   * Always the **key** type `V` — not the full option `T`. When options are
+   * objects and `getOptionValue` extracts a key (e.g. `id`), store that key
+   * in state, not the object itself.
+   */
+  value?: V | V[];
   placeholder?: ReactNode;
   /** Title shown at the top of the popover (above the search bar, if any). */
   title?: string;
@@ -121,8 +127,8 @@ interface SelectOwnProps<T = string> {
   /** Controlled popover open-state setter. */
   onPopoverState?: (state: boolean) => void;
 
-  /** Fires after a selection. In single-select mode receives `T`; in `multiple` receives `T[]`. */
-  onChange?: (value: T | T[]) => void;
+  /** Fires after a selection. In single-select mode receives `V`; in `multiple` receives `V[]`. */
+  onChange?: (value: V | V[]) => void;
   /** Fires when the trigger button is clicked (before the popover state toggles). */
   onClick?: (e: MouseEvent) => void;
 
@@ -555,7 +561,10 @@ export function Select<T = string>(props: SelectProps<T>) {
             )}
           >
             {icon && (
-              <div data-part="icon" className={buttonIconSizes[size]}>
+              <div
+                data-part="icon"
+                className={cn('shrink-0', buttonIconSizes[size])}
+              >
                 {icon}
               </div>
             )}
