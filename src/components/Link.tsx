@@ -70,7 +70,10 @@ export const Link = <C extends ElementType = 'button'>({
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       className={cn(
-        'group/cladd-link cladd-link relative cursor-pointer appearance-none text-cladd-xs outline-0 duration-200 select-none focus:ring-0 focus:outline-0 active:opacity-50 active:duration-0',
+        'group/cladd-link cladd-link relative appearance-none outline-0 select-none focus:ring-0 focus:outline-0',
+        !disabled &&
+          !readOnly &&
+          'cursor-pointer duration-200 active:opacity-50 active:duration-0',
         color && `cladd-color-${color} text-cladd-primary`,
         className,
       )}
@@ -81,7 +84,7 @@ export const Link = <C extends ElementType = 'button'>({
       {...rest}
     >
       {children}
-      {focusable && (
+      {focusable && !disabled && !readOnly && (
         <FocusableLayer group="link" color={color} className="rounded-cladd" />
       )}
     </Component>
