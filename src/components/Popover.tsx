@@ -597,7 +597,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
           variant={variant}
           outline={outline}
           contentClassName={cn(
-            'h-auto max-h-[70vh] overflow-auto',
+            'h-auto max-h-[70vh] w-full overflow-auto',
             contentClassName,
           )}
           {...rest}
