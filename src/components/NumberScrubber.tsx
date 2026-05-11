@@ -25,6 +25,8 @@ interface NumberScrubberOwnProps {
   className?: string;
   /** Extra classes for the inner content row of the trigger. */
   contentClassName?: string;
+  /** Extra classes for the inner Input's input element. */
+  inputClassName?: string;
   /** Visually dim and disable all interactions (drag and edit). */
   disabled?: boolean;
   /** Block drag and edit while keeping the trigger visually enabled. */
@@ -75,6 +77,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     children,
     className = '',
     contentClassName = '',
+    inputClassName = '',
     disabled = false,
     readOnly = false,
     rounded = false,
@@ -227,7 +230,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
         rounded={rounded}
         className={cn('cladd-number-scrubber', className)}
         contentClassName={contentClassName}
-        inputClassName="text-center"
+        inputClassName={cn('text-left', inputClassName)}
       />
     );
   }
@@ -239,7 +242,11 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
         !disabled && !readOnly && 'cursor-ew-resize',
         className,
       )}
-      contentClassName={cn(scrubberIcon && 'pl-1.5', contentClassName)}
+      contentClassName={cn(
+        scrubberIcon && 'pl-1.5',
+        'justify-between',
+        contentClassName,
+      )}
       color={color}
       disabled={disabled}
       readOnly={readOnly}
