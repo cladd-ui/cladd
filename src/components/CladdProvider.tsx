@@ -7,7 +7,7 @@ import { ThemeProvider } from './ThemeContext';
 import { ToastsPortal } from './ToastsPortal';
 import { ToastsPortalProvider } from './ToastsPortalContext';
 
-export interface UIProviderProps {
+export interface CladdProviderProps {
   /**
    * Color scheme. Default `'dark'`.
    *
@@ -31,7 +31,7 @@ export interface UIProviderProps {
   children?: ReactNode;
 }
 
-export const UIProvider = (props: UIProviderProps) => {
+export const CladdProvider = (props: CladdProviderProps) => {
   const {
     theme = 'dark',
     accentColor = 'brand',

@@ -161,4 +161,7 @@ export {
   TooltipPrimitive,
   type TooltipPrimitiveProps,
 } from './components/TooltipPrimitive';
-export { UIProvider, type UIProviderProps } from './components/UIProvider';
+export {
+  CladdProvider,
+  type CladdProviderProps,
+} from './components/CladdProvider';

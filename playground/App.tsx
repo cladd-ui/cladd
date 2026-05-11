@@ -45,7 +45,7 @@ import {
   ToolbarButton,
   ToolbarSeparator,
   Tooltip,
-  UIProvider,
+  CladdProvider,
   cn,
   useDialog,
   useToast,
@@ -116,7 +116,7 @@ function App() {
   const [scrubValue, setScrubValue] = useState(100);
 
   return (
-    <UIProvider theme="dark">
+    <CladdProvider theme="dark">
       <div className={cn('flex flex-col items-start gap-8 p-8 text-cladd-fg')}>
         <SectionTitle>Number Scrubber</SectionTitle>
         <Surface
@@ -1994,7 +1994,7 @@ function App() {
           ))}
         </div>
       </div>
-    </UIProvider>
+    </CladdProvider>
   );
 }
 

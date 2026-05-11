@@ -15,7 +15,7 @@ export const ThemeContext = createContext<ThemeContextValue>({
 
 /**
  * Provides `{ theme, accentColor }` to the rest of the tree via `ThemeContext`.
- * Most apps use `UIProvider` instead, which wraps this together with the dialog/toast portals.
+ * Most apps use `CladdProvider` instead, which wraps this together with the dialog/toast portals.
  *
  * Components read these values via `useTheme()` and `useAccentColor()` to pick:
  * - per-theme defaults (Dialog/Popover/Tooltip variant, outline, surfaceLevel),
