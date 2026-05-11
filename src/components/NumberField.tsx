@@ -117,6 +117,14 @@ export const NumberField = (props: NumberFieldProps) => {
   const { itemRoundedClasses } = roundedClasses(size, valueRounded, false);
   const { wrapRoundedClasses } = roundedClasses(size, rounded, false);
 
+  const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
+  const buttonVariantComputed =
+    isFill && buttonVariant && !buttonVariant.includes('fill')
+      ? buttonVariant === 'transparent' || buttonVariant === 'solid'
+        ? 'solid-fill'
+        : 'gradient-fill'
+      : buttonVariant;
+
   return (
     <Surface
       data-disabled={disabled || undefined}
@@ -137,7 +145,8 @@ export const NumberField = (props: NumberFieldProps) => {
       <Button
         data-part="decrease"
         size={size}
-        variant={buttonVariant}
+        color={color}
+        variant={buttonVariantComputed}
         outline={buttonOutline}
         rounded={rounded}
         readOnly={readOnly}
@@ -169,18 +178,35 @@ export const NumberField = (props: NumberFieldProps) => {
           readOnly={readOnly}
           rounded={valueRounded}
           className="w-auto min-w-0 shrink"
-          inputClassName={cn('w-auto min-w-9 text-center', inputClassName)}
+          inputClassName={cn(
+            'w-auto min-w-9 text-center',
+            isFill && 'text-cladd-fg',
+            inputClassName,
+          )}
+          type="number"
           onChange={(next) => {
-            setDraft(next);
-            if (next === '') return;
+            if (next === '') {
+              setDraft(next);
+              return;
+            }
             const parsed = Number(next);
-            if (Number.isNaN(parsed)) return;
-            onChange(Math.min(max, Math.max(min, parsed)));
+            if (Number.isNaN(parsed)) {
+              setDraft(next);
+              return;
+            }
+            const clamped = Math.min(max, Math.max(min, parsed));
+            setDraft(String(clamped));
+            if (clamped !== value) onChange(clamped);
           }}
           onBlur={() => {
-            if (draft === '' || Number.isNaN(Number(draft))) {
+            const parsed = Number(draft);
+            if (draft === '' || Number.isNaN(parsed)) {
               setDraft(String(value));
+              return;
             }
+            const clamped = Math.min(max, Math.max(min, parsed));
+            setDraft(String(clamped));
+            if (clamped !== value) onChange(clamped);
           }}
         />
       ) : (
@@ -204,7 +230,7 @@ export const NumberField = (props: NumberFieldProps) => {
         data-part="increase"
         size={size}
         color={color}
-        variant={buttonVariant}
+        variant={buttonVariantComputed}
         outline={buttonOutline}
         rounded={rounded}
         readOnly={readOnly}

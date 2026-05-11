@@ -78,6 +78,7 @@ function App() {
   const [otp, setOtp] = useState('');
   const [otpGrouped, setOtpGrouped] = useState('');
   const [otpAlpha, setOtpAlpha] = useState('');
+  const [numberFieldValue, setNumberFieldValue] = useState(10);
 
   const DialogTest = () => {
     const dialog = useDialog();
@@ -956,15 +957,52 @@ function App() {
           outline
           className="rounded-3xl"
         >
-          <NumberField size="sm" input={true} value={10} rounded={false} />
+          {numberFieldValue}
+          <NumberField
+            size="sm"
+            input={true}
+            value={numberFieldValue}
+            rounded={false}
+            max={99}
+            onChange={(v) => setNumberFieldValue(v)}
+          />
 
-          <NumberField input={true} value={10} rounded={false} />
+          <NumberField
+            input={true}
+            value={numberFieldValue}
+            rounded={false}
+            max={99}
+            onChange={(v) => setNumberFieldValue(v)}
+          />
 
-          <NumberField size="lg" input={true} value={10} rounded={false} />
+          <NumberField
+            variant="solid-fill"
+            color="red"
+            size="lg"
+            input={true}
+            value={numberFieldValue}
+            rounded={false}
+            max={99}
+            onChange={(v) => setNumberFieldValue(v)}
+          />
 
-          <NumberField size="xl" input={true} value={10} rounded={false} />
+          <NumberField
+            size="xl"
+            input={true}
+            value={numberFieldValue}
+            rounded={false}
+            max={99}
+            onChange={(v) => setNumberFieldValue(v)}
+          />
 
-          <NumberField size="2xl" input={true} value={10} rounded={false} />
+          <NumberField
+            size="2xl"
+            input={true}
+            value={numberFieldValue}
+            rounded={false}
+            max={99}
+            onChange={(v) => setNumberFieldValue(v)}
+          />
         </Surface>
         <SectionTitle>Segmented</SectionTitle>
         <Surface
