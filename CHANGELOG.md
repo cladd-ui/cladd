@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.37 (2026-05-11)
+
+### Features
+
+- NumberField input (0675176)
+
 ## 0.0.36 (2026-05-11)
 
 ### Features
