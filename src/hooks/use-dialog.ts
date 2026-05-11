@@ -1,10 +1,57 @@
-import {
-  useDialogsPortalContext,
-  DialogsPortalData,
-} from '../components/DialogsPortalContext';
+import { ReactNode } from 'react';
+
+import { useDialogsPortalContext } from '../components/DialogsPortalContext';
+import { Color } from '../types';
 import { useAccentColor } from './use-accent-color';
 
-export const useDialog = ({ lazy }: { lazy?: boolean } = {}) => {
+export interface UseDialogOptions {
+  /** Defer rendering until first opened, and unmount after close. Default `false`. */
+  lazy?: boolean;
+}
+
+export interface UseDialogConfirmOptions {
+  /** Dialog title — auto-wired to `aria-labelledby`. */
+  title?: string;
+  /** Dialog body text — auto-wired to `aria-describedby`. */
+  text?: string | ReactNode;
+  /**
+   * Type-to-confirm guard. When set, renders an `Input` and disables the confirm button until the user types this exact value verbatim — used for irreversible destructive actions.
+   */
+  requireConfirmText?: boolean | string | ReactNode;
+  /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
+  stopPropagationOnClick?: boolean;
+  /** Cancel button label. Default `'Cancel'`. */
+  cancelButtonText?: ReactNode;
+  /** Confirm button label. Default `'Confirm'`. */
+  confirmButtonText?: ReactNode;
+  /** Cancel button color. Default `'neutral'`. */
+  cancelButtonColor?: Color;
+  /** Confirm button color. Default: theme accent color. */
+  confirmButtonColor?: Color;
+  /** Fires when the confirm button is pressed (and the `requireConfirmText` guard passes). Always called with `true`. */
+  onConfirm?: (confirmed: boolean) => void;
+  /** Fires when the cancel button is pressed. Always called with `false`. */
+  onCancel?: (cancelled: boolean) => void;
+  /** Fires after the close transition completes — use for unmount cleanup. */
+  onClosed?: (closed: boolean) => void;
+}
+
+export interface UseDialogAlertOptions {
+  /** Dialog title — auto-wired to `aria-labelledby`. */
+  title?: string;
+  /** Dialog body text — auto-wired to `aria-describedby`. */
+  text?: string | ReactNode;
+  /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
+  stopPropagationOnClick?: boolean;
+  /** Confirm button label. Default `'Ok'`. */
+  confirmButtonText?: ReactNode;
+  /** Fires when the confirm button is pressed. Always called with `true`. */
+  onConfirm?: (confirmed: boolean) => void;
+  /** Fires after the close transition completes — use for unmount cleanup. */
+  onClosed?: (closed: boolean) => void;
+}
+
+export const useDialog = ({ lazy }: UseDialogOptions = {}) => {
   const { setState, setData } = useDialogsPortalContext();
   const accentColor = useAccentColor();
   return {
@@ -20,7 +67,7 @@ export const useDialog = ({ lazy }: { lazy?: boolean } = {}) => {
       onConfirm = () => {},
       onCancel = () => {},
       onClosed = () => {},
-    }: Partial<DialogsPortalData>) {
+    }: UseDialogConfirmOptions) {
       setData({
         title: title!,
         text: text!,
@@ -44,7 +91,7 @@ export const useDialog = ({ lazy }: { lazy?: boolean } = {}) => {
       confirmButtonText = 'Ok',
       onConfirm = () => {},
       onClosed = () => {},
-    }: Partial<DialogsPortalData>) {
+    }: UseDialogAlertOptions) {
       setData({
         title: title!,
         text: text!,

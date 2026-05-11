@@ -1,8 +1,13 @@
 export { useDevice } from './hooks/use-device';
-export { useDialog } from './hooks/use-dialog';
+export {
+  useDialog,
+  type UseDialogAlertOptions,
+  type UseDialogConfirmOptions,
+  type UseDialogOptions,
+} from './hooks/use-dialog';
 export { useSurface } from './hooks/use-surface';
 export { useTheme } from './hooks/use-theme';
-export { useToast } from './hooks/use-toast';
+export { useToast, type UseToastOptions } from './hooks/use-toast';
 export { useAccentColor } from './hooks/use-accent-color';
 
 export { type Color } from './types';
