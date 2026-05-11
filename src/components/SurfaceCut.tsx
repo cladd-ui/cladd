@@ -15,6 +15,10 @@ export interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   outline?: boolean;
   /** Accent color token. Sets the surface's `cladd-color-{name}` class. */
   color?: Color;
+  /**
+   * Slot rendered between the background layer and the content wrapper, **outside** the `SurfaceCutContent` flex layout (e.g. `FocusableLayer`, decorative overlays).
+   */
+  beforeContent?: ReactNode;
   /** Show hover overlay on the cut surface. Default `false`. */
   hoverable?: boolean;
   /** Enable active/pressed visual states (scale + pressed background). Default `false`. */
@@ -47,6 +51,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
     className = '',
     outline = true,
     color,
+    beforeContent,
     hoverable = false,
     clickable = false,
     pressed = false,
@@ -95,6 +100,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
         )}
       </div>
       <SurfaceContextProvider level={contextLevel - 1}>
+        {beforeContent}
         {wrapContent ? (
           <SurfaceCutContent
             className={cn(
