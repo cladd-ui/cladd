@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.44 (2026-05-11)
+
+### Bug Fixes
+
+- check for window in useDevice (40ad5d5)
+
 ## 0.0.43 (2026-05-11)
 
 - _No notable changes since previous release_
