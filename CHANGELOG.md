@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.33 (2026-05-11)
+
+### Features
+
+- overlays tweaks (2d09130)
+
 ## 0.0.32 (2026-05-11)
 
 ### Features
