@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.46 (2026-05-11)
+
+### Features
+
+- SurfaceCut beforeContent slot (e8eb04f)
+
 ## 0.0.45 (2026-05-11)
 
 ### Features
