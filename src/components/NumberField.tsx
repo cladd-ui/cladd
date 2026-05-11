@@ -1,4 +1,4 @@
-import { ReactNode, Ref, useEffect, useState } from 'react';
+import { ReactNode, Ref, useEffect, useRef, useState } from 'react';
 
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
@@ -91,10 +91,33 @@ export const NumberField = (props: NumberFieldProps) => {
   } = props;
 
   const [draft, setDraft] = useState<string>(String(value));
+  const inputElRef = useRef<HTMLInputElement>(null);
+  const cancellingRef = useRef(false);
 
   useEffect(() => {
     setDraft(String(value));
   }, [value]);
+
+  const commitDraft = () => {
+    if (cancellingRef.current) {
+      cancellingRef.current = false;
+      return;
+    }
+    const parsed = Number(draft);
+    if (draft === '' || Number.isNaN(parsed)) {
+      setDraft(String(value));
+      return;
+    }
+    const snapped = min + Math.round((parsed - min) / step) * step;
+    const clamped = Math.min(max, Math.max(min, snapped));
+    setDraft(String(clamped));
+    if (clamped !== value) onChange(clamped);
+  };
+
+  const cancelDraft = () => {
+    cancellingRef.current = true;
+    setDraft(String(value));
+  };
 
   const decrease = () => {
     if (value <= min || disabled) return;
@@ -184,29 +207,16 @@ export const NumberField = (props: NumberFieldProps) => {
             inputClassName,
           )}
           type="number"
-          onChange={(next) => {
-            if (next === '') {
-              setDraft(next);
-              return;
+          inputRef={inputElRef}
+          onChange={setDraft}
+          onBlur={commitDraft}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              inputElRef.current?.blur();
+            } else if (e.key === 'Escape') {
+              cancelDraft();
+              inputElRef.current?.blur();
             }
-            const parsed = Number(next);
-            if (Number.isNaN(parsed)) {
-              setDraft(next);
-              return;
-            }
-            const clamped = Math.min(max, Math.max(min, parsed));
-            setDraft(String(clamped));
-            if (clamped !== value) onChange(clamped);
-          }}
-          onBlur={() => {
-            const parsed = Number(draft);
-            if (draft === '' || Number.isNaN(parsed)) {
-              setDraft(String(value));
-              return;
-            }
-            const clamped = Math.min(max, Math.max(min, parsed));
-            setDraft(String(clamped));
-            if (clamped !== value) onChange(clamped);
           }}
         />
       ) : (
