@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.38 (2026-05-11)
+
+### Features
+
+- NumberField fixes and tweaks (365cae4)
+
 ## 0.0.37 (2026-05-11)
 
 ### Features
