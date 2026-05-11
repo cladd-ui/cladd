@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.42 (2026-05-11)
+
+### Features
+
+- simplify Select (ab4d890)
+
+### Bug Fixes
+
+- components tweaks and fixes (4192336)
+
+### Refactoring
+
+- UIProvider -> CladdProvider (5c4796a)
+
 ## 0.0.41 (2026-05-11)
 
 ### Features
