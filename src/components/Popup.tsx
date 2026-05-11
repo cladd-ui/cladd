@@ -156,7 +156,7 @@ export interface PopupProps {
   root?: string;
   /** Selector for the container made `inert` while the popup is open. Default `'.app-container'`. */
   inertContainer?: string;
-  /** Defer rendering until first opened, and unmount after close. Default `false`. */
+  /** Set to `true` when the popup is rendered inside a React `lazy()` + `Suspense` boundary so it opens on the next tick (after the lazy chunk has resolved and mounted). Default `false`. */
   lazy?: boolean;
   /** Extra classes for the inner content column (where children + header live). */
   contentClassName?: string;
@@ -460,6 +460,7 @@ function PopupInner(props: PopupInnerProps) {
                       className="rounded-full"
                       contentClassName="flex items-center p-1"
                       variant="gradient"
+                      color={closeButtonColor}
                       outline
                       level={1}
                     >
@@ -470,7 +471,6 @@ function PopupInner(props: PopupInnerProps) {
                         rounded
                         variant="transparent"
                         outline={false}
-                        color={closeButtonColor}
                         onClick={() => {
                           onCloseButtonClick();
                           close();

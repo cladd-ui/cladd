@@ -320,7 +320,7 @@ type PopoverOwnProps = {
   variant?: SurfaceVariant;
   /** Outline ring on the popover surface. Default `true` for non-light themes. */
   outline?: boolean;
-  /** Defer rendering until first opened, and unmount after close. */
+  /** Set to `true` when the popover is rendered inside a React `lazy()` + `Suspense` boundary so it opens on the next tick (after the lazy chunk has resolved and mounted). */
   lazy?: boolean;
   /** Default `true`. */
   closeOnBackdropClick?: boolean;

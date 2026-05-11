@@ -5,7 +5,7 @@ import { Color } from '../types';
 import { useAccentColor } from './use-accent-color';
 
 export interface UseDialogOptions {
-  /** Defer rendering until first opened, and unmount after close. Default `false`. */
+  /** Set to `true` when the dialog is rendered inside a React `lazy()` + `Suspense` boundary so it opens on the next tick (after the lazy chunk has resolved and mounted). Default `false`. */
   lazy?: boolean;
 }
 

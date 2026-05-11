@@ -168,7 +168,7 @@ export interface DialogProps {
   title?: ReactNode;
   /** Body text slot. Rendered as `<div>` with `text-cladd-sm leading-relaxed`. Auto-wired to `aria-describedby`. */
   text?: ReactNode;
-  /** Defer rendering until first opened, and unmount after close. */
+  /** Set to `true` when the dialog is rendered inside a React `lazy()` + `Suspense` boundary so it opens on the next tick (after the lazy chunk has resolved and mounted). */
   lazy?: boolean;
   /** Custom button row. Rendered after the auto-generated cancel/confirm buttons (if any). */
   buttons?: ReactNode;
