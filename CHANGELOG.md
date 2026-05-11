@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.34 (2026-05-11)
+
+### Features
+
+- fix input numbers (34a5c38)
+
 ## 0.0.33 (2026-05-11)
 
 ### Features
