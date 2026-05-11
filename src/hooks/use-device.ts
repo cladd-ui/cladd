@@ -10,7 +10,10 @@ interface DeviceInfo {
   ipad: boolean;
 }
 
-function calcDevice({ userAgent }: { userAgent?: string } = {}): DeviceInfo {
+function calcDevice({
+  userAgent,
+}: { userAgent?: string } = {}): DeviceInfo | null {
+  if (typeof window === 'undefined') return null;
   const supportTouch =
     typeof window !== 'undefined' &&
     ('ontouchstart' in window ||
@@ -85,9 +88,12 @@ function useDevice(
   reset?: boolean,
 ): DeviceInfo {
   if (!deviceCalculated || reset) {
-    deviceCalculated = calcDevice(overrides);
+    const res = calcDevice(overrides);
+    if (res) {
+      deviceCalculated = calcDevice(overrides);
+    }
   }
-  return deviceCalculated;
+  return deviceCalculated || ({} as DeviceInfo);
 }
 
 export { useDevice };
