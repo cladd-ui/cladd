@@ -69,11 +69,14 @@ export const Link = <C extends ElementType = 'button'>({
       }}
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
+      tabIndex={focusable && !disabled && !readOnly ? 0 : -1}
       className={cn(
         'group/cladd-link cladd-link relative appearance-none outline-0 select-none focus:ring-0 focus:outline-0',
+        (disabled || readOnly) && 'pointer-events-none',
         !disabled &&
           !readOnly &&
           'cursor-pointer duration-200 active:opacity-50 active:duration-0',
+        disabled && 'opacity-50',
         color && `cladd-color-${color} text-cladd-primary`,
         className,
       )}
