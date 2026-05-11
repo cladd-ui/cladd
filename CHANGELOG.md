@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.40 (2026-05-11)
+
+### Features
+
+- fix auto generated OTP field (11b1cbb)
+
 ## 0.0.39 (2026-05-11)
 
 ### Features
