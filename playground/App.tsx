@@ -118,6 +118,9 @@ function App() {
   return (
     <CladdProvider theme="dark">
       <div className={cn('flex flex-col items-start gap-8 p-8 text-cladd-fg')}>
+        <SectionTitle>Link</SectionTitle>
+        <Link>Link 1</Link>
+        <Link color="red">Link 2</Link>
         <SectionTitle>Number Scrubber</SectionTitle>
         <Surface
           outline

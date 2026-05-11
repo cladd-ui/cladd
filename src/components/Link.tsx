@@ -7,8 +7,12 @@ import {
 } from 'react';
 
 import { cn } from '../shared/cn';
+import { Color } from '../types';
+import { FocusableLayer } from './FocusableLayer';
 
 interface LinkOwnProps<C extends ElementType = 'button'> {
+  /** Accent color token */
+  color?: Color;
   /** Link content. */
   children?: ReactNode;
   /** Extra classes for the link element. */
@@ -21,7 +25,7 @@ interface LinkOwnProps<C extends ElementType = 'button'> {
    * Polymorphic element. When omitted, defaults to `'a'` if `href` is provided, otherwise `'button'`. Pass an explicit value to override (e.g. a router `Link` component).
    */
   as?: C;
-  /** Reserved for focus-ring styling hooks. Default `true`. */
+  /** Renders a `FocusableLayer` ring on keyboard focus. Defaults to `true`. */
   focusable?: boolean;
   /** Click handler. */
   onClick?: () => void;
@@ -40,6 +44,7 @@ export const Link = <C extends ElementType = 'button'>({
   disabled = false,
   readOnly = false,
   as,
+  color,
   focusable = true,
   onClick,
   href,
@@ -65,7 +70,8 @@ export const Link = <C extends ElementType = 'button'>({
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       className={cn(
-        'group/cladd-link cladd-link relative cursor-pointer appearance-none duration-200 select-none focus:ring-0 focus:outline-0 active:opacity-50 active:duration-0',
+        'group/cladd-link cladd-link relative cursor-pointer appearance-none text-cladd-xs outline-0 duration-200 select-none focus:ring-0 focus:outline-0 active:opacity-50 active:duration-0',
+        color && `cladd-color-${color} text-cladd-primary`,
         className,
       )}
       readOnly={readOnly}
@@ -75,6 +81,9 @@ export const Link = <C extends ElementType = 'button'>({
       {...rest}
     >
       {children}
+      {focusable && (
+        <FocusableLayer group="link" color={color} className="rounded-cladd" />
+      )}
     </Component>
   );
 };

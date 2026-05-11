@@ -29,6 +29,7 @@ export const FocusableLayer = (props: {
   const { className, group, color = accentColor, force } = props;
   const groupClasses =
     {
+      link: 'group-focus-visible/cladd-link:scale-100 group-focus-visible/cladd-link:opacity-100',
       button:
         'group-focus-visible/cladd-button:scale-100 group-focus-visible/cladd-button:opacity-100',
       input:
