@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.35 (2026-05-11)
+
+### Features
+
+- Input and Textarea improvements (5d6ac3f)
+- simplify input layout (730c084)
+
 ## 0.0.34 (2026-05-11)
 
 ### Features
