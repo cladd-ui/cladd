@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.41 (2026-05-11)
+
+### Features
+
+- OTP and Switch tweaks (10faf84)
+
 ## 0.0.40 (2026-05-11)
 
 ### Features
