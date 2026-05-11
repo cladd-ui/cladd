@@ -6,7 +6,7 @@ import { Color } from '../types';
 import { SurfaceContextProvider } from './SurfaceContext';
 import { SurfaceCutContent } from './SurfaceCutContent';
 
-interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
+export interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   /** Surface-cut content. */
   children?: ReactNode;
   /** Extra classes for the root element. */

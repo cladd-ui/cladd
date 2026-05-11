@@ -19,7 +19,7 @@ import { Color } from '../types';
 import { Button, ButtonSize } from './Button';
 import { FocusableLayer } from './FocusableLayer';
 import { CloseIcon } from './icons/CloseIcon';
-import { SurfaceCut } from './SurfaceCut';
+import { SurfaceCut, SurfaceCutOwnProps } from './SurfaceCut';
 
 export type InputSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
@@ -98,7 +98,7 @@ interface InputOwnProps<
     | 'search';
   /** Icon node rendered inside the surface, absolutely positioned on the left. Shifts input padding. */
   icon?: ReactNode;
-  /** Forwarded to the wrapper element. */
+  /** Forwarded to the `SurfaceCut` root element. */
   ref?: Ref<HTMLElement>;
   /** Forwarded to the inner `<input>` (or `inputComponent`) element. */
   inputRef?: Ref<HTMLInputElement>;
@@ -116,6 +116,7 @@ export type InputProps<
   C extends ElementType = 'div',
   IC extends ElementType = 'input',
 > = InputOwnProps<C, IC> &
+  Omit<SurfaceCutOwnProps<C>, keyof InputOwnProps<C, IC> | 'children'> &
   Omit<ComponentPropsWithoutRef<C>, keyof InputOwnProps<C, IC>>;
 
 export const Input = <
@@ -166,6 +167,7 @@ export const Input = <
     inputComponentProps = {},
     ref: externalRef,
     inputRef: externalInputRef,
+    ...rest
   } = props;
 
   const fontSizes: Record<InputSize, string> = {
@@ -218,7 +220,6 @@ export const Input = <
     ? inputPaddingWithIcon[size]
     : inputPaddingNoIcon[size];
 
-  const elRef = useRef<HTMLElement | null>(null);
   const inputElRef = useRef<HTMLInputElement | null>(null);
 
   const [focused, setFocused] = useState(false);
@@ -232,14 +233,16 @@ export const Input = <
     onBlur(e);
   };
 
-  const Component = asProp as ElementType;
-
   const InputComponent = inputComponent as ElementType<any>;
+  const SurfaceCutComponent: ElementType = SurfaceCut;
 
   const showDisplayValue = displayValue && (readOnly || !focused);
   const showRealValue = !showDisplayValue;
   return (
-    <SurfaceCut
+    <SurfaceCutComponent
+      {...rest}
+      as={asProp}
+      ref={externalRef}
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       data-invalid={valid === false || undefined}
@@ -268,14 +271,6 @@ export const Input = <
         data-part="wrapper"
         className={cn('relative flex items-center', contentClassName)}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
-        ref={(el: HTMLElement | null) => {
-          elRef.current = el;
-          if (externalRef) {
-            if (typeof externalRef === 'function') externalRef(el);
-            else
-              (externalRef as React.RefObject<HTMLElement | null>).current = el;
-          }
-        }}
       >
         {prefix}
         {icon && (
@@ -415,6 +410,6 @@ export const Input = <
           {errorMessage}
         </div>
       )}
-    </SurfaceCut>
+    </SurfaceCutComponent>
   );
 };

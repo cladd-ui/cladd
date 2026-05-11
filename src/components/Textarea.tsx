@@ -19,14 +19,14 @@ import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
-import { SurfaceCut } from './SurfaceCut';
+import { SurfaceCut, SurfaceCutOwnProps } from './SurfaceCut';
 
 export type TextareaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface TextareaOwnProps<C extends ElementType = 'div'> {
   /** Polymorphic wrapper element. Defaults to `'div'`. The editable area itself is always a `contenteditable` `<div>`. */
   as?: C;
-  /** Forwarded to the wrapper element. */
+  /** Forwarded to the `SurfaceCut` root element. */
   ref?: Ref<HTMLElement>;
   /** Controlled value. Synced into the editable `innerText` on change (see `updateContentOnChange`). */
   value?: string;
@@ -73,13 +73,12 @@ interface TextareaOwnProps<C extends ElementType = 'div'> {
   errorMessage?: ReactNode;
   /** Icon node rendered absolutely positioned on the left. */
   icon?: ReactNode;
-  /** Extra classes applied to the inner `SurfaceCut`. */
-  surfaceClassName?: string;
   /** Reserved - currently not applied in the rendered output. */
   inputPadding?: string;
 }
 
 export type TextareaProps<C extends ElementType = 'div'> = TextareaOwnProps<C> &
+  Omit<SurfaceCutOwnProps<C>, keyof TextareaOwnProps<C> | 'children'> &
   Omit<ComponentPropsWithoutRef<C>, keyof TextareaOwnProps<C>>;
 
 export const Textarea = <C extends ElementType = 'div'>(
@@ -111,7 +110,7 @@ export const Textarea = <C extends ElementType = 'div'>(
     infoMessage,
     errorMessage,
     icon,
-    surfaceClassName,
+    ...rest
   } = props;
 
   const fontSizes: Record<TextareaSize, string> = {
@@ -160,7 +159,6 @@ export const Textarea = <C extends ElementType = 'div'>(
     inputPaddingVertical[size],
     icon ? inputPaddingWithIcon[size] : inputPaddingNoIcon[size],
   );
-  const elRef = useRef<HTMLElement | null>(null);
   const inputElRef = useRef<HTMLDivElement | null>(null);
   const [text, setText] = useState<string | undefined>();
 
@@ -187,16 +185,22 @@ export const Textarea = <C extends ElementType = 'div'>(
     }
   }, [value]);
 
-  const Component = asProp as ElementType;
+  const SurfaceCutComponent: ElementType = SurfaceCut;
 
   return (
-    <Component
+    <SurfaceCutComponent
+      {...rest}
+      as={asProp}
+      ref={externalRef}
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       data-invalid={valid === false || undefined}
+      hoverable={!disabled && !readOnly}
+      wrapContent={false}
       className={cn(
         'cladd-textarea group/cladd-textarea relative',
         disabled && 'opacity-50',
+        itemRoundedClasses,
         className,
       )}
     >
@@ -211,20 +215,10 @@ export const Textarea = <C extends ElementType = 'div'>(
       )}
 
       {/* input */}
-      <SurfaceCut
+      <div
         data-part="wrapper"
-        className={cn(itemRoundedClasses, surfaceClassName)}
-        hoverable={!disabled && !readOnly}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
-        contentClassName={cn('flex items-center', contentClassName)}
-        ref={(el: HTMLElement | null) => {
-          elRef.current = el;
-          if (externalRef) {
-            if (typeof externalRef === 'function') externalRef(el);
-            else
-              (externalRef as React.RefObject<HTMLElement | null>).current = el;
-          }
-        }}
+        className={cn('relative flex items-center', contentClassName)}
       >
         {prefix}
         {icon && (
@@ -274,7 +268,7 @@ export const Textarea = <C extends ElementType = 'div'>(
         </div>
 
         {suffix}
-      </SurfaceCut>
+      </div>
 
       {infoMessage && valid !== false && !readOnly && (
         <div
@@ -297,6 +291,6 @@ export const Textarea = <C extends ElementType = 'div'>(
           {errorMessage}
         </div>
       )}
-    </Component>
+    </SurfaceCutComponent>
   );
 };
