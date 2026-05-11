@@ -98,8 +98,6 @@ interface InputOwnProps<
     | 'search';
   /** Icon node rendered inside the surface, absolutely positioned on the left. Shifts input padding. */
   icon?: ReactNode;
-  /** Extra classes applied to the inner `SurfaceCut`. */
-  surfaceClassName?: string;
   /** Forwarded to the wrapper element. */
   ref?: Ref<HTMLElement>;
   /** Forwarded to the inner `<input>` (or `inputComponent`) element. */
@@ -163,7 +161,6 @@ export const Input = <
     pattern,
     inputMode,
     icon,
-    surfaceClassName,
     autoFocus,
     inputComponent = 'input',
     inputComponentProps = {},
@@ -242,14 +239,17 @@ export const Input = <
   const showDisplayValue = displayValue && (readOnly || !focused);
   const showRealValue = !showDisplayValue;
   return (
-    <Component
+    <SurfaceCut
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       data-invalid={valid === false || undefined}
       data-required={required || undefined}
+      wrapContent={false}
+      hoverable={!disabled && !readOnly}
       className={cn(
-        'cladd-input group/cladd-input relative',
+        'cladd-input group/cladd-input',
         disabled && 'opacity-50',
+        itemRoundedClasses,
         className,
       )}
     >
@@ -264,11 +264,9 @@ export const Input = <
       )}
 
       {/* input */}
-      <SurfaceCut
+      <div
         data-part="wrapper"
-        className={cn(itemRoundedClasses, surfaceClassName)}
-        hoverable={!disabled && !readOnly}
-        contentClassName={cn('flex items-center', contentClassName)}
+        className={cn('relative flex items-center', contentClassName)}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
         ref={(el: HTMLElement | null) => {
           elRef.current = el;
@@ -292,69 +290,72 @@ export const Input = <
           </div>
         )}
 
-        <InputComponent
-          data-part="control"
-          tabIndex={disabled || readOnly ? -1 : undefined}
-          autoFocus={autoFocus}
-          readOnly={readOnly}
-          inputMode={inputMode}
-          ref={(el: HTMLInputElement | null) => {
-            inputElRef.current = el;
-            if (externalInputRef) {
-              if (typeof externalInputRef === 'function') externalInputRef(el);
-              else
-                (
-                  externalInputRef as React.RefObject<HTMLInputElement | null>
-                ).current = el;
-            }
-          }}
-          id={inputId}
-          type={type}
-          disabled={disabled}
-          value={value}
-          name={name}
-          required={required}
-          placeholder={placeholder}
-          className={cn(
-            inputPadding,
-            height,
-            fontSizes[size],
-            itemRoundedClasses,
-            'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
-            disabled && 'text-cladd-fg-softer',
-            'placeholder-cladd-fg-softer',
-            !showRealValue && 'text-transparent! placeholder-transparent!',
-            inputClassName,
-          )}
-          onFocus={onFocusInternal}
-          onBlur={onBlurInternal}
-          onKeyDown={onKeyDown}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChange(e.target.value, e)
-          }
-          maxLength={maxLength}
-          max={max}
-          min={min}
-          pattern={pattern}
-          step={step}
-          {...inputComponentProps}
-        />
-
-        {showDisplayValue && (
-          <span
-            data-part="display-value"
+        <div className={cn('relative flex w-full')}>
+          <InputComponent
+            data-part="control"
+            tabIndex={disabled || readOnly ? -1 : undefined}
+            autoFocus={autoFocus}
+            readOnly={readOnly}
+            inputMode={inputMode}
+            ref={(el: HTMLInputElement | null) => {
+              inputElRef.current = el;
+              if (externalInputRef) {
+                if (typeof externalInputRef === 'function')
+                  externalInputRef(el);
+                else
+                  (
+                    externalInputRef as React.RefObject<HTMLInputElement | null>
+                  ).current = el;
+              }
+            }}
+            id={inputId}
+            type={type}
+            disabled={disabled}
+            value={value}
+            name={name}
+            required={required}
+            placeholder={placeholder}
             className={cn(
               inputPadding,
               height,
               fontSizes[size],
-              'pointer-events-none absolute inset-0 flex items-center font-medium',
+              itemRoundedClasses,
+              'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
               disabled && 'text-cladd-fg-softer',
+              'placeholder-cladd-fg-softer',
+              !showRealValue && 'text-transparent! placeholder-transparent!',
               inputClassName,
             )}
-          >
-            {displayValue}
-          </span>
-        )}
+            onFocus={onFocusInternal}
+            onBlur={onBlurInternal}
+            onKeyDown={onKeyDown}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              onChange(e.target.value, e)
+            }
+            maxLength={maxLength}
+            max={max}
+            min={min}
+            pattern={pattern}
+            step={step}
+            {...inputComponentProps}
+          />
+
+          {showDisplayValue && (
+            <span
+              data-part="display-value"
+              className={cn(
+                inputPadding,
+                height,
+                fontSizes[size],
+                'pointer-events-none absolute inset-0 flex items-center font-medium',
+                disabled && 'text-cladd-fg-softer',
+                inputClassName,
+              )}
+            >
+              {displayValue}
+            </span>
+          )}
+        </div>
         {clearButton && !disabled && !readOnly && (
           <div
             className={cn(
@@ -391,13 +392,13 @@ export const Input = <
         )}
 
         {suffix}
-      </SurfaceCut>
+      </div>
 
       {infoMessage && valid !== false && !readOnly && (
         <div
           data-part="info"
           className={cn(
-            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-1 rounded-cladd-sm bg-cladd-primary px-2 py-1.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/input:-translate-y-1/2 group-has-[input:focus]/input:opacity-100',
+            'pointer-events-none absolute -top-1.5 left-2 z-10 translate-y-0 rounded-cladd-xs bg-cladd-primary px-2 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-0 duration-200 group-has-[input:focus]/cladd-input:-translate-y-1/2 group-has-[input:focus]/cladd-input:opacity-100',
             `cladd-color-${color}`,
           )}
         >
@@ -408,12 +409,12 @@ export const Input = <
         <div
           data-part="error"
           className={cn(
-            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-sm bg-cladd-primary px-1 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
+            'cladd-color-red pointer-events-none absolute -top-1.5 left-2 z-10 -translate-y-1/2 rounded-cladd-xs bg-cladd-primary px-2 py-0.5 text-cladd-2xs leading-none font-semibold text-cladd-on-primary opacity-100 duration-200',
           )}
         >
           {errorMessage}
         </div>
       )}
-    </Component>
+    </SurfaceCut>
   );
 };
