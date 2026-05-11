@@ -188,6 +188,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
           size === 'md' && 'size-cladd-thumb-sm',
           checked && size === 'sm' && `translate-x-cladd-thumb-xs`,
           checked && size === 'md' && `translate-x-cladd-thumb-sm`,
+          checked ? 'text-cladd-on-primary' : 'text-cladd-fg-soft',
           disabled && 'opacity-50',
         )}
         contentClassName="flex items-center justify-center"

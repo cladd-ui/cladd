@@ -155,8 +155,8 @@ export const OTPField = (props: OTPFieldProps) => {
     if (!el) return;
     if (document.activeElement !== el) el.focus();
     try {
-      const len = el.value.length;
-      el.setSelectionRange(len, len);
+      // Select existing content so the next typed character overwrites it.
+      el.setSelectionRange(0, el.value.length);
     } catch {
       /* noop */
     }
