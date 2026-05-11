@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.48 (2026-05-11)
+
+### Features
+
+- tweak Link (06f06f2)
+
 ## 0.0.47 (2026-05-11)
 
 ### Features
