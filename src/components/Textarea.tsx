@@ -135,11 +135,11 @@ export const Textarea = <C extends ElementType = 'div'>(
     '2xl': 'px-3.5',
   };
   const inputPaddingVertical: Record<TextareaSize, string> = {
-    sm: 'py-1',
-    md: 'py-1.5',
-    lg: 'py-2',
-    xl: 'py-3',
-    '2xl': 'py-4',
+    sm: 'py-0.75',
+    md: 'py-1.25',
+    lg: 'py-1.75',
+    xl: 'py-2.75',
+    '2xl': 'py-3.75',
   };
   const inputPaddingWithIcon: Record<TextareaSize, string> = {
     sm: 'pl-8.5 pr-2',
@@ -232,7 +232,7 @@ export const Textarea = <C extends ElementType = 'div'>(
             {icon}
           </div>
         )}
-        <div className="relative w-full">
+        <div className="relative flex w-full">
           <div
             data-part="control"
             contentEditable={!disabled && !readOnly}

@@ -1701,6 +1701,8 @@ function App() {
           outline
           contentClassName="p-4 flex flex-col gap-4"
         >
+          <Input icon={<Icon />} placeholder="SM: Add text" size="sm" />
+          <Textarea icon={<Icon />} placeholder="SM: Add text" size="sm" />
           <Input
             disabled
             icon={<Icon />}
