@@ -133,6 +133,7 @@ function App() {
             rounded
             displayValue={(v) => `${v} px`}
             onChange={(v) => setScrubValue(v)}
+            className="w-32"
           />
         </Surface>
         <SectionTitle>Shortcuts</SectionTitle>
@@ -982,7 +983,8 @@ function App() {
             input={true}
             value={numberFieldValue}
             rounded={false}
-            max={99}
+            max={90}
+            step={10}
             onChange={(v) => setNumberFieldValue(v)}
           />
 
