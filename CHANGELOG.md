@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.47 (2026-05-11)
+
+### Features
+
+- tweak Link states (cf9180d)
+
 ## 0.0.46 (2026-05-11)
 
 ### Features
