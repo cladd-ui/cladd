@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.43 (2026-05-11)
+
+- _No notable changes since previous release_
+
 ## 0.0.42 (2026-05-11)
 
 ### Features
