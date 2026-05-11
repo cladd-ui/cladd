@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.45 (2026-05-11)
+
+### Features
+
+- Link component (7b34cd8)
+
 ## 0.0.44 (2026-05-11)
 
 ### Bug Fixes
