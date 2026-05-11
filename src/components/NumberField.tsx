@@ -1,4 +1,4 @@
-import { ReactNode, Ref } from 'react';
+import { ReactNode, Ref, useEffect, useState } from 'react';
 
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
@@ -90,6 +90,12 @@ export const NumberField = (props: NumberFieldProps) => {
     ...rest
   } = props;
 
+  const [draft, setDraft] = useState<string>(String(value));
+
+  useEffect(() => {
+    setDraft(String(value));
+  }, [value]);
+
   const decrease = () => {
     if (value <= min || disabled) return;
     onChange(Math.max(min, value - step));
@@ -158,12 +164,24 @@ export const NumberField = (props: NumberFieldProps) => {
         <Input
           data-part="control"
           size={size as InputSize}
-          value={value}
+          value={draft}
           disabled={disabled}
           readOnly={readOnly}
           rounded={valueRounded}
           className="w-auto min-w-0 shrink"
           inputClassName={cn('w-auto min-w-9 text-center', inputClassName)}
+          onChange={(next) => {
+            setDraft(next);
+            if (next === '') return;
+            const parsed = Number(next);
+            if (Number.isNaN(parsed)) return;
+            onChange(Math.min(max, Math.max(min, parsed)));
+          }}
+          onBlur={() => {
+            if (draft === '' || Number.isNaN(Number(draft))) {
+              setDraft(String(value));
+            }
+          }}
         />
       ) : (
         <SurfaceCut
