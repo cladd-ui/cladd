@@ -145,7 +145,10 @@ export const OTPField = (props: OTPFieldProps) => {
       }
       return child;
     });
-  }, [children, childInputCount, totalCells]);
+    // `value` is intentionally in deps: when no children are supplied we
+    // auto-generate `OTPFieldInput`s whose element identity would otherwise be
+    // stable across value changes, leaving cells stuck reading a stale value.
+  }, [children, childInputCount, totalCells, value]);
 
   const focusCell = useCallback((i: number) => {
     const el = inputRefs.current[i];
