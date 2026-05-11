@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.36 (2026-05-11)
+
+### Features
+
+- tweak Textarea styles (5a2dea0)
+
 ## 0.0.35 (2026-05-11)
 
 ### Features
