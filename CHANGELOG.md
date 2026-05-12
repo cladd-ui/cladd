@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.50 (2026-05-12)
+
+### Features
+
+- types export: PopoverPosition, SurfaceVariant (74d4904)
+
 ## 0.0.49 (2026-05-12)
 
 ### Features
