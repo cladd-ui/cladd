@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.53 (2026-05-12)
+
+### Bug Fixes
+
+- NumberField to hold its width (3152741)
+
 ## 0.0.52 (2026-05-12)
 
 ### Bug Fixes
