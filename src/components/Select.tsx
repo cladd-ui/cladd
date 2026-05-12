@@ -139,9 +139,13 @@ interface SelectOwnProps<T = string, V = T> {
    * Default `true`. See `noneOptionValue` for how the digits map to options.
    */
   keyboardHints?: boolean;
+  /** `variant` forwarded to the per-option `Shortcut` hint. Default `'transparent'`. */
   keyboardHintsVariant?: SurfaceVariant;
+  /** `outline` forwarded to the per-option `Shortcut` hint. Default `false`. */
   keyboardHintsOutline?: boolean;
+  /** Extra classes for the per-option `Shortcut` hint's key element. */
   keyboardHintsClassName?: string;
+  /** `size` forwarded to the per-option `Shortcut` hint. Default `'md'`. */
   keyboardHintsSize?: ShortcutSize;
   /** Default color for the per-option indicator (Radio/Checkbox). Overridden per-option by `optionIndicatorColor`. */
   indicatorColor?: Color;
