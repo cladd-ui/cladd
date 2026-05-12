@@ -162,7 +162,7 @@ export const NumberField = (props: NumberFieldProps) => {
       variant={variant}
       level={surfaceLevel}
       color={color}
-      contentClassName={cn('flex items-center p-1', contentClassName)}
+      contentClassName={cn('flex w-full items-center p-1', contentClassName)}
       ref={ref}
       {...rest}
     >
@@ -201,9 +201,9 @@ export const NumberField = (props: NumberFieldProps) => {
           disabled={disabled}
           readOnly={readOnly}
           rounded={valueRounded}
-          className="w-auto min-w-0 shrink"
+          className="w-full min-w-0 shrink"
           inputClassName={cn(
-            'w-auto min-w-9 text-center',
+            'min-w-9 text-center',
             isFill && 'text-cladd-fg',
             inputClassName,
           )}
