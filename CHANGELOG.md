@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.51 (2026-05-12)
+
+### Features
+
+- button pointer when href is passed too (15950d5)
+
 ## 0.0.50 (2026-05-12)
 
 ### Features
