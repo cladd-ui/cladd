@@ -167,7 +167,9 @@ export const Button = <C extends ElementType = 'button'>(
         fontSizes[size],
         height,
         disabled && 'pointer-events-none',
-        !disabled && Component === 'a' ? 'cursor-pointer' : 'cursor-auto',
+        !disabled && !readOnly && (Component === 'a' || rest?.href)
+          ? 'cursor-pointer'
+          : 'cursor-auto',
         itemRoundedClasses,
 
         className,
