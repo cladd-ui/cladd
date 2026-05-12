@@ -26,11 +26,15 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   value?: string;
   /** Native `name` - used to group radios in the same set. */
   name?: string;
+  /** Radio size token. Default `'sm'`. */
   size?: RadioSize;
+  /** Native `required` - forwarded to the hidden `<input>` for form validation. */
   required?: boolean;
   /** Fires when the user toggles the radio. First arg is the new checked state, second is the raw event. */
   onChange?: (checked: boolean, event?: ChangeEvent<HTMLInputElement>) => void;
+  /** Fires on click of the root element. Runs before the internal toggle handler. */
   onClick?: (e: MouseEvent) => void;
+  /** Fires on pointerdown of the root element. */
   onPointerDown?: (e: PointerEvent) => void;
   /**
    * When `true` (default), renders a hidden native input for form submission and accessibility.

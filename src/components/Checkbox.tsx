@@ -27,11 +27,15 @@ interface CheckboxOwnProps<C extends ElementType = 'label'> {
   value?: string;
   /** Native `name` - used for form submission and to group radio-like checkboxes. */
   name?: string;
+  /** Checkbox size token. Default `'sm'`. */
   size?: CheckboxSize;
+  /** Native `required` - forwarded to the hidden `<input>` for form validation. */
   required?: boolean;
   /** Fires when the user toggles the checkbox. First arg is the new checked state, second is the raw event (when fired by the hidden `<input>`). */
   onChange?: (checked: boolean, event?: ChangeEvent<HTMLInputElement>) => void;
+  /** Fires on click of the root element. Runs before the internal toggle handler. */
   onClick?: (e: MouseEvent) => void;
+  /** Fires on pointerdown of the root element. */
   onPointerDown?: (e: PointerEvent) => void;
   /**
    * When `true` (default), renders a hidden native `<input type="checkbox">` for form submission and accessibility.

@@ -32,6 +32,7 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
    * Default size-specific corner radii are used when `false`.
    */
   rounded?: boolean;
+  /** Button size token. Drives height, padding, font size, and corner radius. Default `'md'`. */
   size?: ButtonSize;
   /** Polymorphic element to render. Defaults to `'button'`. Pass `'a'` for links (cursor switches to pointer automatically), or any custom component to retain Button styling on a different DOM node. The component's own props become valid here.
    */

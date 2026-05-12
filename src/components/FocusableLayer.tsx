@@ -3,6 +3,7 @@ import { cn } from '../shared/cn';
 import { Color } from '../types';
 
 export const FocusableLayer = (props: {
+  /** Extra classes for the focus ring `<span>` (typically used to match the host's corner radius). */
   className?: string;
   /**
    * Which interactive group's focus state should reveal this ring. The ring is hidden by default
@@ -18,6 +19,7 @@ export const FocusableLayer = (props: {
    * Pass an unknown value to opt out of the auto-reveal classes (use `force` instead).
    */
   group?: string;
+  /** Accent color for the ring. Default: theme accent. */
   color?: Color;
   /**
    * Always show the ring, regardless of focus state. Used for error/invalid states

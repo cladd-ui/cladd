@@ -3,8 +3,11 @@ import { ReactNode, Ref, HTMLAttributes } from 'react';
 import { cn } from '../shared/cn';
 
 export interface BackdropProps extends HTMLAttributes<HTMLDivElement> {
+  /** Extra classes for the backdrop root. */
   className?: string;
+  /** Optional content rendered above the backdrop tint (rarely needed - backdrops are usually empty). */
   children?: ReactNode;
+  /** Forwarded to the underlying `<div>`. */
   ref?: Ref<HTMLDivElement>;
 }
 

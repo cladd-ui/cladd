@@ -30,6 +30,7 @@ interface SegmentedContextValue {
 interface SegmentedContextProviderProps {
   /** Style values to publish to descendant `SegmentedButton`s. */
   value: SegmentedContextValue;
+  /** Subtree that should read these values. */
   children: ReactNode;
 }
 

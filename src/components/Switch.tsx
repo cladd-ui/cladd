@@ -40,6 +40,7 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
    * If omitted, the built-in animated cross/check glyph is used.
    */
   icon?: ReactNode | ((checked: boolean) => ReactNode);
+  /** Switch size token. Drives track width and thumb size. Default `'md'`. */
   size?: SwitchSize;
   /** Extra classes for the outer label/element. */
   className?: string;

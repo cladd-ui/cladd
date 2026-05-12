@@ -30,6 +30,7 @@ interface TextareaOwnProps<C extends ElementType = 'div'> {
   ref?: Ref<HTMLElement>;
   /** Controlled value. Synced into the editable `innerText` on change (see `updateContentOnChange`). */
   value?: string;
+  /** Placeholder text shown when the editor is empty. */
   placeholder?: string;
   /** Visually dim the textarea and remove `contenteditable`. */
   disabled?: boolean;
@@ -37,11 +38,15 @@ interface TextareaOwnProps<C extends ElementType = 'div'> {
   readOnly?: boolean;
   /** Apply pill-style corners. Default `false` - uses size-specific radii. */
   rounded?: boolean;
+  /** Textarea size token. Drives min-height, padding, and font size. Default `'lg'`. */
   size?: TextareaSize;
   /** Fires on every input event. First arg is the new text, second is the raw event. */
   onChange?: (value: string, event?: FormEvent<HTMLDivElement>) => void;
+  /** Forwarded to the editable area - fires on key down. */
   onKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void;
+  /** Forwarded to the editable area - fires when it gains focus. */
   onFocus?: (e: FocusEvent<HTMLDivElement>) => void;
+  /** Forwarded to the editable area - fires when it loses focus. */
   onBlur?: (e: FocusEvent<HTMLDivElement>) => void;
   /** Accent color token. Drives the focus ring and `infoMessage` colors. Default: theme accent. */
   color?: Color;

@@ -13,6 +13,7 @@ interface SurfaceContextValue {
 interface SurfaceContextProviderProps {
   /** Surface depth published to descendants. */
   level: number;
+  /** Subtree to publish the depth to. */
   children: ReactNode;
 }
 

@@ -25,6 +25,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   contentClassName?: string;
   /** Apply `rounded-full` (pill) corners. When `false` (default), uses size-specific corner radii. */
   rounded?: boolean;
+  /** Chip size token. Drives height, padding, and font size. Default `'md'`. */
   size?: ChipSize;
   /**
    * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip becomes interactive automatically (see `clickable`).

@@ -3,8 +3,11 @@ import { ReactNode, Ref, ComponentPropsWithoutRef } from 'react';
 import { cn } from '../shared/cn';
 
 interface SectionTitleOwnProps {
+  /** Title content (typically a short uppercase section label). */
   children?: ReactNode;
+  /** Extra classes for the section title root. */
   className?: string;
+  /** Forwarded to the underlying `<div>`. */
   ref?: Ref<HTMLDivElement>;
 }
 

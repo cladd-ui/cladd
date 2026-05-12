@@ -3,6 +3,7 @@ import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 import { cn } from '../shared/cn';
 
 interface SurfaceCutContentOwnProps<C extends ElementType = 'div'> {
+  /** Content rendered inside the cut surface's content layer. */
   children?: ReactNode;
   /** Stretch the content to `h-full`. Default `true`. Set `false` for content sized by intrinsic height. */
   fullHeight?: boolean;

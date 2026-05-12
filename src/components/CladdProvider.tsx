@@ -28,6 +28,7 @@ export interface CladdProviderProps {
    * Default `'#app, #__next, #root'`.
    */
   overlaysRoot?: string;
+  /** App tree wrapped by the provider. Overlays (Dialog, Toast) are portaled outside this subtree into `overlaysRoot`. */
   children?: ReactNode;
 }
 

@@ -20,9 +20,11 @@ interface ListButtonOwnProps<C extends ElementType = 'button'> {
   iconClassName?: string;
   /** Small text rendered above the title. Typically a category, date, or eyebrow label. */
   header?: ReactNode;
+  /** Extra classes for the `header` element. */
   headerClassName?: string;
   /** Small text rendered below the title. Typically secondary metadata. */
   footer?: ReactNode;
+  /** Extra classes for the `footer` element. */
   footerClassName?: string;
   /** Extra classes for the title row (the wrapper around `children`). */
   titleClassName?: string;

@@ -20,9 +20,13 @@ export type DialogsPortalData = {
   requireConfirmText?: boolean | string | ReactNode;
   /** Stop click propagation on backdrop and surface. */
   stopPropagationOnClick?: boolean;
+  /** Label for the cancel button. When omitted, the cancel button is not rendered. */
   cancelButtonText?: ReactNode;
+  /** Label for the confirm button. When omitted, the confirm button is not rendered. */
   confirmButtonText?: ReactNode;
+  /** Color for the cancel button. Default `'neutral'`. */
   cancelButtonColor?: Color;
+  /** Color for the confirm button. Default: theme accent color. */
   confirmButtonColor?: Color;
   /** Fires when the confirm button is pressed (and the `requireConfirmText` guard passes). Always called with `true`. */
   onConfirm?: (confirmed: boolean) => void;

@@ -22,6 +22,7 @@ export interface SliderProps {
   max?: number;
   /** Default `1`. */
   step?: number;
+  /** Slider size token. Drives track and thumb dimensions. Default `'sm'`. */
   size?: SliderSize;
   /** Visually dim the slider and disable interaction. */
   disabled?: boolean;

@@ -33,6 +33,7 @@ interface NumberFieldOwnProps {
   rounded?: boolean;
   /** Pill-shape the value display. Default `false`. */
   valueRounded?: boolean;
+  /** Size token. Drives container/button height, padding, and font size. Default `'md'`. */
   size?: NumberFieldSize;
   /** Accent color token. Sets the container's `cladd-color-{name}` class - cascades to the +/− buttons. */
   color?: Color;

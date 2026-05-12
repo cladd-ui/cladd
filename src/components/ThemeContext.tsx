@@ -27,6 +27,7 @@ export const ThemeProvider = ({
   accentColor,
   overlaysRoot,
 }: {
+  /** App subtree to expose theme context to. */
   children: ReactNode;
   /** Color scheme to expose to descendants. */
   theme: 'dark' | 'light';

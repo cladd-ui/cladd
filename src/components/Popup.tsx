@@ -164,6 +164,7 @@ export interface PopupProps {
   wrapClassName?: string;
   /** Render the top header (with close button + slots). Default `true`. */
   header?: boolean;
+  /** Extra classes for the header row. */
   headerClassName?: string;
   /** Slot rendered on the left side of the header (e.g. title, breadcrumbs). */
   headerLeft?: ReactNode;

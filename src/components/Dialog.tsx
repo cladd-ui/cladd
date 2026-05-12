@@ -178,7 +178,9 @@ export interface DialogProps {
   requireConfirmText?: string;
   /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
   stopPropagationOnClick?: boolean;
+  /** Label for the cancel button. When omitted, the cancel button is not rendered. */
   cancelButtonText?: ReactNode;
+  /** Label for the confirm button. When omitted, the confirm button is not rendered. */
   confirmButtonText?: ReactNode;
   /** Color for the cancel button. Default `'neutral'`. */
   cancelButtonColor?: Color;

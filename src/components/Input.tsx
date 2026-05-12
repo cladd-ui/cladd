@@ -39,6 +39,7 @@ interface InputOwnProps<
    * Useful for formatted display (e.g. show "1,234.56" while the underlying value is `1234.56`) - the real value re-appears on focus for editing.
    */
   displayValue?: ReactNode;
+  /** Native `placeholder` shown when the input is empty. */
   placeholder?: string;
   /** Native `name` attribute, used for form submission. */
   name?: string;
@@ -52,11 +53,15 @@ interface InputOwnProps<
   inputId?: string;
   /** Apply pill (`rounded-full`) corners. Default `false` - uses size-specific radii. */
   rounded?: boolean;
+  /** Input size token. Drives height, padding, and font size. Default `'lg'`. */
   size?: InputSize;
   /** Fires on every keystroke. First arg is the new value, second is the raw event. */
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
+  /** Forwarded to the inner `<input>` - fires on key down. */
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  /** Forwarded to the inner `<input>` - fires when the input gains focus. */
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
+  /** Forwarded to the inner `<input>` - fires when the input loses focus. */
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   /** Called when the clear button is pressed. Pair with `clearButton`. */
   onClear?: () => void;
@@ -64,7 +69,9 @@ interface InputOwnProps<
   color?: Color;
   /** Slot rendered before the input element, inside the surface (e.g. unit label, currency symbol). */
   prefix?: ReactNode;
+  /** Native `min` attribute. Forwarded to the inner `<input>` (useful for `type="number"`/`"date"`). */
   min?: number | string;
+  /** Native `step` attribute. Forwarded to the inner `<input>` (useful for `type="number"`). */
   step?: number | string;
   /** Slot rendered after the input element, inside the surface. */
   suffix?: ReactNode;
@@ -74,7 +81,9 @@ interface InputOwnProps<
   contentClassName?: string;
   /** Extra classes for the actual `<input>` element (or `inputComponent`). */
   inputClassName?: string;
+  /** Native `max` attribute. Forwarded to the inner `<input>` (useful for `type="number"`/`"date"`). */
   max?: number | string;
+  /** Native `maxLength` attribute. */
   maxLength?: number;
   /** Render a clear (X) button on the right that fires `onClear`. Hidden when `value` is empty. */
   clearButton?: boolean;
@@ -86,7 +95,9 @@ interface InputOwnProps<
   infoMessage?: ReactNode;
   /** Floating error label. Always visible (no focus required) when `valid === false`. */
   errorMessage?: ReactNode;
+  /** Native `pattern` attribute - regex validated on form submission. */
   pattern?: string;
+  /** Native `inputMode` - hints at the mobile keyboard layout to display. */
   inputMode?:
     | 'none'
     | 'text'

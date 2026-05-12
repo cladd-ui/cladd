@@ -3,8 +3,11 @@ import { ReactNode, Ref, HTMLAttributes } from 'react';
 import { cn } from '../shared/cn';
 
 export interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
+  /** Row content. Non-interactive list row (use `ListButton` for clickable rows). */
   children?: ReactNode;
+  /** Extra classes for the row root. */
   className?: string;
+  /** Forwarded to the underlying `<div>`. */
   ref?: Ref<HTMLDivElement>;
 }
 

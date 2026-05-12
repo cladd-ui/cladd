@@ -41,6 +41,7 @@ interface SelectOwnProps<T = string, V = T> {
    * in state, not the object itself.
    */
   value?: V | V[];
+  /** Placeholder node shown in the trigger when `value` is empty and no `children` are provided. */
   placeholder?: ReactNode;
   /** Title shown at the top of the popover (above the search bar, if any). */
   title?: string;
@@ -78,6 +79,7 @@ interface SelectOwnProps<T = string, V = T> {
   dropdownIcon?: boolean;
   /** Forwarded to the trigger `Button` - allows wrapping the value across multiple lines. */
   multiline?: boolean;
+  /** Extra classes applied to the value/placeholder container inside the trigger. */
   placeholderClassName?: string;
   /**
    * Custom node rendered inside the trigger button in place of `String(value) || placeholder`.
@@ -105,6 +107,7 @@ interface SelectOwnProps<T = string, V = T> {
    */
   onSearch?: (query: string) => T[];
 
+  /** Accent color for the popover. Forwarded to `Popover.color`. */
   popoverColor?: Color;
   /** Default `'bottom-end'`. */
   popoverPosition?: PopoverPosition;
@@ -155,6 +158,7 @@ interface SelectOwnProps<T = string, V = T> {
   ) => Color | undefined;
   /** Custom "is this option selected?" predicate - overrides the built-in equality check. */
   isChecked?: (value: T) => boolean;
+  /** Predicate that disables individual options - dims them and prevents selection. */
   isOptionDisabled?: (value: T) => boolean;
   /**
    * Extracts the comparable key `V` from each option. Default: identity (`V = T`).
