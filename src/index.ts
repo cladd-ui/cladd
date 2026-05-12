@@ -76,6 +76,7 @@ export {
   type PopoverProps,
   type PopoverRootProps,
   type PopoverTriggerProps,
+  type PopoverPosition,
 } from './components/Popover';
 export {
   Popup,
@@ -116,7 +117,11 @@ export {
 } from './components/Spinner';
 
 export { SurfaceContextProvider } from './components/SurfaceContext';
-export { Surface, type SurfaceProps } from './components/Surface';
+export {
+  Surface,
+  type SurfaceProps,
+  type SurfaceVariant,
+} from './components/Surface';
 export {
   SurfaceContent,
   type SurfaceContentProps,
