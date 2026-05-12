@@ -20,6 +20,10 @@ interface SearchFieldOwnProps {
   size?: InputSize;
   /** Default `'Search'`. */
   placeholder?: string;
+  /** Make the input non-editable but still focusable for value display/copying. */
+  readOnly?: boolean;
+  /** Disable the input. */
+  disabled?: boolean;
   /** Extra classes for the search field `Surface`. */
   className?: string;
   /** Fires on every keystroke. Also fires with `''` when the clear button is pressed. */
@@ -38,6 +42,8 @@ export const SearchField = (props: SearchFieldProps) => {
     size = 'md',
     placeholder = 'Search',
     className = '',
+    readOnly = false,
+    disabled = false,
     onChange = () => {},
     ref,
     ...rest
@@ -45,6 +51,8 @@ export const SearchField = (props: SearchFieldProps) => {
 
   return (
     <Surface
+      data-disabled={disabled || undefined}
+      data-readonly={readOnly || undefined}
       level={inset ? '+0' : '+1'}
       className={cn(
         'cladd-search-field sticky z-20',
@@ -71,6 +79,8 @@ export const SearchField = (props: SearchFieldProps) => {
           clearButton
           rounded
           size={size}
+          readOnly={readOnly}
+          disabled={disabled}
           onClear={() => onChange('')}
         />
         <SearchIcon
