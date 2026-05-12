@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.49 (2026-05-12)
+
+### Features
+
+- add missing docs (489b319)
+- select docs (fec04c6)
+
 ## 0.0.48 (2026-05-11)
 
 ### Features
