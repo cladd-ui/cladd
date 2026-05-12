@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.54 (2026-05-12)
+
+### Features
+
+- readOnly and disabled for SearchField (0e1d77f)
+
 ## 0.0.53 (2026-05-12)
 
 ### Bug Fixes
