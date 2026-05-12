@@ -224,7 +224,7 @@ export const NumberField = (props: NumberFieldProps) => {
         <SurfaceCut
           data-part="control"
           className={cn(
-            'w-auto min-w-9 self-stretch text-center',
+            'w-full min-w-9 self-stretch text-center',
 
             itemRoundedClasses,
           )}
