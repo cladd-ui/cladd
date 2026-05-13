@@ -129,6 +129,7 @@ export const Surface = <C extends ElementType = 'div'>(
         color && `cladd-color-${color}`,
         isFill ? 'text-cladd-on-primary' : 'text-cladd-fg',
         (clickable || hoverable) && 'group/cladd-surface',
+        hoverable && 'cladd-hoverable',
         className,
       )}
       ref={ref}
@@ -149,7 +150,7 @@ export const Surface = <C extends ElementType = 'div'>(
             cn(isFill ? 'shadow-cladd-outline-fill' : 'shadow-cladd-outline'),
           variant === 'transparent' &&
             hoverable &&
-            'duration-200 group-hover/cladd-surface:bg-cladd-surface',
+            'duration-200 group-hover/cladd-surface:bg-cladd-surface group-has-[.cladd-hoverable:hover]/cladd-surface:bg-transparent!',
           variant === 'transparent' &&
             hoverable &&
             clickable &&
@@ -169,6 +170,7 @@ export const Surface = <C extends ElementType = 'div'>(
                   isFill
                     ? 'group-hover/cladd-surface:bg-cladd-surface-hover-fill'
                     : 'group-hover/cladd-surface:bg-cladd-surface-hover',
+                  'group-has-[.cladd-hoverable:hover]/cladd-surface:opacity-0!',
                 ),
               clickable &&
                 (pressed
