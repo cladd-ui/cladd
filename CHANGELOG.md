@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.55 (2026-05-13)
+
+### Features
+
+- prevent nested hoverables (f971a7b)
+
+### Documentation
+
+- contributing and code of conduct (8edf4b7)
+- README (b27d71f)
+
 ## 0.0.54 (2026-05-12)
 
 ### Features
