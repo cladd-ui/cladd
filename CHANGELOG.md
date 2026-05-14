@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (2026-05-14)
+
+### Refactoring
+
+- default Chip variant to 'gradient' (2e59aa3)
+
 ## 0.2.0 (2026-05-14)
 
 ### Refactoring
