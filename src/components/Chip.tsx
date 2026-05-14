@@ -33,7 +33,7 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
   as?: C;
   /** Render an outline ring around the chip. Forwarded to the underlying `Surface`. Default `true`. */
   outline?: boolean;
-  /** Surface variant. Forwarded to the underlying `Surface`. Default `'transparent'`. */
+  /** Surface variant. Forwarded to the underlying `Surface`. Default `'gradient'`. */
   variant?: SurfaceVariant;
   /** Show hover affordance. Implicitly enabled when the chip is clickable. */
   hoverable?: boolean;
@@ -71,7 +71,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     size = 'md',
     as: Component = 'span',
     outline = true,
-    variant = 'transparent',
+    variant = 'gradient',
     hoverable,
     clickable,
     color = '',
