@@ -18,6 +18,10 @@ interface SearchFieldOwnProps {
   inset?: boolean;
   /** Search field input size. Default `'md'`. */
   size?: InputSize;
+  /** Apply pill (`rounded-full`) corners to the input. Default `true`. */
+  rounded?: boolean;
+  /** Show a clear button inside the input. Default `true`. */
+  clearButton?: boolean;
   /** Default `'Search'`. */
   placeholder?: string;
   /** Make the input non-editable but still focusable for value display/copying. */
@@ -26,6 +30,10 @@ interface SearchFieldOwnProps {
   disabled?: boolean;
   /** Extra classes for the search field `Surface`. */
   className?: string;
+  /** Extra classes forwarded to the inner `Input` root. */
+  inputClassName?: string;
+  /** Extra classes forwarded to the inner `Input` content wrapper. */
+  inputContentClassName?: string;
   /** Fires on every keystroke. Also fires with `''` when the clear button is pressed. */
   onChange?: (value: string, event?: ChangeEvent<HTMLInputElement>) => void;
   /** Forwarded to the search field `Surface` root. */
@@ -40,8 +48,12 @@ export const SearchField = (props: SearchFieldProps) => {
     value = '',
     inset = false,
     size = 'md',
+    rounded = true,
+    clearButton = true,
     placeholder = 'Search',
     className = '',
+    inputClassName = '',
+    inputContentClassName = '',
     readOnly = false,
     disabled = false,
     onChange = () => {},
@@ -69,15 +81,15 @@ export const SearchField = (props: SearchFieldProps) => {
         className={cn('flex items-center', !inset && 'p-1.5')}
       >
         <Input
-          className="w-full"
+          className={cn('w-full', inputClassName)}
           placeholder={placeholder}
           onChange={(v: string, e: ChangeEvent<HTMLInputElement>) =>
             onChange(v, e)
           }
-          contentClassName="pl-6.5"
+          contentClassName={cn('pl-6.5', inputContentClassName)}
           value={value}
-          clearButton
-          rounded
+          clearButton={clearButton}
+          rounded={rounded}
           size={size}
           readOnly={readOnly}
           disabled={disabled}
