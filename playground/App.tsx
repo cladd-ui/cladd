@@ -139,6 +139,27 @@ function App() {
             className="w-32"
           />
         </Surface>
+        <SectionTitle>Nested Hoverable/Clickable</SectionTitle>
+        <Surface
+          className="w-60 rounded-2xl"
+          contentClassName="p-4"
+          outline
+          variant="gradient"
+          hoverable
+          clickable
+        >
+          <div>
+            <Button variant="transparent">Test</Button>
+          </div>
+        </Surface>
+        <Surface
+          className="w-60 rounded-2xl"
+          contentClassName="p-4"
+          outline
+          variant="gradient"
+        >
+          <Button variant="transparent">Test</Button>
+        </Surface>
         <SectionTitle>Shortcuts</SectionTitle>
         <Surface
           outline

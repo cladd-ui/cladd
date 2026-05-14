@@ -130,6 +130,7 @@ export const Surface = <C extends ElementType = 'div'>(
         isFill ? 'text-cladd-on-primary' : 'text-cladd-fg',
         (clickable || hoverable) && 'group/cladd-surface',
         hoverable && 'cladd-hoverable',
+        clickable && 'cladd-clickable',
         className,
       )}
       ref={ref}
@@ -150,11 +151,11 @@ export const Surface = <C extends ElementType = 'div'>(
             cn(isFill ? 'shadow-cladd-outline-fill' : 'shadow-cladd-outline'),
           variant === 'transparent' &&
             hoverable &&
-            'duration-200 group-hover/cladd-surface:bg-cladd-surface group-has-[.cladd-hoverable:hover]/cladd-surface:bg-transparent!',
+            'duration-200 cladd-surface-hover:bg-cladd-surface',
           variant === 'transparent' &&
             hoverable &&
             clickable &&
-            'group-active/cladd-surface:bg-cladd-surface',
+            'cladd-surface-press:bg-cladd-surface',
           bgClassName,
         )}
       >
@@ -166,16 +167,15 @@ export const Surface = <C extends ElementType = 'div'>(
               hoverable &&
                 !pressed &&
                 cn(
-                  'group-hover/cladd-surface:opacity-100',
+                  'cladd-surface-hover:opacity-100',
                   isFill
-                    ? 'group-hover/cladd-surface:bg-cladd-surface-hover-fill'
-                    : 'group-hover/cladd-surface:bg-cladd-surface-hover',
-                  'group-has-[.cladd-hoverable:hover]/cladd-surface:opacity-0!',
+                    ? 'cladd-surface-hover:bg-cladd-surface-hover-fill'
+                    : 'cladd-surface-hover:bg-cladd-surface-hover',
                 ),
               clickable &&
                 (pressed
                   ? 'bg-cladd-surface-pressed opacity-100'
-                  : 'group-active/cladd-surface:bg-cladd-surface-pressed group-active/cladd-surface:opacity-100'),
+                  : 'cladd-surface-press:bg-cladd-surface-pressed cladd-surface-press:opacity-100'),
             )}
           />
         )}
@@ -191,7 +191,7 @@ export const Surface = <C extends ElementType = 'div'>(
             className={cn(
               'duration-200',
               clickable &&
-                'group-active/cladd-surface:scale-95 group-active/cladd-surface:opacity-75',
+                'cladd-surface-press:scale-95 cladd-surface-press:opacity-75',
               contentClassName,
             )}
           >

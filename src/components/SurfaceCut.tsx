@@ -72,6 +72,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
         'cladd-surface-cut group/cladd-surface-cut relative',
         color && `cladd-color-${color}`,
         hoverable && 'cladd-hoverable group/cladd-surface-cut-hoverable',
+        clickable && 'cladd-clickable',
         className,
       )}
       {...rest}
@@ -90,11 +91,11 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
             className={cn(
               'absolute inset-0 rounded-[inherit] opacity-0 duration-200',
               hoverable &&
-                'group-hover/cladd-surface-cut-hoverable:bg-cladd-surface-hover group-hover/cladd-surface-cut-hoverable:opacity-100 group-has-[.cladd-hoverable:hover]/cladd-surface-cut-hoverable:opacity-0!',
+                'cladd-surface-cut-hover:bg-cladd-surface-hover cladd-surface-cut-hover:opacity-100',
               clickable &&
                 (pressed
                   ? 'bg-cladd-surface-pressed opacity-100'
-                  : 'group-active/cladd-surface-cut:bg-cladd-surface-pressed group-active/cladd-surface-cut:opacity-100'),
+                  : 'cladd-surface-cut-press:bg-cladd-surface-pressed cladd-surface-cut-press:opacity-100'),
             )}
           />
         )}
@@ -105,7 +106,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
           <SurfaceCutContent
             className={cn(
               clickable &&
-                'duration-200 group-active/cladd-surface-cut:scale-95 group-active/cladd-surface-cut:opacity-75',
+                'duration-200 cladd-surface-cut-press:scale-95 cladd-surface-cut-press:opacity-75',
               contentClassName,
             )}
           >
