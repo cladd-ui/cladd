@@ -27,6 +27,8 @@ export interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
    * - `'above'` - on top of content as a separate sibling layer (overlay tints content too).
    */
   overlayPosition?: 'below' | 'above';
+  /** Extra classes for the hover/press overlay layer. */
+  overlayClassName?: string;
   /** Enable active/pressed visual states (scale + pressed background). Default `false`. */
   clickable?: boolean;
   /** Force the pressed visual state regardless of pointer activity. */
@@ -62,6 +64,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
     clickable = false,
     pressed = false,
     overlayPosition = 'above',
+    overlayClassName = '',
     as: asProp = 'div',
     wrapContent = true,
     contentClassName = '',
@@ -83,6 +86,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
           (pressed
             ? 'bg-cladd-surface-pressed opacity-100'
             : 'cladd-surface-cut-press:bg-cladd-surface-pressed cladd-surface-cut-press:opacity-100'),
+        overlayClassName,
       )}
     />
   );

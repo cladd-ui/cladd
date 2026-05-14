@@ -63,6 +63,8 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
    * - `'above'` - on top of content as a separate sibling layer (overlay tints content too).
    */
   overlayPosition?: 'below' | 'above';
+  /** Extra classes for the hover/press overlay layer. */
+  overlayClassName?: string;
   /** Accent color token. Sets the surface's `cladd-color-{name}` class - drives accent-aware borders, fills, and text colors. */
   color?: Color;
   /**
@@ -100,6 +102,7 @@ export const Surface = <C extends ElementType = 'div'>(
     pressed,
     hoverable = false,
     overlayPosition = 'above',
+    overlayClassName = '',
     color = '',
     wrapContent = true,
     beforeContent,
@@ -144,6 +147,7 @@ export const Surface = <C extends ElementType = 'div'>(
           (pressed
             ? 'bg-cladd-surface-pressed opacity-100'
             : 'cladd-surface-press:bg-cladd-surface-pressed cladd-surface-press:opacity-100'),
+        overlayClassName,
       )}
     />
   );
