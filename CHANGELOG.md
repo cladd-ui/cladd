@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2026-05-14)
+
+### Refactoring
+
+- pass outline and variant through Chip directly (b05a6a7)
+
 ## 0.1.0 (2026-05-14)
 
 ### Bug Fixes
