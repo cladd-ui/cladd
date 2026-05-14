@@ -21,6 +21,12 @@ export interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   beforeContent?: ReactNode;
   /** Show hover overlay on the cut surface. Default `false`. */
   hoverable?: boolean;
+  /**
+   * Where to stack the hover/press overlay:
+   * - `'below'` (default) - inside the background layer, behind content (overlay tints only the bg).
+   * - `'above'` - on top of content as a separate sibling layer (overlay tints content too).
+   */
+  overlayPosition?: 'below' | 'above';
   /** Enable active/pressed visual states (scale + pressed background). Default `false`. */
   clickable?: boolean;
   /** Force the pressed visual state regardless of pointer activity. */
@@ -55,6 +61,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
     hoverable = false,
     clickable = false,
     pressed = false,
+    overlayPosition = 'below',
     as: asProp = 'div',
     wrapContent = true,
     contentClassName = '',
@@ -65,6 +72,20 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
   const Component = asProp as ElementType;
 
   const contextLevel = useSurface();
+
+  const overlay = (hoverable || clickable) && (
+    <div
+      className={cn(
+        'pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 duration-200',
+        hoverable &&
+          'cladd-surface-cut-hover:bg-cladd-surface-hover cladd-surface-cut-hover:opacity-100',
+        clickable &&
+          (pressed
+            ? 'bg-cladd-surface-pressed opacity-100'
+            : 'cladd-surface-cut-press:bg-cladd-surface-pressed cladd-surface-cut-press:opacity-100'),
+      )}
+    />
+  );
 
   return (
     <Component
@@ -85,20 +106,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
           outline && 'shadow-cladd-cut-outline',
         )}
       >
-        {/* Hoverable/Clickable */}
-        {(hoverable || clickable) && (
-          <div
-            className={cn(
-              'absolute inset-0 rounded-[inherit] opacity-0 duration-200',
-              hoverable &&
-                'cladd-surface-cut-hover:bg-cladd-surface-hover cladd-surface-cut-hover:opacity-100',
-              clickable &&
-                (pressed
-                  ? 'bg-cladd-surface-pressed opacity-100'
-                  : 'cladd-surface-cut-press:bg-cladd-surface-pressed cladd-surface-cut-press:opacity-100'),
-            )}
-          />
-        )}
+        {overlayPosition === 'below' && overlay}
       </div>
       <SurfaceContextProvider level={contextLevel - 1}>
         {beforeContent}
@@ -115,6 +123,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
         ) : (
           children
         )}
+        {overlayPosition === 'above' && overlay}
       </SurfaceContextProvider>
     </Component>
   );

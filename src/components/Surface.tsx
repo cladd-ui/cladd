@@ -57,6 +57,12 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
   pressed?: boolean;
   /** Enables hover background overlay. For `variant="transparent"`, also reveals the surface fill on hover. */
   hoverable?: boolean;
+  /**
+   * Where to stack the hover/press overlay:
+   * - `'below'` (default) - inside the background layer, behind content (overlay tints only the bg).
+   * - `'above'` - on top of content as a separate sibling layer (overlay tints content too).
+   */
+  overlayPosition?: 'below' | 'above';
   /** Accent color token. Sets the surface's `cladd-color-{name}` class - drives accent-aware borders, fills, and text colors. */
   color?: Color;
   /**
@@ -93,6 +99,7 @@ export const Surface = <C extends ElementType = 'div'>(
     clickable = false,
     pressed,
     hoverable = false,
+    overlayPosition = 'below',
     color = '',
     wrapContent = true,
     beforeContent,
@@ -120,6 +127,26 @@ export const Surface = <C extends ElementType = 'div'>(
 
   const Component = asProp as ElementType;
   const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
+
+  const overlay = (hoverable || clickable) && (
+    <div
+      className={cn(
+        'pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 duration-200',
+        hoverable &&
+          !pressed &&
+          cn(
+            'cladd-surface-hover:opacity-100',
+            isFill
+              ? 'cladd-surface-hover:bg-cladd-surface-hover-fill'
+              : 'cladd-surface-hover:bg-cladd-surface-hover',
+          ),
+        clickable &&
+          (pressed
+            ? 'bg-cladd-surface-pressed opacity-100'
+            : 'cladd-surface-press:bg-cladd-surface-pressed cladd-surface-press:opacity-100'),
+      )}
+    />
+  );
 
   return (
     <Component
@@ -159,26 +186,7 @@ export const Surface = <C extends ElementType = 'div'>(
           bgClassName,
         )}
       >
-        {/* Hoverable/Clickable */}
-        {(hoverable || clickable) && (
-          <div
-            className={cn(
-              'absolute inset-0 rounded-[inherit] opacity-0 duration-200',
-              hoverable &&
-                !pressed &&
-                cn(
-                  'cladd-surface-hover:opacity-100',
-                  isFill
-                    ? 'cladd-surface-hover:bg-cladd-surface-hover-fill'
-                    : 'cladd-surface-hover:bg-cladd-surface-hover',
-                ),
-              clickable &&
-                (pressed
-                  ? 'bg-cladd-surface-pressed opacity-100'
-                  : 'cladd-surface-press:bg-cladd-surface-pressed cladd-surface-press:opacity-100'),
-            )}
-          />
-        )}
+        {overlayPosition === 'below' && overlay}
       </div>
 
       <SurfaceContextProvider
@@ -200,6 +208,7 @@ export const Surface = <C extends ElementType = 'div'>(
         ) : (
           children
         )}
+        {overlayPosition === 'above' && overlay}
       </SurfaceContextProvider>
     </Component>
   );
