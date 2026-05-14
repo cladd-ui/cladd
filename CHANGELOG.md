@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 (2026-05-14)
+
+### Features
+
+- forward rounded, clearButton and input class props in SearchField (81a4634)
+
 ## 0.4.0 (2026-05-14)
 
 ### Features
