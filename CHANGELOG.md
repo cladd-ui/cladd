@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2026-05-14)
+
+### Features
+
+- tweak dark colors (64d987a)
+- simplify SearchField (f8ece1a)
+- Slider value auto resize (e100247)
+
 ## 0.4.2 (2026-05-14)
 
 ### Features
