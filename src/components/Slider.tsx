@@ -167,22 +167,22 @@ export function Slider(props: SliderProps) {
       <span
         data-part="thumb-wrapper"
         className={cn(
-          'pointer-events-none absolute inset-0 flex items-center ease-out',
+          'pointer-events-none absolute inset-0 flex items-center ease-out group-focus-within/cladd-slider:z-10',
           durationClass,
         )}
         style={{
           paddingLeft: `calc((100% - ${size === 'sm' ? 20 : 24}px) * ${progress})`,
         }}
       >
-        <span className="relative top-0 h-0 w-0" data-part="value">
+        <span className={cn('relative top-0 size-0 h-0')} data-part="value">
           <Surface
             color={color}
             variant="gradient"
             outline
             className={cn(
-              size === 'sm' && '-left-1.5',
-              size === 'md' && '-left-1',
-              'absolute -bottom-4 w-8 scale-0 rounded-full pt-2.5 pb-8 text-center text-cladd-xs leading-none font-medium text-cladd-primary duration-300',
+              size === 'sm' && 'left-2.5',
+              size === 'md' && 'left-3',
+              'absolute -bottom-4 min-w-8 -translate-x-1/2 scale-0 rounded-cladd-2xl px-1 pt-2.5 pb-8 text-center text-cladd-xs leading-none font-medium text-cladd-primary duration-300',
               !disabled &&
                 !readOnly &&
                 'group-focus-within/cladd-slider:scale-100 group-active/cladd-slider:scale-100',
