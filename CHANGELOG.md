@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 (2026-05-14)
+
+### Features
+
+- add overlayClassName prop (c77e085)
+- switch default overlay position to "above" (807fd2b)
+- surface/cut overlay position (c57699b)
+- tweak hover/press variants (24b0a4d)
+
+### Bug Fixes
+
+- nested surface state propagation (182a6e6)
+
+### Refactoring
+
+- simplify surface hover/press variants (2660da3)
+
 ## 0.3.0 (2026-05-14)
 
 ### Refactoring
