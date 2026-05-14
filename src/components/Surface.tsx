@@ -99,7 +99,7 @@ export const Surface = <C extends ElementType = 'div'>(
     clickable = false,
     pressed,
     hoverable = false,
-    overlayPosition = 'below',
+    overlayPosition = 'above',
     color = '',
     wrapContent = true,
     beforeContent,

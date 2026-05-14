@@ -61,7 +61,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
     hoverable = false,
     clickable = false,
     pressed = false,
-    overlayPosition = 'below',
+    overlayPosition = 'above',
     as: asProp = 'div',
     wrapContent = true,
     contentClassName = '',
