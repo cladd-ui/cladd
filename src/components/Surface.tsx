@@ -159,7 +159,6 @@ export const Surface = <C extends ElementType = 'div'>(
         `cladd-surface-level-${currentLevel}`,
         color && `cladd-color-${color}`,
         isFill ? 'text-cladd-on-primary' : 'text-cladd-fg',
-        (clickable || hoverable) && 'group/cladd-surface',
         hoverable && 'cladd-hoverable',
         clickable && 'cladd-clickable',
         className,
@@ -189,9 +188,8 @@ export const Surface = <C extends ElementType = 'div'>(
             'cladd-surface-press:bg-cladd-surface',
           bgClassName,
         )}
-      >
-        {overlayPosition === 'below' && overlay}
-      </div>
+      />
+      {overlayPosition === 'below' && overlay}
 
       <SurfaceContextProvider
         level={variant === 'transparent' ? currentLevel - 1 : currentLevel}

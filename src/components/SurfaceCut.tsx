@@ -81,11 +81,11 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
       className={cn(
         'pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 duration-200',
         hoverable &&
-          'cladd-surface-cut-hover:bg-cladd-surface-hover cladd-surface-cut-hover:opacity-100',
+          'cladd-surface-hover:bg-cladd-surface-hover cladd-surface-hover:opacity-100',
         clickable &&
           (pressed
             ? 'bg-cladd-surface-pressed opacity-100'
-            : 'cladd-surface-cut-press:bg-cladd-surface-pressed cladd-surface-cut-press:opacity-100'),
+            : 'cladd-surface-press:bg-cladd-surface-pressed cladd-surface-press:opacity-100'),
         overlayClassName,
       )}
     />
@@ -94,9 +94,9 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
   return (
     <Component
       className={cn(
-        'cladd-surface-cut group/cladd-surface-cut relative',
+        'cladd-surface-cut relative',
         color && `cladd-color-${color}`,
-        hoverable && 'cladd-hoverable group/cladd-surface-cut-hoverable',
+        hoverable && 'cladd-hoverable',
         clickable && 'cladd-clickable',
         className,
       )}
@@ -109,16 +109,15 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
           `pointer-events-none absolute inset-0 rounded-[inherit] bg-cladd-surface-cut`,
           outline && 'shadow-cladd-cut-outline',
         )}
-      >
-        {overlayPosition === 'below' && overlay}
-      </div>
+      />
+      {overlayPosition === 'below' && overlay}
       <SurfaceContextProvider level={contextLevel - 1}>
         {beforeContent}
         {wrapContent ? (
           <SurfaceCutContent
             className={cn(
               clickable &&
-                'duration-200 cladd-surface-cut-press:scale-95 cladd-surface-cut-press:opacity-75',
+                'duration-200 cladd-surface-press:scale-95 cladd-surface-press:opacity-75',
               contentClassName,
             )}
           >
