@@ -154,7 +154,6 @@ function App() {
             <Button readOnly color="red">
               Test
             </Button>
-            <div className="size-8 bg-black" />
           </div>
         </Surface>
         <Surface
