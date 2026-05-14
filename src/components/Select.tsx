@@ -30,7 +30,7 @@ interface SelectOptionRenderParams<T> {
 import { Color } from '../types';
 import { ButtonProps } from './Button';
 import { Shortcut, ShortcutSize } from './Shortcut';
-import { SurfaceVariant } from './Surface';
+import { Surface, SurfaceVariant } from './Surface';
 
 interface SelectOwnProps<T = string, V = T> {
   /**
@@ -508,6 +508,8 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
     };
   });
 
+  const searchInset = !!title;
+
   return (
     <>
       {!elRefExternal && (
@@ -600,14 +602,28 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
         >
           {title && <SectionTitle className="px-4 pt-4">{title}</SectionTitle>}
           {search && (
-            <SearchField
-              value={searchQuery}
-              placeholder={searchPlaceholder}
-              inset={!!title}
-              ref={searchFieldRef}
-              className={cn(title && 'mt-2')}
-              onChange={setSearchQuery}
-            />
+            <Surface
+              level={searchInset ? '+0' : '+1'}
+              wrapContent={!searchInset}
+              className={cn(
+                searchInset
+                  ? 'contents'
+                  : 'sticky top-0 z-20 rounded-t-cladd-popover border-b border-cladd-outline',
+              )}
+              contentClassName={cn(searchInset ? 'contents' : 'p-2')}
+              bgClassName={cn(searchInset && 'hidden')}
+            >
+              <SearchField
+                value={searchQuery}
+                placeholder={searchPlaceholder}
+                ref={searchFieldRef}
+                className={cn(
+                  'sticky z-20',
+                  searchInset && 'top-2 mx-2 mt-2 w-auto',
+                )}
+                onChange={setSearchQuery}
+              />
+            </Surface>
           )}
           {beforeOptions}
           <List
