@@ -1426,7 +1426,7 @@ function App() {
           contentClassName="p-4 flex gap-2 flex-wrap"
           level={1}
         >
-          <Chip size="2xs" rounded clickable color="green">
+          <Chip size="2xs" rounded clickable color="green" variant="solid-fill">
             Chip 2XS
           </Chip>
           <Chip size="2xs" rounded clickable color="green">
@@ -1485,7 +1485,14 @@ function App() {
           <Chip size="md" outline rounded clickable color="green">
             Chip MD
           </Chip>
-          <Chip size="md" outline rounded clickable color="green">
+          <Chip
+            size="md"
+            outline
+            rounded
+            clickable
+            color="green"
+            variant="gradient-fill"
+          >
             <Icon />
             Chip MD
           </Chip>

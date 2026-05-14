@@ -10,7 +10,7 @@ import {
 import { cn } from '../shared/cn';
 import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
-import { Surface } from './Surface';
+import { Surface, SurfaceVariant } from './Surface';
 
 export type ChipSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
@@ -31,10 +31,10 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
    * Polymorphic root element. Defaults to `'span'`. When set to `'a'` or `'button'`, the chip becomes interactive automatically (see `clickable`).
    */
   as?: C;
-  /**
-   * Render an outline ring. When `true`, also forces the underlying surface variant to `'transparent'`; when `false`/omitted, the surface is `'gradient'`.
-   */
+  /** Render an outline ring around the chip. Forwarded to the underlying `Surface`. Default `true`. */
   outline?: boolean;
+  /** Surface variant. Forwarded to the underlying `Surface`. Default `'transparent'`. */
+  variant?: SurfaceVariant;
   /** Show hover affordance. Implicitly enabled when the chip is clickable. */
   hoverable?: boolean;
   /**
@@ -70,7 +70,8 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     rounded = false,
     size = 'md',
     as: Component = 'span',
-    outline,
+    outline = true,
+    variant = 'transparent',
     hoverable,
     clickable,
     color = '',
@@ -126,13 +127,15 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
 
   const SurfaceComponent = Surface as ElementType;
 
+  const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
+
   return (
     <SurfaceComponent
       as={Component}
       hoverable={hoverable || clickableComputed}
       clickable={clickableComputed}
       outline={outline}
-      variant={outline ? 'transparent' : 'gradient'}
+      variant={variant}
       level={surfaceLevel}
       contentClassName={cn(
         'relative flex items-center justify-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap [&>svg]:shrink-0',
@@ -142,7 +145,8 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
       )}
       color={color}
       className={cn(
-        `cladd-chip group/cladd-chip relative inline-flex font-semibold text-cladd-primary select-none focus:ring-0 focus:outline-0 focus:outline-none`,
+        `cladd-chip group/cladd-chip relative inline-flex font-semibold select-none focus:ring-0 focus:outline-0 focus:outline-none`,
+        !isFill && 'text-cladd-primary',
         rounded ? 'rounded-full' : roundedClasses[size],
         clickableComputed && 'duration-200',
         clickableComputed && Component === 'a'
