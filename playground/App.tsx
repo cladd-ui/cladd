@@ -147,9 +147,14 @@ function App() {
           variant="gradient"
           hoverable
           clickable
+          // overlayPosition="above"
         >
           <div>
-            <Button variant="transparent">Test</Button>
+            <Button color="red">Test</Button>
+            <Button readOnly color="red">
+              Test
+            </Button>
+            <div className="size-8 bg-black" />
           </div>
         </Surface>
         <Surface
@@ -160,6 +165,93 @@ function App() {
         >
           <Button variant="transparent">Test</Button>
         </Surface>
+        <SectionTitle>Overlay Position (below vs above)</SectionTitle>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col gap-2">
+            <div className="text-sm opacity-60">below (default)</div>
+            <Surface
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              outline
+              variant="gradient"
+              hoverable
+              clickable
+            >
+              Solid gradient surface with some text content
+            </Surface>
+            <Surface
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              outline
+              variant="gradient-fill"
+              hoverable
+              clickable
+            >
+              Gradient-fill surface with some text content
+            </Surface>
+            <Surface
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              variant="transparent"
+              hoverable
+              clickable
+            >
+              Transparent surface with some text content
+            </Surface>
+            <SurfaceCut
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              hoverable
+              clickable
+            >
+              SurfaceCut with some text content
+            </SurfaceCut>
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="text-sm opacity-60">above</div>
+            <Surface
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              outline
+              variant="gradient"
+              hoverable
+              clickable
+              overlayPosition="above"
+            >
+              Solid gradient surface with some text content
+            </Surface>
+            <Surface
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              outline
+              variant="gradient-fill"
+              hoverable
+              clickable
+              overlayPosition="above"
+            >
+              Gradient-fill surface with some text content
+            </Surface>
+            <Surface
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              variant="transparent"
+              hoverable
+              clickable
+              overlayPosition="above"
+            >
+              Transparent surface with some text content
+            </Surface>
+            <SurfaceCut
+              className="w-60 rounded-2xl"
+              contentClassName="p-4"
+              hoverable
+              clickable
+              overlayPosition="above"
+            >
+              SurfaceCut with some text content
+            </SurfaceCut>
+          </div>
+        </div>
         <SectionTitle>Shortcuts</SectionTitle>
         <Surface
           outline
