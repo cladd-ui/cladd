@@ -3,10 +3,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant light (&:where(.light, .light *));
-@custom-variant cladd-surface-hover (&:is(:where(.group\/cladd-surface):hover:not(:active, :has(.cladd-hoverable:hover)) *));
-@custom-variant cladd-surface-press (&:is(:where(.group\/cladd-surface):active:not(:has(.cladd-clickable:active)) *));
-@custom-variant cladd-surface-cut-hover (&:is(:where(.group\/cladd-surface-cut-hoverable):hover:not(:active, :has(.cladd-hoverable:hover)) *));
-@custom-variant cladd-surface-cut-press (&:is(:where(.group\/cladd-surface-cut):active:not(:has(.cladd-clickable:active)) *));
+@custom-variant cladd-surface-hover (&:is(:where(.group\/cladd-surface):hover:not(:active, :has(.cladd-hoverable:hover)) *):not(:where(.group\/cladd-surface):hover:not(:active, :has(.cladd-hoverable:hover)) :where(.group\/cladd-surface) *));
+@custom-variant cladd-surface-press (&:is(:where(.group\/cladd-surface):active:not(:has(.cladd-clickable:active)) *):not(:where(.group\/cladd-surface):active:not(:has(.cladd-clickable:active)) :where(.group\/cladd-surface) *));
+@custom-variant cladd-surface-cut-hover (&:is(:where(.group\/cladd-surface-cut-hoverable):hover:not(:active, :has(.cladd-hoverable:hover)) *):not(:where(.group\/cladd-surface-cut-hoverable):hover:not(:active, :has(.cladd-hoverable:hover)) :where(.group\/cladd-surface-cut-hoverable) *));
+@custom-variant cladd-surface-cut-press (&:is(:where(.group\/cladd-surface-cut):active:not(:has(.cladd-clickable:active)) *):not(:where(.group\/cladd-surface-cut):active:not(:has(.cladd-clickable:active)) :where(.group\/cladd-surface-cut) *));
 @import "./styles/colors.css";
 @import "./styles/radius.css";
 @import "./styles/spacing.css";
