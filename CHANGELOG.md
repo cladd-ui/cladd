@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 (2026-05-14)
+
+### Features
+
+- add viewportMargin prop to Popover for edge spacing (08dc818)
+- switch back popover to absolute (313da07)
+- switch Popover to default fixed position (566af86)
+
 ## 0.4.1 (2026-05-14)
 
 ### Features
