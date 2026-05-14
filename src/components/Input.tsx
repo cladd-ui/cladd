@@ -282,6 +282,28 @@ export const Input = <
         data-part="wrapper"
         className={cn('relative flex items-center', contentClassName)}
         onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
+        onPointerDown={(e) => {
+          if (e.pointerType === 'touch') return;
+          const target = e.target as HTMLElement;
+          if (
+            target.closest(
+              'input, textarea, select, button, a, [role="button"], [tabindex]:not([tabindex="-1"])',
+            )
+          )
+            return;
+          e.preventDefault();
+          inputElRef.current?.focus();
+        }}
+        onClick={(e) => {
+          const target = e.target as HTMLElement;
+          if (
+            target.closest(
+              'input, textarea, select, button, a, [role="button"], [tabindex]:not([tabindex="-1"])',
+            )
+          )
+            return;
+          inputElRef.current?.focus();
+        }}
       >
         {prefix}
         {icon && (
