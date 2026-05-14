@@ -304,6 +304,10 @@ type PopoverOwnProps = {
    * Numbers are pixels; strings pass through (e.g. `'8px'`, `'50%'` - `%` resolves against `anchor-size(width|height)` depending on the position).
    */
   offset?: OffsetValue | [OffsetValue, OffsetValue];
+  /**
+   * Minimum gap (px) the popover should keep from the viewport edge when it would otherwise be clamped there. Default `4`. Set to `0` to disable.
+   */
+  viewportMargin?: number;
   /** Render a backdrop behind the popover. Default `false`. */
   backdrop?: boolean;
   /** Make the backdrop transparent (still captures clicks for outside-close). */
@@ -360,6 +364,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
     root = overlaysRoot,
     position = 'bottom',
     offset,
+    viewportMargin = 4,
     backdrop = false,
     backdropTransparent = false,
     color,
@@ -519,6 +524,14 @@ const PopoverInner = (props: PopoverInnerProps) => {
     ? offset
     : [offset || 0, 0];
   const [mainProp, crossProp] = positionConfig.offsetProperties;
+  const oppositeMargin: Record<string, string> = {
+    marginTop: 'marginBottom',
+    marginBottom: 'marginTop',
+    marginLeft: 'marginRight',
+    marginRight: 'marginLeft',
+  };
+  const isCentered = !positionConfig.justifySelf && !positionConfig.alignSelf;
+  const vm = viewportMargin > 0 ? `${viewportMargin}px` : undefined;
 
   const popoverStyle = {
     positionAnchor: anchorName,
@@ -526,6 +539,13 @@ const PopoverInner = (props: PopoverInnerProps) => {
     positionTryFallbacks: 'flip-block, flip-inline, flip-block flip-inline',
     justifySelf: positionConfig.justifySelf,
     alignSelf: positionConfig.alignSelf,
+    ...(vm
+      ? {
+          [oppositeMargin[mainProp]]: vm,
+          [oppositeMargin[crossProp]]: vm,
+          ...(isCentered ? { [crossProp]: vm } : {}),
+        }
+      : {}),
     ...(mainOffset ? { [mainProp]: resolveOffset(mainOffset, mainProp) } : {}),
     ...(crossOffset
       ? { [crossProp]: resolveOffset(crossOffset, crossProp) }
