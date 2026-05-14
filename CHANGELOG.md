@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0 (2026-05-14)
+
+### Bug Fixes
+
+- focus input on click anywhere in the field surface (f11fa80)
+- nested hoverable/clickable surface states (c8fd795)
+
 ## 0.0.55 (2026-05-13)
 
 ### Features
