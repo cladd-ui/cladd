@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 (2026-05-16)
+
+### Features
+
+- add loading prop to Button (0650aa1)
+- always fire Select onPopoverState callback (1efce46)
+- forward outline prop from Select to Button (3b89bf4)
+
 ## 0.5.1 (2026-05-16)
 
 ### Features
