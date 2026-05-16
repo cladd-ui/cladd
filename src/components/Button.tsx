@@ -12,6 +12,7 @@ import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
+import { Spinner } from './Spinner';
 import { Surface, SurfaceVariant } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
@@ -68,6 +69,9 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   focusable?: boolean;
   /** Forwarded to the underlying `Surface` as `level` - see `SurfaceProps.level` for the relative-offset (`"+1"`/`"-1"`) syntax. */
   surfaceLevel?: string | number;
+
+  /** Show a centered `Spinner` overlay and fade the button's content out. Also sets `data-loading` for styling hooks. */
+  loading?: boolean;
   /** Forwarded to the polymorphic root element. */
   ref?: Ref<HTMLElement>;
 }
@@ -110,6 +114,7 @@ export const Button = <C extends ElementType = 'button'>(
     hoverable = true,
     focusable = true,
     surfaceLevel,
+    loading,
     ref,
     ...rest
   } = props;
@@ -157,6 +162,7 @@ export const Button = <C extends ElementType = 'button'>(
       data-disabled={disabled || undefined}
       data-readonly={readOnly || undefined}
       data-pressed={pressed || undefined}
+      data-loading={loading || undefined}
       className={cn(
         `cladd-button group/cladd-button inline-block appearance-none text-left font-semibold outline-0 select-none focus:ring-0 focus:outline-0`,
         color &&
@@ -181,6 +187,7 @@ export const Button = <C extends ElementType = 'button'>(
         buttonIconSizes[size],
         disabled && 'opacity-40',
         paddings[size],
+        loading && 'scale-0 opacity-0!',
         contentClassName,
       )}
       pressed={pressed}
@@ -204,13 +211,21 @@ export const Button = <C extends ElementType = 'button'>(
       color={color}
       style={style}
       beforeContent={
-        (focused || (focusable && !readOnly && !disabled)) && (
-          <FocusableLayer
-            force={focused}
-            group="button"
-            className={cn(focusRoundedClasses)}
-          />
-        )
+        <>
+          {loading && (
+            <Spinner
+              size={size}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 duration-200 starting:scale-0 starting:opacity-0"
+            />
+          )}
+          {(focused || (focusable && !readOnly && !disabled)) && (
+            <FocusableLayer
+              force={focused}
+              group="button"
+              className={cn(focusRoundedClasses)}
+            />
+          )}
+        </>
       }
       {...rest}
     >
