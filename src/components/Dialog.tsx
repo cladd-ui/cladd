@@ -178,6 +178,10 @@ export interface DialogProps {
   requireConfirmText?: string;
   /** Stop click propagation on backdrop and surface. Useful when the dialog is rendered inside a clickable parent. */
   stopPropagationOnClick?: boolean;
+  /** Default `true`. */
+  closeOnBackdropClick?: boolean;
+  /** Default `true`. Suppressed automatically when this dialog has a child popover/dialog open. */
+  closeOnEscape?: boolean;
   /** Label for the cancel button. When omitted, the cancel button is not rendered. */
   cancelButtonText?: ReactNode;
   /** Label for the confirm button. When omitted, the confirm button is not rendered. */
@@ -232,6 +236,8 @@ const DialogInner = (props: DialogInnerProps) => {
     buttons,
     requireConfirmText = '',
     stopPropagationOnClick,
+    closeOnBackdropClick = true,
+    closeOnEscape = true,
     cancelButtonText,
     confirmButtonText,
     cancelButtonColor = 'neutral',
@@ -264,6 +270,16 @@ const DialogInner = (props: DialogInnerProps) => {
     onClosed,
     lazy,
     transitionEndElRef: elRef,
+    closeOnEscape() {
+      if (!closeOnEscape) return false;
+      if (containerRef.current && containerRef.current.nextElementSibling) {
+        const nextEl = containerRef.current.nextElementSibling;
+        if (nextEl.matches('.cladd-popover, .cladd-dialog, .cladd-popup')) {
+          return false;
+        }
+      }
+      return true;
+    },
     onOpen() {
       const device = useDevice();
       if (!requireConfirmText && confirmButtonRef.current && !device.mobile) {
@@ -324,7 +340,7 @@ const DialogInner = (props: DialogInnerProps) => {
           if (stopPropagationOnClick) {
             e.stopPropagation();
           }
-          close();
+          if (closeOnBackdropClick) close();
         }}
       />
       <Surface
