@@ -59,6 +59,8 @@ interface SelectOwnProps<T = string, V = T> {
   color?: Color;
   /** Pill-style trigger button. Forwarded to `Button.rounded`. */
   rounded?: boolean;
+  /** Render the trigger button's surface outline ring. Forwarded to `Button.outline`. */
+  outline?: boolean;
   /** Trigger button size. Forwarded to `Button.size`. */
   size?: ButtonSize;
   /** Extra classes for the trigger button. */
@@ -211,6 +213,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
     // STYLING
     color,
     rounded,
+    outline,
     size = 'md',
     className,
     contentClassName,
@@ -524,6 +527,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
           }}
           size={size}
           rounded={rounded}
+          outline={outline}
           color={color}
           disabled={disabled}
           multiline={multiline}
