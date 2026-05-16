@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1 (2026-05-16)
+
+### Features
+
+- add closeOnBackdropClick and closeOnEscape props to Dialog (19badd7)
+
 ## 0.5.0 (2026-05-14)
 
 ### Features
