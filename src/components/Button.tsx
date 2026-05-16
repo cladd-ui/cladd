@@ -54,6 +54,8 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   pressed?: boolean;
   /** Allow text to wrap onto multiple lines, switching height to `min-h-*` and using pill radii compatible with multi-line content. */
   multiline?: boolean;
+  /** Render as an icon-only square button: forces `aspect-square` and drops horizontal padding. */
+  square?: boolean;
   /**
    * Which surface primitive to wrap with:
    *
@@ -109,6 +111,7 @@ export const Button = <C extends ElementType = 'button'>(
     focused = false,
     pressed,
     multiline,
+    square,
     surface: propSurface = 'surface',
     clickable = true,
     hoverable = true,
@@ -172,6 +175,7 @@ export const Button = <C extends ElementType = 'button'>(
 
         fontSizes[size],
         height,
+        square && 'aspect-square',
         disabled && 'pointer-events-none',
         !disabled && !readOnly && (Component === 'a' || rest?.href)
           ? 'cursor-pointer'
@@ -186,7 +190,7 @@ export const Button = <C extends ElementType = 'button'>(
         multiline && height,
         buttonIconSizes[size],
         disabled && 'opacity-40',
-        paddings[size],
+        !square && paddings[size],
         loading && 'scale-0 opacity-0!',
         contentClassName,
       )}
