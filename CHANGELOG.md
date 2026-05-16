@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1 (2026-05-16)
+
+### Features
+
+- add square prop to Button (ee918c1)
+
 ## 0.6.0 (2026-05-16)
 
 ### Features
