@@ -129,7 +129,7 @@ interface SelectOwnProps<T = string, V = T> {
   anchorRef?: React.RefObject<HTMLElement | null>;
   /** Controlled popover open state. Pair with `onPopoverState`. */
   popoverState?: boolean;
-  /** Controlled popover open-state setter. */
+  /** Fires whenever the popover open state changes. Acts as the controlled setter when `popoverState` is provided, and as an observer otherwise. */
   onPopoverState?: (state: boolean) => void;
 
   /** Fires after a selection. In single-select mode receives `V`; in `multiple` receives `V[]`. */
@@ -307,8 +307,8 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
       onChange(newValues);
     }
     if (!multiple && closeOnSelect) {
-      if (setPopoverStateExternal) setPopoverStateExternal(false);
-      else setPopoverState(false);
+      if (popoverStateExternal === undefined) setPopoverState(false);
+      setPopoverStateExternal?.(false);
     }
   };
 
@@ -547,8 +547,9 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
           onClick={(e: MouseEvent) => {
             onClick(e);
             const currentState = popoverStateExternal ?? popoverState;
-            if (setPopoverStateExternal) setPopoverStateExternal(!currentState);
-            else setPopoverState(!currentState);
+            const nextState = !currentState;
+            if (popoverStateExternal === undefined) setPopoverState(nextState);
+            setPopoverStateExternal?.(nextState);
           }}
           contentClassName={cn(dropdownIcon && 'pr-1.5')}
           {...rest}
@@ -592,7 +593,10 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
       {!readOnly && !disabled && (
         <Popover
           open={popoverStateExternal || popoverState}
-          onOpenChange={setPopoverStateExternal || setPopoverState}
+          onOpenChange={(nextState) => {
+            if (popoverStateExternal === undefined) setPopoverState(nextState);
+            setPopoverStateExternal?.(nextState);
+          }}
           anchorRef={elRefExternal || elRef}
           position={popoverPosition}
           offset={popoverOffset}
