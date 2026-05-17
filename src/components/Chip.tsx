@@ -7,6 +7,7 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
@@ -60,8 +61,14 @@ interface ChipOwnProps<C extends ElementType = 'span'> {
 export type ChipProps<C extends ElementType = 'span'> = ChipOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof ChipOwnProps<C>>;
 
+/** Shape of `Chip` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ChipDefaultProps = Partial<
+  Omit<ChipOwnProps, 'as' | 'ref' | 'children'>
+>;
+
 export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   const elRef = useRef<HTMLElement | null>(null);
+  const defaults = useComponentDefaults('Chip');
   const {
     children,
     disabled,
@@ -80,7 +87,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     surfaceLevel,
     ref,
     ...rest
-  } = props;
+  } = { ...defaults, ...props } as ChipProps<C>;
   const height = nestedSizeClasses(size, 'height');
   const paddings: Record<ChipSize, string> = {
     '2xs': 'px-1 [&:has(>svg:first-child)]:pl-1 [&:has(>svg:last-child)]:pr-1',

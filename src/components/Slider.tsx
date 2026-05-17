@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, ChangeEvent, MouseEvent } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -42,8 +43,14 @@ export interface SliderProps {
   debounce?: number;
 }
 
+/** Shape of `Slider` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SliderDefaultProps = Partial<
+  Omit<SliderProps, 'value' | 'defaultValue' | 'onChange'>
+>;
+
 export function Slider(props: SliderProps) {
   const accentColor = useAccentColor();
+  const defaults = useComponentDefaults('Slider');
 
   const {
     value: valueProp,
@@ -59,7 +66,7 @@ export function Slider(props: SliderProps) {
     color = accentColor,
     input: _input = false,
     debounce = 0,
-  } = props;
+  } = { ...defaults, ...props };
 
   const isControlled = valueProp !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);

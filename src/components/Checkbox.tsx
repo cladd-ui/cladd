@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -74,10 +75,14 @@ export type CheckboxProps<C extends ElementType = 'label'> =
   CheckboxOwnProps<C> &
     Omit<ComponentPropsWithoutRef<C>, keyof CheckboxOwnProps<C>>;
 
+/** Shape of `Checkbox` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type CheckboxDefaultProps = Partial<Omit<CheckboxOwnProps, 'as'>>;
+
 export function Checkbox<C extends ElementType = 'label'>(
   props: CheckboxProps<C>,
 ) {
   const accentColor = useAccentColor();
+  const defaults = useComponentDefaults('Checkbox');
 
   const {
     checked = false,
@@ -99,7 +104,7 @@ export function Checkbox<C extends ElementType = 'label'>(
     hoverable,
     focusable,
     ...rest
-  } = props;
+  } = { ...defaults, ...props } as CheckboxProps<C>;
   const elRef = useRef<HTMLElement | null>(null);
 
   let hoverableComputed = hoverable;

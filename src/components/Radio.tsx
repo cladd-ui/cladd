@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -69,8 +70,12 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
 export type RadioProps<C extends ElementType = 'label'> = RadioOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof RadioOwnProps<C>>;
 
+/** Shape of `Radio` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type RadioDefaultProps = Partial<Omit<RadioOwnProps, 'as'>>;
+
 export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
   const accentColor = useAccentColor();
+  const defaults = useComponentDefaults('Radio');
 
   const {
     checked = false,
@@ -91,7 +96,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     hoverable,
     focusable,
     ...rest
-  } = props;
+  } = { ...defaults, ...props } as RadioProps<C>;
   const elRef = useRef<HTMLElement | null>(null);
 
   let hoverableComputed = hoverable;

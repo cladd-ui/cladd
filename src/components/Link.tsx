@@ -6,6 +6,7 @@ import {
   ReactNode,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -38,19 +39,28 @@ interface LinkOwnProps<C extends ElementType = 'button'> {
 export type LinkProps<C extends ElementType = 'button'> = LinkOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof LinkOwnProps<C>>;
 
-export const Link = <C extends ElementType = 'button'>({
-  children,
-  className = '',
-  disabled = false,
-  readOnly = false,
-  as,
-  color,
-  focusable = true,
-  onClick,
-  href,
-  ref,
-  ...rest
-}: LinkProps<C>) => {
+/** Shape of `Link` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type LinkDefaultProps = Partial<
+  Omit<LinkOwnProps, 'as' | 'ref' | 'children'>
+>;
+
+export const Link = <C extends ElementType = 'button'>(
+  props: LinkProps<C>,
+) => {
+  const defaults = useComponentDefaults('Link');
+  const {
+    children,
+    className = '',
+    disabled = false,
+    readOnly = false,
+    as,
+    color,
+    focusable = true,
+    onClick,
+    href,
+    ref,
+    ...rest
+  } = { ...defaults, ...props } as LinkProps<C>;
   const elRef = useRef(null);
 
   const Component = (

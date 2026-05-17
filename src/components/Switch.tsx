@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
@@ -85,8 +86,12 @@ interface SwitchOwnProps<C extends ElementType = 'label'> {
 export type SwitchProps<C extends ElementType = 'label'> = SwitchOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof SwitchOwnProps<C>>;
 
+/** Shape of `Switch` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SwitchDefaultProps = Partial<Omit<SwitchOwnProps, 'as'>>;
+
 export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
   const accentColor = useAccentColor();
+  const defaults = useComponentDefaults('Switch');
 
   const {
     checked = false,
@@ -107,7 +112,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     thumbOutline = true,
     thumbVariant = 'gradient',
     thumbSurfaceLevel = '+2',
-  } = props;
+  } = { ...defaults, ...props } as SwitchProps<C>;
   const elRef = useRef<HTMLElement | null>(null);
   let hoverableComputed = hoverable;
   let focusableComputed = focusable;

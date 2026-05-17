@@ -33,8 +33,14 @@ export {
   Checkbox,
   type CheckboxProps,
   type CheckboxSize,
+  type CheckboxDefaultProps,
 } from './components/Checkbox';
-export { Chip, type ChipProps, type ChipSize } from './components/Chip';
+export {
+  Chip,
+  type ChipProps,
+  type ChipSize,
+  type ChipDefaultProps,
+} from './components/Chip';
 export {
   Dialog,
   DialogClose,
@@ -46,7 +52,11 @@ export {
   type DialogTriggerProps,
 } from './components/Dialog';
 export { Input, type InputProps, type InputSize } from './components/Input';
-export { Link, type LinkProps } from './components/Link';
+export {
+  Link,
+  type LinkProps,
+  type LinkDefaultProps,
+} from './components/Link';
 export { List, type ListProps } from './components/List';
 export { ListButton, type ListButtonProps } from './components/ListButton';
 export { ListItem, type ListItemProps } from './components/ListItem';
@@ -99,7 +109,12 @@ export {
   PopupContent,
   type PopupContentProps,
 } from './components/PopupContent';
-export { Radio, type RadioProps, type RadioSize } from './components/Radio';
+export {
+  Radio,
+  type RadioProps,
+  type RadioSize,
+  type RadioDefaultProps,
+} from './components/Radio';
 export { SearchField, type SearchFieldProps } from './components/SearchField';
 export {
   SectionTitle,
@@ -115,12 +130,19 @@ export {
   Shortcut,
   type ShortcutProps,
   type ShortcutSize,
+  type ShortcutDefaultProps,
 } from './components/Shortcut';
-export { Slider, type SliderProps, type SliderSize } from './components/Slider';
+export {
+  Slider,
+  type SliderProps,
+  type SliderSize,
+  type SliderDefaultProps,
+} from './components/Slider';
 export {
   Spinner,
   type SpinnerProps,
   type SpinnerSize,
+  type SpinnerDefaultProps,
 } from './components/Spinner';
 
 export { SurfaceContextProvider } from './components/SurfaceContext';
@@ -138,7 +160,12 @@ export {
   SurfaceCutContent,
   type SurfaceCutContentProps,
 } from './components/SurfaceCutContent';
-export { Switch, type SwitchProps, type SwitchSize } from './components/Switch';
+export {
+  Switch,
+  type SwitchProps,
+  type SwitchSize,
+  type SwitchDefaultProps,
+} from './components/Switch';
 export {
   Textarea,
   type TextareaProps,

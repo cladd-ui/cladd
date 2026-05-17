@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
@@ -60,7 +61,13 @@ interface ShortcutOwnProps {
 export type ShortcutProps = ShortcutOwnProps &
   Omit<ComponentPropsWithoutRef<'div'>, keyof ShortcutOwnProps>;
 
+/** Shape of `Shortcut` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ShortcutDefaultProps = Partial<
+  Omit<ShortcutOwnProps, 'ref' | 'children'>
+>;
+
 export const Shortcut = (props: ShortcutProps) => {
+  const defaults = useComponentDefaults('Shortcut');
   const {
     className = '',
     iconClassName = '',
@@ -74,7 +81,7 @@ export const Shortcut = (props: ShortcutProps) => {
     size = 'md',
     ref,
     ...rest
-  } = props;
+  } = { ...defaults, ...props };
 
   const [isMac, setIsMac] = useState(false);
   const sizeClass = [

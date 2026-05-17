@@ -1,4 +1,5 @@
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { nestedSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
@@ -14,15 +15,23 @@ export interface SpinnerProps {
   className?: string;
 }
 
+/** Shape of `Spinner` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SpinnerDefaultProps = Partial<SpinnerProps>;
+
 export function Spinner(props: SpinnerProps) {
   const accentColor = useAccentColor();
-  const { size = 'sm', color = accentColor, className } = props;
+  const defaults = useComponentDefaults('Spinner');
+  const {
+    size = 'sm',
+    color = accentColor,
+    className,
+  } = { ...defaults, ...props };
   const sizeClass = nestedSizeClasses(size, 'size');
 
   return (
     <span
       className={cn(
-        'cladd-spinner cladd-spinner relative',
+        'cladd-spinner cladd-spinner relative inline-block',
         `cladd-color-${color}`,
         sizeClass,
         className,

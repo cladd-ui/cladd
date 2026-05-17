@@ -2,6 +2,14 @@ import { createContext, ReactNode } from 'react';
 
 import { Color } from '../types';
 import type { ButtonDefaultProps } from './Button';
+import type { CheckboxDefaultProps } from './Checkbox';
+import type { ChipDefaultProps } from './Chip';
+import type { LinkDefaultProps } from './Link';
+import type { RadioDefaultProps } from './Radio';
+import type { ShortcutDefaultProps } from './Shortcut';
+import type { SliderDefaultProps } from './Slider';
+import type { SpinnerDefaultProps } from './Spinner';
+import type { SwitchDefaultProps } from './Switch';
 
 /**
  * Registry of per-component default props that can be supplied to
@@ -14,6 +22,14 @@ import type { ButtonDefaultProps } from './Button';
  */
 export interface ComponentDefaults {
   Button?: ButtonDefaultProps;
+  Checkbox?: CheckboxDefaultProps;
+  Chip?: ChipDefaultProps;
+  Link?: LinkDefaultProps;
+  Radio?: RadioDefaultProps;
+  Shortcut?: ShortcutDefaultProps;
+  Slider?: SliderDefaultProps;
+  Spinner?: SpinnerDefaultProps;
+  Switch?: SwitchDefaultProps;
 }
 
 type ThemeContextValue = {
