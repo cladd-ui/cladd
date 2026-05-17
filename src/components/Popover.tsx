@@ -24,6 +24,12 @@ type PopoverContextValue = {
 
 const PopoverContext = createContext<PopoverContextValue | null>(null);
 
+// Tracks every currently-mounted top-level popover (one whose React tree has no
+// surrounding popover). When a new one mounts, it closes the others so opening
+// an unrelated popover collapses the existing chain instead of leaving stale
+// parents behind. Nested popovers stay handled by parent→child cascade below.
+const openTopLevelPopovers = new Set<() => void>();
+
 type PopoverRootContextValue = {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -512,6 +518,19 @@ const PopoverInner = (props: PopoverInnerProps) => {
   useEffect(() => {
     if (!parentPopover) return;
     return parentPopover.register(() => closeRef.current());
+  }, [parentPopover]);
+
+  // Top-level popovers (no parent popover in the React tree) are mutually
+  // exclusive: mounting a new one closes any others, which cascades through
+  // their nested chains via the parent→child registration above.
+  useEffect(() => {
+    if (parentPopover) return;
+    const closeFn = () => closeRef.current();
+    openTopLevelPopovers.forEach((other) => other());
+    openTopLevelPopovers.add(closeFn);
+    return () => {
+      openTopLevelPopovers.delete(closeFn);
+    };
   }, [parentPopover]);
 
   // Cascade close to registered child popovers when this one starts closing

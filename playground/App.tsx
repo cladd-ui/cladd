@@ -322,6 +322,34 @@ function App() {
             </PopoverRoot>
           </Popover>
         </PopoverRoot>
+        <PopoverRoot>
+          <PopoverTrigger>
+            <Tooltip tooltip={''}>
+              <Button>Popover</Button>
+            </Tooltip>
+          </PopoverTrigger>
+          <Popover contentClassName="p-4">
+            <PopoverClose>
+              <Button>Close</Button>
+            </PopoverClose>
+            <PopoverRoot>
+              <PopoverTrigger>
+                <Button>Popover 2</Button>
+              </PopoverTrigger>
+
+              <Popover contentClassName="p-4">
+                <PopoverRoot>
+                  <PopoverTrigger>
+                    <Button>Popover 3</Button>
+                  </PopoverTrigger>
+                  <Popover contentClassName="p-4">
+                    <div className="p-4">Hello World</div>
+                  </Popover>
+                </PopoverRoot>
+              </Popover>
+            </PopoverRoot>
+          </Popover>
+        </PopoverRoot>
         <SectionTitle>Colors Test</SectionTitle>
 
         <div
