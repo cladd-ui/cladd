@@ -1,16 +1,32 @@
 import { createContext, ReactNode } from 'react';
 
 import { Color } from '../types';
+import type { ButtonDefaultProps } from './Button';
+
+/**
+ * Registry of per-component default props that can be supplied to
+ * `CladdProvider` via the `defaults` prop.
+ *
+ * Each entry is `Partial<ComponentProps>` (with polymorphic and per-instance
+ * props excluded — see each component's `*DefaultProps` type).
+ *
+ * Add new entries here as additional components opt into context defaults.
+ */
+export interface ComponentDefaults {
+  Button?: ButtonDefaultProps;
+}
 
 type ThemeContextValue = {
   theme: 'dark' | 'light';
   accentColor: Color;
   overlaysRoot: string;
+  defaults: ComponentDefaults;
 };
 export const ThemeContext = createContext<ThemeContextValue>({
   theme: 'dark',
   accentColor: 'brand',
   overlaysRoot: '#app, #__next, #root',
+  defaults: {},
 });
 
 /**
@@ -26,6 +42,7 @@ export const ThemeProvider = ({
   theme,
   accentColor,
   overlaysRoot,
+  defaults,
 }: {
   /** App subtree to expose theme context to. */
   children: ReactNode;
@@ -35,6 +52,8 @@ export const ThemeProvider = ({
   accentColor: string;
   /** The root element(s) to insert overlays to. Default `'#app, #__next, #root'`. */
   overlaysRoot?: string;
+  /** Per-component default props, read via `useComponentDefaults`. */
+  defaults?: ComponentDefaults;
 }) => {
   return (
     <ThemeContext.Provider
@@ -42,6 +61,7 @@ export const ThemeProvider = ({
         theme,
         accentColor,
         overlaysRoot: overlaysRoot ?? '#app, #__next, #root',
+        defaults: defaults ?? {},
       }}
     >
       {children}

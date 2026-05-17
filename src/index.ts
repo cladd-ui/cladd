@@ -7,6 +7,7 @@ export {
 } from './hooks/use-dialog';
 export { useSurface } from './hooks/use-surface';
 export { useTheme } from './hooks/use-theme';
+export { useComponentDefaults } from './hooks/use-component-defaults';
 export { useToast, type UseToastOptions } from './hooks/use-toast';
 export { useAccentColor } from './hooks/use-accent-color';
 
@@ -21,7 +22,13 @@ export { DropdownIcon } from './components/icons/DropdownIcon';
 export { CheckIcon } from './components/icons/CheckIcon';
 
 export { Backdrop, type BackdropProps } from './components/Backdrop';
-export { Button, type ButtonProps, type ButtonSize } from './components/Button';
+export {
+  Button,
+  type ButtonProps,
+  type ButtonSize,
+  type ButtonDefaultProps,
+} from './components/Button';
+export { type ComponentDefaults } from './components/ThemeContext';
 export {
   Checkbox,
   type CheckboxProps,

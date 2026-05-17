@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Color } from '../types';
 import { DialogsPortal } from './DialogsPortal';
 import { DialogsPortalProvider } from './DialogsPortalContext';
-import { ThemeProvider } from './ThemeContext';
+import { ComponentDefaults, ThemeProvider } from './ThemeContext';
 import { ToastsPortal } from './ToastsPortal';
 import { ToastsPortalProvider } from './ToastsPortalContext';
 
@@ -28,6 +28,15 @@ export interface CladdProviderProps {
    * Default `'#app, #__next, #root'`.
    */
   overlaysRoot?: string;
+  /**
+   * Per-component default props, applied app-wide.
+   *
+   * Example: `defaults={{ Button: { outline: false, size: 'lg' } }}`.
+   *
+   * Explicit props on a component instance always win over these defaults,
+   * which in turn win over the component's built-in defaults.
+   */
+  defaults?: ComponentDefaults;
   /** App tree wrapped by the provider. Overlays (Dialog, Toast) are portaled outside this subtree into `overlaysRoot`. */
   children?: ReactNode;
 }
@@ -37,6 +46,7 @@ export const CladdProvider = (props: CladdProviderProps) => {
     theme = 'dark',
     accentColor = 'brand',
     overlaysRoot = '#app, #__next, #root',
+    defaults,
     children,
   } = props;
 
@@ -45,6 +55,7 @@ export const CladdProvider = (props: CladdProviderProps) => {
       theme={theme}
       accentColor={accentColor}
       overlaysRoot={overlaysRoot}
+      defaults={defaults}
     >
       <DialogsPortalProvider>
         <ToastsPortalProvider>

@@ -7,6 +7,7 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
@@ -81,6 +82,15 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
 export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps<C>>;
 
+/**
+ * Shape of `Button` defaults that can be supplied via `CladdProvider`'s
+ * `defaults={{ Button: { ... } }}` prop. Polymorphic (`as`, `ref`) and
+ * per-instance (`children`) props are intentionally excluded.
+ */
+export type ButtonDefaultProps = Partial<
+  Omit<ButtonOwnProps, 'as' | 'ref' | 'children'>
+>;
+
 export const buttonIconSizes: Record<ButtonSize, string> = {
   '2xs': '[&>svg]:size-3',
   xs: '[&>svg]:size-3',
@@ -95,6 +105,7 @@ export const Button = <C extends ElementType = 'button'>(
   props: ButtonProps<C>,
 ) => {
   const elRef = useRef<HTMLElement | null>(null);
+  const defaults = useComponentDefaults('Button');
   const {
     children,
     className = '',
@@ -120,7 +131,7 @@ export const Button = <C extends ElementType = 'button'>(
     loading,
     ref,
     ...rest
-  } = props;
+  } = { ...defaults, ...props } as ButtonProps<C>;
 
   let surface: ButtonSurface = propSurface || 'surface';
 
