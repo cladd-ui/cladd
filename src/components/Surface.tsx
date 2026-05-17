@@ -199,9 +199,8 @@ export const Surface = <C extends ElementType = 'div'>(
         {wrapContent ? (
           <SurfaceContent
             className={cn(
-              'duration-200',
               clickable &&
-                'cladd-surface-press:scale-95 cladd-surface-press:opacity-75',
+                'duration-200 cladd-surface-press:scale-95 cladd-surface-press:opacity-75',
               contentClassName,
             )}
           >
