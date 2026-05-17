@@ -51,7 +51,12 @@ export {
   type DialogRootProps,
   type DialogTriggerProps,
 } from './components/Dialog';
-export { Input, type InputProps, type InputSize } from './components/Input';
+export {
+  Input,
+  type InputProps,
+  type InputSize,
+  type InputDefaultProps,
+} from './components/Input';
 export {
   Link,
   type LinkProps,
@@ -69,20 +74,28 @@ export {
   NumberField,
   type NumberFieldProps,
   type NumberFieldSize,
+  type NumberFieldDefaultProps,
 } from './components/NumberField';
 export {
   NumberScrubber,
   type NumberScrubberProps,
   type NumberScrubberSize,
+  type NumberScrubberDefaultProps,
 } from './components/NumberScrubber';
-export { OTPField, type OTPFieldProps } from './components/OTPField';
+export {
+  OTPField,
+  type OTPFieldProps,
+  type OTPFieldDefaultProps,
+} from './components/OTPField';
 export {
   OTPFieldInput,
   type OTPFieldInputProps,
+  type OTPFieldInputDefaultProps,
 } from './components/OTPFieldInput';
 export {
   OTPFieldSeparator,
   type OTPFieldSeparatorProps,
+  type OTPFieldSeparatorDefaultProps,
 } from './components/OTPFieldSeparator';
 export {
   Popover,
@@ -115,7 +128,11 @@ export {
   type RadioSize,
   type RadioDefaultProps,
 } from './components/Radio';
-export { SearchField, type SearchFieldProps } from './components/SearchField';
+export {
+  SearchField,
+  type SearchFieldProps,
+  type SearchFieldDefaultProps,
+} from './components/SearchField';
 export {
   SectionTitle,
   type SectionTitleProps,
@@ -125,7 +142,11 @@ export {
   SegmentedButton,
   type SegmentedButtonProps,
 } from './components/SegmentedButton';
-export { Select, type SelectProps } from './components/Select';
+export {
+  Select,
+  type SelectProps,
+  type SelectDefaultProps,
+} from './components/Select';
 export {
   Shortcut,
   type ShortcutProps,
@@ -170,6 +191,7 @@ export {
   Textarea,
   type TextareaProps,
   type TextareaSize,
+  type TextareaDefaultProps,
 } from './components/Textarea';
 export {
   Toast,

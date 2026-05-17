@@ -91,7 +91,6 @@ export type SwitchDefaultProps = Partial<Omit<SwitchOwnProps, 'as'>>;
 
 export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
   const accentColor = useAccentColor();
-  const defaults = useComponentDefaults('Switch');
 
   const {
     checked = false,
@@ -112,7 +111,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
     thumbOutline = true,
     thumbVariant = 'gradient',
     thumbSurfaceLevel = '+2',
-  } = { ...defaults, ...props } as SwitchProps<C>;
+  } = useComponentDefaults('Switch', props);
   const elRef = useRef<HTMLElement | null>(null);
   let hoverableComputed = hoverable;
   let focusableComputed = focusable;

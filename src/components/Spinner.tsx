@@ -20,12 +20,11 @@ export type SpinnerDefaultProps = Partial<SpinnerProps>;
 
 export function Spinner(props: SpinnerProps) {
   const accentColor = useAccentColor();
-  const defaults = useComponentDefaults('Spinner');
   const {
     size = 'sm',
     color = accentColor,
     className,
-  } = { ...defaults, ...props };
+  } = useComponentDefaults('Spinner', props);
   const sizeClass = nestedSizeClasses(size, 'size');
 
   return (

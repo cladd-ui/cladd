@@ -105,7 +105,6 @@ export const Button = <C extends ElementType = 'button'>(
   props: ButtonProps<C>,
 ) => {
   const elRef = useRef<HTMLElement | null>(null);
-  const defaults = useComponentDefaults('Button');
   const {
     children,
     className = '',
@@ -131,7 +130,7 @@ export const Button = <C extends ElementType = 'button'>(
     loading,
     ref,
     ...rest
-  } = { ...defaults, ...props } as ButtonProps<C>;
+  } = useComponentDefaults('Button', props);
 
   let surface: ButtonSurface = propSurface || 'surface';
 

@@ -47,7 +47,6 @@ export type LinkDefaultProps = Partial<
 export const Link = <C extends ElementType = 'button'>(
   props: LinkProps<C>,
 ) => {
-  const defaults = useComponentDefaults('Link');
   const {
     children,
     className = '',
@@ -60,7 +59,7 @@ export const Link = <C extends ElementType = 'button'>(
     href,
     ref,
     ...rest
-  } = { ...defaults, ...props } as LinkProps<C>;
+  } = useComponentDefaults('Link', props);
   const elRef = useRef(null);
 
   const Component = (

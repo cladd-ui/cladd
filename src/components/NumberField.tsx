@@ -1,5 +1,6 @@
 import { ReactNode, Ref, useEffect, useRef, useState } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { Color } from '../types';
@@ -64,6 +65,11 @@ interface NumberFieldOwnProps {
 export type NumberFieldProps = NumberFieldOwnProps &
   Omit<SurfaceProps, keyof NumberFieldOwnProps>;
 
+/** Shape of `NumberField` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type NumberFieldDefaultProps = Partial<
+  Omit<NumberFieldOwnProps, 'children' | 'ref' | 'value' | 'onChange'>
+>;
+
 export const NumberField = (props: NumberFieldProps) => {
   const {
     children,
@@ -89,7 +95,7 @@ export const NumberField = (props: NumberFieldProps) => {
     onChange = () => {},
     ref,
     ...rest
-  } = props;
+  } = useComponentDefaults('NumberField', props);
 
   const [draft, setDraft] = useState<string>(String(value));
   const inputElRef = useRef<HTMLInputElement>(null);

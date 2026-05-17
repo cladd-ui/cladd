@@ -82,7 +82,6 @@ export function Checkbox<C extends ElementType = 'label'>(
   props: CheckboxProps<C>,
 ) {
   const accentColor = useAccentColor();
-  const defaults = useComponentDefaults('Checkbox');
 
   const {
     checked = false,
@@ -104,7 +103,7 @@ export function Checkbox<C extends ElementType = 'label'>(
     hoverable,
     focusable,
     ...rest
-  } = { ...defaults, ...props } as CheckboxProps<C>;
+  } = useComponentDefaults('Checkbox', props);
   const elRef = useRef<HTMLElement | null>(null);
 
   let hoverableComputed = hoverable;

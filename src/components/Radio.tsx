@@ -75,7 +75,6 @@ export type RadioDefaultProps = Partial<Omit<RadioOwnProps, 'as'>>;
 
 export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
   const accentColor = useAccentColor();
-  const defaults = useComponentDefaults('Radio');
 
   const {
     checked = false,
@@ -96,7 +95,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     hoverable,
     focusable,
     ...rest
-  } = { ...defaults, ...props } as RadioProps<C>;
+  } = useComponentDefaults('Radio', props);
   const elRef = useRef<HTMLElement | null>(null);
 
   let hoverableComputed = hoverable;

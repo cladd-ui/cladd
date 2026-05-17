@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 interface OTPFieldSeparatorOwnProps {
@@ -14,8 +15,16 @@ interface OTPFieldSeparatorOwnProps {
 export type OTPFieldSeparatorProps = OTPFieldSeparatorOwnProps &
   Omit<ComponentPropsWithoutRef<'div'>, keyof OTPFieldSeparatorOwnProps>;
 
+/** Shape of `OTPFieldSeparator` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type OTPFieldSeparatorDefaultProps = Partial<
+  Omit<OTPFieldSeparatorOwnProps, 'ref' | 'children'>
+>;
+
 export const OTPFieldSeparator = (props: OTPFieldSeparatorProps) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, ref, ...rest } = useComponentDefaults(
+    'OTPFieldSeparator',
+    props,
+  );
 
   return (
     <div

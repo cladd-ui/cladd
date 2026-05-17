@@ -9,6 +9,7 @@ import {
   MouseEvent,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useDevice } from '../hooks/use-device';
 import { cn } from '../shared/cn';
 import { Button, buttonIconSizes, ButtonSize } from './Button';
@@ -200,6 +201,35 @@ interface SelectOwnProps<T = string, V = T> {
 export type SelectProps<T = string, V = T> = SelectOwnProps<T, V> &
   Omit<ButtonProps, keyof SelectOwnProps<T, V>>;
 
+/** Shape of `Select` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SelectDefaultProps = Partial<
+  Omit<
+    SelectOwnProps,
+    | 'children'
+    | 'ref'
+    | 'anchorRef'
+    | 'value'
+    | 'options'
+    | 'onChange'
+    | 'onClick'
+    | 'onSearch'
+    | 'onPopoverState'
+    | 'popoverState'
+    | 'beforeOptions'
+    | 'afterOptions'
+    | 'renderOption'
+    | 'renderOptionInfo'
+    | 'renderBeforeOption'
+    | 'renderAfterOption'
+    | 'isChecked'
+    | 'isOptionDisabled'
+    | 'optionIndicatorColor'
+    | 'getOptionValue'
+    | 'noneOptionValue'
+    | 'icon'
+  >
+>;
+
 export function Select<T = string, V = T>(props: SelectProps<T, V>) {
   const {
     value,
@@ -280,7 +310,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
     ref,
 
     ...rest
-  } = props;
+  } = useComponentDefaults('Select', props);
 
   const elRef = useRef<HTMLElement | null>(null);
   const listElRef = useRef<HTMLDivElement | null>(null);

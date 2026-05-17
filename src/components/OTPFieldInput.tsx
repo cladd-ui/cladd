@@ -1,5 +1,6 @@
 import { ClipboardEvent, Ref } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Input } from './Input';
@@ -20,8 +21,19 @@ interface OTPFieldInputOwnProps {
 
 export type OTPFieldInputProps = OTPFieldInputOwnProps;
 
+/** Shape of `OTPFieldInput` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type OTPFieldInputDefaultProps = Partial<
+  Omit<OTPFieldInputOwnProps, 'ref' | 'index'>
+>;
+
 export const OTPFieldInput = (props: OTPFieldInputProps) => {
-  const { placeholder, className, inputClassName, ref, index = 0 } = props;
+  const {
+    placeholder,
+    className,
+    inputClassName,
+    ref,
+    index = 0,
+  } = useComponentDefaults('OTPFieldInput', props);
   const {
     size,
     pattern,

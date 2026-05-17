@@ -9,6 +9,7 @@ import {
   PointerEvent as ReactPointerEvent,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { Button } from './Button';
@@ -70,6 +71,14 @@ interface NumberScrubberOwnProps {
 export type NumberScrubberProps = NumberScrubberOwnProps &
   Omit<ComponentPropsWithoutRef<'button'>, keyof NumberScrubberOwnProps>;
 
+/** Shape of `NumberScrubber` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type NumberScrubberDefaultProps = Partial<
+  Omit<
+    NumberScrubberOwnProps,
+    'children' | 'ref' | 'value' | 'onChange' | 'onTemporaryChange'
+  >
+>;
+
 const CLICK_SUPPRESS_MS = 200;
 
 export const NumberScrubber = (props: NumberScrubberProps) => {
@@ -87,7 +96,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     variant = 'gradient',
     surfaceLevel,
     scrubberIcon = true,
-    displayValue = (v) => String(v),
+    displayValue = (v: number) => String(v),
     min = 0,
     max = 1000000,
     value = 0,
@@ -98,7 +107,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     onTemporaryChange,
     onChange,
     ...rest
-  } = props;
+  } = useComponentDefaults('NumberScrubber', props);
 
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(String(value));

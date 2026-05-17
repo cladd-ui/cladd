@@ -68,7 +68,6 @@ export type ChipDefaultProps = Partial<
 
 export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
   const elRef = useRef<HTMLElement | null>(null);
-  const defaults = useComponentDefaults('Chip');
   const {
     children,
     disabled,
@@ -87,7 +86,7 @@ export const Chip = <C extends ElementType = 'span'>(props: ChipProps<C>) => {
     surfaceLevel,
     ref,
     ...rest
-  } = { ...defaults, ...props } as ChipProps<C>;
+  } = useComponentDefaults('Chip', props);
   const height = nestedSizeClasses(size, 'height');
   const paddings: Record<ChipSize, string> = {
     '2xs': 'px-1 [&:has(>svg:first-child)]:pl-1 [&:has(>svg:last-child)]:pr-1',

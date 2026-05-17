@@ -14,6 +14,7 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
@@ -86,6 +87,11 @@ export type TextareaProps<C extends ElementType = 'div'> = TextareaOwnProps<C> &
   Omit<SurfaceCutOwnProps<C>, keyof TextareaOwnProps<C> | 'children'> &
   Omit<ComponentPropsWithoutRef<C>, keyof TextareaOwnProps<C>>;
 
+/** Shape of `Textarea` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type TextareaDefaultProps = Partial<
+  Omit<TextareaOwnProps, 'as' | 'ref' | 'value' | 'onChange'>
+>;
+
 export const Textarea = <C extends ElementType = 'div'>(
   props: TextareaProps<C>,
 ) => {
@@ -116,7 +122,7 @@ export const Textarea = <C extends ElementType = 'div'>(
     errorMessage,
     icon,
     ...rest
-  } = props;
+  } = useComponentDefaults('Textarea', props);
 
   const fontSizes: Record<TextareaSize, string> = {
     sm: 'text-cladd-xs',

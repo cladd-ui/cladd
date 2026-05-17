@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { SearchIcon } from './icons/SearchIcon';
 import { Input, InputProps } from './Input';
@@ -11,6 +12,21 @@ interface SearchFieldOwnProps {
 
 export type SearchFieldProps = SearchFieldOwnProps &
   Omit<InputProps, keyof SearchFieldOwnProps>;
+
+/** Shape of `SearchField` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SearchFieldDefaultProps = Partial<
+  Omit<
+    SearchFieldProps,
+    | 'as'
+    | 'ref'
+    | 'inputRef'
+    | 'inputComponent'
+    | 'inputComponentProps'
+    | 'value'
+    | 'onChange'
+    | 'onClear'
+  >
+>;
 
 export const SearchField = (props: SearchFieldProps) => {
   const {
@@ -24,7 +40,7 @@ export const SearchField = (props: SearchFieldProps) => {
     onChange = () => {},
     onClear,
     ...rest
-  } = props;
+  } = useComponentDefaults('SearchField', props);
 
   return (
     <Input

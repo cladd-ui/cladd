@@ -12,6 +12,7 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
@@ -130,6 +131,20 @@ export type InputProps<
   Omit<SurfaceCutOwnProps<C>, keyof InputOwnProps<C, IC> | 'children'> &
   Omit<ComponentPropsWithoutRef<C>, keyof InputOwnProps<C, IC>>;
 
+/** Shape of `Input` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type InputDefaultProps = Partial<
+  Omit<
+    InputOwnProps,
+    | 'as'
+    | 'ref'
+    | 'inputRef'
+    | 'inputComponent'
+    | 'inputComponentProps'
+    | 'value'
+    | 'onChange'
+  >
+>;
+
 export const Input = <
   C extends ElementType = 'div',
   IC extends ElementType = 'input',
@@ -179,7 +194,7 @@ export const Input = <
     ref: externalRef,
     inputRef: externalInputRef,
     ...rest
-  } = props;
+  } = useComponentDefaults('Input', props);
 
   const fontSizes: Record<InputSize, string> = {
     sm: 'text-cladd-xs',

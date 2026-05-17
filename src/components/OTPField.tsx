@@ -14,6 +14,7 @@ import {
   useRef,
 } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { FocusableLayer } from './FocusableLayer';
@@ -67,6 +68,11 @@ interface OTPFieldOwnProps {
 export type OTPFieldProps = OTPFieldOwnProps &
   Omit<ComponentPropsWithoutRef<'div'>, keyof OTPFieldOwnProps>;
 
+/** Shape of `OTPField` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type OTPFieldDefaultProps = Partial<
+  Omit<OTPFieldOwnProps, 'children' | 'ref' | 'value' | 'onChange'>
+>;
+
 const isOTPInputElement = (
   child: ReactNode,
 ): child is React.ReactElement<{ index?: number }> =>
@@ -89,7 +95,7 @@ export const OTPField = (props: OTPFieldProps) => {
     readOnly = false,
     inputMode = 'numeric',
     ...rest
-  } = props;
+  } = useComponentDefaults('OTPField', props);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 

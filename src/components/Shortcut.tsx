@@ -67,7 +67,6 @@ export type ShortcutDefaultProps = Partial<
 >;
 
 export const Shortcut = (props: ShortcutProps) => {
-  const defaults = useComponentDefaults('Shortcut');
   const {
     className = '',
     iconClassName = '',
@@ -81,7 +80,7 @@ export const Shortcut = (props: ShortcutProps) => {
     size = 'md',
     ref,
     ...rest
-  } = { ...defaults, ...props };
+  } = useComponentDefaults('Shortcut', props);
 
   const [isMac, setIsMac] = useState(false);
   const sizeClass = [

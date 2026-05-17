@@ -50,7 +50,6 @@ export type SliderDefaultProps = Partial<
 
 export function Slider(props: SliderProps) {
   const accentColor = useAccentColor();
-  const defaults = useComponentDefaults('Slider');
 
   const {
     value: valueProp,
@@ -66,7 +65,7 @@ export function Slider(props: SliderProps) {
     color = accentColor,
     input: _input = false,
     debounce = 0,
-  } = { ...defaults, ...props };
+  } = useComponentDefaults('Slider', props);
 
   const isControlled = valueProp !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);

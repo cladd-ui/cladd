@@ -4,12 +4,21 @@ import { Color } from '../types';
 import type { ButtonDefaultProps } from './Button';
 import type { CheckboxDefaultProps } from './Checkbox';
 import type { ChipDefaultProps } from './Chip';
+import type { InputDefaultProps } from './Input';
 import type { LinkDefaultProps } from './Link';
+import type { NumberFieldDefaultProps } from './NumberField';
+import type { NumberScrubberDefaultProps } from './NumberScrubber';
+import type { OTPFieldDefaultProps } from './OTPField';
+import type { OTPFieldInputDefaultProps } from './OTPFieldInput';
+import type { OTPFieldSeparatorDefaultProps } from './OTPFieldSeparator';
 import type { RadioDefaultProps } from './Radio';
+import type { SearchFieldDefaultProps } from './SearchField';
+import type { SelectDefaultProps } from './Select';
 import type { ShortcutDefaultProps } from './Shortcut';
 import type { SliderDefaultProps } from './Slider';
 import type { SpinnerDefaultProps } from './Spinner';
 import type { SwitchDefaultProps } from './Switch';
+import type { TextareaDefaultProps } from './Textarea';
 
 /**
  * Registry of per-component default props that can be supplied to
@@ -24,12 +33,21 @@ export interface ComponentDefaults {
   Button?: ButtonDefaultProps;
   Checkbox?: CheckboxDefaultProps;
   Chip?: ChipDefaultProps;
+  Input?: InputDefaultProps;
   Link?: LinkDefaultProps;
+  NumberField?: NumberFieldDefaultProps;
+  NumberScrubber?: NumberScrubberDefaultProps;
+  OTPField?: OTPFieldDefaultProps;
+  OTPFieldInput?: OTPFieldInputDefaultProps;
+  OTPFieldSeparator?: OTPFieldSeparatorDefaultProps;
   Radio?: RadioDefaultProps;
+  SearchField?: SearchFieldDefaultProps;
+  Select?: SelectDefaultProps;
   Shortcut?: ShortcutDefaultProps;
   Slider?: SliderDefaultProps;
   Spinner?: SpinnerDefaultProps;
   Switch?: SwitchDefaultProps;
+  Textarea?: TextareaDefaultProps;
 }
 
 type ThemeContextValue = {
