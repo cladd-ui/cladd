@@ -16,10 +16,12 @@ export interface ListProps extends HTMLAttributes<HTMLDivElement> {
 export type ListDefaultProps = Partial<Omit<ListProps, 'children' | 'ref'>>;
 
 export const List = (props: ListProps) => {
-  const { children, className = '', ref, ...rest } = useComponentDefaults(
-    'List',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ref,
+    ...rest
+  } = useComponentDefaults('List', props);
 
   return (
     <div

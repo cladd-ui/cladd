@@ -18,10 +18,12 @@ export type ListSeparatorDefaultProps = Partial<
 >;
 
 export const ListSeparator = (props: ListSeparatorProps) => {
-  const { children, className = '', ref, ...rest } = useComponentDefaults(
-    'ListSeparator',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ref,
+    ...rest
+  } = useComponentDefaults('ListSeparator', props);
 
   return (
     <div

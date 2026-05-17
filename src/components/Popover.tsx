@@ -670,12 +670,10 @@ const PopoverInner = (props: PopoverInnerProps) => {
 };
 
 export const Popover = (props: PopoverProps) => {
-  const {
-    open,
-    onOpenChange,
-    anchorRef,
-    ...rest
-  } = useComponentDefaults('Popover', props);
+  const { open, onOpenChange, anchorRef, ...rest } = useComponentDefaults(
+    'Popover',
+    props,
+  );
   const ctx = useContext(PopoverRootContext);
   const effectiveOpen = open ?? ctx?.open ?? false;
   const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});

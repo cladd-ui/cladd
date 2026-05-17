@@ -18,10 +18,11 @@ export type ListItemDefaultProps = Partial<
 >;
 
 export const ListItem = (props: ListItemProps, ref?: Ref<HTMLDivElement>) => {
-  const { children, className = '', ...rest } = useComponentDefaults(
-    'ListItem',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ...rest
+  } = useComponentDefaults('ListItem', props);
 
   return (
     <div

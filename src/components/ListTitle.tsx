@@ -21,10 +21,12 @@ export type ListTitleDefaultProps = Partial<
 >;
 
 export const ListTitle = (props: ListTitleProps) => {
-  const { children, className = '', ref, ...rest } = useComponentDefaults(
-    'ListTitle',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ref,
+    ...rest
+  } = useComponentDefaults('ListTitle', props);
 
   return (
     <div

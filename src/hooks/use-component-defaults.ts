@@ -1,9 +1,6 @@
 import { useContext } from 'react';
 
-import {
-  ComponentDefaults,
-  ThemeContext,
-} from '../components/ThemeContext';
+import { ComponentDefaults, ThemeContext } from '../components/ThemeContext';
 
 /**
  * Returns the default props registered for a component via

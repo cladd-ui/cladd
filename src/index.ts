@@ -62,16 +62,8 @@ export {
   type InputSize,
   type InputDefaultProps,
 } from './components/Input';
-export {
-  Link,
-  type LinkProps,
-  type LinkDefaultProps,
-} from './components/Link';
-export {
-  List,
-  type ListProps,
-  type ListDefaultProps,
-} from './components/List';
+export { Link, type LinkProps, type LinkDefaultProps } from './components/Link';
+export { List, type ListProps, type ListDefaultProps } from './components/List';
 export {
   ListButton,
   type ListButtonProps,

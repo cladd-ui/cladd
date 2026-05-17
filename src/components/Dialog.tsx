@@ -473,10 +473,7 @@ const DialogInner = (props: DialogInnerProps) => {
 };
 
 export const Dialog = (props: DialogProps) => {
-  const { open, onOpenChange, ...rest } = useComponentDefaults(
-    'Dialog',
-    props,
-  );
+  const { open, onOpenChange, ...rest } = useComponentDefaults('Dialog', props);
   const ctx = useContext(DialogRootContext);
   const effectiveOpen = open ?? ctx?.open ?? false;
   const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});

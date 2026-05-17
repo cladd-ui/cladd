@@ -18,10 +18,12 @@ export type SurfaceContentDefaultProps = Partial<
 >;
 
 export const SurfaceContent = (props: SurfaceContentProps) => {
-  const { children, className = '', ref, ...rest } = useComponentDefaults(
-    'SurfaceContent',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ref,
+    ...rest
+  } = useComponentDefaults('SurfaceContent', props);
   return (
     <div ref={ref} className={cn(`relative h-full`, className)} {...rest}>
       {children}

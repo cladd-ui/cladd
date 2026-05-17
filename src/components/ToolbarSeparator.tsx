@@ -21,10 +21,12 @@ export type ToolbarSeparatorDefaultProps = Partial<
 >;
 
 export const ToolbarSeparator = (props: ToolbarSeparatorProps) => {
-  const { children, className = '', ref, ...rest } = useComponentDefaults(
-    'ToolbarSeparator',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ref,
+    ...rest
+  } = useComponentDefaults('ToolbarSeparator', props);
 
   return (
     <div

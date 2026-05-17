@@ -44,9 +44,7 @@ export type LinkDefaultProps = Partial<
   Omit<LinkOwnProps, 'as' | 'ref' | 'children'>
 >;
 
-export const Link = <C extends ElementType = 'button'>(
-  props: LinkProps<C>,
-) => {
+export const Link = <C extends ElementType = 'button'>(props: LinkProps<C>) => {
   const {
     children,
     className = '',

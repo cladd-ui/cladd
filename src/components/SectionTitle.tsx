@@ -21,10 +21,12 @@ export type SectionTitleDefaultProps = Partial<
 >;
 
 export const SectionTitle = (props: SectionTitleProps) => {
-  const { children, className = '', ref, ...rest } = useComponentDefaults(
-    'SectionTitle',
-    props,
-  );
+  const {
+    children,
+    className = '',
+    ref,
+    ...rest
+  } = useComponentDefaults('SectionTitle', props);
 
   return (
     <div

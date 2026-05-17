@@ -18,10 +18,12 @@ export type BackdropDefaultProps = Partial<
 >;
 
 export const Backdrop = (props: BackdropProps) => {
-  const { className = '', children, ref, ...rest } = useComponentDefaults(
-    'Backdrop',
-    props,
-  );
+  const {
+    className = '',
+    children,
+    ref,
+    ...rest
+  } = useComponentDefaults('Backdrop', props);
 
   return (
     <div
