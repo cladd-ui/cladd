@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.2 (2026-05-17)
+
+### Features
+
+- surface content duration only when clickable (dc55e89)
+- tweak popover timings (1c9a69b)
+
 ## 0.6.1 (2026-05-16)
 
 ### Features
