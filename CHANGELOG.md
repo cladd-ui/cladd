@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.3 (2026-05-17)
+
+### Bug Fixes
+
+- close existing popover chains when opening another top-level popover (bff5eab)
+
+### Refactoring
+
+- split toast/dialog portal contexts into data + api (1587fb4)
+
 ## 0.6.2 (2026-05-17)
 
 ### Features
