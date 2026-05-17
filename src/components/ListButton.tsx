@@ -1,5 +1,6 @@
 import { ReactNode, Ref, ElementType, FC } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { Button, ButtonProps, buttonIconSizes, ButtonSize } from './Button';
@@ -66,6 +67,21 @@ interface ListButtonOwnProps<C extends ElementType = 'button'> {
 export type ListButtonProps<C extends ElementType = 'button'> =
   ListButtonOwnProps<C> & Omit<ButtonProps<C>, keyof ListButtonOwnProps<C>>;
 
+/** Shape of `ListButton` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ListButtonDefaultProps = Partial<
+  Omit<
+    ListButtonOwnProps,
+    | 'as'
+    | 'ref'
+    | 'children'
+    | 'icon'
+    | 'header'
+    | 'footer'
+    | 'after'
+    | 'selected'
+  >
+>;
+
 export const ListButton = <C extends ElementType = 'button'>(
   props: ListButtonProps<C>,
 ) => {
@@ -93,7 +109,7 @@ export const ListButton = <C extends ElementType = 'button'>(
     outline = false,
     rounded = true,
     ...rest
-  } = props;
+  } = useComponentDefaults('ListButton', props);
 
   const ButtonEl = Button as FC<ButtonProps<ElementType>>;
 

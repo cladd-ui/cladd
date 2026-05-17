@@ -21,7 +21,11 @@ export { SearchIcon } from './components/icons/SearchIcon';
 export { DropdownIcon } from './components/icons/DropdownIcon';
 export { CheckIcon } from './components/icons/CheckIcon';
 
-export { Backdrop, type BackdropProps } from './components/Backdrop';
+export {
+  Backdrop,
+  type BackdropProps,
+  type BackdropDefaultProps,
+} from './components/Backdrop';
 export {
   Button,
   type ButtonProps,
@@ -50,6 +54,7 @@ export {
   type DialogProps,
   type DialogRootProps,
   type DialogTriggerProps,
+  type DialogDefaultProps,
 } from './components/Dialog';
 export {
   Input,
@@ -62,14 +67,31 @@ export {
   type LinkProps,
   type LinkDefaultProps,
 } from './components/Link';
-export { List, type ListProps } from './components/List';
-export { ListButton, type ListButtonProps } from './components/ListButton';
-export { ListItem, type ListItemProps } from './components/ListItem';
+export {
+  List,
+  type ListProps,
+  type ListDefaultProps,
+} from './components/List';
+export {
+  ListButton,
+  type ListButtonProps,
+  type ListButtonDefaultProps,
+} from './components/ListButton';
+export {
+  ListItem,
+  type ListItemProps,
+  type ListItemDefaultProps,
+} from './components/ListItem';
 export {
   ListSeparator,
   type ListSeparatorProps,
+  type ListSeparatorDefaultProps,
 } from './components/ListSeparator';
-export { ListTitle, type ListTitleProps } from './components/ListTitle';
+export {
+  ListTitle,
+  type ListTitleProps,
+  type ListTitleDefaultProps,
+} from './components/ListTitle';
 export {
   NumberField,
   type NumberFieldProps,
@@ -107,6 +129,7 @@ export {
   type PopoverRootProps,
   type PopoverTriggerProps,
   type PopoverPosition,
+  type PopoverDefaultProps,
 } from './components/Popover';
 export {
   Popup,
@@ -117,10 +140,12 @@ export {
   type PopupProps,
   type PopupRootProps,
   type PopupTriggerProps,
+  type PopupDefaultProps,
 } from './components/Popup';
 export {
   PopupContent,
   type PopupContentProps,
+  type PopupContentDefaultProps,
 } from './components/PopupContent';
 export {
   Radio,
@@ -136,11 +161,17 @@ export {
 export {
   SectionTitle,
   type SectionTitleProps,
+  type SectionTitleDefaultProps,
 } from './components/SectionTitle';
-export { Segmented, type SegmentedProps } from './components/Segmented';
+export {
+  Segmented,
+  type SegmentedProps,
+  type SegmentedDefaultProps,
+} from './components/Segmented';
 export {
   SegmentedButton,
   type SegmentedButtonProps,
+  type SegmentedButtonDefaultProps,
 } from './components/SegmentedButton';
 export {
   Select,
@@ -171,15 +202,22 @@ export {
   Surface,
   type SurfaceProps,
   type SurfaceVariant,
+  type SurfaceDefaultProps,
 } from './components/Surface';
 export {
   SurfaceContent,
   type SurfaceContentProps,
+  type SurfaceContentDefaultProps,
 } from './components/SurfaceContent';
-export { SurfaceCut, type SurfaceCutProps } from './components/SurfaceCut';
+export {
+  SurfaceCut,
+  type SurfaceCutProps,
+  type SurfaceCutDefaultProps,
+} from './components/SurfaceCut';
 export {
   SurfaceCutContent,
   type SurfaceCutContentProps,
+  type SurfaceCutContentDefaultProps,
 } from './components/SurfaceCutContent';
 export {
   Switch,
@@ -202,25 +240,34 @@ export {
   type ToastProps,
   type ToastRootProps,
   type ToastTriggerProps,
+  type ToastDefaultProps,
 } from './components/Toast';
-export { Toolbar, type ToolbarProps } from './components/Toolbar';
+export {
+  Toolbar,
+  type ToolbarProps,
+  type ToolbarDefaultProps,
+} from './components/Toolbar';
 export {
   ToolbarButton,
   type ToolbarButtonProps,
+  type ToolbarButtonDefaultProps,
 } from './components/ToolbarButton';
 export {
   ToolbarSeparator,
   type ToolbarSeparatorProps,
+  type ToolbarSeparatorDefaultProps,
 } from './components/ToolbarSeparator';
 
 export {
   Tooltip,
   type TooltipPosition,
   type TooltipProps,
+  type TooltipDefaultProps,
 } from './components/Tooltip';
 export {
   TooltipPrimitive,
   type TooltipPrimitiveProps,
+  type TooltipPrimitiveDefaultProps,
 } from './components/TooltipPrimitive';
 export {
   CladdProvider,

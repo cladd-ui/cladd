@@ -1,5 +1,6 @@
 import { ElementType, FC } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { Button, ButtonProps } from './Button';
 import { useSegmentedContext } from './SegmentedContext';
 
@@ -12,6 +13,11 @@ export type SegmentedButtonProps<C extends ElementType = 'button'> =
      */
     active?: boolean;
   };
+
+/** Shape of `SegmentedButton` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SegmentedButtonDefaultProps = Partial<
+  Omit<SegmentedButtonProps, 'as' | 'ref' | 'children' | 'active'>
+>;
 
 export const SegmentedButton = <C extends ElementType = 'button'>(
   props: SegmentedButtonProps<C>,
@@ -26,7 +32,7 @@ export const SegmentedButton = <C extends ElementType = 'button'>(
     activeVariant,
     activeOutline,
   } = useSegmentedContext();
-  const { active, ...rest } = props;
+  const { active, ...rest } = useComponentDefaults('SegmentedButton', props);
   const ButtonEl = Button as FC<ButtonProps>;
 
   return (

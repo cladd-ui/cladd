@@ -1,5 +1,6 @@
 import { useRef, ReactNode, Ref, ElementType, MouseEvent } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { Color } from '../types';
@@ -47,6 +48,11 @@ interface ToolbarOwnProps<C extends ElementType = 'div'> {
 export type ToolbarProps<C extends ElementType = 'div'> = ToolbarOwnProps<C> &
   Omit<SurfaceProps<C>, keyof ToolbarOwnProps<C>>;
 
+/** Shape of `Toolbar` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ToolbarDefaultProps = Partial<
+  Omit<ToolbarOwnProps, 'as' | 'ref' | 'children'>
+>;
+
 export const Toolbar = <C extends ElementType = 'div'>(
   props: ToolbarProps<C>,
 ) => {
@@ -66,7 +72,7 @@ export const Toolbar = <C extends ElementType = 'div'>(
     buttonOutline = false,
     surfaceLevel,
     ...rest
-  } = props;
+  } = useComponentDefaults('Toolbar', props);
 
   const { wrapRoundedClasses } = roundedClasses(size, rounded);
 

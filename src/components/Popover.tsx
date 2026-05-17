@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useModalUtils } from '../hooks/use-modal-utils';
 import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
@@ -351,6 +352,23 @@ type PopoverOwnProps = {
 export type PopoverProps = PopoverOwnProps &
   Omit<SurfaceProps, keyof PopoverOwnProps>;
 
+/** Shape of `Popover` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type PopoverDefaultProps = Partial<
+  Omit<
+    PopoverOwnProps,
+    | 'open'
+    | 'onOpenChange'
+    | 'anchorRef'
+    | 'anchorRect'
+    | 'children'
+    | 'ref'
+    | 'onOpen'
+    | 'onOpened'
+    | 'onClose'
+    | 'onClosed'
+  >
+>;
+
 type PopoverInnerProps = Omit<PopoverProps, 'open' | 'onOpenChange'> & {
   phase?: ModalPhase;
   onPhaseChange?: (phase: ModalPhase) => void;
@@ -651,12 +669,13 @@ const PopoverInner = (props: PopoverInnerProps) => {
     : content;
 };
 
-export const Popover = ({
-  open,
-  onOpenChange,
-  anchorRef,
-  ...rest
-}: PopoverProps) => {
+export const Popover = (props: PopoverProps) => {
+  const {
+    open,
+    onOpenChange,
+    anchorRef,
+    ...rest
+  } = useComponentDefaults('Popover', props);
   const ctx = useContext(PopoverRootContext);
   const effectiveOpen = open ?? ctx?.open ?? false;
   const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});

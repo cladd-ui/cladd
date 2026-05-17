@@ -12,6 +12,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useModalUtils } from '../hooks/use-modal-utils';
 import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
@@ -169,6 +170,22 @@ export interface ToastProps {
   children?: ReactNode;
 }
 
+/** Shape of `Toast` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ToastDefaultProps = Partial<
+  Omit<
+    ToastProps,
+    | 'open'
+    | 'onOpenChange'
+    | 'children'
+    | 'title'
+    | 'text'
+    | 'icon'
+    | 'iconProps'
+    | 'onClosed'
+    | 'ref'
+  >
+>;
+
 type ToastInnerProps = Omit<ToastProps, 'open' | 'onOpenChange'> & {
   phase?: ModalPhase;
   onPhaseChange?: (phase: ModalPhase) => void;
@@ -303,7 +320,8 @@ const ToastInner = (props: ToastInnerProps) => {
   return root ? createPortal(content, document.querySelector(root)!) : content;
 };
 
-export const Toast = ({ open, onOpenChange, ...rest }: ToastProps) => {
+export const Toast = (props: ToastProps) => {
+  const { open, onOpenChange, ...rest } = useComponentDefaults('Toast', props);
   const ctx = useContext(ToastRootContext);
   const effectiveOpen = open ?? ctx?.open ?? false;
   const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});

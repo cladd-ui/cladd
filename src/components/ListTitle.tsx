@@ -1,5 +1,6 @@
 import { ReactNode, Ref, ComponentPropsWithoutRef } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 interface ListTitleOwnProps {
@@ -14,8 +15,16 @@ interface ListTitleOwnProps {
 export type ListTitleProps = ListTitleOwnProps &
   Omit<ComponentPropsWithoutRef<'div'>, keyof ListTitleOwnProps>;
 
+/** Shape of `ListTitle` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ListTitleDefaultProps = Partial<
+  Omit<ListTitleOwnProps, 'children' | 'ref'>
+>;
+
 export const ListTitle = (props: ListTitleProps) => {
-  const { children, className = '', ref, ...rest } = props;
+  const { children, className = '', ref, ...rest } = useComponentDefaults(
+    'ListTitle',
+    props,
+  );
 
   return (
     <div

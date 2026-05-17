@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { ButtonSize } from './Button';
@@ -52,6 +53,11 @@ export type SegmentedProps<C extends ElementType = 'div'> =
   SegmentedOwnProps<C> &
     Omit<ComponentPropsWithoutRef<C>, keyof SegmentedOwnProps<C>>;
 
+/** Shape of `Segmented` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SegmentedDefaultProps = Partial<
+  Omit<SegmentedOwnProps, 'as' | 'ref' | 'children'>
+>;
+
 export const Segmented = <C extends ElementType = 'div'>(
   props: SegmentedProps<C>,
 ) => {
@@ -74,7 +80,7 @@ export const Segmented = <C extends ElementType = 'div'>(
     activeVariant = 'gradient',
     activeOutline = true,
     ...rest
-  } = props;
+  } = useComponentDefaults('Segmented', props);
 
   const Component = asProp as ElementType<any>;
   return (

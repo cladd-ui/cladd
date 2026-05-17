@@ -1,5 +1,6 @@
 import { ReactNode, Ref, HTMLAttributes } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 export interface ListSeparatorProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,8 +12,16 @@ export interface ListSeparatorProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement>;
 }
 
+/** Shape of `ListSeparator` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ListSeparatorDefaultProps = Partial<
+  Omit<ListSeparatorProps, 'children' | 'ref'>
+>;
+
 export const ListSeparator = (props: ListSeparatorProps) => {
-  const { children, className = '', ref, ...rest } = props;
+  const { children, className = '', ref, ...rest } = useComponentDefaults(
+    'ListSeparator',
+    props,
+  );
 
   return (
     <div

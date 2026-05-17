@@ -1,5 +1,6 @@
 import { ReactNode, Ref, HTMLAttributes } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 export interface BackdropProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,8 +12,16 @@ export interface BackdropProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement>;
 }
 
+/** Shape of `Backdrop` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type BackdropDefaultProps = Partial<
+  Omit<BackdropProps, 'children' | 'ref'>
+>;
+
 export const Backdrop = (props: BackdropProps) => {
-  const { className = '', children, ref, ...rest } = props;
+  const { className = '', children, ref, ...rest } = useComponentDefaults(
+    'Backdrop',
+    props,
+  );
 
   return (
     <div

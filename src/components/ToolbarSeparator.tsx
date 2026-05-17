@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode, Ref } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 interface ToolbarSeparatorOwnProps {
@@ -14,8 +15,16 @@ interface ToolbarSeparatorOwnProps {
 export type ToolbarSeparatorProps = ToolbarSeparatorOwnProps &
   Omit<ComponentPropsWithoutRef<'div'>, keyof ToolbarSeparatorOwnProps>;
 
+/** Shape of `ToolbarSeparator` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ToolbarSeparatorDefaultProps = Partial<
+  Omit<ToolbarSeparatorOwnProps, 'children' | 'ref'>
+>;
+
 export const ToolbarSeparator = (props: ToolbarSeparatorProps) => {
-  const { children, className = '', ref, ...rest } = props;
+  const { children, className = '', ref, ...rest } = useComponentDefaults(
+    'ToolbarSeparator',
+    props,
+  );
 
   return (
     <div

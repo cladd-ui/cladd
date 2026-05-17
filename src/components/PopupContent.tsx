@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Surface, SurfaceVariant } from './Surface';
 
@@ -20,6 +21,11 @@ export interface PopupContentProps {
   ref?: React.Ref<HTMLDivElement>;
 }
 
+/** Shape of `PopupContent` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type PopupContentDefaultProps = Partial<
+  Omit<PopupContentProps, 'children' | 'ref'>
+>;
+
 export const PopupContent = (props: PopupContentProps) => {
   const {
     surfaceLevel = 1,
@@ -29,7 +35,7 @@ export const PopupContent = (props: PopupContentProps) => {
     variant = 'solid',
     outline = true,
     ref,
-  } = props;
+  } = useComponentDefaults('PopupContent', props);
   return (
     <Surface
       level={surfaceLevel}

@@ -1,5 +1,6 @@
 import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useSurface } from '../hooks/use-surface';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
@@ -84,6 +85,11 @@ interface SurfaceOwnProps<C extends ElementType = 'div'> {
 export type SurfaceProps<C extends ElementType = 'div'> = SurfaceOwnProps<C> &
   Omit<ComponentPropsWithoutRef<C>, keyof SurfaceOwnProps<C>>;
 
+/** Shape of `Surface` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SurfaceDefaultProps = Partial<
+  Omit<SurfaceOwnProps, 'as' | 'ref' | 'children' | 'beforeContent'>
+>;
+
 export const Surface = <C extends ElementType = 'div'>(
   props: SurfaceProps<C>,
 ) => {
@@ -108,7 +114,7 @@ export const Surface = <C extends ElementType = 'div'>(
     beforeContent,
     ref,
     ...rest
-  } = props;
+  } = useComponentDefaults('Surface', props);
 
   const contextLevel = useSurface();
   let levelProp: number | string | undefined = level;

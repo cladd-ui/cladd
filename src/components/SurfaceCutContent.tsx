@@ -1,5 +1,6 @@
 import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 interface SurfaceCutContentOwnProps<C extends ElementType = 'div'> {
@@ -19,6 +20,11 @@ export type SurfaceCutContentProps<C extends ElementType = 'div'> =
   SurfaceCutContentOwnProps<C> &
     Omit<ComponentPropsWithoutRef<C>, keyof SurfaceCutContentOwnProps<C>>;
 
+/** Shape of `SurfaceCutContent` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type SurfaceCutContentDefaultProps = Partial<
+  Omit<SurfaceCutContentOwnProps, 'as' | 'ref' | 'children'>
+>;
+
 export const SurfaceCutContent = <C extends ElementType = 'div'>(
   props: SurfaceCutContentProps<C>,
 ) => {
@@ -29,7 +35,7 @@ export const SurfaceCutContent = <C extends ElementType = 'div'>(
     className = '',
     ref,
     ...rest
-  } = props;
+  } = useComponentDefaults('SurfaceCutContent', props);
   const Component = asProp as ElementType;
   return (
     <Component

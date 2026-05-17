@@ -1,5 +1,6 @@
 import { ReactNode, Ref, HTMLAttributes } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 
 export interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,8 +12,16 @@ export interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement>;
 }
 
+/** Shape of `ListItem` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type ListItemDefaultProps = Partial<
+  Omit<ListItemProps, 'children' | 'ref'>
+>;
+
 export const ListItem = (props: ListItemProps, ref?: Ref<HTMLDivElement>) => {
-  const { children, className = '', ...rest } = props;
+  const { children, className = '', ...rest } = useComponentDefaults(
+    'ListItem',
+    props,
+  );
 
   return (
     <div

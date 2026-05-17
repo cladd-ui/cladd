@@ -1,6 +1,7 @@
 import { useEffect, useRef, ReactNode, Ref } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useModalUtils } from '../hooks/use-modal-utils';
 import { useOverlaysRoot } from '../hooks/use-overlays-root';
 import { useTheme } from '../hooks/use-theme';
@@ -65,6 +66,22 @@ interface TooltipPrimitiveOwnProps {
 
 export type TooltipPrimitiveProps = TooltipPrimitiveOwnProps &
   Omit<SurfaceProps, keyof TooltipPrimitiveOwnProps>;
+
+/** Shape of `TooltipPrimitive` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type TooltipPrimitiveDefaultProps = Partial<
+  Omit<
+    TooltipPrimitiveOwnProps,
+    | 'open'
+    | 'onOpenChange'
+    | 'anchorRef'
+    | 'children'
+    | 'ref'
+    | 'onOpen'
+    | 'onOpened'
+    | 'onClose'
+    | 'onClosed'
+  >
+>;
 
 type TooltipPrimitiveRootProps = Omit<
   TooltipPrimitiveProps,
@@ -203,12 +220,15 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
   return root ? createPortal(content, document.querySelector(root)!) : content;
 };
 
-export const TooltipPrimitive = ({
-  open = false,
-  onOpenChange = () => {},
-  ...rest
-}: TooltipPrimitiveProps) => (
-  <ModalController open={open} onOpenChange={onOpenChange}>
-    <TooltipPrimitiveRoot {...rest} />
-  </ModalController>
-);
+export const TooltipPrimitive = (props: TooltipPrimitiveProps) => {
+  const {
+    open = false,
+    onOpenChange = () => {},
+    ...rest
+  } = useComponentDefaults('TooltipPrimitive', props);
+  return (
+    <ModalController open={open} onOpenChange={onOpenChange}>
+      <TooltipPrimitiveRoot {...rest} />
+    </ModalController>
+  );
+};

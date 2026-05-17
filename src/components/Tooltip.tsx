@@ -1,5 +1,6 @@
 import { cloneElement, useEffect, useRef, useState, ReactNode } from 'react';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useDevice } from '../hooks/use-device';
 import {
   TooltipPrimitive,
@@ -22,6 +23,25 @@ const getGlobalTimeout = () => {
     resetGlobalTimeout();
   }
   return tooltipGlobalTimeout;
+};
+
+/** Shape of `Tooltip` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type TooltipDefaultProps = Partial<
+  Omit<
+    TooltipPrimitiveProps,
+    | 'open'
+    | 'onOpenChange'
+    | 'anchorRef'
+    | 'children'
+    | 'ref'
+    | 'onOpen'
+    | 'onOpened'
+    | 'onClose'
+    | 'onClosed'
+  >
+> & {
+  /** Whether to use the shared global tooltip timer (delays first show). */
+  timeout?: boolean;
 };
 
 export interface TooltipProps extends Omit<
@@ -213,14 +233,15 @@ const TooltipWrapper = ({
 };
 
 export const Tooltip = (props: TooltipProps) => {
-  if (props.tooltip === undefined) {
+  const merged = useComponentDefaults('Tooltip', props);
+  if (merged.tooltip === undefined) {
     const {
       tooltip: _t,
       timeout: _to,
       onClick: _oc,
       ...primitiveProps
-    } = props;
+    } = merged;
     return <TooltipPrimitive {...(primitiveProps as TooltipPrimitiveProps)} />;
   }
-  return <TooltipWrapper {...props} />;
+  return <TooltipWrapper {...merged} />;
 };

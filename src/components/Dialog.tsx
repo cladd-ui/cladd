@@ -13,6 +13,7 @@ import {
 import { createPortal } from 'react-dom';
 
 import { useAccentColor } from '../hooks/use-accent-color';
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useDevice } from '../hooks/use-device';
 import { useFocusTrap } from '../hooks/use-focus-trap';
 import { useModalUtils } from '../hooks/use-modal-utils';
@@ -211,6 +212,27 @@ export interface DialogProps {
   /** Custom content rendered between `text` and the optional confirm-input/buttons row. */
   children?: ReactNode;
 }
+
+/** Shape of `Dialog` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type DialogDefaultProps = Partial<
+  Omit<
+    DialogProps,
+    | 'open'
+    | 'onOpenChange'
+    | 'children'
+    | 'title'
+    | 'text'
+    | 'buttons'
+    | 'requireConfirmText'
+    | 'onCancel'
+    | 'onConfirm'
+    | 'onClosed'
+    | 'ref'
+    | 'aria-label'
+    | 'aria-labelledby'
+    | 'aria-describedby'
+  >
+>;
 
 type DialogInnerProps = Omit<DialogProps, 'open' | 'onOpenChange'> & {
   phase?: ModalPhase;
@@ -450,7 +472,11 @@ const DialogInner = (props: DialogInnerProps) => {
   return root ? createPortal(content, document.querySelector(root)!) : content;
 };
 
-export const Dialog = ({ open, onOpenChange, ...rest }: DialogProps) => {
+export const Dialog = (props: DialogProps) => {
+  const { open, onOpenChange, ...rest } = useComponentDefaults(
+    'Dialog',
+    props,
+  );
   const ctx = useContext(DialogRootContext);
   const effectiveOpen = open ?? ctx?.open ?? false;
   const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});

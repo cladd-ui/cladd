@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useFocusTrap } from '../hooks/use-focus-trap';
 import { useModalUtils } from '../hooks/use-modal-utils';
 import { useOverlaysRoot } from '../hooks/use-overlays-root';
@@ -203,6 +204,29 @@ export interface PopupProps {
   /** Slot rendered above the header, inside the popup content wrapper. */
   beforeContent?: ReactNode;
 }
+
+/** Shape of `Popup` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
+export type PopupDefaultProps = Partial<
+  Omit<
+    PopupProps,
+    | 'open'
+    | 'onOpenChange'
+    | 'children'
+    | 'beforeContent'
+    | 'headerLeft'
+    | 'headerRight'
+    | 'closeRef'
+    | 'closeButtonContent'
+    | 'onOpen'
+    | 'onOpened'
+    | 'onClose'
+    | 'onClosed'
+    | 'onCloseButtonClick'
+    | 'aria-label'
+    | 'aria-labelledby'
+    | 'aria-describedby'
+  >
+>;
 
 type PopupInnerProps = Omit<PopupProps, 'open' | 'onOpenChange'> & {
   phase?: ModalPhase;
@@ -497,7 +521,8 @@ function PopupInner(props: PopupInnerProps) {
     : content;
 }
 
-export const Popup = ({ open, onOpenChange, ...rest }: PopupProps) => {
+export const Popup = (props: PopupProps) => {
+  const { open, onOpenChange, ...rest } = useComponentDefaults('Popup', props);
   const ctx = useContext(PopupRootContext);
   const effectiveOpen = open ?? ctx?.open ?? false;
   const effectiveOnOpenChange = onOpenChange ?? ctx?.setOpen ?? (() => {});
