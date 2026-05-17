@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0 (2026-05-17)
+
+### Features
+
+- support CladdProvider defaults for surfaces, overlays, lists, and toolbars (f5ab37d)
+- support CladdProvider defaults for form inputs (45e4bcc)
+- support CladdProvider defaults for simple primitives (26f6931)
+- add per-component default props via CladdProvider defaults (f074a63)
+
 ## 0.6.3 (2026-05-17)
 
 ### Bug Fixes
