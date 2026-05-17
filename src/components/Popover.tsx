@@ -606,7 +606,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
             opened && 'scale-100 opacity-100 ease-[cubic-bezier(0,1,0,1.025)]',
             (phase === 'opened' || (phase === 'opening' && opened)) &&
               'duration-400',
-            phase === 'closing' && 'duration-300 ease-out!',
+            phase === 'closing' && 'duration-200 ease-in-out!',
             (phase === 'closing' || !opened) && 'scale-0 opacity-0',
             positionConfig.origin,
             className,
