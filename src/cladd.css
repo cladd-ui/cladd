@@ -9,7 +9,12 @@
    Guarded by `(hover: hover)` so the state doesn't stick on touch devices. */
 @custom-variant cladd-surface-hover {
   @media (hover: hover) {
-    &:where(.cladd-hoverable:hover:not(.cladd-clickable:active:not(:has(.cladd-clickable:active))) > *) {
+    &:where(
+      .cladd-hoverable:hover:not(
+          .cladd-clickable:active:not(:has(.cladd-clickable:active))
+        )
+        > *
+    ) {
       @slot;
     }
   }

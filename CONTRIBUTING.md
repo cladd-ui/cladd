@@ -79,7 +79,7 @@ npm run build         # build the publishable package into packages/react/
 
 - **Formatter:** [oxfmt](https://github.com/oxc-project/oxc). Run `npm run format` before committing. CI runs `npm run format:check`.
 - **Types:** strict TypeScript. Run `npm run check-types` before opening a PR.
-- **Comments:** by default, no comments. Only add one when the *why* is non-obvious — a hidden constraint, a workaround, a surprising invariant. Don't explain what the code does; the code does that.
+- **Comments:** by default, no comments. Only add one when the _why_ is non-obvious — a hidden constraint, a workaround, a surprising invariant. Don't explain what the code does; the code does that.
 - **State vs. variants:** use class names for static variants (color, size, shape) and `data-*` attributes only for runtime state (open, disabled, selected). This is enforced by convention across the kit — match what neighboring components do.
 - **No new dependencies** without discussion. The whole point of cladd is a small, predictable surface area.
 
@@ -118,7 +118,7 @@ Keep the summary lowercase, present tense, under ~70 characters. Add a longer bo
 2. Make your change. Keep PRs focused — one feature or fix per PR.
 3. Run `npm run check-types` and `npm run format` locally.
 4. Update or add a playground example if you're touching a component, so reviewers can see the change in action.
-5. Open the PR. In the description, link the related issue and explain the *why*, not just the *what*.
+5. Open the PR. In the description, link the related issue and explain the _why_, not just the _what_.
 
 Small, well-scoped PRs get reviewed fastest. A 30-line fix with a clear repro will land before a 600-line PR that "also cleans up a few things."
 

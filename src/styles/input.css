@@ -1,5 +1,6 @@
 @layer base {
-  .cladd-number-scrubber, .cladd-input {
+  .cladd-number-scrubber,
+  .cladd-input {
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
