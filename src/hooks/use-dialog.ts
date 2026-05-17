@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { useDialogsPortalContext } from '../components/DialogsPortalContext';
+import { useDialogsPortalApi } from '../components/DialogsPortalContext';
 import { Color } from '../types';
 import { useAccentColor } from './use-accent-color';
 
@@ -52,7 +52,7 @@ export interface UseDialogAlertOptions {
 }
 
 export const useDialog = ({ lazy }: UseDialogOptions = {}) => {
-  const { setState, setData } = useDialogsPortalContext();
+  const { setState, setData } = useDialogsPortalApi();
   const accentColor = useAccentColor();
   return {
     confirm({

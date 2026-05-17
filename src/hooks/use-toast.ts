@@ -1,6 +1,6 @@
 import { ElementType, ReactNode } from 'react';
 
-import { useToastsPortalContext } from '../components/ToastsPortalContext';
+import { useToastsPortalApi } from '../components/ToastsPortalContext';
 import { Color } from '../types';
 
 export interface UseToastOptions {
@@ -25,7 +25,7 @@ export interface UseToastOptions {
 }
 
 export const useToast = () => {
-  const { setState, state, setData, data } = useToastsPortalContext();
+  const { setState, setData } = useToastsPortalApi();
   return ({
     title,
     text,
@@ -38,20 +38,21 @@ export const useToast = () => {
     onClosed,
   }: UseToastOptions) => {
     const id = Math.random().toString(36).substr(2, 9);
-    data.push({
-      id,
-      title: title!,
-      text: text!,
-      color,
-      closeButton,
-      icon,
-      iconProps,
-      timeout,
-      className,
-      onClosed,
-    });
-    setData([...data]);
-    state[id] = true;
-    setState({ ...state });
+    setData((prev) => [
+      ...prev,
+      {
+        id,
+        title: title!,
+        text: text!,
+        color,
+        closeButton,
+        icon,
+        iconProps,
+        timeout,
+        className,
+        onClosed,
+      },
+    ]);
+    setState((prev) => ({ ...prev, [id]: true }));
   };
 };

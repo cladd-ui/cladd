@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  ReactNode,
+} from 'react';
 
 import { Color } from '../types';
 
@@ -38,15 +44,23 @@ export type DialogsPortalData = {
   lazy?: boolean;
 };
 
-export const DialogsPortalContext = createContext<{
+type DialogsPortalDataValue = {
   data: DialogsPortalData | null;
-  setData: React.Dispatch<React.SetStateAction<DialogsPortalData | null>>;
   state: boolean;
+};
+
+type DialogsPortalApiValue = {
+  setData: React.Dispatch<React.SetStateAction<DialogsPortalData | null>>;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
-}>({
+};
+
+export const DialogsPortalDataContext = createContext<DialogsPortalDataValue>({
   data: null,
-  setData: () => {},
   state: false,
+});
+
+export const DialogsPortalApiContext = createContext<DialogsPortalApiValue>({
+  setData: () => {},
   setState: () => {},
 });
 
@@ -57,13 +71,16 @@ export const DialogsPortalProvider = ({
 }) => {
   const [data, setData] = useState<null | DialogsPortalData>(null);
   const [state, setState] = useState<boolean>(false);
+  const api = useMemo(() => ({ setData, setState }), []);
+  const dataValue = useMemo(() => ({ data, state }), [data, state]);
   return (
-    <DialogsPortalContext.Provider value={{ data, setData, state, setState }}>
-      {children}
-    </DialogsPortalContext.Provider>
+    <DialogsPortalApiContext.Provider value={api}>
+      <DialogsPortalDataContext.Provider value={dataValue}>
+        {children}
+      </DialogsPortalDataContext.Provider>
+    </DialogsPortalApiContext.Provider>
   );
 };
 
-export const useDialogsPortalContext = () => {
-  return useContext(DialogsPortalContext);
-};
+export const useDialogsPortalData = () => useContext(DialogsPortalDataContext);
+export const useDialogsPortalApi = () => useContext(DialogsPortalApiContext);

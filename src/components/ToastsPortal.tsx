@@ -1,8 +1,9 @@
 import { Toast } from './Toast';
-import { useToastsPortalContext } from './ToastsPortalContext';
+import { useToastsPortalApi, useToastsPortalData } from './ToastsPortalContext';
 
 export function ToastsPortal() {
-  const { data, state, setState, setData } = useToastsPortalContext();
+  const { data, state } = useToastsPortalData();
+  const { setData, setState } = useToastsPortalApi();
   if (!data) return null;
   return (
     <>
@@ -10,7 +11,7 @@ export function ToastsPortal() {
         <Toast
           open={state[toast.id]}
           onOpenChange={(newState) =>
-            setState({ ...state, [toast.id]: newState })
+            setState((prev) => ({ ...prev, [toast.id]: newState }))
           }
           key={toast.id}
           title={toast.title}
@@ -24,8 +25,7 @@ export function ToastsPortal() {
           onClosed={() => {
             if (toast.removed) return;
             toast.removed = true;
-            data.splice(data.indexOf(toast), 1);
-            setData([...data]);
+            setData((prev) => prev.filter((t) => t !== toast));
             toast.onClosed?.(false);
           }}
         />

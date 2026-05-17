@@ -1,8 +1,12 @@
 import { Dialog } from './Dialog';
-import { useDialogsPortalContext } from './DialogsPortalContext';
+import {
+  useDialogsPortalApi,
+  useDialogsPortalData,
+} from './DialogsPortalContext';
 
 export function DialogsPortal() {
-  const { data, state, setState, setData } = useDialogsPortalContext();
+  const { data, state } = useDialogsPortalData();
+  const { setState, setData } = useDialogsPortalApi();
   if (!data) return null;
   return (
     <Dialog

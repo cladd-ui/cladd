@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useState,
+  useMemo,
   ElementType,
   ReactNode,
 } from 'react';
@@ -37,28 +38,39 @@ export type ToastsPortalData = {
   onClosed?: (closed: boolean) => void;
 };
 
-export const ToastsPortalContext = createContext<{
+type ToastsPortalDataValue = {
   data: ToastsPortalData[];
-  setData: React.Dispatch<React.SetStateAction<ToastsPortalData[]>>;
   state: Record<string, boolean>;
+};
+
+type ToastsPortalApiValue = {
+  setData: React.Dispatch<React.SetStateAction<ToastsPortalData[]>>;
   setState: React.Dispatch<React.SetStateAction<Record<string, boolean>>>;
-}>({
+};
+
+export const ToastsPortalDataContext = createContext<ToastsPortalDataValue>({
   data: [],
-  setData: () => {},
   state: {},
+});
+
+export const ToastsPortalApiContext = createContext<ToastsPortalApiValue>({
+  setData: () => {},
   setState: () => {},
 });
 
 export const ToastsPortalProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<ToastsPortalData[]>([]);
   const [state, setState] = useState<Record<string, boolean>>({});
+  const api = useMemo(() => ({ setData, setState }), []);
+  const dataValue = useMemo(() => ({ data, state }), [data, state]);
   return (
-    <ToastsPortalContext.Provider value={{ data, setData, state, setState }}>
-      {children}
-    </ToastsPortalContext.Provider>
+    <ToastsPortalApiContext.Provider value={api}>
+      <ToastsPortalDataContext.Provider value={dataValue}>
+        {children}
+      </ToastsPortalDataContext.Provider>
+    </ToastsPortalApiContext.Provider>
   );
 };
 
-export const useToastsPortalContext = () => {
-  return useContext(ToastsPortalContext);
-};
+export const useToastsPortalData = () => useContext(ToastsPortalDataContext);
+export const useToastsPortalApi = () => useContext(ToastsPortalApiContext);
