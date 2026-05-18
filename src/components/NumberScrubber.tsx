@@ -12,7 +12,7 @@ import {
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
-import { Button } from './Button';
+import { Button, buttonIconSizes } from './Button';
 import { DropdownIcon } from './icons/DropdownIcon';
 import { Input, InputSize } from './Input';
 import { SurfaceVariant } from './Surface';
@@ -46,6 +46,8 @@ interface NumberScrubberOwnProps {
   surfaceLevel?: string | number;
   /** Show the chevron-expand indicator on the left of the trigger. Default `true`. */
   scrubberIcon?: boolean;
+  /** Icon node rendered inside the trigger - forwarded to the inner `Input` when editing and rendered as the first child of the idle `Button`. */
+  icon?: ReactNode;
   /** Minimum allowed value. Default `0`. */
   min?: number;
   /** Maximum allowed value. Default `1_000_000`. */
@@ -96,6 +98,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     variant = 'gradient',
     surfaceLevel,
     scrubberIcon = true,
+    icon,
     displayValue = (v: number) => String(v),
     min = 0,
     max = 1000000,
@@ -237,6 +240,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
         onChange={setInputValue}
         disabled={disabled}
         rounded={rounded}
+        icon={icon}
         className={cn('cladd-number-scrubber', className)}
         contentClassName={contentClassName}
         inputClassName={cn('text-left', inputClassName)}
@@ -252,7 +256,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
         className,
       )}
       contentClassName={cn(
-        scrubberIcon && 'pl-1.5',
+        scrubberIcon && !icon && 'pl-1.5',
         'justify-between',
         contentClassName,
       )}
@@ -270,8 +274,13 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
       onFocus={onFocus}
       {...rest}
     >
+      {icon && (
+        <div data-part="icon" className={cn('shrink-0', buttonIconSizes[size])}>
+          {icon}
+        </div>
+      )}
       {scrubberIcon && (
-        <DropdownIcon className="shrink-0 rotate-90 text-cladd-fg-softer" />
+        <DropdownIcon className="mr-auto shrink-0 rotate-90 text-cladd-fg-softer" />
       )}
       <span ref={displayValueElRef}>{displayValue(value)}</span>
       {children}

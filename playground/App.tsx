@@ -130,6 +130,7 @@ function App() {
           contentClassName="flex flex-col gap-4 p-4"
         >
           <NumberScrubber
+            icon={<Icon />}
             value={scrubValue}
             min={0}
             max={1000}
