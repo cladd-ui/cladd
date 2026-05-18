@@ -1,8 +1,37 @@
 import { clsx, type ClassValue } from 'clsx';
-import { extendTailwindMerge } from 'tailwind-merge';
+import { extendTailwindMerge, validators } from 'tailwind-merge';
+
+const safe = (prefix: string) => ({
+  [prefix]: ['safe', { safe: [validators.isNumber] }],
+});
 
 const customTwMerge = extendTailwindMerge({
   extend: {
+    classGroups: {
+      pl: [safe('pl')],
+      pr: [safe('pr')],
+      pt: [safe('pt')],
+      pb: [safe('pb')],
+      px: [{ px: [{ safe: [validators.isNumber] }] }],
+      py: [{ py: [{ safe: [validators.isNumber] }] }],
+
+      ml: [safe('ml')],
+      mr: [safe('mr')],
+      mt: [safe('mt')],
+      mb: [safe('mb')],
+      mx: [{ mx: [{ safe: [validators.isNumber] }] }],
+      my: [{ my: [{ safe: [validators.isNumber] }] }],
+
+      'scroll-ml': [{ 'scroll-ml': [{ safe: [validators.isNumber] }] }],
+      'scroll-mr': [{ 'scroll-mr': [{ safe: [validators.isNumber] }] }],
+      'scroll-mt': [{ 'scroll-mt': [{ safe: [validators.isNumber] }] }],
+      'scroll-mb': [{ 'scroll-mb': [{ safe: [validators.isNumber] }] }],
+
+      left: [safe('left')],
+      right: [safe('right')],
+      top: [safe('top')],
+      bottom: [safe('bottom')],
+    },
     theme: {
       text: [
         'cladd-4xs',
