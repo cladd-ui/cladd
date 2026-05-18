@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.3 (2026-05-18)
+
+### Bug Fixes
+
+- compose user event handlers in NumberScrubber and Radio (eb9bf58)
+
 ## 0.7.2 (2026-05-18)
 
 ### Features
