@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.2 (2026-05-18)
+
+### Features
+
+- proper readme in npm package (d6ce43d)
+
 ## 0.7.1 (2026-05-18)
 
 ### Features
