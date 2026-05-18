@@ -173,6 +173,13 @@ const copyAssets = async () => {
     log('copying CHANGELOG.md');
     await cp(changelogFrom, changelogTo);
   }
+
+  const readmeFrom = join(repoRoot, 'README.md');
+  const readmeTo = join(pkgDir, 'README.md');
+  if (await exists(readmeFrom)) {
+    log('copying README.md');
+    await cp(readmeFrom, readmeTo);
+  }
 };
 
 const main = async () => {

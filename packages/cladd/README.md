@@ -1,3 +1,3 @@
 # Cladd UI
 
-Coming soon
+Placeholder package -> use @cladd-ui/react
