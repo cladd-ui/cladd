@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1 (2026-05-18)
+
+### Features
+
+- add icon prop to NumberScrubber (b094e98)
+
 ## 0.7.0 (2026-05-17)
 
 ### Features
