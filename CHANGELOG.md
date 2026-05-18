@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.4 (2026-05-18)
+
+### Bug Fixes
+
+- teach tailwind-merge about safe-area utilities (92a4065)
+
 ## 0.7.3 (2026-05-18)
 
 ### Bug Fixes
