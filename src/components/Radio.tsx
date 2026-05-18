@@ -4,6 +4,7 @@ import {
   ChangeEvent,
   MouseEvent,
   PointerEvent,
+  KeyboardEvent,
   ComponentPropsWithoutRef,
 } from 'react';
 
@@ -87,6 +88,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     onChange = () => {},
     onClick = () => {},
     onPointerDown = () => {},
+    onKeyDown: onKeyDownProp,
     input = true,
     inputId,
     className,
@@ -115,7 +117,9 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         'aria-readonly': readOnly || undefined,
         'aria-required': required || undefined,
         tabIndex: disabled ? -1 : 0,
-        onKeyDown: (e: React.KeyboardEvent<HTMLElement>) => {
+        onKeyDown: (e: KeyboardEvent<HTMLElement>) => {
+          onKeyDownProp?.(e);
+          if (e.defaultPrevented) return;
           if (disabled || readOnly) return;
           if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
@@ -123,7 +127,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
           }
         },
       }
-    : {};
+    : { onKeyDown: onKeyDownProp };
 
   const handleClick = (e: MouseEvent) => {
     onClick(e);
@@ -148,11 +152,11 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         className,
       )}
       onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
+      ref={elRef}
+      {...rest}
+      {...ariaFallback}
       onClick={handleClick}
       onPointerDown={onPointerDown}
-      ref={elRef}
-      {...ariaFallback}
-      {...rest}
     >
       {input && (
         <input

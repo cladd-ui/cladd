@@ -7,6 +7,8 @@ import {
   useEffect,
   KeyboardEvent as ReactKeyboardEvent,
   PointerEvent as ReactPointerEvent,
+  FocusEvent as ReactFocusEvent,
+  MouseEvent as ReactMouseEvent,
 } from 'react';
 
 import { useComponentDefaults } from '../hooks/use-component-defaults';
@@ -109,6 +111,9 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     ref,
     onTemporaryChange,
     onChange,
+    onPointerDown: onPointerDownProp,
+    onClick: onClickProp,
+    onFocus: onFocusProp,
     ...rest
   } = useComponentDefaults('NumberScrubber', props);
 
@@ -148,7 +153,9 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     if (isEditing) inputElRef.current?.select();
   }, [isEditing]);
 
-  const onPointerDown = (e: ReactPointerEvent) => {
+  const onPointerDown = (e: ReactPointerEvent<HTMLButtonElement>) => {
+    onPointerDownProp?.(e);
+    if (e.defaultPrevented) return;
     if (disabled || readOnly || isEditing) return;
     pointerDownAtRef.current = Date.now();
 
@@ -211,13 +218,17 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     document.addEventListener('pointercancel', onCancel);
   };
 
-  const onClick = () => {
+  const onClick = (e: ReactMouseEvent<HTMLButtonElement>) => {
+    onClickProp?.(e);
+    if (e.defaultPrevented) return;
     if (disabled || readOnly) return;
     if (Date.now() - dragEndedAtRef.current < CLICK_SUPPRESS_MS) return;
     enableEditing();
   };
 
-  const onFocus = () => {
+  const onFocus = (e: ReactFocusEvent<HTMLButtonElement>) => {
+    onFocusProp?.(e);
+    if (e.defaultPrevented) return;
     if (disabled || readOnly) return;
     // Pointer-driven focus: let onClick handle it (so a drag doesn't open edit).
     if (Date.now() - pointerDownAtRef.current < CLICK_SUPPRESS_MS) return;
@@ -269,10 +280,10 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
       outline={outline}
       surfaceLevel={surfaceLevel}
       ref={ref}
+      {...rest}
       onPointerDown={onPointerDown}
       onClick={onClick}
       onFocus={onFocus}
-      {...rest}
     >
       {icon && (
         <div data-part="icon" className={cn('shrink-0', buttonIconSizes[size])}>
