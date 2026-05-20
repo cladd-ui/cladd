@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.6 (2026-05-20)
+
+### Refactoring
+
+- dialog content to flex instead of space-y (c7a8bbf)
+
 ## 0.7.5 (2026-05-20)
 
 ### Features
