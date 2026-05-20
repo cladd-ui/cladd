@@ -29,7 +29,7 @@ export interface SliderProps {
   disabled?: boolean;
   /** Block dragging without the disabled visual treatment. */
   readOnly?: boolean;
-  /** Fires while the user drags or types a new value (subject to `debounce`). */
+  /** Fires while the user drags or types a new value (subject to `debounce` / `throttle`). */
   onChange?: (value: number, event?: ChangeEvent<HTMLInputElement>) => void;
   /** Extra classes for the slider container. */
   className?: string;
@@ -39,8 +39,10 @@ export interface SliderProps {
    * Reserved - currently unused in the rendered output (the underlying `<input type="range">` is always present). Kept for parity with other form components.
    */
   input?: boolean;
-  /** Debounce onChange calls in ms. Defaults to 0 (immediate). */
+  /** Debounce onChange calls in ms. Fires once after the user stops changing for N ms. Defaults to 0 (immediate). */
   debounce?: number;
+  /** Throttle onChange calls in ms. Fires immediately, then at most once per N ms while changing, with a trailing call for the final value. Defaults to 0 (immediate). Takes precedence over `debounce` when both are set. */
+  throttle?: number;
 }
 
 /** Shape of `Slider` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
@@ -65,6 +67,7 @@ export function Slider(props: SliderProps) {
     color = accentColor,
     input: _input = false,
     debounce = 0,
+    throttle = 0,
   } = useComponentDefaults('Slider', props);
 
   const isControlled = valueProp !== undefined;
@@ -75,6 +78,9 @@ export function Slider(props: SliderProps) {
   const thumbElRef = useRef<HTMLDivElement | null>(null);
   const progress = (value - min) / (max - min);
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const throttleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const throttleLastFire = useRef(0);
+  const throttlePending = useRef<number | null>(null);
   const isTouched = useRef(false);
   const [isTouchMoved, setIsTouchMoved] = useState(false);
 
@@ -82,7 +88,32 @@ export function Slider(props: SliderProps) {
     const v = parseFloat(e.target.value);
     if (!isControlled) setUncontrolledValue(v);
 
-    if (debounce > 0) {
+    if (throttle > 0) {
+      const now = Date.now();
+      const elapsed = now - throttleLastFire.current;
+      if (elapsed >= throttle) {
+        throttleLastFire.current = now;
+        throttlePending.current = null;
+        if (throttleTimer.current) {
+          clearTimeout(throttleTimer.current);
+          throttleTimer.current = null;
+        }
+        onChange(v, e);
+      } else {
+        throttlePending.current = v;
+        if (!throttleTimer.current) {
+          throttleTimer.current = setTimeout(() => {
+            throttleTimer.current = null;
+            if (throttlePending.current !== null) {
+              const pending = throttlePending.current;
+              throttlePending.current = null;
+              throttleLastFire.current = Date.now();
+              onChange(pending);
+            }
+          }, throttle - elapsed);
+        }
+      }
+    } else if (debounce > 0) {
       if (debounceTimer.current) clearTimeout(debounceTimer.current);
       debounceTimer.current = setTimeout(() => onChange(v), debounce);
     } else {
@@ -93,6 +124,7 @@ export function Slider(props: SliderProps) {
   useEffect(() => {
     return () => {
       if (debounceTimer.current) clearTimeout(debounceTimer.current);
+      if (throttleTimer.current) clearTimeout(throttleTimer.current);
     };
   }, []);
 
