@@ -8,8 +8,6 @@
 }
 
 body {
-  /* background-color: #0f0f0f; */
-  /* background-color: #fff; */
   font-family: Inter;
-  @apply bg-cladd-bg;
+  @apply bg-cladd-bg text-sm;
 }
