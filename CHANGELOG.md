@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.5 (2026-05-20)
+
+### Features
+
+- add scale option to Slider (linear/log/custom) for non-linear value mapping (9c85e54)
+- add throttle option to Slider for rate-limited onChange during drag (d9a5fb7)
+
 ## 0.7.4 (2026-05-18)
 
 ### Bug Fixes
