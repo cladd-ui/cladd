@@ -1200,6 +1200,7 @@ function App() {
           <Slider />
           <Slider readOnly />
           <Slider disabled value={50} />
+          <Slider min={20} max={20000} defaultValue={440} scale="log" />
         </Surface>
         <Surface
           contentClassName={'flex p-4 flex-col gap-4'}

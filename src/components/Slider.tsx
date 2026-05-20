@@ -9,6 +9,26 @@ import { Surface } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
 export type SliderSize = 'sm' | 'md';
+
+const SLIDER_RESOLUTION = 1000;
+
+/**
+ * Mapping between the user value (passed via `value`, emitted by `onChange`) and the internal slider position (linear 0..1 across the track).
+ *
+ * - `'linear'` (default): position = (value - min) / (max - min).
+ * - `'log'`: equal pixel motion produces equal *ratio* change. Requires `min > 0`.
+ * - Object with `toSlider`/`fromSlider`: custom bidirectional mapping.
+ *
+ * `toSlider(value) -> position` in [0, 1]; `fromSlider(position) -> value`.
+ */
+export type SliderScale =
+  | 'linear'
+  | 'log'
+  | {
+      toSlider: (value: number) => number;
+      fromSlider: (position: number) => number;
+    };
+
 export interface SliderProps {
   /** Controlled value. When omitted, the component falls back to uncontrolled mode using `defaultValue`. */
   value?: number;
@@ -21,7 +41,11 @@ export interface SliderProps {
   min?: number;
   /** Default `100`. */
   max?: number;
-  /** Default `1`. */
+  /**
+   * Step size for the emitted value. Default `1`.
+   *
+   * For non-linear `scale`, the user value is rounded to the nearest `step` after the inverse mapping — so a `log` slider with `step={1}` still emits integer values, but those steps are spaced logarithmically on the track.
+   */
   step?: number;
   /** Slider size token. Drives track and thumb dimensions. Default `'sm'`. */
   size?: SliderSize;
@@ -41,8 +65,20 @@ export interface SliderProps {
   input?: boolean;
   /** Debounce onChange calls in ms. Fires once after the user stops changing for N ms. Defaults to 0 (immediate). */
   debounce?: number;
-  /** Throttle onChange calls in ms. Fires immediately, then at most once per N ms while changing, with a trailing call for the final value. Defaults to 0 (immediate). Takes precedence over `debounce` when both are set. */
+  /** Throttle onChange calls in ms. Fires immediately, then at most once per N ms while changing, with a trailing call for the final value. Defaults to 0 (immediate).
+   *
+   * Takes precedence over `debounce` when both are set.
+   * */
   throttle?: number;
+  /**
+   * Value-to-position mapping. Default `'linear'`.
+   *
+   * Use `'log'` (requires `min > 0`) for ranges where ratios matter more than absolute differences — audio frequency, zoom, price brackets.
+   * Pass a custom `{ toSlider, fromSlider }` pair for any other curve (quadratic, S-curve, etc.).
+   *
+   * `min`, `max`, and `value` are always in user-value space. `step` is applied to the emitted value after the inverse mapping (see `step`).
+   */
+  scale?: SliderScale;
 }
 
 /** Shape of `Slider` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
@@ -68,15 +104,28 @@ export function Slider(props: SliderProps) {
     input: _input = false,
     debounce = 0,
     throttle = 0,
+    scale = 'linear',
   } = useComponentDefaults('Slider', props);
 
   const isControlled = valueProp !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
   const value = isControlled ? (valueProp as number) : uncontrolledValue;
 
+  const scaleFns =
+    scale === 'linear'
+      ? null
+      : scale === 'log'
+        ? {
+            toSlider: (v: number) => Math.log(v / min) / Math.log(max / min),
+            fromSlider: (p: number) => min * Math.pow(max / min, p),
+          }
+        : scale;
+
   const elRef = useRef<HTMLDivElement | null>(null);
   const thumbElRef = useRef<HTMLDivElement | null>(null);
-  const progress = (value - min) / (max - min);
+  const progress = scaleFns
+    ? scaleFns.toSlider(value)
+    : (value - min) / (max - min);
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const throttleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const throttleLastFire = useRef(0);
@@ -85,7 +134,9 @@ export function Slider(props: SliderProps) {
   const [isTouchMoved, setIsTouchMoved] = useState(false);
 
   const onChangeInternal = (e: ChangeEvent<HTMLInputElement>) => {
-    const v = parseFloat(e.target.value);
+    const raw = parseFloat(e.target.value);
+    let v = scaleFns ? scaleFns.fromSlider(raw / SLIDER_RESOLUTION) : raw;
+    if (scaleFns && step > 0) v = Math.round(v / step) * step;
     if (!isControlled) setUncontrolledValue(v);
 
     if (throttle > 0) {
@@ -255,10 +306,14 @@ export function Slider(props: SliderProps) {
         type="range"
         disabled={disabled || readOnly}
         readOnly={readOnly}
-        value={value}
-        min={min}
-        max={max}
-        step={step}
+        value={
+          scaleFns
+            ? Math.round(scaleFns.toSlider(value) * SLIDER_RESOLUTION)
+            : value
+        }
+        min={scaleFns ? 0 : min}
+        max={scaleFns ? SLIDER_RESOLUTION : max}
+        step={scaleFns ? 1 : step}
         onChange={onChangeInternal}
       />
     </div>
