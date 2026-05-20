@@ -163,7 +163,7 @@ export interface DialogProps {
   onClosed?: () => void;
   /** Extra classes applied to the dialog root `Surface`. */
   className?: string;
-  /** Extra classes applied to the inner content area. Default includes `space-y-4 p-4`. */
+  /** Extra classes applied to the inner content area. Default includes `flex flex-col gap-4 p-4`. */
   contentClassName?: string;
   /** Title slot. Rendered as `<div>` with `text-cladd-md font-semibold`. Auto-wired to `aria-labelledby`. */
   title?: ReactNode;
@@ -379,7 +379,7 @@ const DialogInner = (props: DialogInnerProps) => {
         level={surfaceLevel}
         variant={variant}
         outline={outline}
-        contentClassName={cn('space-y-4 p-4', contentClassName)}
+        contentClassName={cn('flex flex-col gap-4 p-4', contentClassName)}
         onClick={(e: MouseEvent) => {
           if (stopPropagationOnClick) {
             e.stopPropagation();
@@ -419,7 +419,7 @@ const DialogInner = (props: DialogInnerProps) => {
         {(buttons || cancelButtonText || confirmButtonText) && (
           <div
             data-part="buttons"
-            className="mt-8! flex flex-wrap items-center justify-end gap-2"
+            className="mt-4 flex flex-wrap items-center justify-end gap-2"
           >
             {cancelButtonText && (
               <Button
