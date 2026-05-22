@@ -581,42 +581,39 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
             if (popoverStateExternal === undefined) setPopoverState(nextState);
             setPopoverStateExternal?.(nextState);
           }}
-          contentClassName={cn(dropdownIcon && 'pr-1.5')}
+          contentClassName={cn(
+            dropdownIcon && 'pr-1.5',
+            'flex w-full min-w-0 shrink items-center justify-between gap-2',
+            reverse && 'flex-row-reverse',
+            contentClassName,
+          )}
           {...rest}
         >
+          {icon && (
+            <div
+              data-part="icon"
+              className={cn('shrink-0', buttonIconSizes[size])}
+            >
+              {icon}
+            </div>
+          )}
           <div
+            data-part="value"
             className={cn(
-              'flex w-full min-w-0 shrink items-center justify-between gap-2',
-              reverse && 'flex-row-reverse',
-              contentClassName,
+              'w-full min-w-0 shrink',
+              !children && !triggerValue && 'text-cladd-fg-softer',
+              placeholderClassName,
+              valueClassName,
             )}
           >
-            {icon && (
-              <div
-                data-part="icon"
-                className={cn('shrink-0', buttonIconSizes[size])}
-              >
-                {icon}
-              </div>
-            )}
-            <div
-              data-part="value"
-              className={cn(
-                'w-full min-w-0 shrink',
-                !children && !triggerValue && 'text-cladd-fg-softer',
-                placeholderClassName,
-                valueClassName,
-              )}
-            >
-              {children || triggerValue || placeholder}
-            </div>
-            {dropdownIcon && (
-              <DropdownIcon
-                data-part="dropdown-icon"
-                className={cn('size-4', 'shrink-0 text-cladd-fg-softer')}
-              />
-            )}
+            {children || triggerValue || placeholder}
           </div>
+          {dropdownIcon && (
+            <DropdownIcon
+              data-part="dropdown-icon"
+              className={cn('size-4', 'shrink-0 text-cladd-fg-softer')}
+            />
+          )}
         </Button>
       )}
 
