@@ -1,21 +1,17 @@
 @theme {
   --cladd-radius: 8px;
-  --cladd-radius-ratio: calc(var(--cladd-radius) / var(--spacing-cladd-md));
   --radius-cladd: var(--cladd-radius);
-  --radius-cladd-3xs: calc(
-    var(--cladd-radius-ratio) * var(--spacing-cladd-3xs)
-  );
-  --radius-cladd-2xs: calc(
-    var(--cladd-radius-ratio) * var(--spacing-cladd-2xs)
-  );
-  --radius-cladd-xs: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-xs));
-  --radius-cladd-sm: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-sm));
+  /* Numerators mirror --spacing-cladd-* (in px) over the md base (28).
+     Written as length × number ÷ number to avoid length/length division,
+     which Firefox doesn't resolve. */
+  --radius-cladd-3xs: calc(var(--cladd-radius) * 12 / 28);
+  --radius-cladd-2xs: calc(var(--cladd-radius) * 16 / 28);
+  --radius-cladd-xs: calc(var(--cladd-radius) * 20 / 28);
+  --radius-cladd-sm: calc(var(--cladd-radius) * 24 / 28);
   --radius-cladd-md: var(--cladd-radius);
-  --radius-cladd-lg: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-lg));
-  --radius-cladd-xl: calc(var(--cladd-radius-ratio) * var(--spacing-cladd-xl));
-  --radius-cladd-2xl: calc(
-    var(--cladd-radius-ratio) * var(--spacing-cladd-2xl)
-  );
+  --radius-cladd-lg: calc(var(--cladd-radius) * 32 / 28);
+  --radius-cladd-xl: calc(var(--cladd-radius) * 40 / 28);
+  --radius-cladd-2xl: calc(var(--cladd-radius) * 48 / 28);
 
   --radius-cladd-full-2xs: calc(var(--spacing-cladd-2xs) / 2);
   --radius-cladd-full-xs: calc(var(--spacing-cladd-xs) / 2);
