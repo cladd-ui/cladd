@@ -10,7 +10,9 @@ export default function SliderDemo() {
         className="rounded-3xl"
       >
         <SectionTitle>Default</SectionTitle>
-        <Slider />
+        <Slider size="xs" />
+        <Slider size="sm" />
+        <Slider size="md" />
         <SectionTitle>Read only</SectionTitle>
 
         <Slider readOnly />

@@ -15,7 +15,7 @@ import { Color } from '../types';
 import { FocusableLayer } from './FocusableLayer';
 import { Surface } from './Surface';
 
-export type RadioSize = 'sm' | 'md';
+export type RadioSize = 'xs' | 'sm' | 'md';
 
 interface RadioOwnProps<C extends ElementType = 'label'> {
   /** Controlled checked state. Default `false`. */
@@ -50,6 +50,8 @@ interface RadioOwnProps<C extends ElementType = 'label'> {
   className?: string;
   /** Accent color for the checked state. Default: theme accent. */
   color?: Color;
+  /** Outline ring on the thumb surfaces. Default `true`. */
+  thumbOutline?: boolean;
   /**
    * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden input on click. Use a non-label container when the radio lives inside an existing label — see `hoverable`/`focusable` for how this changes interactivity.
    */
@@ -93,6 +95,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
     inputId,
     className,
     color = accentColor,
+    thumbOutline = true,
     as: asProp = 'label',
     hoverable,
     focusable,
@@ -144,9 +147,10 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
       data-readonly={readOnly || undefined}
       data-required={required || undefined}
       className={cn(
-        'cladd-radio group/cladd-radio relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
-        size === 'sm' && 'size-5',
-        size === 'md' && 'size-6',
+        'cladd-radio group/cladd-radio relative flex shrink-0 items-center justify-center rounded-full select-none',
+        size === 'xs' && 'size-cladd-thumb-xs p-0',
+        size === 'sm' && 'size-cladd-thumb-sm p-1',
+        size === 'md' && 'size-cladd-thumb-md p-1',
 
         disabled && 'opacity-50',
         className,
@@ -180,10 +184,11 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
         )}
-        outline
+        outline={thumbOutline}
         variant={'gradient'}
         hoverable={hoverableComputed && !disabled && !readOnly}
         clickable={hoverableComputed && !disabled && !readOnly}
+        wrapContent={false}
       />
 
       {/* Checked Thumb */}
@@ -195,10 +200,11 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
           checked ? 'opacity-100' : 'opacity-0',
         )}
         color={color}
-        outline
+        outline={thumbOutline}
         variant={'gradient-fill'}
         hoverable={hoverableComputed && !disabled && !readOnly}
         clickable={hoverableComputed && !disabled && !readOnly}
+        wrapContent={false}
       />
 
       {/* Check */}
@@ -206,6 +212,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         data-part="indicator"
         className={cn(
           'pointer-events-none relative size-2 rounded-full duration-200',
+          size === 'xs' ? 'size-1.5' : 'size-2',
           !checked &&
             cn(
               'scale-75 bg-cladd-fg-soft',

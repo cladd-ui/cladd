@@ -15,7 +15,7 @@ import { FocusableLayer } from './FocusableLayer';
 import { CheckIcon } from './icons/CheckIcon';
 import { Surface } from './Surface';
 
-export type CheckboxSize = 'sm' | 'md';
+export type CheckboxSize = 'xs' | 'sm' | 'md';
 
 interface CheckboxOwnProps<C extends ElementType = 'label'> {
   /** Controlled checked state. Default `false`. */
@@ -52,6 +52,8 @@ interface CheckboxOwnProps<C extends ElementType = 'label'> {
   checkClassName?: string;
   /** Accent color for the checked state. Default: theme accent. */
   color?: Color;
+  /** Outline ring on the thumb surfaces. Default `true`. */
+  thumbOutline?: boolean;
   /**
    * Polymorphic root element. Defaults to `'label'` so a wrapping `<label>` activates the hidden input on click.
    *
@@ -99,6 +101,7 @@ export function Checkbox<C extends ElementType = 'label'>(
     className,
     checkClassName,
     color = accentColor,
+    thumbOutline = true,
     as: asProp = 'label',
     hoverable,
     focusable,
@@ -148,9 +151,10 @@ export function Checkbox<C extends ElementType = 'label'>(
       data-readonly={readOnly || undefined}
       data-required={required || undefined}
       className={cn(
-        'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full p-1 select-none',
-        size === 'sm' && 'size-cladd-thumb-sm',
-        size === 'md' && 'size-cladd-thumb-md',
+        'cladd-checkbox group/cladd-checkbox relative flex shrink-0 items-center justify-center rounded-full select-none',
+        size === 'xs' && 'size-cladd-thumb-xs p-0',
+        size === 'sm' && 'size-cladd-thumb-sm p-1',
+        size === 'md' && 'size-cladd-thumb-md p-1',
         disabled && 'opacity-50',
         className,
       )}
@@ -183,10 +187,11 @@ export function Checkbox<C extends ElementType = 'label'>(
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
         )}
-        outline
+        outline={thumbOutline}
         variant={'gradient'}
         hoverable={hoverableComputed && !disabled && !readOnly}
         clickable={hoverableComputed && !disabled && !readOnly}
+        wrapContent={false}
       />
 
       {/* Checked Thumb */}
@@ -198,16 +203,18 @@ export function Checkbox<C extends ElementType = 'label'>(
           checked ? 'opacity-100' : 'opacity-0',
         )}
         color={color}
-        outline
+        outline={thumbOutline}
         variant={'gradient-fill'}
         hoverable={hoverableComputed && !disabled && !readOnly}
         clickable={hoverableComputed && !disabled && !readOnly}
+        wrapContent={false}
       />
 
       <CheckIcon
         data-part="indicator"
         className={cn(
           'pointer-events-none relative duration-200',
+          size === 'xs' && 'size-2.5',
           size === 'sm' && 'size-3',
           size === 'md' && 'size-4',
           !checked && 'scale-75 text-cladd-fg-soft',

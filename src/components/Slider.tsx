@@ -8,7 +8,7 @@ import { FocusableLayer } from './FocusableLayer';
 import { Surface } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
-export type SliderSize = 'sm' | 'md';
+export type SliderSize = 'xs' | 'sm' | 'md';
 
 const SLIDER_RESOLUTION = 1000;
 
@@ -59,6 +59,8 @@ export interface SliderProps {
   className?: string;
   /** Accent color for the active track segment and thumb. Default: theme accent. */
   color?: Color;
+  /** Outline ring on the thumb surface. Default `true`. */
+  thumbOutline?: boolean;
   /**
    * Reserved - currently unused in the rendered output (the underlying `<input type="range">` is always present). Kept for parity with other form components.
    */
@@ -101,6 +103,7 @@ export function Slider(props: SliderProps) {
     onChange = () => {},
     className,
     color = accentColor,
+    thumbOutline = true,
     input: _input = false,
     debounce = 0,
     throttle = 0,
@@ -212,6 +215,7 @@ export function Slider(props: SliderProps) {
       data-readonly={readOnly || undefined}
       className={cn(
         'cladd-slider group/cladd-slider relative flex touch-pan-y select-none',
+        size === 'xs' && 'h-cladd-thumb-xs',
         size === 'sm' && 'h-cladd-thumb-sm',
         size === 'md' && 'h-cladd-thumb-md',
         className,
@@ -224,7 +228,7 @@ export function Slider(props: SliderProps) {
         data-part="track"
         className={cn(
           'pointer-events-none absolute inset-0 top-1/2 right-0 left-0 rounded-full',
-          size === 'sm' ? '-mt-0.75 h-1.5' : '-mt-1 h-2',
+          size === 'xs' || size === 'sm' ? '-mt-0.75 h-1.5' : '-mt-1 h-2',
         )}
       />
 
@@ -233,7 +237,9 @@ export function Slider(props: SliderProps) {
         data-part="range"
         className={cn(
           'absolute top-1/2 -mt-px h-0.5 overflow-hidden rounded-full',
-          size === 'sm' ? 'right-px left-px' : 'right-0.75 left-0.75',
+          size === 'sm' || size === 'xs'
+            ? 'right-px left-px'
+            : 'right-0.75 left-0.75',
         )}
       >
         <span
@@ -247,7 +253,7 @@ export function Slider(props: SliderProps) {
             durationClass,
           )}
           style={{
-            width: `calc((100% - ${size === 'sm' ? 'var(--spacing-cladd-thumb-sm)' : 'var(--spacing-cladd-thumb-md)'}) * ${progress})`,
+            width: `calc((100% - var(--spacing-cladd-thumb-${size})) * ${progress})`,
           }}
         />
       </span>
@@ -260,7 +266,7 @@ export function Slider(props: SliderProps) {
           durationClass,
         )}
         style={{
-          paddingLeft: `calc((100% - ${size === 'sm' ? 20 : 24}px) * ${progress})`,
+          paddingLeft: `calc((100% - var(--spacing-cladd-thumb-${size})) * ${progress})`,
         }}
       >
         <span className={cn('relative top-0 size-0 h-0')} data-part="value">
@@ -269,6 +275,7 @@ export function Slider(props: SliderProps) {
             variant="gradient"
             outline
             className={cn(
+              size === 'xs' && 'left-2',
               size === 'sm' && 'left-2.5',
               size === 'md' && 'left-3',
               'absolute -bottom-4 min-w-8 -translate-x-1/2 scale-0 rounded-cladd-2xl px-1 pt-2.5 pb-8 text-center text-cladd-xs leading-none font-medium text-cladd-primary duration-300',
@@ -291,13 +298,15 @@ export function Slider(props: SliderProps) {
           data-part="thumb"
           className={cn(
             'z-10 shrink-0 rounded-full',
+            size === 'xs' && 'size-cladd-thumb-xs',
             size === 'sm' && 'size-cladd-thumb-sm',
             size === 'md' && 'size-cladd-thumb-md',
           )}
-          outline
+          outline={thumbOutline}
           variant="gradient-fill"
           color={color}
           ref={thumbElRef}
+          wrapContent={false}
         />
       </span>
       <input

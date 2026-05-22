@@ -12,7 +12,9 @@ export default function RadioDemo() {
         className="rounded-3xl"
       >
         <div className="flex gap-8">
-          <Radio checked={checked} onChange={setChecked} />
+          <Radio size="xs" checked={checked} onChange={setChecked} />
+          <Radio size="sm" checked={checked} onChange={setChecked} />
+          <Radio size="md" checked={checked} onChange={setChecked} />
           <Radio disabled onChange={setChecked} />
           <Radio disabled checked={checked} onChange={setChecked} />
           <Radio readOnly onChange={setChecked} />
