@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.8.0 (2026-05-22)
+
+### Features
+
+- simplify select layout by removing extra wrap element (1296b5b)
+- xs size and thumbOutline prop for Checkbox, Radio, Slider (d6af1f8)
+
+### Bug Fixes
+
+- radius scale invalid in Firefox due to length/length calc (c8a1b40)
+
+### Refactoring
+
+- refactor playground into separate components (c6e9cc1)
+
 ## 0.7.6 (2026-05-20)
 
 ### Refactoring
