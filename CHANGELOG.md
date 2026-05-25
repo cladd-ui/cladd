@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1 (2026-05-25)
+
+### Features
+
+- move spinner's color class to its root element (45f32e2)
+
 ## 0.8.0 (2026-05-22)
 
 ### Features
