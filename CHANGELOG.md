@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0 (2026-05-29)
+
+### Features
+
+- popover open duration 400ms -> 300ms (13de1ab)
+
 ## 0.8.1 (2026-05-25)
 
 ### Features
