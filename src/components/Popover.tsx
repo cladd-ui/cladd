@@ -642,7 +642,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
             'pointer-events-auto absolute z-50 flex w-40 max-w-[calc(100vw-16px)] rounded-cladd-popover shadow-cladd-popover transition-[opacity,transform,scale] duration-0',
             opened && 'scale-100 opacity-100 ease-[cubic-bezier(0,1,0,1.025)]',
             (phase === 'opened' || (phase === 'opening' && opened)) &&
-              'duration-400',
+              'duration-300',
             phase === 'closing' && 'duration-200 ease-in-out!',
             (phase === 'closing' || !opened) && 'scale-0 opacity-0',
             positionConfig.origin,
