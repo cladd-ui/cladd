@@ -271,7 +271,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
     popoverColor,
     popoverPosition = 'bottom-end',
     popoverOffset = ['-50%', 4],
-    popoverClassName = 'w-auto min-w-[160px]',
+    popoverClassName = '',
     popoverSurfaceLevel,
     anchorRef: elRefExternal,
     popoverState: popoverStateExternal,
@@ -487,7 +487,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Tab') {
       setSelectedItemIndex(newIndex);
       if (listElRef.current) {
-        const el = listElRef.current.querySelectorAll('.list label')[
+        const el = listElRef.current.querySelectorAll('.cladd-list label')[
           newIndex
         ] as HTMLElement;
         if (el) {
@@ -629,7 +629,10 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
           offset={popoverOffset}
           color={popoverColor}
           surfaceLevel={popoverSurfaceLevel}
-          className={popoverClassName}
+          className={cn(
+            'w-auto min-w-[160px] overflow-hidden',
+            popoverClassName,
+          )}
           onOpen={onPopoverOpen}
           onOpened={onPopoverOpened}
           onClosed={onPopoverClosed}

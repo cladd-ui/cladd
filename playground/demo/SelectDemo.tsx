@@ -19,6 +19,7 @@ export default function SelectDemo() {
           value={value}
           options={Array.from({ length: 50 }).map((_, i) => `Option ${i + 1}`)}
           search
+          scrollToSelected
           valueClassName="truncate"
           icon={<Icon />}
           onChange={(v) => setValue(v as string)}
