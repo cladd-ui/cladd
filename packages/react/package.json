@@ -23,6 +23,10 @@
       "types": "./index.d.ts",
       "import": "./index.js"
     },
+    "./calendar": {
+      "types": "./calendar/index.d.ts",
+      "import": "./calendar/index.js"
+    },
     "./cladd.css": {
       "default": "./cladd.css",
       "types": "./cladd.css.d.ts"
@@ -40,6 +44,12 @@
   },
   "peerDependencies": {
     "react": ">=19",
+    "react-day-picker": ">=10",
     "react-dom": ">=19"
+  },
+  "peerDependenciesMeta": {
+    "react-day-picker": {
+      "optional": true
+    }
   }
 }

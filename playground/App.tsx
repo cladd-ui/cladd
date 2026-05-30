@@ -1,6 +1,7 @@
 import { CladdProvider } from '@cladd-ui/react';
 
 import ButtonDemo from './demo/ButtonDemo';
+import CalendarDemo from './demo/CalendarDemo';
 import CheckboxDemo from './demo/CheckboxDemo';
 import ChipDemo from './demo/ChipDemo';
 import ColorsDemo from './demo/ColorsDemo';
@@ -31,6 +32,7 @@ function App() {
     <CladdProvider theme="dark">
       <div className="flex flex-col items-start gap-8 p-8 text-cladd-fg">
         <ButtonDemo />
+        <CalendarDemo />
         <CheckboxDemo />
         <ChipDemo />
         <ColorsDemo />

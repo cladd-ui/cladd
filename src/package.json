@@ -8,6 +8,9 @@
     ".": {
       "import": "./index.ts"
     },
+    "./calendar": {
+      "import": "./calendar/index.ts"
+    },
     "./css": "./cladd.css"
   }
 }
