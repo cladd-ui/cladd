@@ -180,6 +180,7 @@ export {
   Slider,
   type SliderProps,
   type SliderSize,
+  type SliderVariant,
   type SliderDefaultProps,
 } from './components/Slider';
 export {
