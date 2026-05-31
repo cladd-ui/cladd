@@ -6,6 +6,7 @@ import CalendarDemo from './demo/CalendarDemo';
 import CheckboxDemo from './demo/CheckboxDemo';
 import ChipDemo from './demo/ChipDemo';
 import CollapsibleDemo from './demo/CollapsibleDemo';
+import ColorEditorDemo from './demo/ColorEditorDemo';
 import ColorsDemo from './demo/ColorsDemo';
 import DialogDemo from './demo/DialogDemo';
 import InputDemo from './demo/InputDemo';
@@ -41,6 +42,7 @@ function App() {
         <CheckboxDemo />
         <ChipDemo />
         <CollapsibleDemo />
+        <ColorEditorDemo />
         <ColorsDemo />
         <DialogDemo />
         <InputDemo />

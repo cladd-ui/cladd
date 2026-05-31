@@ -74,6 +74,26 @@ export {
   type ChipDefaultProps,
 } from './components/Chip';
 export {
+  ColorEditor,
+  type ColorEditorProps,
+  type ColorEditorControlSize,
+  type ColorEditorFormat,
+  type ColorEditorDefaultProps,
+} from './components/ColorEditor';
+export {
+  type ColorValue,
+  type ColorInput,
+  type RGB,
+  type HSL,
+  type HSB,
+  type SolidValue,
+  type GradientValue,
+  type GradientStop,
+  type GradientStopInput,
+  type GradientInput,
+  type ColorEditorValue,
+} from './shared/color';
+export {
   CollapsibleRoot,
   type CollapsibleRootProps,
   type CollapsibleRootDefaultProps,
