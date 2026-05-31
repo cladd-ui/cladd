@@ -1,10 +1,15 @@
 import { createContext, ReactNode } from 'react';
 
 import { Color } from '../types';
+import type { AccordionItemDefaultProps } from './AccordionItem';
+import type { AccordionRootDefaultProps } from './AccordionRoot';
 import type { BackdropDefaultProps } from './Backdrop';
 import type { ButtonDefaultProps } from './Button';
 import type { CheckboxDefaultProps } from './Checkbox';
 import type { ChipDefaultProps } from './Chip';
+import type { CollapsibleIndicatorDefaultProps } from './CollapsibleIndicator';
+import type { CollapsiblePanelDefaultProps } from './CollapsiblePanel';
+import type { CollapsibleRootDefaultProps } from './CollapsibleRoot';
 import type { DialogDefaultProps } from './Dialog';
 import type { InputDefaultProps } from './Input';
 import type { LinkDefaultProps } from './Link';
@@ -59,10 +64,15 @@ import type { TooltipPrimitiveDefaultProps } from './TooltipPrimitive';
  * Add new entries here as additional components opt into context defaults.
  */
 export interface ComponentDefaults {
+  AccordionRoot?: AccordionRootDefaultProps;
+  AccordionItem?: AccordionItemDefaultProps;
   Backdrop?: BackdropDefaultProps;
   Button?: ButtonDefaultProps;
   Checkbox?: CheckboxDefaultProps;
   Chip?: ChipDefaultProps;
+  CollapsibleRoot?: CollapsibleRootDefaultProps;
+  CollapsiblePanel?: CollapsiblePanelDefaultProps;
+  CollapsibleIndicator?: CollapsibleIndicatorDefaultProps;
   Dialog?: DialogDefaultProps;
   Input?: InputDefaultProps;
   Link?: LinkDefaultProps;

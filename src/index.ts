@@ -10,6 +10,10 @@ export { useTheme } from './hooks/use-theme';
 export { useComponentDefaults } from './hooks/use-component-defaults';
 export { useToast, type UseToastOptions } from './hooks/use-toast';
 export { useAccentColor } from './hooks/use-accent-color';
+export {
+  useCollapsibleContext,
+  type CollapsibleContextValue,
+} from './components/CollapsibleContext';
 
 export { type Color } from './types';
 
@@ -21,6 +25,30 @@ export { SearchIcon } from './components/icons/SearchIcon';
 export { DropdownIcon } from './components/icons/DropdownIcon';
 export { CheckIcon } from './components/icons/CheckIcon';
 
+export {
+  AccordionRoot,
+  type AccordionRootProps,
+  type AccordionRootDefaultProps,
+} from './components/AccordionRoot';
+export {
+  AccordionItem,
+  type AccordionItemProps,
+  type AccordionItemDefaultProps,
+} from './components/AccordionItem';
+export {
+  CollapsibleTrigger as AccordionTrigger,
+  type CollapsibleTriggerProps as AccordionTriggerProps,
+} from './components/CollapsibleTrigger';
+export {
+  CollapsiblePanel as AccordionPanel,
+  type CollapsiblePanelProps as AccordionPanelProps,
+  type CollapsiblePanelDefaultProps as AccordionPanelDefaultProps,
+} from './components/CollapsiblePanel';
+export {
+  CollapsibleIndicator as AccordionIndicator,
+  type CollapsibleIndicatorProps as AccordionIndicatorProps,
+  type CollapsibleIndicatorState as AccordionIndicatorState,
+} from './components/CollapsibleIndicator';
 export {
   Backdrop,
   type BackdropProps,
@@ -45,6 +73,26 @@ export {
   type ChipSize,
   type ChipDefaultProps,
 } from './components/Chip';
+export {
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  type CollapsibleRootDefaultProps,
+} from './components/CollapsibleRoot';
+export {
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from './components/CollapsibleTrigger';
+export {
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  type CollapsiblePanelDefaultProps,
+} from './components/CollapsiblePanel';
+export {
+  CollapsibleIndicator,
+  type CollapsibleIndicatorProps,
+  type CollapsibleIndicatorState,
+  type CollapsibleIndicatorDefaultProps,
+} from './components/CollapsibleIndicator';
 export {
   Dialog,
   DialogClose,

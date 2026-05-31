@@ -1,9 +1,11 @@
 import { CladdProvider } from '@cladd-ui/react';
 
+import AccordionDemo from './demo/AccordionDemo';
 import ButtonDemo from './demo/ButtonDemo';
 import CalendarDemo from './demo/CalendarDemo';
 import CheckboxDemo from './demo/CheckboxDemo';
 import ChipDemo from './demo/ChipDemo';
+import CollapsibleDemo from './demo/CollapsibleDemo';
 import ColorsDemo from './demo/ColorsDemo';
 import DialogDemo from './demo/DialogDemo';
 import InputDemo from './demo/InputDemo';
@@ -33,10 +35,12 @@ function App() {
   return (
     <CladdProvider theme="dark">
       <div className="flex flex-col items-start gap-8 p-8 text-cladd-fg">
+        <AccordionDemo />
         <ButtonDemo />
         <CalendarDemo />
         <CheckboxDemo />
         <ChipDemo />
+        <CollapsibleDemo />
         <ColorsDemo />
         <DialogDemo />
         <InputDemo />
