@@ -1,7 +1,4 @@
-import { useId } from 'react';
-
 export function GradientColorIcon(props: React.SVGProps<SVGSVGElement>) {
-  const gradientId = useId();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,18 +7,110 @@ export function GradientColorIcon(props: React.SVGProps<SVGSVGElement>) {
       viewBox="0 0 16 16"
       {...props}
     >
-      <defs>
-        <linearGradient id={gradientId} x1="50%" x2="50%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="currentColor" />
-          <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <g fill="currentColor" fillRule="nonzero">
-        <path d="M15.111 8A7.111 7.111 0 1 1 .89 8 7.111 7.111 0 0 1 15.11 8M2.222 8a5.778 5.778 0 1 0 11.556 0A5.778 5.778 0 0 0 2.222 8" />
+      <g fill="currentColor" fillRule="evenodd">
         <path
-          fill={`url(#${gradientId})`}
-          d="M2.611 7.111a4.5 4.5 0 1 0 9 0 4.5 4.5 0 0 0-9 0"
-          transform="translate(.889 .889)"
+          fillRule="nonzero"
+          d="M15.111 8A7.111 7.111 0 1 1 .89 8 7.111 7.111 0 0 1 15.11 8M2.222 8a5.778 5.778 0 1 0 11.556 0A5.778 5.778 0 0 0 2.222 8"
+        />
+        <rect width="1.5" height="1.5" x="5" y="3.5" rx=".75" />
+        <rect width="1.5" height="1.5" x="7.25" y="3.5" rx=".75" />
+        <rect width="1.5" height="1.5" x="9.5" y="3.5" rx=".75" />
+        <rect width="1.5" height="1.5" x="5" y="6" fillOpacity=".75" rx=".75" />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="7.25"
+          y="6"
+          fillOpacity=".75"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="9.5"
+          y="6"
+          fillOpacity=".75"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="11.75"
+          y="6"
+          fillOpacity=".75"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="11.75"
+          y="8.5"
+          fillOpacity=".66"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="2.75"
+          y="6"
+          fillOpacity=".75"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="2.75"
+          y="8.5"
+          fillOpacity=".66"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="5"
+          y="8.5"
+          fillOpacity=".66"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="7.25"
+          y="8.5"
+          fillOpacity=".66"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="9.5"
+          y="8.5"
+          fillOpacity=".66"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="5"
+          y="11"
+          fillOpacity=".33"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="7.25"
+          y="11"
+          fillOpacity=".33"
+          rx=".75"
+        />
+        <rect
+          width="1.5"
+          height="1.5"
+          x="9.5"
+          y="11"
+          fillOpacity=".33"
+          rx=".75"
         />
       </g>
     </svg>
