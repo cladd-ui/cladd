@@ -81,6 +81,11 @@ export {
   type ColorEditorDefaultProps,
 } from './components/ColorEditor';
 export {
+  ColorPicker,
+  type ColorPickerProps,
+  type ColorPickerDefaultProps,
+} from './components/ColorPicker';
+export {
   type ColorValue,
   type ColorInput,
   type RGB,

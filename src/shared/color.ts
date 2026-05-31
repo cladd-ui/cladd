@@ -380,6 +380,15 @@ export const gradientCss = (angle: number, stops: GradientStop[]) =>
     .map((stop) => `${stop.color.css} ${stop.position}%`)
     .join(', ')})`;
 
+/**
+ * Two-tone checkerboard background for surfaces that can show transparency
+ * (swatches, alpha tracks). Spread into a `style` prop: `style={CHECKER}`.
+ */
+export const CHECKER = {
+  background:
+    'repeating-conic-gradient(#9a9a9a 0% 25%, #6f6f6f 0% 50%) 50% / 12px 12px',
+};
+
 /** Horizontal preview gradient for the stop bar (ignores `angle`, like Sketch). */
 export const gradientPreviewCss = (stops: GradientStop[]) =>
   `linear-gradient(to right, ${stops

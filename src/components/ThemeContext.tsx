@@ -11,6 +11,7 @@ import type { CollapsibleIndicatorDefaultProps } from './CollapsibleIndicator';
 import type { CollapsiblePanelDefaultProps } from './CollapsiblePanel';
 import type { CollapsibleRootDefaultProps } from './CollapsibleRoot';
 import type { ColorEditorDefaultProps } from './ColorEditor';
+import type { ColorPickerDefaultProps } from './ColorPicker';
 import type { DialogDefaultProps } from './Dialog';
 import type { InputDefaultProps } from './Input';
 import type { LinkDefaultProps } from './Link';
@@ -72,6 +73,7 @@ export interface ComponentDefaults {
   Checkbox?: CheckboxDefaultProps;
   Chip?: ChipDefaultProps;
   ColorEditor?: ColorEditorDefaultProps;
+  ColorPicker?: ColorPickerDefaultProps;
   CollapsibleRoot?: CollapsibleRootDefaultProps;
   CollapsiblePanel?: CollapsiblePanelDefaultProps;
   CollapsibleIndicator?: CollapsibleIndicatorDefaultProps;

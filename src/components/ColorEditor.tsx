@@ -1,5 +1,4 @@
 import {
-  CSSProperties,
   KeyboardEvent as ReactKeyboardEvent,
   PointerEvent as ReactPointerEvent,
   Ref,
@@ -12,6 +11,7 @@ import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import {
   buildColorValue,
+  CHECKER,
   ColorEditorValue,
   ColorInput,
   ColorValue,
@@ -169,12 +169,6 @@ const r0 = (n: number) => Math.round(n);
 /** Center-position a thumb so it never overshoots the track ends. */
 const thumbLeft = (fraction: number) =>
   `calc(${fraction} * (100% - ${THUMB_PX}px) + ${THUMB_PX / 2}px)`;
-
-/** Two-tone checkerboard for surfaces that can show transparency. */
-const CHECKER: CSSProperties = {
-  background:
-    'repeating-conic-gradient(#9a9a9a 0% 25%, #6f6f6f 0% 50%) 50% / 12px 12px',
-};
 
 const THUMB_CLASS =
   'absolute rounded-full border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,0.2),0_1px_3px_rgba(0,0,0,0.45)] outline-none focus-visible:ring-2 focus-visible:ring-cladd-primary';
