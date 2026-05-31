@@ -63,13 +63,13 @@ export const Segmented = <C extends ElementType = 'div'>(
 ) => {
   const elRef = useRef<HTMLElement | null>(null);
   const accentColor = useAccentColor();
-  const { size: toolbarSize } = useToolbarContext();
+  const { size: toolbarSize, rounded: toolbarRounded } = useToolbarContext();
 
   const {
     children,
     className = '',
     disabled = false,
-    rounded = true,
+    rounded = typeof toolbarRounded !== 'undefined' ? toolbarRounded : true,
     size = toolbarSize || 'md',
     as: asProp = 'div' as ElementType<any>,
     color = '',
