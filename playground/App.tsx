@@ -23,6 +23,7 @@ import SliderDemo from './demo/SliderDemo';
 import SpinnerDemo from './demo/SpinnerDemo';
 import SurfaceDemo from './demo/SurfaceDemo';
 import SwitchDemo from './demo/SwitchDemo';
+import TabsDemo from './demo/TabsDemo';
 import TextareaDemo from './demo/TextareaDemo';
 import ToastDemo from './demo/ToastDemo';
 import ToolbarDemo from './demo/ToolbarDemo';
@@ -54,6 +55,7 @@ function App() {
         <SpinnerDemo />
         <SurfaceDemo />
         <SwitchDemo />
+        <TabsDemo />
         <TextareaDemo />
         <ToastDemo />
         <ToolbarDemo />

@@ -218,6 +218,18 @@ export {
   type SwitchSize,
   type SwitchDefaultProps,
 } from './components/Switch';
+export { Tabs, type TabsProps, type TabsDefaultProps } from './components/Tabs';
+export {
+  TabsList,
+  type TabsListProps,
+  type TabsListDefaultProps,
+} from './components/TabsList';
+export { Tab, type TabProps, type TabDefaultProps } from './components/Tab';
+export {
+  TabPanel,
+  type TabPanelProps,
+  type TabPanelDefaultProps,
+} from './components/TabPanel';
 export {
   Textarea,
   type TextareaProps,
