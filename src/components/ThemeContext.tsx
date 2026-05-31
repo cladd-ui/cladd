@@ -41,6 +41,8 @@ import type { TabsDefaultProps } from './Tabs';
 import type { TabsListDefaultProps } from './TabsList';
 import type { TextareaDefaultProps } from './Textarea';
 import type { ToastDefaultProps } from './Toast';
+import type { ToggleButtonDefaultProps } from './ToggleButton';
+import type { ToggleGroupDefaultProps } from './ToggleGroup';
 import type { ToolbarDefaultProps } from './Toolbar';
 import type { ToolbarButtonDefaultProps } from './ToolbarButton';
 import type { ToolbarSeparatorDefaultProps } from './ToolbarSeparator';
@@ -97,6 +99,8 @@ export interface ComponentDefaults {
   TabPanel?: TabPanelDefaultProps;
   Textarea?: TextareaDefaultProps;
   Toast?: ToastDefaultProps;
+  ToggleGroup?: ToggleGroupDefaultProps;
+  ToggleButton?: ToggleButtonDefaultProps;
   Toolbar?: ToolbarDefaultProps;
   ToolbarButton?: ToolbarButtonDefaultProps;
   ToolbarSeparator?: ToolbarSeparatorDefaultProps;

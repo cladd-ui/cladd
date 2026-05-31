@@ -26,6 +26,7 @@ import SwitchDemo from './demo/SwitchDemo';
 import TabsDemo from './demo/TabsDemo';
 import TextareaDemo from './demo/TextareaDemo';
 import ToastDemo from './demo/ToastDemo';
+import ToggleDemo from './demo/ToggleDemo';
 import ToolbarDemo from './demo/ToolbarDemo';
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         <TabsDemo />
         <TextareaDemo />
         <ToastDemo />
+        <ToggleDemo />
         <ToolbarDemo />
       </div>
     </CladdProvider>
