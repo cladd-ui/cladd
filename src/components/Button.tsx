@@ -12,7 +12,7 @@ import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { Spinner } from './Spinner';
 import { Surface, SurfaceVariant } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
@@ -233,7 +233,7 @@ export const Button = <C extends ElementType = 'button'>(
             />
           )}
           {(focused || (focusable && !readOnly && !disabled)) && (
-            <FocusableLayer
+            <FocusRing
               force={focused}
               group="button"
               className={cn(focusRoundedClasses)}

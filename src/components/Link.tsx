@@ -9,7 +9,7 @@ import {
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 
 interface LinkOwnProps<C extends ElementType = 'button'> {
   /** Accent color token */
@@ -95,7 +95,7 @@ export const Link = <C extends ElementType = 'button'>(props: LinkProps<C>) => {
     >
       {children}
       {focusable && !disabled && !readOnly && (
-        <FocusableLayer group="link" color={color} className="rounded-cladd" />
+        <FocusRing group="link" color={color} className="rounded-cladd" />
       )}
     </Component>
   );

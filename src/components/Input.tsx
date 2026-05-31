@@ -18,7 +18,7 @@ import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
 import { Button, ButtonSize } from './Button';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { CloseIcon } from './icons/CloseIcon';
 import { SurfaceCut, SurfaceCutOwnProps } from './SurfaceCut';
 
@@ -284,7 +284,7 @@ export const Input = <
     >
       {/* focus layer */}
       {!readOnly && !disabled && (
-        <FocusableLayer
+        <FocusRing
           className={cn(focusRoundedClasses)}
           force={valid === false}
           color={valid === false ? 'red' : color}

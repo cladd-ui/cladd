@@ -6,7 +6,7 @@ import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { Surface } from './Surface';
 import { SurfaceCut } from './SurfaceCut';
 
@@ -306,7 +306,7 @@ export function Slider(props: SliderProps) {
 
           {/* Focus ring */}
           {!disabled && !readOnly && (
-            <FocusableLayer
+            <FocusRing
               group="slider"
               className={cn(isTrack ? focusRoundedClasses : 'rounded-full')}
             />
@@ -396,7 +396,7 @@ export function Slider(props: SliderProps) {
                 beforeContent={
                   !readOnly &&
                   !disabled && (
-                    <FocusableLayer group="slider" className="rounded-full" />
+                    <FocusRing group="slider" className="rounded-full" />
                   )
                 }
               >

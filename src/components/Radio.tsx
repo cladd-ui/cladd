@@ -12,7 +12,7 @@ import { useAccentColor } from '../hooks/use-accent-color';
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { Surface } from './Surface';
 
 export type RadioSize = 'xs' | 'sm' | 'md';
@@ -227,7 +227,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
         )}
       />
       {focusableComputed && !disabled && !readOnly && (
-        <FocusableLayer className="rounded-full" group="radio" />
+        <FocusRing className="rounded-full" group="radio" />
       )}
     </Component>
   );

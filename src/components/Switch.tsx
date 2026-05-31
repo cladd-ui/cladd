@@ -10,7 +10,7 @@ import { useAccentColor } from '../hooks/use-accent-color';
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { Surface, SurfaceVariant } from './Surface';
 
 export type SwitchSize = 'sm' | 'md';
@@ -259,7 +259,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
         )}
 
         {focusableComputed && !disabled && !readOnly && (
-          <FocusableLayer className="rounded-full" group="switch" />
+          <FocusRing className="rounded-full" group="switch" />
         )}
       </Surface>
     </Component>

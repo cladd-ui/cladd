@@ -17,7 +17,7 @@ import {
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { InputSize } from './Input';
 import { OTPFieldContextProvider } from './OTPFieldContext';
 import { OTPFieldInput } from './OTPFieldInput';
@@ -325,11 +325,7 @@ export const OTPField = (props: OTPFieldProps) => {
         {...rest}
       >
         {!readOnly && !disabled && !valid && (
-          <FocusableLayer
-            className={cn(focusRoundedClasses)}
-            force
-            color="red"
-          />
+          <FocusRing className={cn(focusRoundedClasses)} force color="red" />
         )}
         {indexedChildren}
       </div>

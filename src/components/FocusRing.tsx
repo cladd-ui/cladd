@@ -2,7 +2,7 @@ import { useAccentColor } from '../hooks/use-accent-color';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 
-export const FocusableLayer = (props: {
+export const FocusRing = (props: {
   /** Extra classes for the focus ring `<span>` (typically used to match the host's corner radius). */
   className?: string;
   /**

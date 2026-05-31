@@ -19,7 +19,7 @@ import { cn } from '../shared/cn';
 import { roundedClasses } from '../shared/rounded-classes';
 import { rootSizeClasses } from '../shared/size-utls';
 import { Color } from '../types';
-import { FocusableLayer } from './FocusableLayer';
+import { FocusRing } from './FocusRing';
 import { SurfaceCut, SurfaceCutOwnProps } from './SurfaceCut';
 
 export type TextareaSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -217,7 +217,7 @@ export const Textarea = <C extends ElementType = 'div'>(
     >
       {/* focus layer */}
       {!readOnly && !disabled && (
-        <FocusableLayer
+        <FocusRing
           className={cn(focusRoundedClasses)}
           force={valid === false}
           color={valid === false ? 'red' : color}
