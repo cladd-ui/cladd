@@ -50,6 +50,8 @@ interface NumberScrubberOwnProps {
   scrubberIcon?: boolean;
   /** Icon node rendered inside the trigger - forwarded to the inner `Input` when editing and rendered as the first child of the idle `Button`. */
   icon?: ReactNode;
+  /** Extra classes for the icon wrapper. */
+  iconClassName?: string;
   /** Minimum allowed value. Default `0`. */
   min?: number;
   /** Maximum allowed value. Default `1_000_000`. */
@@ -101,6 +103,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
     surfaceLevel,
     scrubberIcon = true,
     icon,
+    iconClassName = '',
     displayValue = (v: number) => String(v),
     min = 0,
     max = 1000000,
@@ -252,6 +255,7 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
         disabled={disabled}
         rounded={rounded}
         icon={icon}
+        iconClassName={iconClassName}
         className={cn('cladd-number-scrubber', className)}
         contentClassName={contentClassName}
         inputClassName={cn('text-left', inputClassName)}
@@ -286,7 +290,10 @@ export const NumberScrubber = (props: NumberScrubberProps) => {
       onFocus={onFocus}
     >
       {icon && (
-        <div data-part="icon" className={cn('shrink-0', buttonIconSizes[size])}>
+        <div
+          data-part="icon"
+          className={cn('shrink-0', buttonIconSizes[size], iconClassName)}
+        >
           {icon}
         </div>
       )}

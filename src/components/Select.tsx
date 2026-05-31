@@ -78,6 +78,8 @@ interface SelectOwnProps<T = string, V = T> {
   reverse?: boolean;
   /** Icon node rendered inside the trigger button. */
   icon?: ReactNode;
+  /** Extra classes for the icon wrapper. */
+  iconClassName?: string;
   /** Show the chevron-down indicator on the right of the trigger. Default `true`. */
   dropdownIcon?: boolean;
   /** Forwarded to the trigger `Button` - allows wrapping the value across multiple lines. */
@@ -251,6 +253,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
     surface,
     reverse,
     icon,
+    iconClassName = '',
     dropdownIcon = true,
     multiline,
     placeholderClassName = '',
@@ -592,7 +595,7 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
           {icon && (
             <div
               data-part="icon"
-              className={cn('shrink-0', buttonIconSizes[size])}
+              className={cn('shrink-0', buttonIconSizes[size], iconClassName)}
             >
               {icon}
             </div>

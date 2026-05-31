@@ -79,6 +79,8 @@ interface TextareaOwnProps<C extends ElementType = 'div'> {
   errorMessage?: ReactNode;
   /** Icon node rendered absolutely positioned on the left. */
   icon?: ReactNode;
+  /** Extra classes for the icon wrapper. */
+  iconClassName?: string;
   /** Reserved - currently not applied in the rendered output. */
   inputPadding?: string;
 }
@@ -121,6 +123,7 @@ export const Textarea = <C extends ElementType = 'div'>(
     infoMessage,
     errorMessage,
     icon,
+    iconClassName = '',
     ...rest
   } = useComponentDefaults('Textarea', props);
 
@@ -238,6 +241,7 @@ export const Textarea = <C extends ElementType = 'div'>(
             className={cn(
               'pointer-events-none absolute',
               iconWrapClasses[size],
+              iconClassName,
             )}
           >
             {icon}

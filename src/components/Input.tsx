@@ -110,6 +110,8 @@ interface InputOwnProps<
     | 'search';
   /** Icon node rendered inside the surface, absolutely positioned on the left. Shifts input padding. */
   icon?: ReactNode;
+  /** Extra classes for the icon wrapper. */
+  iconClassName?: string;
   /** Forwarded to the `SurfaceCut` root element. */
   ref?: Ref<HTMLElement>;
   /** Forwarded to the inner `<input>` (or `inputComponent`) element. */
@@ -188,6 +190,7 @@ export const Input = <
     pattern,
     inputMode,
     icon,
+    iconClassName = '',
     autoFocus,
     inputComponent = 'input',
     inputComponentProps = {},
@@ -327,6 +330,7 @@ export const Input = <
             className={cn(
               'pointer-events-none absolute top-1/2 -translate-y-1/2',
               iconWrapClasses[size],
+              iconClassName,
             )}
           >
             {icon}

@@ -36,6 +36,8 @@ interface DatePickerBaseProps {
   contentClassName?: string;
   /** Icon node in the trigger. Defaults to a calendar glyph; pass `null` to hide. */
   icon?: ReactNode;
+  /** Extra classes for the icon wrapper. */
+  iconClassName?: string;
   /** Extra props forwarded to the underlying `Calendar` (e.g. `numberOfMonths`, `disabled`, `startMonth`, `endMonth`). */
   calendarProps?: Omit<Partial<PropsBase>, 'mode' | 'required'> & {
     size?: CalendarSize;
@@ -113,6 +115,7 @@ export function DatePicker(props: DatePickerProps) {
     className,
     contentClassName,
     icon = <CalendarIcon />,
+    iconClassName,
     dropdownIcon = true,
     calendarProps,
     popoverPosition = 'bottom-end',
@@ -235,7 +238,11 @@ export function DatePicker(props: DatePickerProps) {
         {icon && (
           <div
             data-part="icon"
-            className={cn('shrink-0 text-cladd-fg-soft', buttonIconSizes[size])}
+            className={cn(
+              'shrink-0 text-cladd-fg-soft',
+              buttonIconSizes[size],
+              iconClassName,
+            )}
           >
             {icon}
           </div>
