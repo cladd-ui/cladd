@@ -432,6 +432,8 @@ const PopoverInner = (props: PopoverInnerProps) => {
   const elRef = useRef<HTMLElement>(null);
   const containerElRef = useRef<HTMLDivElement>(null);
   const wasPointerDown = useRef(false);
+  // A press that starts inside must not dismiss on release outside (drag-out).
+  const pointerDownInsideRef = useRef(false);
 
   const positionConfig = POSITIONS[position] || POSITIONS['right-start'];
 
@@ -483,6 +485,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
     }
 
     if (!wasPointerDown.current) return;
+    if (pointerDownInsideRef.current) return;
     if (!target.closest('body')) return;
     if (!closeOnBackdropClick) return;
     if (
@@ -497,8 +500,12 @@ const PopoverInner = (props: PopoverInnerProps) => {
     close();
   };
 
-  const onPointerDown = () => {
+  const onPointerDown = (e: PointerEvent) => {
     wasPointerDown.current = true;
+    const target = e.target as Node | null;
+    pointerDownInsideRef.current = !!(
+      target && containerElRef.current?.contains(target)
+    );
   };
 
   useEffect(() => {
