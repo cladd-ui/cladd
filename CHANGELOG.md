@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.1 (2026-06-01)
+
+### Features
+
+- update calendar date range middle day to be colored (c3294ca)
+
 ## 0.11.0 (2026-06-01)
 
 ### Features
