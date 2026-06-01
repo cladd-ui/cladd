@@ -273,7 +273,7 @@ export function DatePicker(props: DatePickerProps) {
           offset={popoverOffset}
           className={popoverClassName}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          color={popoverColor ?? color}
+          color={popoverColor}
           surfaceLevel={popoverSurfaceLevel}
         >
           <div className="p-2">{calendar}</div>
