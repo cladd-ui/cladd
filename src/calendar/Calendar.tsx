@@ -369,7 +369,7 @@ export const Calendar = (props: CalendarProps) => {
   };
 
   const baseModifierClassNames: ModifiersClassNames = {
-    range_middle: 'bg-cladd-primary/5',
+    range_middle: cn('bg-cladd-primary/10', color && `cladd-color-${color}`),
   };
 
   return (
