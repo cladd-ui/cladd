@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.10.0 (2026-06-01)
+
+### Features
+
+- add ColorPicker (87a7f61)
+- add ColorEditor (4ef1a11)
+- iconClassName prop for icon-wrapping fields (2fa8710)
+- add Accordion and Collapsible (05389a6)
+- add ToggleGroup and ToggleButton (9be07d4)
+- Segmented - reads Toolbar's rounded value as default (6fe5e48)
+- add Tabs component (707f2bc)
+- add track variant to Slider (3c3f1a7)
+- add Calendar and DatePicker components (b4af769)
+- tweak fg colors chroma in dark-colors theme (89830ea)
+
+### Bug Fixes
+
+- keep Popover open when a drag starts inside and releases outside (86c5f83)
+- scroll Select option list to keyboard-highlighted option (0b93c9b)
+
+### Refactoring
+
+- FocusableLayer -> FocusRing (3391ffa)
+
+### Styles
+
+- redraw GradientColorIcon with halftone dots (7f28acb)
+
 ## 0.9.0 (2026-05-29)
 
 ### Features
