@@ -9,6 +9,7 @@ import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { ModalPhase, ModalController } from './ModalController';
 import { Surface, SurfaceProps } from './Surface';
+import { SurfaceColorReset } from './SurfaceContext';
 
 type OffsetValue = number | string;
 
@@ -217,7 +218,12 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
     </div>
   );
 
-  return root ? createPortal(content, document.querySelector(root)!) : content;
+  return root
+    ? createPortal(
+        <SurfaceColorReset>{content}</SurfaceColorReset>,
+        document.querySelector(root)!,
+      )
+    : content;
 };
 
 export const TooltipPrimitive = (props: TooltipPrimitiveProps) => {

@@ -41,6 +41,39 @@ export default function SegmentedDemo() {
             Button 3
           </SegmentedButton>
         </Segmented>
+
+        {/* Default activeColor: falls back to the theme accent. */}
+        <Segmented>
+          <SegmentedButton active={active === 0} onClick={() => setActive(0)}>
+            Button 1
+          </SegmentedButton>
+          <SegmentedButton active={active === 1} onClick={() => setActive(1)}>
+            Button 2
+          </SegmentedButton>
+          <SegmentedButton active={active === 2} onClick={() => setActive(2)}>
+            Button 3
+          </SegmentedButton>
+        </Segmented>
+
+        {/* Inside a colored surface: the active segment inherits the region color. */}
+        <Toolbar
+          color="purple"
+          variant="gradient"
+          outline
+          className="rounded-2xl"
+        >
+          <Segmented activeColor="green">
+            <SegmentedButton active={active === 0} onClick={() => setActive(0)}>
+              Button 1
+            </SegmentedButton>
+            <SegmentedButton active={active === 1} onClick={() => setActive(1)}>
+              Button 2
+            </SegmentedButton>
+            <SegmentedButton active={active === 2} onClick={() => setActive(2)}>
+              Button 3
+            </SegmentedButton>
+          </Segmented>
+        </Toolbar>
       </Surface>
     </>
   );

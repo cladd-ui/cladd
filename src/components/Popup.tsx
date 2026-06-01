@@ -20,6 +20,7 @@ import { Button } from './Button';
 import { CloseIcon } from './icons/CloseIcon';
 import { ModalController, ModalPhase } from './ModalController';
 import { Surface } from './Surface';
+import { SurfaceColorReset } from './SurfaceContext';
 
 type PopupRootContextValue = {
   open: boolean;
@@ -517,7 +518,10 @@ function PopupInner(props: PopupInnerProps) {
   );
 
   return root
-    ? createPortal(content, document.querySelector(root) as HTMLElement)
+    ? createPortal(
+        <SurfaceColorReset>{content}</SurfaceColorReset>,
+        document.querySelector(root) as HTMLElement,
+      )
     : content;
 }
 

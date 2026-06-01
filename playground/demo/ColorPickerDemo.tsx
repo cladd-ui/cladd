@@ -59,6 +59,8 @@ export default function ColorPickerDemo() {
           <ColorPicker
             gradient
             swatches={PALETTE}
+            color="pink"
+            popoverColor="pink"
             value={gradient}
             onChange={(c) => setGradient(c.css)}
           />

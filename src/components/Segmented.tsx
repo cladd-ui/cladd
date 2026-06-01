@@ -9,6 +9,7 @@ import {
 
 import { useAccentColor } from '../hooks/use-accent-color';
 import { useComponentDefaults } from '../hooks/use-component-defaults';
+import { useSurfaceColor } from '../hooks/use-surface';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { ButtonSize } from './Button';
@@ -41,7 +42,13 @@ interface SegmentedOwnProps<C extends ElementType = 'div'> {
   variant?: SurfaceVariant;
   /** Outline ring on **inactive** segment buttons. Default `false`. */
   outline?: boolean;
-  /** Color applied to the **active** segment button. Default: theme accent color. */
+  /**
+   * Color applied to the **active** segment button.
+   *
+   * Defaults to the color of the nearest enclosing colored surface (e.g. a
+   * `Popover`/`Surface` with a `color`), so the active segment matches its region.
+   * Falls back to the theme accent color when no surface up the tree set a color.
+   */
   activeColor?: Color;
   /** `Surface` variant applied to the **active** segment button. Default `'gradient'`. */
   activeVariant?: SurfaceVariant;
@@ -63,6 +70,7 @@ export const Segmented = <C extends ElementType = 'div'>(
 ) => {
   const elRef = useRef<HTMLElement | null>(null);
   const accentColor = useAccentColor();
+  const surfaceColor = useSurfaceColor();
   const { size: toolbarSize, rounded: toolbarRounded } = useToolbarContext();
 
   const {
@@ -76,7 +84,7 @@ export const Segmented = <C extends ElementType = 'div'>(
     ref,
     variant = 'transparent',
     outline = false,
-    activeColor = accentColor,
+    activeColor = surfaceColor || accentColor,
     activeVariant = 'gradient',
     activeOutline = true,
     ...rest

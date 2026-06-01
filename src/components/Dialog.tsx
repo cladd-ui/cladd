@@ -27,6 +27,7 @@ import { Button } from './Button';
 import { Input } from './Input';
 import { ModalController, ModalPhase } from './ModalController';
 import { Surface, SurfaceVariant } from './Surface';
+import { SurfaceColorReset } from './SurfaceContext';
 
 type DialogRootContextValue = {
   open: boolean;
@@ -469,7 +470,12 @@ const DialogInner = (props: DialogInnerProps) => {
     </div>
   );
 
-  return root ? createPortal(content, document.querySelector(root)!) : content;
+  return root
+    ? createPortal(
+        <SurfaceColorReset>{content}</SurfaceColorReset>,
+        document.querySelector(root)!,
+      )
+    : content;
 };
 
 export const Dialog = (props: DialogProps) => {

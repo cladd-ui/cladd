@@ -18,6 +18,7 @@ import { Color } from '../types';
 import { Backdrop } from './Backdrop';
 import { ModalController, ModalPhase } from './ModalController';
 import { Surface, SurfaceProps, SurfaceVariant } from './Surface';
+import { SurfaceColorReset } from './SurfaceContext';
 
 type PopoverContextValue = {
   register: (closeFn: () => void) => () => void;
@@ -672,7 +673,10 @@ const PopoverInner = (props: PopoverInnerProps) => {
   );
 
   return root
-    ? createPortal(content, document.querySelector(root as string) as Element)
+    ? createPortal(
+        <SurfaceColorReset>{content}</SurfaceColorReset>,
+        document.querySelector(root as string) as Element,
+      )
     : content;
 };
 

@@ -1,7 +1,7 @@
 import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 
 import { useComponentDefaults } from '../hooks/use-component-defaults';
-import { useSurface } from '../hooks/use-surface';
+import { useSurface, useSurfaceColor } from '../hooks/use-surface';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { SurfaceContent } from './SurfaceContent';
@@ -117,6 +117,7 @@ export const Surface = <C extends ElementType = 'div'>(
   } = useComponentDefaults('Surface', props);
 
   const contextLevel = useSurface();
+  const inheritedColor = useSurfaceColor();
   let levelProp: number | string | undefined = level;
   if (
     typeof levelProp === 'string' &&
@@ -199,6 +200,7 @@ export const Surface = <C extends ElementType = 'div'>(
 
       <SurfaceContextProvider
         level={variant === 'transparent' ? currentLevel - 1 : currentLevel}
+        color={color || inheritedColor}
       >
         {beforeContent}
         {/* content */}

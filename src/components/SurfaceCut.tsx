@@ -1,7 +1,7 @@
 import { ReactNode, Ref, ElementType, ComponentPropsWithoutRef } from 'react';
 
 import { useComponentDefaults } from '../hooks/use-component-defaults';
-import { useSurface } from '../hooks/use-surface';
+import { useSurface, useSurfaceColor } from '../hooks/use-surface';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { SurfaceContextProvider } from './SurfaceContext';
@@ -81,6 +81,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
   const Component = asProp as ElementType;
 
   const contextLevel = useSurface();
+  const inheritedColor = useSurfaceColor();
 
   const overlay = (hoverable || clickable) && (
     <div
@@ -117,7 +118,10 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
         )}
       />
       {overlayPosition === 'below' && overlay}
-      <SurfaceContextProvider level={contextLevel - 1}>
+      <SurfaceContextProvider
+        level={contextLevel - 1}
+        color={color || inheritedColor}
+      >
         {beforeContent}
         {wrapContent ? (
           <SurfaceCutContent
