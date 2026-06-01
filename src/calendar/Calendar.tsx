@@ -337,7 +337,7 @@ export const Calendar = (props: CalendarProps) => {
   const t = SIZES[size];
 
   const baseClassNames: Partial<ClassNames> = {
-    footer: cn('mt-2 pl-2 text-cladd-xs text-cladd-fg-soft', footerClassName),
+    footer: cn('mt-2 text-cladd-xs text-cladd-fg-soft', footerClassName),
     months: 'relative flex gap-4',
     month: 'flex flex-col gap-4',
 
