@@ -907,7 +907,7 @@ export const ColorEditor = (props: ColorEditorProps) => {
           ref={areaElRef}
           data-part="area"
           className={cn(
-            'relative w-full touch-none rounded-cladd-lg',
+            'relative w-full touch-none rounded-cladd-lg select-none',
             AREA_H,
             interactive && 'cursor-crosshair',
             areaClassName,
@@ -938,7 +938,10 @@ export const ColorEditor = (props: ColorEditorProps) => {
         <div
           ref={hueElRef}
           data-part="hue"
-          className={cn('relative w-full touch-none rounded-full', BAR_H)}
+          className={cn(
+            'relative w-full touch-none rounded-full select-none',
+            BAR_H,
+          )}
           style={{ background: HUE_TRACK }}
           onPointerDown={onHueDown}
         >
@@ -955,7 +958,10 @@ export const ColorEditor = (props: ColorEditorProps) => {
           <div
             ref={alphaElRef}
             data-part="alpha"
-            className={cn('relative w-full touch-none rounded-full', BAR_H)}
+            className={cn(
+              'relative w-full touch-none rounded-full select-none',
+              BAR_H,
+            )}
             style={CHECKER}
             onPointerDown={onAlphaDown}
           >
