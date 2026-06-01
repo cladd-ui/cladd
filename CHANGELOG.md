@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.0 (2026-06-01)
+
+### Features
+
+- Segmented - active segment inherits enclosing region color (c2e3c27)
+- DatePicker - popover color don't uses default color (fb58d09)
+- Calendar footer - remove padding (ff692cd)
+
 ## 0.10.0 (2026-06-01)
 
 ### Features
