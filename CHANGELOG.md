@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.0 (2026-06-08)
+
+### Features
+
+- inline-safe surfaces and Shortcut "as" prop (0c0b3ca)
+
 ## 0.11.1 (2026-06-01)
 
 ### Features
