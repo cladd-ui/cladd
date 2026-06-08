@@ -176,6 +176,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
 
       {/* BG */}
       <Surface
+        as="span"
         data-part="track"
         level={surfaceLevel}
         className="absolute inset-0 rounded-full"
@@ -186,6 +187,7 @@ export function Switch<C extends ElementType = 'label'>(props: SwitchProps<C>) {
 
       {/* Thumb */}
       <Surface
+        as="span"
         data-part="thumb"
         className={cn(
           'z-10 rounded-full duration-300',

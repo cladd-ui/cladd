@@ -1,5 +1,6 @@
 import {
   ComponentPropsWithoutRef,
+  ElementType,
   ReactNode,
   Ref,
   useLayoutEffect,
@@ -23,7 +24,7 @@ import { Surface, SurfaceVariant } from './Surface';
 
 export type ShortcutSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-interface ShortcutOwnProps {
+interface ShortcutOwnProps<C extends ElementType = 'div'> {
   /** Extra classes for the shortcut root container. */
   className?: string;
   /** Extra classes for keyboard icon glyphs (cmd, shift, arrows, etc.). */
@@ -54,19 +55,25 @@ interface ShortcutOwnProps {
   children?: ReactNode;
   /** Key dimension. Default `'md'`. Drives height, font size, icon size, and corner radius. */
   size?: ShortcutSize;
-  /** Forwarded to the root `<div>` element. */
-  ref?: Ref<HTMLDivElement>;
+  /**
+   * Polymorphic root element. Defaults to `'div'`. Use `'span'` when rendering inline (e.g. inside a `<p>`) to keep valid HTML.
+   */
+  as?: C;
+  /** Forwarded to the polymorphic root element. */
+  ref?: Ref<HTMLElement>;
 }
 
-export type ShortcutProps = ShortcutOwnProps &
-  Omit<ComponentPropsWithoutRef<'div'>, keyof ShortcutOwnProps>;
+export type ShortcutProps<C extends ElementType = 'div'> = ShortcutOwnProps<C> &
+  Omit<ComponentPropsWithoutRef<C>, keyof ShortcutOwnProps<C>>;
 
 /** Shape of `Shortcut` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type ShortcutDefaultProps = Partial<
-  Omit<ShortcutOwnProps, 'ref' | 'children'>
+  Omit<ShortcutOwnProps, 'as' | 'ref' | 'children'>
 >;
 
-export const Shortcut = (props: ShortcutProps) => {
+export const Shortcut = <C extends ElementType = 'div'>(
+  props: ShortcutProps<C>,
+) => {
   const {
     className = '',
     iconClassName = '',
@@ -78,9 +85,12 @@ export const Shortcut = (props: ShortcutProps) => {
     color,
     children,
     size = 'md',
+    as: asProp = 'div',
     ref,
     ...rest
   } = useComponentDefaults('Shortcut', props);
+
+  const Component = asProp as ElementType;
 
   const [isMac, setIsMac] = useState(false);
   const sizeClass = [
@@ -97,8 +107,8 @@ export const Shortcut = (props: ShortcutProps) => {
     '2xl': 'size-6',
   }[size];
   const roundedClass = {
-    '2xs': 'rounded-cladd-2xs',
-    xs: 'rounded-cladd-xs',
+    '2xs': 'rounded-cladd-3xs',
+    xs: 'rounded-cladd-2xs',
     sm: 'rounded-cladd-xs',
     md: 'rounded-cladd-sm',
     lg: 'rounded-cladd-md',
@@ -109,10 +119,10 @@ export const Shortcut = (props: ShortcutProps) => {
     '2xs': 'text-cladd-4xs',
     xs: 'text-cladd-3xs',
     sm: 'text-cladd-2xs',
-    md: 'text-cladd-2xs',
+    md: 'text-cladd-xs',
     lg: 'text-cladd-xs',
-    xl: 'text-cladd-xs',
-    '2xl': 'text-cladd-sm',
+    xl: 'text-cladd-sm',
+    '2xl': 'text-cladd-md',
   }[size];
   const iconClass = cn(iconSizeClass, iconClassName);
 
@@ -209,7 +219,7 @@ export const Shortcut = (props: ShortcutProps) => {
   }, []);
 
   return (
-    <div
+    <Component
       ref={ref}
       className={cn(
         'cladd-shortcut inline-flex shrink-0 items-center gap-0.5 self-center align-middle font-mono leading-0 tabular-nums',
@@ -243,6 +253,6 @@ export const Shortcut = (props: ShortcutProps) => {
           {getKey(key)}
         </Surface>
       ))}
-    </div>
+    </Component>
   );
 };

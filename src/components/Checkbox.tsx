@@ -183,6 +183,7 @@ export function Checkbox<C extends ElementType = 'label'>(
 
       {/* Thumb */}
       <Surface
+        as="span"
         data-part="thumb"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
@@ -196,6 +197,7 @@ export function Checkbox<C extends ElementType = 'label'>(
 
       {/* Checked Thumb */}
       <Surface
+        as="span"
         data-part="thumb-checked"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',

@@ -14,6 +14,43 @@ export type SurfaceVariant =
   | 'solid-fill'
   | 'gradient-fill';
 
+/**
+ * Phrasing-content elements. When `as` is one of these, the surface's internal
+ * layers (bg, overlay, content wrapper) render as `<span>` instead of `<div>`
+ * so the surface stays valid inside `<p>`, `<button>`, `<kbd>`, etc. The swap is
+ * visually identical - the layers are absolutely positioned or flex, so `display`
+ * is class-driven regardless of tag.
+ */
+const PHRASING_ELEMENTS = new Set([
+  'span',
+  'a',
+  'button',
+  'kbd',
+  'code',
+  'label',
+  'abbr',
+  'b',
+  'bdi',
+  'bdo',
+  'cite',
+  'data',
+  'dfn',
+  'em',
+  'i',
+  'mark',
+  'output',
+  'q',
+  's',
+  'samp',
+  'small',
+  'strong',
+  'sub',
+  'sup',
+  'time',
+  'u',
+  'var',
+]);
+
 interface SurfaceOwnProps<C extends ElementType = 'div'> {
   /**
    * Surface depth level (1–5). Drives the background tone via `cladd-surface-level="N"` class
@@ -138,8 +175,13 @@ export const Surface = <C extends ElementType = 'div'>(
   const Component = asProp as ElementType;
   const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
 
+  const InnerTag: ElementType =
+    typeof asProp === 'string' && PHRASING_ELEMENTS.has(asProp)
+      ? 'span'
+      : 'div';
+
   const overlay = (hoverable || clickable) && (
-    <div
+    <InnerTag
       className={cn(
         'pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 duration-200',
         hoverable &&
@@ -174,7 +216,7 @@ export const Surface = <C extends ElementType = 'div'>(
       {...rest}
     >
       {/* bg */}
-      <div
+      <InnerTag
         className={cn(
           'pointer-events-none absolute inset-0 rounded-[inherit]',
           variant === 'solid' && 'bg-cladd-surface',
@@ -206,6 +248,7 @@ export const Surface = <C extends ElementType = 'div'>(
         {/* content */}
         {wrapContent ? (
           <SurfaceContent
+            as={InnerTag}
             className={cn(
               clickable &&
                 'duration-200 cladd-surface-press:scale-95 cladd-surface-press:opacity-75',

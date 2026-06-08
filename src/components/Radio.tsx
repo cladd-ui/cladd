@@ -180,6 +180,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Thumb */}
       <Surface
+        as="span"
         data-part="thumb"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
@@ -193,6 +194,7 @@ export function Radio<C extends ElementType = 'label'>(props: RadioProps<C>) {
 
       {/* Checked Thumb */}
       <Surface
+        as="span"
         data-part="thumb-checked"
         className={cn(
           'absolute inset-0 size-full shrink-0 rounded-full duration-200',
