@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.14.0 (2026-06-16)
+
+### Features
+
+- add Popover "center" position (d113e6a)
+
 ## 0.13.0 (2026-06-16)
 
 ### Features
