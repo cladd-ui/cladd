@@ -33,23 +33,18 @@ import { ButtonProps } from './Button';
 import { Shortcut, ShortcutSize } from './Shortcut';
 import { Surface, SurfaceVariant } from './Surface';
 
-interface SelectOwnProps<T = string, V = T> {
-  /**
-   * Selected value (single-select) or array of selected values (when `multiple`).
-   *
-   * Always the **key** type `V` — not the full option `T`. When options are
-   * objects and `getOptionValue` extracts a key (e.g. `id`), store that key
-   * in state, not the object itself.
-   */
-  value?: V | V[];
+/**
+ * Props shared by both select modes. `value`, `multiple`, and `onChange` are
+ * added by the mode-specific interfaces below so `onChange` can be typed
+ * precisely per mode (single → `V`, multiple → `V[]`).
+ */
+interface SelectBaseProps<T = string, V = T> {
   /** Placeholder node shown in the trigger when `value` is empty and no `children` are provided. */
   placeholder?: ReactNode;
   /** Title shown at the top of the popover (above the search bar, if any). */
   title?: string;
   /** All available options. Compared against `value` via `getOptionValue` (default: identity). */
   options?: T[];
-  /** Multi-select mode - uses `Checkbox` instead of `Radio` and emits `T[]` to `onChange`. */
-  multiple?: boolean;
   /** Visually dim the trigger and prevent the popover from opening. */
   disabled?: boolean;
   /** Show the trigger with the current value but block opening the popover. */
@@ -135,8 +130,6 @@ interface SelectOwnProps<T = string, V = T> {
   /** Fires whenever the popover open state changes. Acts as the controlled setter when `popoverState` is provided, and as an observer otherwise. */
   onPopoverState?: (state: boolean) => void;
 
-  /** Fires after a selection. In single-select mode receives `V`; in `multiple` receives `V[]`. */
-  onChange?: (value: V | V[]) => void;
   /** Fires when the trigger button is clicked (before the popover state toggles). */
   onClick?: (e: MouseEvent) => void;
 
@@ -200,19 +193,53 @@ interface SelectOwnProps<T = string, V = T> {
   ref?: Ref<HTMLElement>;
 }
 
-export type SelectProps<T = string, V = T> = SelectOwnProps<T, V> &
-  Omit<ButtonProps, keyof SelectOwnProps<T, V>>;
+/**
+ * The `multiple`/`value`/`onChange` trio, discriminated on the inferred
+ * `Multiple` flag so `value` and `onChange` are scalar `V` in single-select and
+ * `V[]` in multi-select.
+ *
+ * `Multiple` is inferred from the `multiple` prop (omitted or `false` → single,
+ * `true` → multi). `T`/`V` are inferred from `options`/`getOptionValue`, never
+ * from `value`, so a `value` of `V[]` can't pollute `V` the way a plain
+ * discriminated union of interfaces would.
+ */
+interface SelectSelectionProps<
+  T = string,
+  V = T,
+  Multiple extends boolean = false,
+> {
+  /** Multi-select mode - uses `Checkbox` instead of `Radio` and emits `V[]` to `onChange`. */
+  multiple?: Multiple;
+  /**
+   * Selected value(s) — always the **key** type `V`, not the full option `T`.
+   * Scalar `V` in single-select, `V[]` when `multiple`. When options are objects
+   * and `getOptionValue` extracts a key (e.g. `id`), store that key in state,
+   * not the object itself.
+   */
+  value?: Multiple extends true ? V[] : V;
+  /** Fires after a selection. Receives the selected key `V`, or the full `V[]` when `multiple`. */
+  onChange?: (value: Multiple extends true ? V[] : V) => void;
+}
+
+export type SelectProps<
+  T = string,
+  V = T,
+  Multiple extends boolean = false,
+> = SelectBaseProps<T, V> &
+  SelectSelectionProps<T, V, Multiple> &
+  Omit<
+    ButtonProps,
+    keyof SelectBaseProps<T, V> | keyof SelectSelectionProps<T, V, Multiple>
+  >;
 
 /** Shape of `Select` defaults that can be supplied via `CladdProvider`'s `defaults` prop. */
 export type SelectDefaultProps = Partial<
   Omit<
-    SelectOwnProps,
+    SelectBaseProps,
     | 'children'
     | 'ref'
     | 'anchorRef'
-    | 'value'
     | 'options'
-    | 'onChange'
     | 'onClick'
     | 'onSearch'
     | 'onPopoverState'
@@ -232,7 +259,9 @@ export type SelectDefaultProps = Partial<
   >
 >;
 
-export function Select<T = string, V = T>(props: SelectProps<T, V>) {
+export function Select<T = string, V = T, Multiple extends boolean = false>(
+  props: SelectProps<T, V, Multiple>,
+) {
   const {
     value,
     placeholder = '',
@@ -328,16 +357,20 @@ export function Select<T = string, V = T>(props: SelectProps<T, V>) {
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
   const onChangeInternal = (optionValue: T, checked: boolean) => {
+    // Destructured from the discriminated union, `onChange` is
+    // `((value: V) => void) | ((value: V[]) => void)`; the runtime branch on
+    // `multiple` picks the right shape, so widen to call it.
+    const emitChange = onChange as (value: V | V[]) => void;
     const optKey = getOptionValue(optionValue);
     if (!multiple) {
-      onChange(optKey);
+      emitChange(optKey);
     } else {
       const newValues = [...((value as V[]) ?? [])];
       if (checked) newValues.push(optKey);
       else if (newValues.includes(optKey)) {
         newValues.splice(newValues.indexOf(optKey), 1);
       }
-      onChange(newValues);
+      emitChange(newValues);
     }
     if (!multiple && closeOnSelect) {
       if (popoverStateExternal === undefined) setPopoverState(false);
