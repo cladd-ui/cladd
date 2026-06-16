@@ -46,6 +46,15 @@ export default function PopoverDemo() {
             </PopoverRoot>
           </Popover>
         </PopoverRoot>
+
+        <PopoverRoot>
+          <PopoverTrigger>
+            <Button>Centered</Button>
+          </PopoverTrigger>
+          <Popover contentClassName="p-4" position="center" backdrop>
+            <div className="p-4">Opens centered over the trigger</div>
+          </Popover>
+        </PopoverRoot>
       </Surface>
     </>
   );

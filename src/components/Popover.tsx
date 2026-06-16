@@ -183,7 +183,8 @@ export type PopoverPosition =
   | 'left-end'
   | 'right-start'
   | 'right'
-  | 'right-end';
+  | 'right-end'
+  | 'center';
 export type PopoverOffset = OffsetValue | [OffsetValue, OffsetValue];
 interface PositionConfig {
   area: string;
@@ -192,6 +193,8 @@ interface PositionConfig {
   origin: string;
   // [mainAxis, crossAxis] - main pushes away from anchor, cross shifts along anchor edge
   offsetProperties: [string, string];
+  // Centered over the anchor on both axes (no anchor side); offsets shift it.
+  centered?: boolean;
 }
 
 const POSITIONS: Record<PopoverPosition, PositionConfig> = {
@@ -263,6 +266,12 @@ const POSITIONS: Record<PopoverPosition, PositionConfig> = {
     origin: 'origin-bottom-left',
     offsetProperties: ['marginLeft', 'marginBottom'],
   },
+  center: {
+    area: 'center center',
+    origin: 'origin-center',
+    offsetProperties: ['marginTop', 'marginLeft'],
+    centered: true,
+  },
 };
 
 type OffsetValue = number | string;
@@ -304,7 +313,7 @@ type PopoverOwnProps = {
    * Portal target. CSS selector string (default `'#app, #__next, #root'` - first match wins), or `false` to render inline without portalling.
    */
   root?: string | boolean;
-  /** Anchor side + alignment. See `PopoverPosition`. Default `'bottom'`. */
+  /** Anchor side + alignment, or `'center'` to open centered over the anchor. See `PopoverPosition`. Default `'bottom'`. */
   position?: PopoverPosition;
   /**
    * Spacing from anchor. Either a single value (main axis only) or `[main, cross]`.
@@ -589,6 +598,8 @@ const PopoverInner = (props: PopoverInnerProps) => {
           [oppositeMargin[mainProp]]: vm,
           [oppositeMargin[crossProp]]: vm,
           ...(isCentered ? { [crossProp]: vm } : {}),
+          // Centered on both axes: also keep a gap on the main-axis near side.
+          ...(positionConfig.centered ? { [mainProp]: vm } : {}),
         }
       : {}),
     ...(mainOffset ? { [mainProp]: resolveOffset(mainOffset, mainProp) } : {}),
