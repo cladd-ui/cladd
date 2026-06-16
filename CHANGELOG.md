@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.0 (2026-06-16)
+
+### Features
+
+- Select - properly typed multiple type for onChange and value (606de5f)
+
 ## 0.12.0 (2026-06-08)
 
 ### Features
