@@ -130,7 +130,7 @@
 
 /* COLORS DARK */
 [class*="cladd-color-"]:not(.cladd-color-neutral) {
-  --cladd-bg: oklch(from var(--cladd-theme) 0.15 0.02 h);
+  --cladd-bg: oklch(from var(--cladd-theme) 0.18 0.02 h);
   --cladd-backdrop: #000;
   --cladd-primary: oklch(
     from var(--cladd-theme) var(--cladd-dark-primary-lightness)
@@ -247,7 +247,7 @@
 .light [class*="cladd-color-"]:not(.cladd-color-neutral),
 .dark .light [class*="cladd-color-"]:not(.cladd-color-neutral),
 .light[class*="cladd-color-"]:not(.cladd-color-neutral) {
-  --cladd-bg: oklch(0.91 0.015 100);
+  --cladd-bg: oklch(from var(--cladd-theme) 1 0.015 h);
   --cladd-backdrop: oklch(0.74 0.018 100);
   --cladd-primary: oklch(
     from var(--cladd-theme) var(--cladd-light-primary-lightness)
