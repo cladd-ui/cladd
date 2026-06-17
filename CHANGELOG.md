@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.15.0 (2026-06-17)
+
+### Features
+
+- tweak cladd-bg colors (587ce44)
+
 ## 0.14.0 (2026-06-16)
 
 ### Features
