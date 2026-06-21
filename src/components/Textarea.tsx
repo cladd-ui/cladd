@@ -189,13 +189,11 @@ export const Textarea = <C extends ElementType = 'div'>(
 
   const onInput = (e: FormEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
+    // A cleared field keeps a filler `<br>` (`innerText` is a lone `"\n"`) - treat as empty so the placeholder returns.
     let next = target.innerText;
+    if (next === '\n') next = '';
 
-    // The editor is a `contenteditable`, so `maxLength` isn't enforced by the
-    // browser and `beforeinput`'s preventDefault is unreliable across input
-    // types. Enforce here instead: clamp the text and rewrite the DOM, then
-    // restore the caret to the end (typing/pasting that overflows happens at
-    // the caret, which after the clamp sits at the end of the kept content).
+    // `maxLength` isn't enforced on `contenteditable`, so clamp here and restore the caret to the end.
     if (maxLength !== undefined && next.length > maxLength) {
       next = next.slice(0, maxLength);
       target.innerText = next;
