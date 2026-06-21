@@ -152,11 +152,11 @@ export const Textarea = <C extends ElementType = 'div'>(
     '2xl': 'px-3.5',
   };
   const inputPaddingVertical: Record<TextareaSize, string> = {
-    sm: 'py-0.75',
-    md: 'py-1.25',
-    lg: 'py-1.75',
-    xl: 'py-2.75',
-    '2xl': 'py-3.75',
+    sm: 'pt-1 pb-0.5',
+    md: 'pt-1.5 pb-1',
+    lg: 'pt-2 pb-1.5',
+    xl: 'pt-3 pb-2.5',
+    '2xl': 'pt-4 pb-3.5',
   };
   const inputPaddingWithIcon: Record<TextareaSize, string> = {
     sm: 'pl-8.5 pr-2',
