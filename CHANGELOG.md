@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.16.0 (2026-06-21)
+
+### Features
+
+- tweak textarea vertical paddings (7c4eaca)
+- maxLength prop for Textarea (06e2e33)
+
+### Bug Fixes
+
+- Textarea placeholder not returning after clearing (a7506cc)
+
 ## 0.15.0 (2026-06-17)
 
 ### Features
