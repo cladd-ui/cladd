@@ -33,6 +33,8 @@ interface TextareaOwnProps<C extends ElementType = 'div'> {
   value?: string;
   /** Placeholder text shown when the editor is empty. */
   placeholder?: string;
+  /** Maximum number of characters the user can type or paste. Enforced manually since the editor is a `contenteditable` element, not a native `<textarea>`. */
+  maxLength?: number;
   /** Visually dim the textarea and remove `contenteditable`. */
   disabled?: boolean;
   /** Make the textarea non-editable but still selectable. */
@@ -103,6 +105,7 @@ export const Textarea = <C extends ElementType = 'div'>(
     ref: externalRef,
     value,
     placeholder,
+    maxLength,
     disabled = false,
     readOnly,
     rounded = false,
@@ -186,8 +189,28 @@ export const Textarea = <C extends ElementType = 'div'>(
 
   const onInput = (e: FormEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
-    setText(target.innerText);
-    onChange(target.innerText, e);
+    let next = target.innerText;
+
+    // The editor is a `contenteditable`, so `maxLength` isn't enforced by the
+    // browser and `beforeinput`'s preventDefault is unreliable across input
+    // types. Enforce here instead: clamp the text and rewrite the DOM, then
+    // restore the caret to the end (typing/pasting that overflows happens at
+    // the caret, which after the clamp sits at the end of the kept content).
+    if (maxLength !== undefined && next.length > maxLength) {
+      next = next.slice(0, maxLength);
+      target.innerText = next;
+      const selection = window.getSelection();
+      if (selection) {
+        const range = document.createRange();
+        range.selectNodeContents(target);
+        range.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+
+    setText(next);
+    onChange(next, e);
   };
 
   useEffect(() => {
@@ -257,7 +280,7 @@ export const Textarea = <C extends ElementType = 'div'>(
               height,
               itemRoundedClasses,
               fontSizes[size],
-              'w-full appearance-none border-none bg-transparent font-medium shadow-none outline-none',
+              'w-full appearance-none border-none bg-transparent font-medium whitespace-pre-wrap shadow-none outline-none',
               disabled && 'text-cladd-fg-softer',
               inputClassName,
             )}

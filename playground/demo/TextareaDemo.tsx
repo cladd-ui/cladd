@@ -36,6 +36,7 @@ export default function TextareaDemo() {
           <Textarea icon={<Icon />} placeholder="LG: Add text" size="lg" />
           <Textarea icon={<Icon />} placeholder="XL: Add text" size="xl" />
           <Textarea icon={<Icon />} placeholder="2XL: Add text" size="2xl" />
+          <Textarea maxLength={20} placeholder="Max 20 characters" size="lg" />
         </div>
         <div className="flex flex-col gap-4">
           <SectionTitle>Textarea Rounded</SectionTitle>
