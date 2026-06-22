@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.2 (2026-06-22)
+
+### Bug Fixes
+
+- unset inert on container when Dialog unmounts (78ba4be)
+
 ## 0.17.1 (2026-06-22)
 
 ### Bug Fixes
