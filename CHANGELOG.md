@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.1 (2026-06-22)
+
+### Bug Fixes
+
+- Link onClick handler to receive the event (8a1275c)
+
 ## 0.17.0 (2026-06-22)
 
 ### Features
