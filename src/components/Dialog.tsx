@@ -332,6 +332,15 @@ const DialogInner = (props: DialogInnerProps) => {
 
   useEffect(() => {
     open();
+    return () => {
+      const container = document.querySelector(inertContainer);
+      const otherModals = document.querySelectorAll(
+        '.cladd-popover, .cladd-popup',
+      );
+      if (container && otherModals.length === 0) {
+        (container as HTMLElement).inert = false;
+      }
+    };
   }, []);
 
   useFocusTrap({
