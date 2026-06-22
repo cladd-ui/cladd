@@ -26,9 +26,14 @@ export const FocusRing = (props: {
    * (e.g. `Input` passes `force={!valid}` and a red color).
    */
   force?: boolean;
+  /**
+   * When `true` (default), the ring sits offset outside the host (`-inset-1.5`). When `false`, it
+   * renders flush against the host (`inset-0`) so it doesn't contribute to a scroll container's overflow.
+   */
+  offset?: boolean;
 }) => {
   const accentColor = useAccentColor();
-  const { className, group, color = accentColor, force } = props;
+  const { className, group, color = accentColor, force, offset = true } = props;
   const groupClasses =
     {
       link: 'group-focus-visible/cladd-link:scale-100 group-focus-visible/cladd-link:opacity-100',
@@ -51,7 +56,8 @@ export const FocusRing = (props: {
     <span
       data-part="focus-ring"
       className={cn(
-        'pointer-events-none absolute -inset-1.5 z-1 scale-95 border-2 border-cladd-primary opacity-0 duration-200',
+        'pointer-events-none absolute z-1 scale-95 border-2 border-cladd-primary opacity-0 duration-200',
+        offset ? '-inset-1.5' : 'inset-0',
         `cladd-color-${color}`,
 
         force && 'scale-100 opacity-100',

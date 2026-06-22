@@ -51,6 +51,8 @@ interface ButtonOwnProps<C extends ElementType = 'button'> {
   style?: CSSProperties;
   /** Force the focus ring on, regardless of actual keyboard focus. */
   focused?: boolean;
+  /** Render the focus ring flush against the element (`inset-0`) instead of offset outside it (`-inset-1.5`). Use when the button sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
+  tightFocusRing?: boolean;
   /** Force the pressed visual state, regardless of pointer activity. */
   pressed?: boolean;
   /** Allow text to wrap onto multiple lines, switching height to `min-h-*` and using pill radii compatible with multi-line content. */
@@ -119,6 +121,7 @@ export const Button = <C extends ElementType = 'button'>(
     variant = 'gradient',
     style,
     focused = false,
+    tightFocusRing = false,
     pressed,
     multiline,
     square,
@@ -236,7 +239,10 @@ export const Button = <C extends ElementType = 'button'>(
             <FocusRing
               force={focused}
               group="button"
-              className={cn(focusRoundedClasses)}
+              offset={!tightFocusRing}
+              className={cn(
+                tightFocusRing ? 'rounded-[inherit]' : focusRoundedClasses,
+              )}
             />
           )}
         </>

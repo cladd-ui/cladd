@@ -75,6 +75,8 @@ interface TextareaOwnProps<C extends ElementType = 'div'> {
    *
    * When `false`, switches the focus ring to red and shows `errorMessage`. */
   valid?: boolean;
+  /** Render the focus ring flush against the element (`inset-0`) instead of offset outside it (`-inset-1.5`). Use when the textarea sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
+  tightFocusRing?: boolean;
   /** Floating label shown above the editor on focus. Hidden when `valid === false` or `readOnly`. */
   infoMessage?: ReactNode;
   /** Floating error label. Always visible when `valid === false`. */
@@ -123,6 +125,7 @@ export const Textarea = <C extends ElementType = 'div'>(
     inputClassName,
     placeholderClassName = '',
     valid = true,
+    tightFocusRing = false,
     infoMessage,
     errorMessage,
     icon,
@@ -242,10 +245,13 @@ export const Textarea = <C extends ElementType = 'div'>(
       {/* focus layer */}
       {!readOnly && !disabled && (
         <FocusRing
-          className={cn(focusRoundedClasses)}
+          className={cn(
+            tightFocusRing ? 'rounded-[inherit]' : focusRoundedClasses,
+          )}
           force={valid === false}
           color={valid === false ? 'red' : color}
           group="textarea"
+          offset={!tightFocusRing}
         />
       )}
 

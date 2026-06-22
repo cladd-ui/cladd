@@ -92,6 +92,8 @@ interface InputOwnProps<
    * Validity state. Default `true`. When `false`, switches the focus ring to red and shows `errorMessage` (instead of `infoMessage`).
    */
   valid?: boolean;
+  /** Render the focus ring flush against the element (`inset-0`) instead of offset outside it (`-inset-1.5`). Use when the input sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
+  tightFocusRing?: boolean;
   /** Floating label shown above the input on focus. Hidden when `valid === false` or `readOnly`. */
   infoMessage?: ReactNode;
   /** Floating error label. Always visible (no focus required) when `valid === false`. */
@@ -185,6 +187,7 @@ export const Input = <
     maxLength,
     clearButton,
     valid = true,
+    tightFocusRing = false,
     infoMessage,
     errorMessage,
     pattern,
@@ -288,10 +291,13 @@ export const Input = <
       {/* focus layer */}
       {!readOnly && !disabled && (
         <FocusRing
-          className={cn(focusRoundedClasses)}
+          className={cn(
+            tightFocusRing ? 'rounded-[inherit]' : focusRoundedClasses,
+          )}
           force={valid === false}
           color={valid === false ? 'red' : color}
           group="input"
+          offset={!tightFocusRing}
         />
       )}
 

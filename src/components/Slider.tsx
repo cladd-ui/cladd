@@ -71,6 +71,8 @@ export interface SliderProps {
   disabled?: boolean;
   /** Block dragging without the disabled visual treatment. */
   readOnly?: boolean;
+  /** Render the focus ring flush against the slider (`inset-0`) instead of offset outside it (`-inset-1.5`). Use when the slider sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
+  tightFocusRing?: boolean;
   /** Fires while the user drags or types a new value (subject to `debounce` / `throttle`). */
   onChange?: (value: number, event?: ChangeEvent<HTMLInputElement>) => void;
   /** Extra classes for the slider container. */
@@ -136,6 +138,7 @@ export function Slider(props: SliderProps) {
     rounded = false,
     readOnly = false,
     disabled = false,
+    tightFocusRing = false,
     onChange = () => {},
     className,
     color: colorProp,
@@ -308,7 +311,10 @@ export function Slider(props: SliderProps) {
           {!disabled && !readOnly && (
             <FocusRing
               group="slider"
-              className={cn(isTrack ? focusRoundedClasses : 'rounded-full')}
+              offset={!tightFocusRing}
+              className={cn(
+                tightFocusRing ? itemRoundedClasses : focusRoundedClasses,
+              )}
             />
           )}
 
@@ -396,7 +402,11 @@ export function Slider(props: SliderProps) {
                 beforeContent={
                   !readOnly &&
                   !disabled && (
-                    <FocusRing group="slider" className="rounded-full" />
+                    <FocusRing
+                      group="slider"
+                      className="rounded-full"
+                      offset={!tightFocusRing}
+                    />
                   )
                 }
               >

@@ -154,6 +154,21 @@ export default function ButtonDemo() {
             </Surface>
           </Button>
         </div>
+        <div className="flex flex-col gap-2">
+          <span className="text-cladd-xs text-cladd-fg-soft">
+            tightFocusRing — both buttons are force-focused inside a snug
+            overflow-auto box. The default offset ring overflows it
+            (scrollbars); the tight ring sits flush.
+          </span>
+          <div className="flex items-center gap-6">
+            <div className="flex overflow-auto bg-black/20 ring-1 ring-white/15">
+              <Button>Offset</Button>
+            </div>
+            <div className="flex overflow-auto bg-black/20 ring-1 ring-white/15">
+              <Button tightFocusRing>Tight</Button>
+            </div>
+          </div>
+        </div>
       </Surface>
     </>
   );

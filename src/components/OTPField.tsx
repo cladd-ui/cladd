@@ -49,6 +49,8 @@ interface OTPFieldOwnProps {
    * Validity state. Default `true`. When `false`, the entire field renders a single red focus ring around all cells.
    */
   valid?: boolean;
+  /** Render the invalid focus ring flush against the cells (`inset-0`) instead of offset outside them (`-inset-1.5`). Use when the field sits at the edge of an `overflow` container, where the offset ring would add unwanted scroll overflow. Default `false`. */
+  tightFocusRing?: boolean;
   /** Visually dim the field and disable interaction with all cells. */
   disabled?: boolean;
   /** Make every cell non-editable but still focusable. */
@@ -91,6 +93,7 @@ export const OTPField = (props: OTPFieldProps) => {
     size = 'lg',
     pattern = '[0-9]',
     valid = true,
+    tightFocusRing = false,
     disabled = false,
     readOnly = false,
     inputMode = 'numeric',
@@ -278,7 +281,7 @@ export const OTPField = (props: OTPFieldProps) => {
     [],
   );
 
-  const { focusRoundedClasses } = roundedClasses(size);
+  const { itemRoundedClasses, focusRoundedClasses } = roundedClasses(size);
 
   const contextValue = useMemo(
     () => ({
@@ -325,7 +328,14 @@ export const OTPField = (props: OTPFieldProps) => {
         {...rest}
       >
         {!readOnly && !disabled && !valid && (
-          <FocusRing className={cn(focusRoundedClasses)} force color="red" />
+          <FocusRing
+            className={cn(
+              tightFocusRing ? itemRoundedClasses : focusRoundedClasses,
+            )}
+            force
+            color="red"
+            offset={!tightFocusRing}
+          />
         )}
         {indexedChildren}
       </div>
