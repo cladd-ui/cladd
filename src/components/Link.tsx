@@ -1,6 +1,7 @@
 import {
   useRef,
   ElementType,
+  MouseEvent,
   Ref,
   ComponentPropsWithoutRef,
   ReactNode,
@@ -29,7 +30,7 @@ interface LinkOwnProps<C extends ElementType = 'button'> {
   /** Renders a `FocusableLayer` ring on keyboard focus. Defaults to `true`. */
   focusable?: boolean;
   /** Click handler. */
-  onClick?: () => void;
+  onClick?: (e: MouseEvent) => void;
   /** Native `href` - when provided, the polymorphic default switches from `'button'` to `'a'`. */
   href?: string;
   /** Forwarded to the polymorphic root element. */
