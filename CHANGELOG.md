@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.0 (2026-06-22)
+
+### Features
+
+- tightFocusRing option (e647032)
+
 ## 0.16.0 (2026-06-21)
 
 ### Features
