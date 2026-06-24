@@ -88,6 +88,8 @@ interface InputOwnProps<
   maxLength?: number;
   /** Render a clear (X) button on the right that fires `onClear`. Hidden when `value` is empty. */
   clearButton?: boolean;
+  /** Accessible label for the clear button. Default: `'Clear'`. */
+  clearLabel?: string;
   /**
    * Validity state. Default `true`. When `false`, switches the focus ring to red and shows `errorMessage` (instead of `infoMessage`).
    */
@@ -186,6 +188,7 @@ export const Input = <
     max,
     maxLength,
     clearButton,
+    clearLabel = 'Clear',
     valid = true,
     tightFocusRing = false,
     infoMessage,
@@ -419,6 +422,8 @@ export const Input = <
           >
             <Button
               data-part="clear"
+              aria-label={clearLabel}
+              tabIndex={-1}
               className={cn(
                 'absolute top-1 right-0 bottom-1 left-0 h-auto w-auto transform-gpu duration-200',
                 !value && 'pointer-events-none scale-0',
