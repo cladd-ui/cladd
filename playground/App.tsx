@@ -19,6 +19,7 @@ import OTPFieldDemo from './demo/OTPFieldDemo';
 import PopoverDemo from './demo/PopoverDemo';
 import PopupDemo from './demo/PopupDemo';
 import RadioDemo from './demo/RadioDemo';
+import SearchFieldDemo from './demo/SearchFieldDemo';
 import SegmentedDemo from './demo/SegmentedDemo';
 import SelectDemo from './demo/SelectDemo';
 import ShortcutDemo from './demo/ShortcutDemo';
@@ -56,6 +57,7 @@ function App() {
         <PopoverDemo />
         <PopupDemo />
         <RadioDemo />
+        <SearchFieldDemo />
         <SegmentedDemo />
         <SelectDemo />
         <ShortcutDemo />

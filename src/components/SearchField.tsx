@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { cn } from '../shared/cn';
@@ -39,8 +39,21 @@ export const SearchField = (props: SearchFieldProps) => {
     className,
     onChange = () => {},
     onClear,
+    onKeyDown,
     ...rest
   } = useComponentDefaults('SearchField', props);
+
+  const clear = onClear ?? (() => onChange(''));
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    onKeyDown?.(event);
+    // Escape clears the field; only swallow it when there's something to clear
+    // so an empty field still lets Escape bubble (e.g. to close a Popover).
+    if (event.defaultPrevented || event.key !== 'Escape' || !value) return;
+    event.preventDefault();
+    event.stopPropagation();
+    clear();
+  };
 
   return (
     <Input
@@ -52,7 +65,8 @@ export const SearchField = (props: SearchFieldProps) => {
       placeholder={placeholder}
       icon={icon ?? <SearchIcon className="text-cladd-fg-softer" />}
       onChange={onChange}
-      onClear={onClear ?? (() => onChange(''))}
+      onClear={clear}
+      onKeyDown={handleKeyDown}
       className={cn('cladd-search-field w-full', className)}
     />
   );
