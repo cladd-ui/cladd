@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.17.3 (2026-06-24)
+
+### Bug Fixes
+
+- support function refs in Chip, Toolbar, Segmented, TooltipPrimitive (1a69426)
+
 ## 0.17.2 (2026-06-22)
 
 ### Bug Fixes
