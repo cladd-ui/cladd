@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.0 (2026-06-24)
+
+### Features
+
+- confirm Dialog on Enter (f30cfab)
+- clear SearchField on Escape (131b64f)
+- non-focusable clear button with clearLabel for Input (6d5b3ee)
+
 ## 0.17.3 (2026-06-24)
 
 ### Bug Fixes
