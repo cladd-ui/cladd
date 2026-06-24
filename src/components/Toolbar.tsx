@@ -90,7 +90,11 @@ export const Toolbar = <C extends ElementType = 'div'>(
       )}
       ref={(el: HTMLElement | null) => {
         elRef.current = el;
-        if (ref) (ref as React.RefObject<HTMLElement | null>).current = el;
+        if (ref && typeof ref === 'function') {
+          ref(el);
+        } else if (ref) {
+          (ref as React.RefObject<HTMLElement | null>).current = el;
+        }
       }}
       onContextMenuCapture={(e: MouseEvent) => e.preventDefault()}
       {...rest}

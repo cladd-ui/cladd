@@ -1,10 +1,24 @@
-import { Button, Chip, SectionTitle, Surface } from '@cladd-ui/react';
+import { Button, Chip, SectionTitle, Surface, Tooltip } from '@cladd-ui/react';
 
 import { Icon } from './Icon';
 
 export default function ChipDemo() {
   return (
     <>
+      <SectionTitle>Chip with Tooltip</SectionTitle>
+      <Surface
+        outline
+        className="rounded-3xl"
+        contentClassName="p-4 flex gap-2 flex-wrap"
+        level={1}
+      >
+        <Tooltip tooltip="Tooltip on a Chip">
+          <Chip size="md" rounded clickable color="green">
+            Hover me
+          </Chip>
+        </Tooltip>
+      </Surface>
+
       <SectionTitle>Chip</SectionTitle>
       <Surface
         outline

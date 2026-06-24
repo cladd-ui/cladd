@@ -192,7 +192,11 @@ const TooltipPrimitiveRoot = (props: TooltipPrimitiveRootProps) => {
         data-position={position}
         ref={(el: any) => {
           elRef.current = el;
-          if (ref) (ref as React.RefObject<HTMLDivElement | null>).current = el;
+          if (ref && typeof ref === 'function') {
+            ref(el);
+          } else if (ref) {
+            (ref as React.RefObject<HTMLDivElement | null>).current = el;
+          }
         }}
         style={tooltipStyle}
         level={surfaceLevel}
