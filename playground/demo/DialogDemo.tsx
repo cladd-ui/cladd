@@ -4,13 +4,16 @@ import {
   DialogClose,
   DialogRoot,
   DialogTrigger,
+  Input,
   SectionTitle,
   Surface,
   useDialog,
 } from '@cladd-ui/react';
+import { useState } from 'react';
 
 export default function DialogDemo() {
   const dialog = useDialog();
+  const [name, setName] = useState('Google');
   return (
     <>
       <SectionTitle>Dialog</SectionTitle>
@@ -39,6 +42,21 @@ export default function DialogDemo() {
             <DialogClose>
               <Button>Close</Button>
             </DialogClose>
+          </Dialog>
+        </DialogRoot>
+        <DialogRoot>
+          <DialogTrigger>
+            <Button rounded surfaceLevel={1}>
+              Edit name
+            </Button>
+          </DialogTrigger>
+          {/* Type in the field and press Enter -> confirms (no Tab needed). */}
+          <Dialog
+            title="Edit name"
+            cancelButtonText="Cancel"
+            confirmButtonText="Save"
+          >
+            <Input value={name} onChange={setName} clearButton autoFocus />
           </Dialog>
         </DialogRoot>
       </Surface>

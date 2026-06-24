@@ -9,6 +9,7 @@ import {
   ReactNode,
   Ref,
   MouseEvent,
+  KeyboardEvent,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -356,10 +357,27 @@ const DialogInner = (props: DialogInnerProps) => {
       (ref as React.RefObject<HTMLDivElement | null>).current = el;
   };
 
+  // Mirror native form behavior: Enter from a text input confirms the dialog,
+  // so a body input doesn't force a Tab to the (DOM-first) cancel button. Scoped
+  // to <input> targets - textareas keep newline, buttons keep native activation.
+  const confirmOnEnter = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (!confirmButtonText) return;
+    if (e.key !== 'Enter' || e.nativeEvent.isComposing || e.defaultPrevented)
+      return;
+    if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+    if ((e.target as HTMLElement).tagName !== 'INPUT') return;
+    // Same gate as the confirm button's `disabled` for type-to-confirm dialogs.
+    if (requireConfirmText && inputText !== requireConfirmText) return;
+    e.preventDefault();
+    close();
+    onConfirm?.();
+  };
+
   const content = (
     <div
       className="cladd-dialog"
       ref={setRefs}
+      onKeyDown={confirmOnEnter}
       role="dialog"
       aria-modal="true"
       aria-label={!ariaLabelledBy ? ariaLabel : undefined}
