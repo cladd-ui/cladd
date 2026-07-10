@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.1 (2026-07-10)
+
+### Features
+
+- bgClassName for SurfaceCut (9dc7636)
+
 ## 0.18.0 (2026-06-24)
 
 ### Features
