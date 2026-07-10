@@ -12,6 +12,8 @@ export interface SurfaceCutOwnProps<C extends ElementType = 'div'> {
   children?: ReactNode;
   /** Extra classes for the root element. */
   className?: string;
+  /** Extra classes for the absolutely-positioned background layer (the cut fill behind content). */
+  bgClassName?: string;
   /** Render the inset outline ring. Default `true`. */
   outline?: boolean;
   /** Accent color token. Sets the surface's `cladd-color-{name}` class. */
@@ -63,6 +65,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
   const {
     children,
     className = '',
+    bgClassName = '',
     outline = true,
     color,
     beforeContent,
@@ -115,6 +118,7 @@ export const SurfaceCut = <C extends ElementType = 'div'>(
         className={cn(
           `pointer-events-none absolute inset-0 rounded-[inherit] bg-cladd-surface-cut`,
           outline && 'shadow-cladd-cut-outline',
+          bgClassName,
         )}
       />
       {overlayPosition === 'below' && overlay}
