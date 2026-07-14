@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.2 (2026-07-14)
+
+### Features
+
+- support dark in light colors (9a8aedb)
+
 ## 0.18.1 (2026-07-10)
 
 ### Features
