@@ -72,7 +72,8 @@
 }
 /* NEUTRAL DARK */
 :root,
-.cladd-color-neutral {
+.dark .cladd-color-neutral,
+.dark.cladd-color-neutral {
   --cladd-bg: #0f0f0f;
   --cladd-backdrop: #000;
   --cladd-primary: oklch(
@@ -129,7 +130,10 @@
 }
 
 /* COLORS DARK */
-[class*="cladd-color-"]:not(.cladd-color-neutral) {
+[class*="cladd-color-"]:not(.cladd-color-neutral),
+.dark [class*="cladd-color-"]:not(.cladd-color-neutral),
+.light .dark [class*="cladd-color-"]:not(.cladd-color-neutral),
+.dark[class*="cladd-color-"]:not(.cladd-color-neutral){
   --cladd-bg: oklch(from var(--cladd-theme) 0.18 0.02 h);
   --cladd-backdrop: #000;
   --cladd-primary: oklch(
@@ -195,6 +199,7 @@
 :root .light,
 .light .cladd-color-neutral,
 .light .cladd-color-neutral,
+.light.cladd-color-neutral,
 .cladd-color-neutral .light {
   --cladd-bg: #fff;
   --cladd-backdrop: oklch(0.91 0 0);
