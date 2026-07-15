@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.4 (2026-07-15)
+
+### Features
+
+- popover in light theme to reset surface context to "0" (8062dbf)
+
 ## 0.18.3 (2026-07-15)
 
 ### Features
