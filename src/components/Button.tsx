@@ -172,6 +172,16 @@ export const Button = <C extends ElementType = 'button'>(
 
   const isFill = variant === 'solid-fill' || variant === 'gradient-fill';
 
+  const spinnerSize: ButtonSize = {
+    '2xs': '2xs',
+    xs: '2xs',
+    sm: 'xs',
+    md: 'sm',
+    lg: 'md',
+    xl: 'lg',
+    '2xl': 'xl',
+  }[size] as ButtonSize;
+
   return (
     <WrapComponent
       as={Component}
@@ -231,7 +241,8 @@ export const Button = <C extends ElementType = 'button'>(
         <>
           {loading && (
             <Spinner
-              size={size}
+              size={spinnerSize}
+              color={color || undefined}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 duration-200 starting:scale-0 starting:opacity-0"
             />
           )}
