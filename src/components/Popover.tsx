@@ -12,13 +12,14 @@ import { createPortal } from 'react-dom';
 import { useComponentDefaults } from '../hooks/use-component-defaults';
 import { useModalUtils } from '../hooks/use-modal-utils';
 import { useOverlaysRoot } from '../hooks/use-overlays-root';
+import { useSurface } from '../hooks/use-surface';
 import { useTheme } from '../hooks/use-theme';
 import { cn } from '../shared/cn';
 import { Color } from '../types';
 import { Backdrop } from './Backdrop';
 import { ModalController, ModalPhase } from './ModalController';
 import { Surface, SurfaceProps, SurfaceVariant } from './Surface';
-import { SurfaceColorReset } from './SurfaceContext';
+import { SurfaceColorReset, SurfaceContextProvider } from './SurfaceContext';
 
 type PopoverContextValue = {
   register: (closeFn: () => void) => () => void;
@@ -384,6 +385,19 @@ type PopoverInnerProps = Omit<PopoverProps, 'open' | 'onOpenChange'> & {
   onPhaseChange?: (phase: ModalPhase) => void;
 };
 
+const PopoverSurfaceReset = ({ children }: { children: React.ReactNode }) => {
+  const theme = useTheme();
+  const level = useSurface();
+  if (level === 1 && theme === 'light') {
+    return (
+      <SurfaceContextProvider level={theme === 'light' ? 0 : level}>
+        {children}
+      </SurfaceContextProvider>
+    );
+  }
+  return children;
+};
+
 const PopoverInner = (props: PopoverInnerProps) => {
   const theme = useTheme();
   const overlaysRoot = useOverlaysRoot();
@@ -677,7 +691,7 @@ const PopoverInner = (props: PopoverInnerProps) => {
           )}
           {...rest}
         >
-          {children}
+          <PopoverSurfaceReset>{children}</PopoverSurfaceReset>
         </Surface>
       </div>
     </PopoverContext.Provider>
