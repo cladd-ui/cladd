@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.3 (2026-07-15)
+
+### Features
+
+- spinner in button loading correct color and smaller size (0087e7c)
+
 ## 0.18.2 (2026-07-14)
 
 ### Features
