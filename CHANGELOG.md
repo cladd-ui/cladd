@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.5 (2026-07-30)
+
+### Features
+
+- showToday option for Calendar to highlight today's date (9cc5928)
+
 ## 0.18.4 (2026-07-15)
 
 ### Features
