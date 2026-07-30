@@ -43,6 +43,7 @@ interface DatePickerBaseProps {
     size?: CalendarSize;
     controlSize?: ButtonSize;
     color?: Color;
+    showToday?: boolean;
   };
   /** Popover anchor side + alignment. Default `'bottom-end'`. */
   popoverPosition?: PopoverPosition;

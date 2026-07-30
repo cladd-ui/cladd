@@ -83,6 +83,8 @@ export type CalendarProps = DayPickerProps & {
   controlSize?: ButtonSize;
   /** Accent color token. Sets the `cladd-color-{name}` class - drives selected fill, today, and focus ring. Default: theme accent. */
   color?: Color;
+  /** Mark today's date with an accent ring and label. Default `true`. */
+  showToday?: boolean;
   /** Custom content rendered above the calendar grid, inside the calendar container (mirrors `footer`). */
   header?: ReactNode;
   /** Extra classes for the `header` wrapper. */
@@ -113,6 +115,7 @@ type CalendarContextValue = {
   hasNavigation: boolean;
   navLayout?: 'around' | 'after';
   color: Color;
+  showToday: boolean;
   header?: ReactNode;
   headerClassName?: string;
 };
@@ -123,6 +126,7 @@ const CalendarContext = createContext<CalendarContextValue>({
   hasNavigation: true,
   navLayout: 'after',
   color: 'brand',
+  showToday: true,
 });
 
 const PreviousMonthButton = ({
@@ -263,9 +267,10 @@ const DayButton = ({
     if (modifiers.focused) ref.current?.focus();
   }, [modifiers.focused]);
 
-  const { size, color } = useContext(CalendarContext);
+  const { size, color, showToday } = useContext(CalendarContext);
   const inRangeMiddle = !!modifiers.range_middle;
   const isFilled = !!modifiers.selected && !inRangeMiddle;
+  const isToday = showToday && !!modifiers.today;
   const roundedEnd =
     modifiers.range_start && !modifiers.range_end
       ? 'rounded-r-none'
@@ -277,7 +282,7 @@ const DayButton = ({
     <Button
       {...rest}
       ref={ref}
-      color={isFilled ? color : undefined}
+      color={isFilled || isToday ? color : undefined}
       square
       rounded
       size={size}
@@ -288,9 +293,14 @@ const DayButton = ({
         'font-medium',
         SIZES[size].dayText,
         isFilled && cn('font-semibold', roundedEnd),
-        modifiers.today &&
-          !modifiers.selected &&
-          'font-semibold text-cladd-primary',
+        isToday &&
+          !isFilled &&
+          cn(
+            'font-semibold ring-1 ring-inset',
+            modifiers.outside
+              ? 'ring-current'
+              : 'text-cladd-primary ring-cladd-primary/60',
+          ),
         modifiers.outside && !modifiers.selected && 'text-cladd-fg-softer',
         modifiers.disabled && 'text-cladd-fg-softest',
         className,
@@ -321,6 +331,7 @@ export const Calendar = (props: CalendarProps) => {
     hideNavigation,
     disableNavigation,
     color = 'brand',
+    showToday = true,
     header,
     headerClassName,
     footerClassName,
@@ -380,6 +391,7 @@ export const Calendar = (props: CalendarProps) => {
         hasNavigation,
         navLayout,
         color,
+        showToday,
         header,
         headerClassName,
       }}

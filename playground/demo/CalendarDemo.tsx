@@ -38,6 +38,13 @@ export default function CalendarDemo() {
           onSelect={setDay}
         />
 
+        <Calendar
+          mode="single"
+          color="orange"
+          showToday={false}
+          footer="showToday={false}"
+        />
+
         <div className="flex w-56 flex-col gap-3">
           <DatePicker value={pickerDay} onChange={setPickerDay} outline />
           <DatePicker
