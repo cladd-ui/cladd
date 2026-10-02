@@ -277,7 +277,9 @@ export const Textarea = <C extends ElementType = 'div'>(
         <div className="relative flex w-full">
           <div
             data-part="control"
-            contentEditable={!disabled && !readOnly}
+            // `plaintext-only`: Enter inserts a bare newline instead of `<div>` blocks, whose
+            // `innerText` serialization adds a phantom `\n` per empty line ("a⏎⏎b" -> "a\n\n\nb")
+            contentEditable={!disabled && !readOnly ? 'plaintext-only' : false}
             ref={inputElRef}
             className={cn(
               inputPadding,

@@ -9,6 +9,7 @@ const FOCUSABLE_SELECTOR = [
   'textarea:not([disabled])',
   '[tabindex]:not([tabindex="-1"])',
   '[contenteditable="true"]',
+  '[contenteditable="plaintext-only"]',
   'audio[controls]',
   'video[controls]',
   'iframe',
