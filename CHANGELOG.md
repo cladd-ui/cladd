@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.18.6 (2026-10-02)
+
+### Bug Fixes
+
+- Textarea phantom newlines on Enter - use plaintext-only contenteditable (4c5f27b)
+
 ## 0.18.5 (2026-07-30)
 
 ### Features
