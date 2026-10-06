@@ -14,7 +14,7 @@ Public site: [cladd.io](https://cladd.io) · Docs: [cladd.io/react](https://clad
   - `src/shared/`, `src/types.ts`, `src/index.ts` — shared utilities, prop types, public exports.
 - `playground/` — local Vite sandbox. Imports `@cladd-ui/react` directly from `src/` so edits hot-reload.
 - `packages/react/` — build output. **Do not edit by hand.**
-- `scripts/` — `build.mjs`, `changelog.mjs`, `release.mjs`.
+- `scripts/` — `build.mjs`, `changelog.mjs`, `release.mjs`, `build-sponsors.mjs`.
 
 ## Running things
 
@@ -25,6 +25,7 @@ The maintainer usually keeps the dev server running on port 5173. Check `lsof -t
 - `npm run format` — oxfmt write. `npm run format:check` is what CI runs.
 - `npm run build` — produces `packages/react/`.
 - `npm run release` — maintainer-only: bumps version, regenerates changelog, builds, tags, publishes.
+- `npm run build-sponsors` — pulls active sponsors from sponsors.nolimits4web.com and rewrites the `<!-- … -->` marker blocks in `README.md` and `BACKERS.md`. Run manually, commit as `chore: sponsors`.
 
 Package manager is **npm** (the repo uses `package-lock.json`). Node 20+.
 

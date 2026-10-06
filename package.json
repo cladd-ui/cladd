@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "build-sponsors": "node scripts/build-sponsors.mjs",
     "changelog": "node scripts/changelog.mjs",
     "check-types": "tsc --noEmit",
     "dev": "cd playground && vite",

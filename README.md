@@ -99,6 +99,13 @@ Full component reference: [cladd.io/react](https://cladd.io/react/).
 - [PaneFlow](https://paneflow.com/) — animated slideshow editor
 - [Start Page HQ](https://startpagehq.com/) — custom New Tab dashboard
 
+## Sponsors
+
+Support cladd by [becoming a sponsor](https://sponsors.nolimits4web.com) — your logo lands here, in [BACKERS.md](./BACKERS.md), and on [cladd.io](https://cladd.io/sponsors/). You can also back the developer on [GitHub Sponsors](https://github.com/sponsors/nolimits4web).
+
+<!-- SPONSORS_TABLE_WRAP -->
+<!-- SPONSORS_TABLE_WRAP -->
+
 ## License
 
 [MIT](./LICENSE) — free forever.

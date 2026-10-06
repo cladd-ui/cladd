@@ -12,6 +12,16 @@
     "type": "git",
     "url": "https://github.com/cladd-ui/cladd.git"
   },
+  "funding": [
+    {
+      "type": "custom",
+      "url": "https://sponsors.nolimits4web.com"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/nolimits4web"
+    }
+  ],
   "type": "module",
   "sideEffects": [
     "**/*.css"
